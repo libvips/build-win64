@@ -27,12 +27,13 @@ os.environ['TARGET'] = 'x86_64-w64-mingw32'
 # try to stop our enclosing pkg path getting in
 # basedir/lib/pkgconfig is added for us later
 os.environ['PKG_CONFIG_PATH'] = ''
+addpath('PKG_CONFIG_PATH', os.path.join(prefix, 'lib', 'pkgconfig'))
 
+# comment these out or we get pkg-config errors, investigate
 # pkg-config will always search $libdir, usually /usr/lib/pkgconfig -- we want
 # to stop it seeing any host packages, so turn this off
-os.environ['PKG_CONFIG_LIBDIR'] = ''
-
-addpath('PKG_CONFIG_LIBDIR', os.path.join(prefix, 'lib', 'pkgconfig'))
+#os.environ['PKG_CONFIG_LIBDIR'] = ''
+#addpath('PKG_CONFIG_LIBDIR', os.path.join(prefix, 'lib', 'pkgconfig'))
 
 # Prefix for all the tools
 # mingw-w64 on debian uses this:

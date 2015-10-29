@@ -30,7 +30,7 @@ add ~/.local/bin to your PATH
 
 Run:
 
-	jhbuild --file=jhbuildrc --moduleset=vips.modules build libvips
+	jhbuild --file=jhbuildrc build libvips
 
 
 
