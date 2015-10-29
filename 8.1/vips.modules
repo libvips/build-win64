@@ -3,13 +3,75 @@
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
 
-  <include href="gnome-suites-core-deps-3.20.modules"/>
+<!-- git repos -->
+<repository type="git" name="git.gnome.org" default="yes"
+    href="git://git.gnome.org/"/>
+<repository type="git" name="git.freedesktop.org"
+    href="git://anongit.freedesktop.org/"/>
+<repository type="git" name="gstreamer.freedesktop.org"
+    href="git://anongit.freedesktop.org/gstreamer/"/>
+<repository type="git" name="telepathy.freedesktop.org"
+    href="git://anongit.freedesktop.org/telepathy/"/>
+<repository type="git" name="wayland.freedesktop.org"
+    href="git://anongit.freedesktop.org/git/wayland"/>
+<repository type="git" name="xorg.freedesktop.org"
+    href="git://anongit.freedesktop.org/git/xorg"/>
+<repository type="git" name="github.com"
+    href="git://github.com/"/>
+<repository type="bzr" name="research.operationaldynamics.com"
+    href="http://research.operationaldynamics.com/bzr"/>
+<repository type="git" name="linuxwacom.git.sourceforge.net"
+    href="git://linuxwacom.git.sourceforge.net/"/>
+<repository type="git" name="quvi"
+    href="git://repo.or.cz/"/>
+
+<!-- tarball repos -->
+<repository type="tarball" name="cairo.org"
+    href="http://cairographics.org/"/>
+<repository type="tarball" name="iso-codes"
+    href="http://pkg-isocodes.alioth.debian.org/downloads/"/>
+<repository type="tarball" name="sourceforge.net"
+    href="http://sourceforge.net/projects/"/>
+<repository type="tarball" name="webkitgtk.org"
+    href="http://webkitgtk.org/releases/"/>
+<repository type="tarball" name="freedesktop.org"
+    href="http://freedesktop.org/software/"/>
+<repository type="tarball" name="people.freedesktop.org"
+    href="http://people.freedesktop.org/"/>
+<repository type="tarball" name="icon-theme.freedesktop.org"
+    href="http://icon-theme.freedesktop.org/releases/"/>
+<repository type="tarball" name="nice.freedesktop.org"
+    href="http://nice.freedesktop.org/releases/"/>
+<repository type="tarball" name="libpwquality"
+    href="https://fedorahosted.org/releases/l/i/libpwquality/"/>
+<repository type="tarball" name="ftp.mozilla.org"
+      href="http://ftp.mozilla.org/"/>
+<repository type="tarball" name="kernel.org"
+      href="http://www.kernel.org"/>
+<repository type="tarball" name="ftp.gnu.org"
+    href="http://ftp.gnu.org/gnu/"/>
+<repository type="tarball" name="libndp"
+    href="http://libndp.org/files/"/>
+<repository type="tarball" name="mir"
+    href="https://launchpad.net/mir/"/>
+<repository type="tarball" name="xorg-tar"
+    href="http://xorg.freedesktop.org/"/>
+<repository type="tarball" name="github-tar"
+    href="https://github.com/"/>
+<repository type="tarball" name="libxkbcommon"
+    href="http://xkbcommon.org/download/"/>
 
   <repository 
     type="tarball"
     name="tiff"
     href="ftp://ftp.remotesensing.org/pub/libtiff/"
   />
+
+  <repository 
+    type="tarball" 
+    name="cairo" 
+    href="http://www.cairographics.org/releases/"
+    />
 
   <repository 
     type="tarball"
@@ -21,6 +83,12 @@
     type="tarball"
     name="vips-beta"
     href="http://www.vips.ecs.soton.ac.uk/development/"
+  />
+
+  <repository 
+    type="tarball"
+    name="sourceware"
+    href="ftp://sourceware.org/pub/"
   />
 
   <repository 
@@ -316,9 +384,7 @@
     />
   </autotools>
 
-  <!-- 
-
-       cfitsio can't make a .dll with mingw ... only include it in nip2 builds 
+  <!-- cfitsio can't make a .dll with mingw ... only include it in nip2 builds 
        where we don't care about making a libvips.dll
 
     -->
@@ -347,15 +413,78 @@
     </branch>
   </autotools>
 
+  <autotools id="libffi">
+    <branch
+      repo="sourceware"
+      module="libffi/libffi-3.2.1.tar.gz"
+      version="3.2.1"
+      >
+    </branch>
+  </autotools>
+
+  <!-- don't do any of doc stuff
+
+    -->
+
+  <autotools id="glib">
+    <branch/>
+    <dependencies>
+      <dep package="libffi"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="pixman" autogen-sh="configure">
+    <branch 
+      repo="cairo" 
+      module="pixman-0.32.6.tar.gz" 
+      version="0.32.6"
+      >
+    </branch>
+  </autotools>
+
+  <autotools id="cairo" autogenargs="--disable-gl --disable-xlib --disable-xcb --enable-win32 --without-x --disable-svg --disable-ps --disable-pdf --disable-script">
+    <branch repo="git.freedesktop.org">
+    </branch>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="fontconfig"/>
+      <dep package="pixman"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="pango" autogenargs="--with-cairo --disable-introspection">
+    <branch/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="cairo"/>
+      <dep package="fontconfig"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gdk-pixbuf"
+    autogenargs="--disable-introspection"
+    >
+    <branch/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="libjpeg"/>
+      <dep package="libpng"/>
+      <dep package="libtiff"/>
+    </dependencies>
+  </autotools>
+
   <autotools id="libgsf"
     autogen-sh="configure"
-    makeargs="CFLAGS=-O2"
     >
     <branch
       repo="gnome"
       module="libgsf/1.14/libgsf-1.14.34.tar.xz"
       version="1.14.34">
     </branch>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="gdk-pixbuf"/>
+    </dependencies>
   </autotools>
 
   <!-- openexr has problems on win

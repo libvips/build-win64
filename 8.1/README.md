@@ -26,13 +26,31 @@ Briefly:
 
 add ~/.local/bin to your PATH
 
+### Fetch binary dependencies
+
+We use some binary zips for basic things like libz and gettext. Run:
+
+	./get-win64-packages.sh
+
+To fetch the zips. Run:
+
+	./unpack.sh
+
+To wipe inst/ and reinitialize it from the zips.
+
 ### Build
 
 Run:
 
-	jhbuild --file=jhbuildrc build libvips
+	jhbuild --file=jhbuildrc build --nodeps libvips
 
 
+cairo is done, currently working on gdk-pixbuf
+
+we're building gdk-pixbuf because libgsf is asking for it, but perhaps we
+should turn it off, seem to be part of the thumbnailing system?
+
+need to disable testing for gdk-pixbuf
 
 
 

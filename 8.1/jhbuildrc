@@ -29,7 +29,13 @@ os.environ['TARGET'] = 'x86_64-w64-mingw32'
 os.environ['PKG_CONFIG_PATH'] = ''
 addpath('PKG_CONFIG_PATH', os.path.join(prefix, 'lib', 'pkgconfig'))
 
-# comment these out or we get pkg-config errors, investigate
+# .pc files from binary packages have something like 
+#     prefix=c:/devel/target/f3002dbeeb43fd4ea5385fb6fa4de06f
+# at the top ... we need to override this prefix with our own
+# don't use "--define-variable=prefix=/poop", some pkg-config get confused
+os.environ['PKG_CONFIG'] = '/usr/bin/pkg-config --static --define-variable prefix=' + prefix
+
+# comment these two out or we get pkg-config errors, investigate
 # pkg-config will always search $libdir, usually /usr/lib/pkgconfig -- we want
 # to stop it seeing any host packages, so turn this off
 #os.environ['PKG_CONFIG_LIBDIR'] = ''
