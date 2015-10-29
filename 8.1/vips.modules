@@ -266,6 +266,8 @@
       >
     </branch>
     <dependencies>
+      <dep package="cairo"/>
+      <dep package="gdk-pixbuf"/>
       <dep package="openjpeg"/>
       <dep package="sqlite3"/>
     </dependencies>
@@ -462,7 +464,7 @@
   </autotools>
 
   <autotools id="gdk-pixbuf"
-    autogenargs="--disable-introspection"
+    autogenargs="--disable-introspection --disable-installed-tests --disable-always-build-tests --disable-glibtest "
     >
     <branch/>
     <dependencies>
@@ -475,6 +477,7 @@
 
   <autotools id="libgsf"
     autogen-sh="configure"
+    autogenargs="--without-gdk-pixbuf"
     >
     <branch
       repo="gnome"
@@ -483,7 +486,6 @@
     </branch>
     <dependencies>
       <dep package="glib"/>
-      <dep package="gdk-pixbuf"/>
     </dependencies>
   </autotools>
 

@@ -20,8 +20,6 @@ while read PACKAGE; do
     echo "I don't know what to do with $PACKAGE as it doesn't match anything I am looking for."
   fi
 done << EOF
-dependencies/cairo_1.10.2-1_win64.zip
-dependencies/cairo-dev_1.10.2-1_win64.zip
 dependencies/expat_2.0.1-3_win64.zip
 dependencies/expat-dev_2.0.1-3_win64.zip
 dependencies/fontconfig_2.8.0-2_win64.zip
