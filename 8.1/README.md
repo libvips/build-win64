@@ -5,11 +5,9 @@ This set of scripts build a 64-bit vips binary for Windows. They won't make a
 
 On Ubuntu, follow these steps:
 
-### Install jhbuild
+### Install `jhbuild`
 
-Install `jhbuild`. Don't use the official Ubuntu one, it's missing the
-modulesets we need for the glib parts of the system. Instead, install from
-git. 
+I installed from git, but the packaged `jhbuild` might work. 
 
 Follow these instructions:
 
@@ -24,11 +22,11 @@ Briefly:
 	make
 	make install
 
-add ~/.local/bin to your PATH
+add `~/.local/bin` to your `PATH`.
 
 ### Fetch binary dependencies
 
-We use some binary zips for basic things like libz and gettext. Run:
+We use some binary zips for basic things like `libz` and `gettext`. Run:
 
 	./get-win64-packages.sh
 
@@ -36,11 +34,11 @@ To fetch the zips. Run:
 
 	./unpack.sh
 
-To wipe inst/ and reinitialize it from the zips.
+To wipe `inst/` and reinitialize it from the zips.
 
 ### Install mingw
 
-You need the mingw cross-compiler for generating 64-bit Windows binaries.
+You need the mingw cross-compiler to generate 64-bit Windows binaries.
 
 	sudo apt-get install mingw-w64
 
@@ -50,8 +48,8 @@ Run:
 
 	jhbuild --file=jhbuildrc build --nodeps libvips
 
-## TODO
+It will take a while. 
 
-* fixing up package-vipsdev.sh
+## TODO
 
 * test

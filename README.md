@@ -1,6 +1,6 @@
 # build-win64
 
-Build a libvips binary for 64-bit Windows
+Build a libvips binary for 64-bit Windows. This produces a binary that seems
+to work, at least at a basic level.  More testing required!
 
-Not yet finished or working. See build-win32 for a working Windows build
-system.
+See the README in the 8.1 subdirectory for instructions. 

@@ -2,7 +2,7 @@
 
 . variables.sh
 
-mingw_prefix=i686-pc-mingw32-
+mingw_prefix=x86_64-w64-mingw32-
 
 # set -x
 
@@ -32,8 +32,7 @@ done
 # clean /bin 
 ( cd $repackagedir/bin ; mkdir ../poop ; mv *vips* ../poop ; mv *.dll ../poop ; rm -f * ; mv ../poop/* . ; rmdir ../poop )
 
-( cd $repackagedir/bin ; rm libatk* libglade* libgtk* )
-( cd $repackagedir/bin ; rm -f vips-7.* )
+( cd $repackagedir/bin ; rm -f vips-8.* )
 
 ( cd $repackagedir/bin ; strip --strip-unneeded *.exe )
 
@@ -59,10 +58,8 @@ done
 ( cd $repackagedir/lib ; find . -name "*.la" -exec rm {} \; )
 
 # we need to copy the C++ runtime dlls in there
-gccmingwlibdir=/usr/lib/gcc/i686-w64-mingw32/*-win32
-mingwlibdir=/usr/i686-w64-mingw32/lib
+gccmingwlibdir=/usr/lib/gcc/x86_64-w64-mingw32/*-win32
 cp $gccmingwlibdir/*.dll $repackagedir/bin
-cp $mingwlibdir/*.dll $repackagedir/bin
 
 # don't need these two
 ( cd $repackagedir/bin ; rm -f libgomp*.dll )
@@ -83,6 +80,6 @@ if [ "$?" -ne "0" ]; then
 fi
 echo ok
 
-echo creating $vips_package-dev-$vips_version.zip
-rm -f $vips_package-dev-$vips_version.zip
-zip -r -qq $vips_package-dev-$vips_version.zip $vips_package-dev-$vips_version
+echo creating $vips_package-dev-w64-$vips_version.zip
+rm -f $vips_package-dev-w64-$vips_version.zip
+zip -r -qq $vips_package-dev-w64-$vips_version.zip $vips_package-dev-$vips_version
