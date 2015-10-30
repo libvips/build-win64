@@ -38,6 +38,12 @@ To fetch the zips. Run:
 
 To wipe inst/ and reinitialize it from the zips.
 
+### Install mingw
+
+You need the mingw cross-compiler for generating 64-bit Windows binaries.
+
+	sudo apt-get install mingw-w64
+
 ### Build
 
 Run:
@@ -46,15 +52,6 @@ Run:
 
 ## TODO
 
-* don't build from git, too unpredictable, build from tarballs instead
+* fixing up package-vipsdev.sh
 
-* cairo is done, currently working on gdk-pixbuf
-
-* we're building gdk-pixbuf because libgsf is asking for it, but perhaps we
-  should turn it off, seem to be part of the thumbnailing system?
-
-* need to disable testing for gdk-pixbuf
-
-  argh can't find the setting for this, turn off gdk-pixbuf in libgsf
-
-* oh no, openslide needs gdk-pixbuf, try again
+* test

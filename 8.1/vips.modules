@@ -186,7 +186,7 @@
     name="gnome" 
     href="http://ftp.gnome.org/pub/GNOME/sources/"
   />
-  
+
   <repository
     type="tarball"
     name="sqlite3"
@@ -429,7 +429,12 @@
     -->
 
   <autotools id="glib">
-    <branch/>
+    <branch
+      repo="gnome"
+      module="glib/2.47/glib-2.47.1.tar.xz"
+      version="2.47.1"
+      >
+    </branch>
     <dependencies>
       <dep package="libffi"/>
     </dependencies>
@@ -438,14 +443,24 @@
   <autotools id="pixman" autogen-sh="configure">
     <branch 
       repo="cairo" 
-      module="pixman-0.32.6.tar.gz" 
-      version="0.32.6"
+      module="pixman-0.32.8.tar.gz" 
+      version="0.32.8"
       >
     </branch>
   </autotools>
 
-  <autotools id="cairo" autogenargs="--disable-gl --disable-xlib --disable-xcb --enable-win32 --without-x --disable-svg --disable-ps --disable-pdf --disable-script">
-    <branch repo="git.freedesktop.org">
+  <!-- 1.14.4 fails to build in a cross-compiler
+
+       openslide needs the pdf backend
+
+    -->
+
+  <autotools id="cairo" autogenargs="--disable-gl --disable-xlib --disable-xcb --enable-win32 --without-x --disable-svg --disable-ps --disable-script">
+    <branch 
+      repo="cairo" 
+      module="cairo-1.14.2.tar.xz" 
+      version="1.14.2"
+      >
     </branch>
     <dependencies>
       <dep package="glib"/>
@@ -455,7 +470,12 @@
   </autotools>
 
   <autotools id="pango" autogenargs="--with-cairo --disable-introspection">
-    <branch/>
+    <branch
+      repo="gnome"
+      module="pango/1.38/pango-1.38.1.tar.xz"
+      version="1.38.1"
+      >
+    </branch>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
@@ -463,15 +483,26 @@
     </dependencies>
   </autotools>
 
+  <!-- don't build from git ... it does some introspection to build the test
+       suite build files, which won't work in cross-compiler mode
+
+       disable run-time loading of modules, it's difficult when cross-compiling
+
+    -->
+
   <autotools id="gdk-pixbuf"
-    autogenargs="--disable-introspection --disable-installed-tests --disable-always-build-tests --disable-glibtest "
+    autogenargs="--disable-introspection --disable-installed-tests --disable-always-build-tests --disable-glibtest --with-included-loaders=png,gdip-jpeg"
     >
-    <branch/>
+    <branch
+      repo="gnome"
+      module="gdk-pixbuf/2.33/gdk-pixbuf-2.33.1.tar.xz"
+      version="2.33.1"
+      >
+    </branch>
     <dependencies>
       <dep package="glib"/>
-      <dep package="libjpeg"/>
-      <dep package="libpng"/>
-      <dep package="libtiff"/>
+      <dep package="libjpeg-turbo"/>
+      <dep package="tiff"/>
     </dependencies>
   </autotools>
 
@@ -486,6 +517,7 @@
     </branch>
     <dependencies>
       <dep package="glib"/>
+      <dep package="gdk-pixbuf"/>
     </dependencies>
   </autotools>
 

@@ -29,11 +29,16 @@ os.environ['TARGET'] = 'x86_64-w64-mingw32'
 os.environ['PKG_CONFIG_PATH'] = ''
 addpath('PKG_CONFIG_PATH', os.path.join(prefix, 'lib', 'pkgconfig'))
 
+# pkg-config will always look in PKG_CONFIG_LIBDIR (by default 
+# /usr/lib/pkgconfig) after searching PKG_CONFIG_PATH ... we need to stop this
+# or it'll see host .pc files
+os.environ['PKG_CONFIG_LIBDIR'] = os.path.join(prefix, 'lib', 'pkgconfig')
+
 # .pc files from binary packages have something like 
 #     prefix=c:/devel/target/f3002dbeeb43fd4ea5385fb6fa4de06f
 # at the top ... we need to override this prefix with our own
 # don't use "--define-variable=prefix=/poop", some pkg-config get confused
-os.environ['PKG_CONFIG'] = '/usr/bin/pkg-config --static --define-variable prefix=' + prefix
+os.environ['PKG_CONFIG'] = '/usr/bin/pkg-config --define-variable prefix=' + prefix
 
 # comment these two out or we get pkg-config errors, investigate
 # pkg-config will always search $libdir, usually /usr/lib/pkgconfig -- we want
@@ -103,9 +108,6 @@ autogenargs += ' --enable-all-warnings --enable-maintainer-mode'
 for tool in ('AR', 'RANLIB', 'STRIP', 'AS',
 	     'DLLTOOL', 'OBJDUMP', 'NM', 'WINDRES'):
 	autogenargs += ' '+tool+'="'+os.environ[tool]+'" '
-
-# we generare 64-bit binaries when cross-compiling
-use_lib64 = True
 
 # fetch modules from this dir ... in fact, we just use the 'vips.modules'
 # file
