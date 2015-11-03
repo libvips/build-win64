@@ -5,6 +5,15 @@ This set of scripts build a 64-bit vips binary for Windows. They won't make a
 
 On Ubuntu, follow these steps:
 
+### Install mingw
+
+You need the mingw cross-compiler to generate 64-bit Windows binaries.
+
+	sudo apt-get install mingw-w64 mingw-w64-tools
+
+The `tools` package provides `gendef`, which we use to generate .def files for
+our DLLs.
+
 ### Install `jhbuild`
 
 I installed from git, but the packaged `jhbuild` might work. 
@@ -24,6 +33,11 @@ Briefly:
 
 add `~/.local/bin` to your `PATH`.
 
+### Check the build variables
+
+Have a look in `variables.sh` and make sure the version numbers and other
+settings are right. 
+
 ### Fetch binary dependencies
 
 We use some binary zips for basic things like `libz` and `gettext`. Run:
@@ -36,12 +50,6 @@ To fetch the zips. Run:
 
 To wipe `inst/` and reinitialize it from the zips.
 
-### Install mingw
-
-You need the mingw cross-compiler to generate 64-bit Windows binaries.
-
-	sudo apt-get install mingw-w64
-
 ### Build
 
 Run:
@@ -50,6 +58,14 @@ Run:
 
 It will take a while. 
 
+## Package
+
+Run:
+
+	./package-vipsdev.sh 
+
+To make a nice `vips-dev.zip` package. 
+
 ## TODO
 
-* test
+* more testing

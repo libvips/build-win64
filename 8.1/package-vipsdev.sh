@@ -2,8 +2,6 @@
 
 . variables.sh
 
-mingw_prefix=x86_64-w64-mingw32-
-
 # set -x
 
 if [ ! -f $linux_install/lib/girepository-1.0/Vips-8.0.typelib ]; then
@@ -17,6 +15,10 @@ echo copying install area $installdir
 
 rm -rf $repackagedir
 cp -r $installdir $repackagedir
+
+echo generating import files 
+
+./gendeflibs.sh
 
 echo cleaning build $repackagedir
 
