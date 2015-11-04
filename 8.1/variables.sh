@@ -22,3 +22,5 @@ checkoutdir=checkout
 linux_install=~/vips
 
 mingw_prefix=x86_64-w64-mingw32-
+
+repackagedir=$vips_package-dev-$vips_version

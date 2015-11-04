@@ -9,8 +9,6 @@ if [ ! -f $linux_install/lib/girepository-1.0/Vips-8.0.typelib ]; then
 	exit 1
 fi
 
-repackagedir=$vips_package-dev-$vips_version
-
 echo copying install area $installdir
 
 rm -rf $repackagedir

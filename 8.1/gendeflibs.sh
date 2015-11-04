@@ -7,7 +7,7 @@ dlltool=${mingw_prefix}dlltool
 
 # set -x
 
-cd $installdir
+cd $repackagedir
 
 for dllfile in bin/*.dll; do
 	base=$(basename $dllfile .dll)
