@@ -193,6 +193,16 @@
     href="http://www.sqlite.org/"
   />
 
+  <autotools id="libpng" 
+    autogen-sh="configure"
+    >
+    <branch
+      repo="sourceforge"
+      module="libpng/libpng-1.6.19.tar.gz"
+      version="1.6.19"
+    />
+  </autotools>
+
   <autotools id="fftw3" 
     autogen-sh="configure"
     autogenargs="--disable-static --enable-shared --disable-threads"
