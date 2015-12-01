@@ -125,5 +125,5 @@ notrayicon = True
 # whether not to emit notifications through the notification daemon
 nonotify = True 
 
-
-
+# jhbuild uses a CPU-meltingly excessive default parallelism of 2x CPU cores
+makeargs = '-j1'

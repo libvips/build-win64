@@ -476,6 +476,7 @@
       <dep package="glib"/>
       <dep package="fontconfig"/>
       <dep package="pixman"/>
+      <dep package="libpng"/>
     </dependencies>
   </autotools>
 
@@ -571,10 +572,7 @@
     <branch
       repo="vips"
       module="8.1/vips-8.1.1.tar.gz"
-      version="8.1.1"
-      >
-
-      <patch file="file:///home/john/develop/transform-7.32/transform.patch" strip="1"/>
+      version="8.1.1">
     </branch>
 
     <dependencies>
@@ -588,6 +586,7 @@
       <dep package="lcms"/>
       <dep package="libexif"/>
       <dep package="imagemagick"/>
+      <dep package="libpng"/>
     </dependencies>
   </autotools>
 

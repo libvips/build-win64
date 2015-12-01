@@ -4,11 +4,6 @@
 
 # set -x
 
-if [ ! -f $linux_install/lib/girepository-1.0/Vips-8.0.typelib ]; then
-	echo "need a complete linux install to make a windows install"
-	exit 1
-fi
-
 echo copying install area $installdir
 
 rm -rf $repackagedir
@@ -65,20 +60,24 @@ cp $gccmingwlibdir/*.dll $repackagedir/bin
 ( cd $repackagedir/bin ; rm -f libgomp*.dll )
 ( cd $repackagedir/bin ; rm -f libgfortran*.dll )
 
-# stuff for pyvips8
-mkdir -p $repackagedir/lib/girepository-1.0
-cp $linux_install/lib/girepository-1.0/Vips-8.0.typelib $repackagedir/lib/girepository-1.0
-mkdir -p $repackagedir/lib/python2.7/site-packages/gi/overrides
-cp $linux_install/lib/python2.7/site-packages/gi/overrides/Vips.* $repackagedir/lib/python2.7/site-packages/gi/overrides
+# stuff for pyvips8, assumes presence of ~/vips/lib/girepository-1.0
+if [ -f $linux_install/lib/girepository-1.0/Vips-8.0.typelib ]; then
+  mkdir -p $repackagedir/lib/girepository-1.0
+  cp $linux_install/lib/girepository-1.0/Vips-8.0.typelib $repackagedir/lib/girepository-1.0
+  mkdir -p $repackagedir/lib/python2.7/site-packages/gi/overrides
+  cp $linux_install/lib/python2.7/site-packages/gi/overrides/Vips.* $repackagedir/lib/python2.7/site-packages/gi/overrides
+else
+  echo WARNING: could not find lib/girepository-1.0 for pyvips8 support
+fi
 
 # ... and test we startup OK
 echo -n "testing build ... "
 $repackagedir/bin/vips.exe --help > /dev/null
 if [ "$?" -ne "0" ]; then
-	echo vips.exe failed to run argh
-	exit 1
+	echo WARNING: vips.exe failed to run
+else
+  echo ok
 fi
-echo ok
 
 echo creating $vips_package-dev-w64-$vips_version.zip
 rm -f $vips_package-dev-w64-$vips_version.zip
