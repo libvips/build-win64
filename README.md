@@ -29,3 +29,14 @@ sudo ./build.sh 8.1
 At the end of the build, the script will display the paths of all the zip
 files it created, ready to be uploaded to the server. Be patient, this process
 can take an hour, even on a powerful machine. 
+
+### TODO
+
+- do a native linux build as well, so we get a typelib
+
+  we wouldn't need any of the optional components, just a minimal build
+
+- try installing win32 python and running it under wine so we can run the test
+  suite? who knows, it could work
+
+
