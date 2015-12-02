@@ -1,0 +1,6 @@
+language: c
+sudo: required
+services:
+  - docker
+script:
+  - ./build.sh 8.1
