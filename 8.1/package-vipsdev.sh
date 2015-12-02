@@ -18,7 +18,7 @@ echo cleaning build $repackagedir
 ( cd $repackagedir ; rm -rf _jhbuild )
 
 for i in COPYING ChangeLog README.md AUTHORS; do 
-	( cp $basedir/$checkoutdir/vips-$vips_version/$i $repackagedir )
+  ( cp $basedir/$checkoutdir/vips-$vips_version/$i $repackagedir )
 done
 
 # rename all the $mingw_prefix-animate etc. without the prefix
@@ -72,9 +72,9 @@ fi
 
 # ... and test we startup OK
 echo -n "testing build ... "
-$repackagedir/bin/vips.exe --help > /dev/null
+wine $repackagedir/bin/vips.exe --help > /dev/null
 if [ "$?" -ne "0" ]; then
-	echo WARNING: vips.exe failed to run
+  echo WARNING: vips.exe failed to run
 else
   echo ok
 fi

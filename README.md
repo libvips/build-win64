@@ -23,8 +23,9 @@ Then pass the build instructions to the docker service. You have to run this
 as root.
 
 ```
-sudo ./build 8.1
+sudo ./build.sh 8.1
 ```
 
 At the end of the build, the script will display the paths of all the zip
-files it created, ready to be uploaded to the server.  
+files it created, ready to be uploaded to the server. Be patient, this process
+can take an hour, even on a powerful machine. 
