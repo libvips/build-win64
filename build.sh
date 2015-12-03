@@ -17,7 +17,7 @@ fi
 docker build -t libvips-build-win64 container
 
 # Run build scripts inside container, with versioned subdirectory mounted at /data
-docker run --rm -t -v $PWD/$VERSION:/data libvips-build-win64 sh -c "cp /data/* .; ./get-win64-packages.sh && ./unpack.sh && jhbuild --file=jhbuildrc build --nodeps libvips && ./package-vipsdev.sh && cp vips-dev-w64-*.zip /data"
+docker run --rm -t -v $PWD/$VERSION:/data libvips-build-win64 sh -c "cp /data/* .; ./build.sh && cp vips-dev-w64-*.zip /data"
 
 # List result
 ls -al $PWD/$VERSION/*.zip

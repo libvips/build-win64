@@ -33,11 +33,24 @@ directly in `jhbuild`.
 
 ### TODO
 
-- do a native linux build as well, so we get a typelib
-
-  we wouldn't need any of the optional components, just a minimal build
-
-- try installing win32 python and running it under wine so we can run the test
+- try installing win64 python and running it under wine so we can run the test
   suite? who knows, it could work
 
+	wget https://www.python.org/ftp/python/2.7.10/python-2.7.10.amd64.msi
+
+  headless install
+
+	wine msiexec /qn /i python-2.7.10.amd64.msi 
+
+  does not set PATH, so to run, use:
+
+	WINEPATH=c:/python27 wine python.exe test.py
+
+  try
+
+	WINEPATH="c:/python27;/home/john/GIT/build-win64/8.1/x/vips-dev-8.1.1/bin" GI_TYPELIB_PATH=/home/john/GIT/build-win64/8.1/x/vips-dev-8.1.1/lib/girepository-1.0 wine python test_all.py
+
+  need win gi stuff
+
+  try an all-in-one bundle? 
 
