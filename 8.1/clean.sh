@@ -2,6 +2,11 @@
 
 . variables.sh
 
+echo wiping native build
+
+rm -rf $linux_install
+rm -rf native-linux-build
+
 echo wiping install area $installdir
 
 rm -rf $installdir

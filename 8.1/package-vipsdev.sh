@@ -60,7 +60,7 @@ cp $gccmingwlibdir/*.dll $repackagedir/bin
 ( cd $repackagedir/bin ; rm -f libgomp*.dll )
 ( cd $repackagedir/bin ; rm -f libgfortran*.dll )
 
-# stuff for pyvips8, assumes presence of ~/vips/lib/girepository-1.0
+# stuff for pyvips8, assumes presence of $linux_install/lib/girepository-1.0
 if [ -f $linux_install/lib/girepository-1.0/Vips-8.0.typelib ]; then
   mkdir -p $repackagedir/lib/girepository-1.0
   cp $linux_install/lib/girepository-1.0/Vips-8.0.typelib $repackagedir/lib/girepository-1.0
