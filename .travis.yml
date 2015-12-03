@@ -2,5 +2,8 @@ language: c
 sudo: required
 services:
   - docker
+env:
+  - VERSION=8.1
 script:
-  - ./build.sh 8.1
+  - chmod o+w ${VERSION}
+  - ./build.sh ${VERSION}
