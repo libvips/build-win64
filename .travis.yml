@@ -1,9 +1,16 @@
 language: c
 sudo: required
 services:
-  - docker
+- docker
 env:
-  - VERSION=8.1
+- VERSION=8.1
 script:
-  - chmod o+w ${VERSION}
-  - ./build.sh ${VERSION}
+- chmod o+w ${VERSION}
+- "./build.sh ${VERSION}"
+deploy:
+  provider: releases
+  api_key:
+    secure: h06fYBLt/IGe4omY6+8nAllSaDv0aDK/EMhpUPp8JqvD5VC9Pz8FvxJHU0RwoW/OGl+Q2aNKtavM5C1KABbhRdkiUbrrL2Jtvhrcc2RX1kkib/1PSgbfTvLt6DIFf+tdjD5eFbx2St+ktfarhGXj7kraHP6Z9u9PNub/zSjdHyMvbxUUpz/rYc0GHMFnmVjHzlaeh2cFs4uLt9W6uSogo3ygSf0NoDppAGP58o2efHo4h7I+6X/UGBJhe7NMtB0yDvJa+qMCQeIg85c5rpKZllmSn3oGgyhSTYbqdJhzroc0J+mwYPRovZb/27SSG/L7Oe3WeOYWDZPIV4jmGDmAYQOIQZs3wjD+N5qHXJx0H8j+HMB8AHTMCWyhL9QQCRqgo2iCZStHCqAQONGWx5DXIYgj781cetGKTjS52hCQUr72WqwGax+nbeC1b/2r4/L4B/wyK58RW0UblSln75GF6nq+B8YQGw4P8O1/rjyRoslNS1Xsv8a7HxwBln73RYt/mDWHXKkNgV8bkK5Rfb52RZn5MRVbTZsFyKoGwh9v6vqsGVmFsFwUQ1PHQ0BoGDdLXowO1gLotFAQk2pkiqUopZzjihyFXnPZUYK4wLNtoSkwFOQMzaREYL+q3xyVCsC6zMoX7T1oNyn3iL2JsAD+C1uM/nY8jUWYi8Yil+qn5qM=
+  file: 8.1/vips-dev-w64-8.1.1.zip
+  on:
+    repo: jcupitt/build-win64
