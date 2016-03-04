@@ -228,12 +228,29 @@
 
        openjpeg's tiff detector finds /usr/include/tiff.h, making it add 
        -I/usr/include to the search path, and breaking all the <windows.h>
-       stuff has linux headers start being found instead of the mingw ones
+       stuff as linux headers start being found instead of the mingw ones
 
        disable openjpeg tiff, we don't use it anyway
 
        openjpeg2 is not using autotools making cross-compilation difficult 
        and annoying, stick with 1.5.1 for now
+
+       though see:
+
+	https://github.com/libjpeg-turbo/libjpeg-turbo/issues/56
+
+       maybe we can cross-compile using those tips?
+
+       perhaps:
+
+
+  <cmake id = 'ros'>
+    <branch repo="code.ros.org/ros"/>
+    <dependencies>
+      <dep package="catkin"/>
+      <dep package="rospack"/>
+    </dependencies>
+  </cmake>
 
        -->
 
