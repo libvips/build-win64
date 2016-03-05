@@ -4,6 +4,9 @@
 
 . variables.sh
 
+# export this to vips.modules ... cmake needs it
+export BASEDIR=$basedir
+
 vips_site=http://www.vips.ecs.soton.ac.uk/supported/$vips_version
 
 # basic setup ... must do this before the native build, since it'll wipe the
