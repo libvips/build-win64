@@ -20,6 +20,7 @@ RUN dpkg --add-architecture i386 && \
     mingw-w64 \
     mingw-w64-tools \
     nasm \
+    cmake \
     wget \
     yelp-tools \
     libglib2.0-dev \

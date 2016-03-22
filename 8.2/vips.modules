@@ -567,8 +567,8 @@
 
     <branch
       repo="vips"
-      module="8.2/vips-8.2.2.tar.gz"
-      version="8.2.2">
+      module="8.2/vips-8.2.3.tar.gz"
+      version="8.2.3">
     </branch>
 
     <dependencies>

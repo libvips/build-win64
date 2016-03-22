@@ -15,6 +15,16 @@ First, install docker:
 sudo apt-get install docker.io
 ```
 
+On some Ubuntu installs, docker can fail to see DNS thanks to some interaction
+with NetworkManager. If it can't download stuff, edit `/etc/default/docker`
+and uncomment the line:
+
+```
+DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4"
+```
+
+And restart docker.
+
 Then pass the build instructions to the docker service. You have to run
 this as root.
 
