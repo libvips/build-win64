@@ -226,7 +226,7 @@
 
   <autotools id="librsvg" 
     supports-non-srcdir-builds="no"
-    autogenargs="--disable-introspection">
+    autogenargs="--disable-introspection --disable-pixbuf-loader">
     >
     <branch/>
     <dependencies>

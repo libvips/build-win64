@@ -7,7 +7,8 @@
 # export this to vips.modules ... cmake needs it
 export BASEDIR=$basedir
 
-vips_site=http://www.vips.ecs.soton.ac.uk/supported/$vips_version
+#vips_site=http://www.vips.ecs.soton.ac.uk/supported/$vips_version
+vips_site=http://www.vips.ecs.soton.ac.uk/development/$vips_version
 
 # basic setup ... must do this before the native build, since it'll wipe the
 # install area
@@ -19,8 +20,8 @@ vips_site=http://www.vips.ecs.soton.ac.uk/supported/$vips_version
 if [ ! -d $linux_install ]; then
   ( mkdir native-linux-build; cd native-linux-build; \
     vips_name=$vips_package-$vips_version.$vips_minor_version
-    wget $vips_site/$vips_name.tar.gz &&
-    tar xf $vips_name.tar.gz &&
+    wget $vips_site/${vips_name}b.tar.gz &&
+    tar xf ${vips_name}b.tar.gz &&
     cd $vips_name &&
     CFLAGS="-g" CXXFLAGS="-g" ./configure --prefix=$basedir/vips &&
     make &&
