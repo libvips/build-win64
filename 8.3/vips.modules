@@ -205,8 +205,13 @@
     />
   </autotools>
 
+  <!-- giflib fails to detect the need to open binary when cross-compiling
+
+    -->
+
   <autotools id="giflib" 
     autogen-sh="configure"
+    makeargs="CFLAGS=-D_OPEN_BINARY"
     >
     <branch
       repo="sourceforge"
