@@ -205,7 +205,7 @@
     />
   </autotools>
 
-  <!-- giflib fails to detect the need to open binary when cross-compiling
+  <!-- giflib does not automatically open binary when cross-compiling
 
     -->
 
@@ -243,7 +243,7 @@
   </autotools>
 
   <autotools id="poppler" 
-    autogenargs="--disable-xpdf-headers --disable-splash-output --enable-poppler-glib --disable-gtk-test --disable-utils --disable-poppler-cpp" 
+    autogenargs="--with-font-configuration=fontconfig --disable-xpdf-headers --disable-splash-output --enable-poppler-glib --disable-gtk-test --disable-utils --disable-poppler-cpp" 
     makeargs="POPPLER_GLIB_DISABLE_DEPRECATED="
     >
     <pkg-config>poppler-glib.pc</pkg-config>
