@@ -225,7 +225,6 @@
     <branch />
     <dependencies>
       <dep package="glib"/>
-      <dep package="gtk-doc"/>
     </dependencies>
   </autotools>
 
@@ -624,7 +623,7 @@
 
     <branch
       repo="vips-beta"
-      module="8.3/vips-8.3.0b.tar.gz"
+      module="8.3/vips-8.3.0c.tar.gz"
       version="8.3.0"
       checkoutdir="vips-8.3.0"
       >
