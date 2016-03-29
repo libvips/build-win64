@@ -242,7 +242,7 @@
   </autotools>
 
   <autotools id="poppler" 
-    autogenargs="--with-font-configuration=fontconfig --disable-xpdf-headers --disable-splash-output --enable-poppler-glib --disable-gtk-test --disable-utils --disable-poppler-cpp" 
+    autogenargs="--with-font-configuration=win32 --disable-xpdf-headers --disable-splash-output --enable-poppler-glib --disable-gtk-test --disable-utils --disable-poppler-cpp" 
     makeargs="POPPLER_GLIB_DISABLE_DEPRECATED="
     >
     <pkg-config>poppler-glib.pc</pkg-config>
@@ -617,13 +617,13 @@
 
   <autotools id="libvips" 
     autogen-sh="configure"
-    autogenargs="--enable-debug=no --without-OpenEXR --without-matio --without-orc --disable-introspection "
+    autogenargs="--enable-debug=yes --without-OpenEXR --without-matio --without-orc --disable-introspection "
     makeargs="CFLAGS=-O3 CXXFLAGS=-O3"
     >
 
     <branch
       repo="vips-beta"
-      module="8.3/vips-8.3.0c.tar.gz"
+      module="8.3/vips-8.3.0d.tar.gz"
       version="8.3.0"
       checkoutdir="vips-8.3.0"
       >

@@ -20,8 +20,8 @@ vips_site=http://www.vips.ecs.soton.ac.uk/development/$vips_version
 if [ ! -d $linux_install ]; then
   ( mkdir native-linux-build; cd native-linux-build; \
     vips_name=$vips_package-$vips_version.$vips_minor_version
-    wget $vips_site/${vips_name}c.tar.gz &&
-    tar xf ${vips_name}c.tar.gz &&
+    wget $vips_site/${vips_name}d.tar.gz &&
+    tar xf ${vips_name}d.tar.gz &&
     cd $vips_name &&
     CFLAGS="-g" CXXFLAGS="-g" ./configure --prefix=$basedir/vips &&
     make &&
