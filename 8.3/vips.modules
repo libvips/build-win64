@@ -615,7 +615,7 @@
 
     -->
 
-  <autotools id="libvips" 
+  <autotools id="libvips-all"
     autogen-sh="configure"
     autogenargs="--enable-debug=yes --without-OpenEXR --without-matio --without-orc --disable-introspection "
     makeargs="CFLAGS=-O3 CXXFLAGS=-O3"

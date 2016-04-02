@@ -30,6 +30,6 @@ fi
 
 # do the win64 build and package
 if [ -d $linux_install ]; then
-  jhbuild --file=jhbuildrc build --nodeps libvips && \
+  jhbuild --file=jhbuildrc build --nodeps libvips-$DEPS && \
     ./package-vipsdev.sh
 fi
