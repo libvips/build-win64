@@ -60,6 +60,8 @@
     href="https://github.com/"/>
 <repository type="tarball" name="libxkbcommon"
     href="http://xkbcommon.org/download/"/>
+<repository type="tarball" name="poppler.freedesktop.org"
+    href="http://poppler.freedesktop.org/"/>
 
   <repository 
     type="tarball"
@@ -201,6 +203,61 @@
       module="libpng/libpng-1.6.19.tar.gz"
       version="1.6.19"
     />
+  </autotools>
+
+  <!-- giflib does not automatically open binary when cross-compiling
+
+    -->
+
+  <autotools id="giflib" 
+    autogen-sh="configure"
+    makeargs="CFLAGS=-D_OPEN_BINARY"
+    >
+    <branch
+      repo="sourceforge"
+      module="giflib/giflib-4.2.3.tar.gz"
+      version="4.2.3"
+    />
+  </autotools>
+
+  <autotools id="libcroco" supports-non-srcdir-builds="no">
+    <pkg-config>libcroco-0.6.pc</pkg-config>
+    <branch />
+    <dependencies>
+      <dep package="glib"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="librsvg" 
+    supports-non-srcdir-builds="no"
+    autogenargs="--disable-introspection --disable-pixbuf-loader">
+    >
+    <branch/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="gdk-pixbuf"/>
+      <dep package="libcroco"/>
+      <dep package="pango"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="poppler" 
+    autogenargs="--with-font-configuration=win32 --disable-xpdf-headers --disable-splash-output --enable-poppler-glib --disable-gtk-test --disable-utils --disable-poppler-cpp" 
+    makeargs="POPPLER_GLIB_DISABLE_DEPRECATED="
+    >
+    <pkg-config>poppler-glib.pc</pkg-config>
+    <branch repo="poppler.freedesktop.org"
+            module="poppler-0.42.0.tar.xz"
+            version="0.42.0"
+      />
+    <dependencies>
+      <dep package="cairo"/>
+      <dep package="openjpeg"/>
+      <dep package="glib"/>
+    </dependencies>
+    <after>
+      <dep package="gdk-pixbuf"/>
+    </after>
   </autotools>
 
   <autotools id="fftw3" 
@@ -470,7 +527,6 @@
     </branch>
     <dependencies>
       <dep package="glib"/>
-      <dep package="fontconfig"/>
       <dep package="pixman"/>
       <dep package="libpng"/>
     </dependencies>
@@ -486,7 +542,6 @@
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
-      <dep package="fontconfig"/>
     </dependencies>
   </autotools>
 
@@ -510,6 +565,7 @@
       <dep package="glib"/>
       <dep package="libjpeg-turbo"/>
       <dep package="tiff"/>
+      <dep package="libpng"/>
     </dependencies>
   </autotools>
 
@@ -561,17 +617,22 @@
 
   <autotools id="libvips" 
     autogen-sh="configure"
-    autogenargs="--enable-debug=no --without-OpenEXR --without-matio --without-orc --disable-introspection "
+    autogenargs="--enable-debug=yes --without-OpenEXR --without-matio --without-orc --disable-introspection "
     makeargs="CFLAGS=-O3 CXXFLAGS=-O3"
     >
 
     <branch
-      repo="vips"
-      module="8.2/vips-8.2.3.tar.gz"
-      version="8.2.3">
+      repo="vips-beta"
+      module="8.3/vips-8.3.0d.tar.gz"
+      version="8.3.0"
+      checkoutdir="vips-8.3.0"
+      >
     </branch>
 
     <dependencies>
+      <dep package="librsvg"/>
+      <dep package="giflib"/>
+      <dep package="poppler"/>
       <dep package="glib"/>
       <dep package="pango"/>
       <dep package="fftw3"/>

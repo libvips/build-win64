@@ -15,6 +15,16 @@ First, install docker:
 sudo apt-get install docker.io
 ```
 
+On some Ubuntu installs, docker can fail to see DNS thanks to some interaction
+with NetworkManager. If it can't download stuff, edit `/etc/default/docker`
+and uncomment the line:
+
+```
+DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4"
+```
+
+And restart docker.
+
 Then pass the build instructions to the docker service. You have to run
 this as root.
 
@@ -33,6 +43,14 @@ directly in `jhbuild`.
 
 ### TODO
 
+- linux build needs to include all components that the win build has, so pdf,
+  svg, gif etc. 
+
+  maybe we should just include a good typelib? and Vips.py too? much simpler
+  than trying to build a complete linux install in the container
+
+- could turn on orc now
+
 - try installing win64 python and running it under wine so we can run the test
   suite? who knows, it could work
 
@@ -50,7 +68,4 @@ directly in `jhbuild`.
 
 	WINEPATH="c:/python27;/home/john/GIT/build-win64/8.1/x/vips-dev-8.1.1/bin" GI_TYPELIB_PATH=/home/john/GIT/build-win64/8.1/x/vips-dev-8.1.1/lib/girepository-1.0 wine python test_all.py
 
-  need win gi stuff
-
-  try an all-in-one bundle? 
 
