@@ -81,4 +81,4 @@ fi
 
 echo creating $vips_package-dev-w64-$vips_version.zip
 rm -f $vips_package-dev-w64-$vips_version.zip
-zip -r -qq $vips_package-dev-w64-$vips_version.zip $vips_package-dev-$vips_version
+zip -r -qq $vips_package-dev-w64-$DEPS-$vips_version.zip $vips_package-dev-$vips_version
