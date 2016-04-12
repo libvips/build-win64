@@ -20,16 +20,22 @@ vips_site=http://www.vips.ecs.soton.ac.uk/development/$vips_version
 if [ ! -d $linux_install ]; then
   ( mkdir native-linux-build; cd native-linux-build; \
     vips_name=$vips_package-$vips_version.$vips_minor_version
-    wget $vips_site/${vips_name}d.tar.gz &&
-    tar xf ${vips_name}d.tar.gz &&
+    wget $vips_site/${vips_name}e.tar.gz &&
+    tar xf ${vips_name}e.tar.gz &&
     cd $vips_name &&
     CFLAGS="-g" CXXFLAGS="-g" ./configure --prefix=$basedir/vips &&
     make &&
     make install )
 fi
 
+# set all conditions
+conditions=
+for cond in $OPTS; do
+  conditions+="--condition=+$cond "
+done
+
 # do the win64 build and package
 if [ -d $linux_install ]; then
-  jhbuild --file=jhbuildrc build --nodeps libvips-$DEPS && \
+  jhbuild --file=jhbuildrc $conditions build --nodeps libvips && \
     ./package-vipsdev.sh
 fi

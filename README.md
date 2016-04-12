@@ -36,6 +36,13 @@ At the end of the build, the script will display the paths of all the
 zip files it created, ready to be uploaded to the server. Be patient,
 this process can take an hour, even on a powerful machine.
 
+You can optionally disable some components. For example:
+
+```
+sudo ./build.sh 8.3 no-poppler no-openslide no-imagemagick
+```
+
+
 ### Build with `jhbuild`
 
 See the README in the 8.1 subdirectory for instructions for building

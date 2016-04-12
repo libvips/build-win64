@@ -615,7 +615,7 @@
 
     -->
 
-  <autotools id="libvips-all"
+  <autotools id="libvips"
     autogen-sh="configure"
     autogenargs="--enable-debug=yes --without-OpenEXR --without-matio --without-orc --disable-introspection "
     makeargs="CFLAGS=-O3 CXXFLAGS=-O3"
@@ -623,7 +623,7 @@
 
     <branch
       repo="vips-beta"
-      module="8.3/vips-8.3.0d.tar.gz"
+      module="8.3/vips-8.3.0e.tar.gz"
       version="8.3.0"
       checkoutdir="vips-8.3.0"
       >
@@ -632,17 +632,23 @@
     <dependencies>
       <dep package="librsvg"/>
       <dep package="giflib"/>
-      <dep package="poppler"/>
+      <if condition-unset="no-poppler">
+        <dep package="poppler"/>
+      </if>
       <dep package="glib"/>
       <dep package="pango"/>
       <dep package="fftw3"/>
       <dep package="libgsf"/>
       <dep package="libjpeg-turbo"/>
-      <dep package="openslide"/>
+      <if condition-unset="no-openslide">
+        <dep package="openslide"/>
+      </if>
       <dep package="tiff"/>
       <dep package="lcms"/>
       <dep package="libexif"/>
-      <dep package="imagemagick"/>
+      <if condition-unset="no-imagemagick">
+        <dep package="imagemagick"/>
+      </if>
       <dep package="libpng"/>
     </dependencies>
   </autotools>
