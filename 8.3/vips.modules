@@ -472,8 +472,8 @@
     >
     <branch
       repo="webp"
-      module="libwebp-0.4.3.tar.gz"
-      version="0.4.3"
+      module="libwebp-0.5.0.tar.gz"
+      version="0.5.0"
       >
     </branch>
   </autotools>
@@ -601,35 +601,103 @@
        use -O3 to turn on the auto vectorizer, this gives a useful speedup in 
        7.38 and later
 
-       webp has problems with mingw on windows, see:
-
-	https://github.com/jcupitt/build-win32/issues/11
-
-	https://github.com/webmproject/libwebp/commit/46305ca649bf6035f9ef61c1a0c3a1f094a752ad
-
-	http://www.virtualdub.org/blog/pivot/entry.php?id=363
-
-      reenable webp when we are > 0.4.3, and turn off all intrinsics
-
-      <dep package="webp"/>
-
     -->
 
   <autotools id="libvips-all"
     autogen-sh="configure"
-    autogenargs="--enable-debug=yes --without-OpenEXR --without-matio --without-orc --disable-introspection "
+    autogenargs="--enable-debug=no --without-OpenEXR --without-matio --without-orc --disable-introspection "
     makeargs="CFLAGS=-O3 CXXFLAGS=-O3"
     >
 
     <branch
       repo="vips-beta"
-      module="8.3/vips-8.3.0d.tar.gz"
+      module="8.3/vips-8.3.0e.tar.gz"
       version="8.3.0"
       checkoutdir="vips-8.3.0"
       >
     </branch>
 
     <dependencies>
+      <dep package="webp"/>
+      <dep package="librsvg"/>
+      <dep package="giflib"/>
+      <dep package="poppler"/>
+      <dep package="glib"/>
+      <dep package="pango"/>
+      <dep package="fftw3"/>
+      <dep package="libgsf"/>
+      <dep package="libjpeg-turbo"/>
+      <dep package="openslide"/>
+      <dep package="tiff"/>
+      <dep package="lcms"/>
+      <dep package="libexif"/>
+      <dep package="imagemagick"/>
+      <dep package="libpng"/>
+    </dependencies>
+  </autotools>
+
+  <!-- libvips with a set of deps for web use
+
+       don't include support for less-used file formats in an attempt to 
+       reduce the attack surface
+
+       don't include poppler, it's GPL
+
+       don't include imagemagick, it's got a HUGE attack surface 
+
+    -->
+
+  <autotools id="libvips-web"
+    autogen-sh="configure"
+    autogenargs="--enable-debug=no --without-OpenEXR --without-matio --without-orc --disable-introspection "
+    makeargs="CFLAGS=-O3 CXXFLAGS=-O3"
+    >
+
+    <branch
+      repo="vips-beta"
+      module="8.3/vips-8.3.0e.tar.gz"
+      version="8.3.0"
+      checkoutdir="vips-8.3.0"
+      >
+    </branch>
+
+    <dependencies>
+      <dep package="webp"/>
+      <dep package="librsvg"/>
+      <dep package="giflib"/>
+      <dep package="glib"/>
+      <dep package="pango"/>
+      <dep package="fftw3"/>
+      <dep package="libgsf"/>
+      <dep package="libjpeg-turbo"/>
+      <dep package="tiff"/>
+      <dep package="lcms"/>
+      <dep package="libexif"/>
+      <dep package="libpng"/>
+    </dependencies>
+  </autotools>
+
+  <!-- same as -all, but with the transform patch
+
+    -->
+
+  <autotools id="libvips-transform"
+    autogen-sh="configure"
+    autogenargs="--enable-debug=no --without-OpenEXR --without-matio --without-orc --disable-introspection "
+    makeargs="CFLAGS=-O3 CXXFLAGS=-O3"
+    >
+
+    <branch
+      repo="vips-beta"
+      module="8.3/vips-8.3.0e.tar.gz"
+      version="8.3.0"
+      checkoutdir="vips-8.3.0"
+      >
+      <patch file="file:///home/john/develop/transform-7.32/transform.patch" strip="1"/>
+    </branch>
+
+    <dependencies>
+      <dep package="webp"/>
       <dep package="librsvg"/>
       <dep package="giflib"/>
       <dep package="poppler"/>
