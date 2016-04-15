@@ -59,9 +59,13 @@ To wipe `inst/` and reinitialize it from the zips.
 
 Run:
 
-	jhbuild --file=jhbuildrc build --nodeps libvips
+	export BASEDIR=$(pwd)
+	jhbuild --file=jhbuildrc build --nodeps libvips-all
 
+BASEDIR is needed by vips.modules to pass the toolchain file to cmake. 
 It will take a while. 
+
+You can use libvips-web and libvips-transform as targets too.
 
 ## Package
 

@@ -442,6 +442,11 @@
     </dependencies>
   </autotools>
 
+  <!-- build vips with orc and you get segv if you try to use it, not tried
+       to track down why, leave it off now for
+
+    -->
+
   <autotools id="orc-0.4" 
     autogen-sh="configure"
     >
@@ -663,6 +668,10 @@
        use -O3 to turn on the auto vectorizer, this gives a useful speedup in 
        7.38 and later
 
+       orc causes an immediate segv, not tried to diagnose yet
+
+      <dep package="orc-0.4"/>
+
     -->
 
   <autotools id="libvips-all"
@@ -680,7 +689,6 @@
     </branch>
 
     <dependencies>
-      <dep package="orc-0.4"/>
       <dep package="matio"/>
       <dep package="webp"/>
       <dep package="librsvg"/>
@@ -726,7 +734,6 @@
     </branch>
 
     <dependencies>
-      <dep package="orc-0.4"/>
       <dep package="webp"/>
       <dep package="librsvg"/>
       <dep package="giflib"/>
@@ -762,7 +769,6 @@
     </branch>
 
     <dependencies>
-      <dep package="orc-0.4"/>
       <dep package="matio"/>
       <dep package="webp"/>
       <dep package="librsvg"/>
