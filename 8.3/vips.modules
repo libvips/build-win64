@@ -95,8 +95,14 @@
 
   <repository 
     type="tarball"
+    name="hdf5"
+    href="http://www.hdfgroup.org/ftp/HDF5/current/src/"
+  />
+
+  <repository 
+    type="tarball"
     name="orc"
-    href="http://code.entropywave.com/download/orc/"
+    href="https://gstreamer.freedesktop.org/src/orc/"
   />
 
   <repository 
@@ -436,16 +442,13 @@
     </dependencies>
   </autotools>
 
-  <!-- the orc stuff we use needs 64-bit SSE, so we can't use it under 
-       windows -->
-
   <autotools id="orc-0.4" 
     autogen-sh="configure"
     >
     <branch
       repo="orc"
-      module="orc-0.4.18.tar.gz"
-      version="0.4.18"
+      module="orc-0.4.25.tar.xz"
+      version="0.4.25"
     />
   </autotools>
 
@@ -460,8 +463,8 @@
     >
     <branch
       repo="cfitsio"
-      module="cfitsio3370.tar.gz"
-      version="3.37"
+      module="cfitsio3380.tar.gz"
+      version="3.38"
       checkoutdir="cfitsio"
       >
     </branch>
@@ -584,16 +587,75 @@
     </dependencies>
   </autotools>
 
-  <!-- openexr has problems on win
-  
-       matio fails to build and link on win
+  <!-- openexr has a range of problems cross-compiling to win
 
-       cfitsio cannot make a .dll with mingw, only include it if you must 
+       the first thing it does it build a couple of small programs to generate 
+       some headers, but of course they need to be compiled with the 
+       non-cross-compiler argh
+
+    -->
+
+  <autotools id="ilmbase"
+    autogen-sh="configure"
+    >
+    <branch 
+      repo="nongnu"
+      module="openexr/ilmbase-2.2.0.tar.gz"
+      version="2.2.0"
+    />
+    <dependencies>
+    </dependencies>
+  </autotools>
+
+  <autotools id="openexr"
+    autogen-sh="configure"
+    >
+    <branch 
+      repo="nongnu"
+      module="openexr/openexr-2.2.0.tar.gz"
+      version="2.2.0"
+    />
+    <dependencies>
+      <dep package="ilmbase"/>
+    </dependencies>
+  </autotools>
+
+  <!-- sadly hdf5 does not like cross-compiling
+
+    -->
+
+  <autotools id="hdf5"
+    autogen-sh="configure"
+    >
+    <branch 
+      repo="hdf5"
+      module="hdf5-1.8.16.tar.gz"
+      version="1.8.16"
+    />
+    <dependencies>
+    </dependencies>
+  </autotools>
+
+  <!-- use matio without hdf5, see above
+
+    -->
+
+  <autotools id="matio"
+    autogen-sh="configure"
+    >
+    <branch 
+      repo="sourceforge"
+      module="matio/matio-1.5.6.tar.gz"
+      version="1.5.6"
+    />
+    <dependencies>
+    </dependencies>
+  </autotools>
+
+  <!-- cfitsio cannot make a .dll with mingw, only include it if you must 
        have it
 
        the transform patch is some non-LGPL code we paste into binaries 
-
-       orc needs 64-bit SSE, so we can't use it under windows
 
        introspection won't work cross-platform since we can't easily run our
        objects ... fix this by including the typelibs in the dist later
@@ -605,7 +667,7 @@
 
   <autotools id="libvips-all"
     autogen-sh="configure"
-    autogenargs="--enable-debug=no --without-OpenEXR --without-matio --without-orc --disable-introspection "
+    autogenargs="--enable-debug=no --without-OpenEXR --disable-introspection "
     makeargs="CFLAGS=-O3 CXXFLAGS=-O3"
     >
 
@@ -618,6 +680,8 @@
     </branch>
 
     <dependencies>
+      <dep package="orc-0.4"/>
+      <dep package="matio"/>
       <dep package="webp"/>
       <dep package="librsvg"/>
       <dep package="giflib"/>
@@ -643,13 +707,13 @@
 
        don't include poppler, it's GPL
 
-       don't include imagemagick, it's got a HUGE attack surface 
+       don't include imagemagick to try to keep the surface down
 
     -->
 
   <autotools id="libvips-web"
     autogen-sh="configure"
-    autogenargs="--enable-debug=no --without-OpenEXR --without-matio --without-orc --disable-introspection "
+    autogenargs="--enable-debug=no --without-OpenEXR --without-matio --disable-introspection "
     makeargs="CFLAGS=-O3 CXXFLAGS=-O3"
     >
 
@@ -662,6 +726,7 @@
     </branch>
 
     <dependencies>
+      <dep package="orc-0.4"/>
       <dep package="webp"/>
       <dep package="librsvg"/>
       <dep package="giflib"/>
@@ -683,7 +748,7 @@
 
   <autotools id="libvips-transform"
     autogen-sh="configure"
-    autogenargs="--enable-debug=no --without-OpenEXR --without-matio --without-orc --disable-introspection "
+    autogenargs="--enable-debug=no --without-OpenEXR --disable-introspection "
     makeargs="CFLAGS=-O3 CXXFLAGS=-O3"
     >
 
@@ -697,6 +762,8 @@
     </branch>
 
     <dependencies>
+      <dep package="orc-0.4"/>
+      <dep package="matio"/>
       <dep package="webp"/>
       <dep package="librsvg"/>
       <dep package="giflib"/>
