@@ -610,8 +610,8 @@
     >
 
     <branch
-      repo="vips-beta"
-      module="8.3/vips-8.3.0e.tar.gz"
+      repo="vips"
+      module="8.3/vips-8.3.0.tar.gz"
       version="8.3.0"
       checkoutdir="vips-8.3.0"
       >
@@ -654,8 +654,8 @@
     >
 
     <branch
-      repo="vips-beta"
-      module="8.3/vips-8.3.0e.tar.gz"
+      repo="vips"
+      module="8.3/vips-8.3.0.tar.gz"
       version="8.3.0"
       checkoutdir="vips-8.3.0"
       >
@@ -688,8 +688,8 @@
     >
 
     <branch
-      repo="vips-beta"
-      module="8.3/vips-8.3.0e.tar.gz"
+      repo="vips"
+      module="8.3/vips-8.3.0.tar.gz"
       version="8.3.0"
       checkoutdir="vips-8.3.0"
       >
