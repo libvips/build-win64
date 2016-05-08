@@ -206,8 +206,8 @@
     >
     <branch
       repo="sourceforge"
-      module="libpng/libpng-1.6.19.tar.gz"
-      version="1.6.19"
+      module="libpng/libpng-1.6.21.tar.gz"
+      version="1.6.21"
     />
   </autotools>
 
@@ -433,8 +433,8 @@
     >
     <branch
       repo="magick"
-      module="ImageMagick-6.8.9-10.tar.xz"
-      version="6.8.9"
+      module="ImageMagick-6.9.3-10.tar.xz"
+      version="6.9.3"
     />
     <dependencies>
       <dep package="lcms"/>
@@ -501,11 +501,11 @@
 
     -->
 
-  <autotools id="glib">
+  <autotools id="glib" autogenargs="--with-pcre=internal">
     <branch
       repo="gnome"
-      module="glib/2.47/glib-2.47.1.tar.xz"
-      version="2.47.1"
+      module="glib/2.48/glib-2.48.0.tar.xz"
+      version="2.48.0"
       >
     </branch>
     <dependencies>
@@ -516,8 +516,8 @@
   <autotools id="pixman" autogen-sh="configure">
     <branch 
       repo="cairo" 
-      module="pixman-0.32.8.tar.gz" 
-      version="0.32.8"
+      module="pixman-0.34.0.tar.gz"
+      version="0.34.0"
       >
     </branch>
   </autotools>
@@ -531,8 +531,8 @@
   <autotools id="cairo" autogenargs="--disable-gl --disable-xlib --disable-xcb --enable-win32 --without-x --disable-svg --disable-ps --disable-script">
     <branch 
       repo="cairo" 
-      module="cairo-1.14.2.tar.xz" 
-      version="1.14.2"
+      module="cairo-1.14.6.tar.xz"
+      version="1.14.6"
       >
     </branch>
     <dependencies>
@@ -545,8 +545,8 @@
   <autotools id="pango" autogenargs="--with-cairo --disable-introspection">
     <branch
       repo="gnome"
-      module="pango/1.38/pango-1.38.1.tar.xz"
-      version="1.38.1"
+      module="pango/1.40/pango-1.40.1.tar.xz"
+      version="1.40.1"
       >
     </branch>
     <dependencies>
@@ -567,8 +567,8 @@
     >
     <branch
       repo="gnome"
-      module="gdk-pixbuf/2.33/gdk-pixbuf-2.33.1.tar.xz"
-      version="2.33.1"
+      module="gdk-pixbuf/2.34/gdk-pixbuf-2.34.0.tar.xz"
+      version="2.34.0"
       >
     </branch>
     <dependencies>
@@ -585,8 +585,8 @@
     >
     <branch
       repo="gnome"
-      module="libgsf/1.14/libgsf-1.14.34.tar.xz"
-      version="1.14.34">
+      module="libgsf/1.14/libgsf-1.14.36.tar.xz"
+      version="1.14.36">
     </branch>
     <dependencies>
       <dep package="glib"/>
@@ -723,15 +723,15 @@
 
   <autotools id="libvips-web"
     autogen-sh="configure"
-    autogenargs="--enable-debug=no --without-OpenEXR --without-matio --disable-introspection "
+    autogenargs="--enable-debug=no --without-OpenEXR --without-matio --without-ppm --without-analyze --without-radiance --disable-introspection "
     makeargs="CFLAGS=-O3 CXXFLAGS=-O3"
     >
 
     <branch
       repo="vips"
-      module="8.3/vips-8.3.0.tar.gz"
-      version="8.3.0"
-      checkoutdir="vips-8.3.0"
+      module="8.3/vips-8.3.1.tar.gz"
+      version="8.3.1"
+      checkoutdir="vips-8.3.1"
       >
     </branch>
 
@@ -763,9 +763,9 @@
 
     <branch
       repo="vips"
-      module="8.3/vips-8.3.0.tar.gz"
-      version="8.3.0"
-      checkoutdir="vips-8.3.0"
+      module="8.3/vips-8.3.1.tar.gz"
+      version="8.3.1"
+      checkoutdir="vips-8.3.1"
       >
       <patch file="file:///home/john/develop/transform-7.32/transform.patch" strip="1"/>
     </branch>
