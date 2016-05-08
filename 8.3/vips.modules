@@ -213,6 +213,8 @@
 
   <!-- giflib does not automatically open binary when cross-compiling
 
+       giflib5 still has problems, use 4 for now
+
     -->
 
   <autotools id="giflib" 
@@ -682,9 +684,9 @@
 
     <branch
       repo="vips"
-      module="8.3/vips-8.3.0.tar.gz"
-      version="8.3.0"
-      checkoutdir="vips-8.3.0"
+      module="8.3/vips-8.3.1.tar.gz"
+      version="8.3.1"
+      checkoutdir="vips-8.3.1"
       >
     </branch>
 
@@ -699,8 +701,8 @@
       <dep package="fftw3"/>
       <dep package="libgsf"/>
       <dep package="libjpeg-turbo"/>
-      <dep package="openslide"/>
       <dep package="tiff"/>
+      <dep package="openslide"/>
       <dep package="lcms"/>
       <dep package="libexif"/>
       <dep package="imagemagick"/>

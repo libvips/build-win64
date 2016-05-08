@@ -29,7 +29,7 @@ Then pass the build instructions to the docker service. You have to run
 this as root.
 
 ```
-sudo ./build.sh 8.1
+sudo ./build.sh 8.3
 ```
 
 At the end of the build, the script will display the paths of all the
