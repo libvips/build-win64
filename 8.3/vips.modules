@@ -416,14 +416,20 @@
 
   <!-- libMagick++.dll fails to link due to some exception problem, disable it
 
-	disable largefile support, we rely on vips for that and ImageMagick's 
-	detection does not work when cross-compiling
+       disable largefile support, we rely on vips for that and ImageMagick's 
+       detection does not work when cross-compiling
 
-	disable openmp, ubuntu 14.04 mingw has a broken libgomp
+       disable openmp, ubuntu 14.04 mingw has a broken libgomp
 
-	6.9.0-10 and later don't build under mingw
+       6.9.0-10 and later don't build under mingw
 
-	6.9.2-3 confirmed to also fail, some sort of locale issue
+       6.9.2-3 confirmed to also fail, some sort of locale issue
+
+       6.9.3-10 and later use intsafe.h which does not yet have an 
+       implementation on mingw
+
+       since we are forced to use a very old version, don't use vips + IM on 
+       Windows if you are at all concerned about security :( 
 
     -->
 
@@ -433,8 +439,8 @@
     >
     <branch
       repo="magick"
-      module="ImageMagick-6.9.3-10.tar.xz"
-      version="6.9.3"
+      module="ImageMagick-6.8.9-10.tar.xz"
+      version="6.8.9"
     />
     <dependencies>
       <dep package="lcms"/>
