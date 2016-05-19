@@ -366,9 +366,6 @@
     </branch>
   </autotools>
 
-  <!-- matio does not work with mingw, sadly, it can't make a DLL and we need
-       one for vips to link to -->
-
   <!-- openexr does not work with mingw, it becomes very confused re.
        threading -->
 
