@@ -15,7 +15,7 @@ os.environ['prefix'] = prefix
 # what module set should be used.  The default can be found in
 # jhbuild/defaults.jhbuildrc, but can be any file in the modulesets directory
 # or a URL of a module set file on a web server.
-moduleset = 'vips.modules'
+moduleset = ['vips.modules', 'nip2.modules']
 
 # HOST ... the thing that will run the executable we generate
 # BUILD ... the thing doing the compiling

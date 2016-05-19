@@ -1,0 +1,279 @@
+<?xml version="1.0"?>
+<!DOCTYPE moduleset SYSTEM "moduleset.dtd">
+<?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
+<moduleset>
+
+	<include href="vips.modules"/>
+
+<!-- git repos -->
+<repository type="git" name="git.gnome.org" default="yes"
+    href="git://git.gnome.org/"/>
+<repository type="git" name="git.freedesktop.org"
+    href="git://anongit.freedesktop.org/"/>
+<repository type="git" name="gstreamer.freedesktop.org"
+    href="git://anongit.freedesktop.org/gstreamer/"/>
+<repository type="git" name="telepathy.freedesktop.org"
+    href="git://anongit.freedesktop.org/telepathy/"/>
+<repository type="git" name="wayland.freedesktop.org"
+    href="git://anongit.freedesktop.org/git/wayland"/>
+<repository type="git" name="xorg.freedesktop.org"
+    href="git://anongit.freedesktop.org/git/xorg"/>
+<repository type="git" name="github.com"
+    href="git://github.com/"/>
+<repository type="bzr" name="research.operationaldynamics.com"
+    href="http://research.operationaldynamics.com/bzr"/>
+<repository type="git" name="linuxwacom.git.sourceforge.net"
+    href="git://linuxwacom.git.sourceforge.net/"/>
+<repository type="git" name="quvi"
+    href="git://repo.or.cz/"/>
+
+<!-- tarball repos -->
+<repository type="tarball" name="cairo.org"
+    href="http://cairographics.org/"/>
+<repository type="tarball" name="iso-codes"
+    href="http://pkg-isocodes.alioth.debian.org/downloads/"/>
+<repository type="tarball" name="sourceforge.net"
+    href="http://sourceforge.net/projects/"/>
+<repository type="tarball" name="webkitgtk.org"
+    href="http://webkitgtk.org/releases/"/>
+<repository type="tarball" name="freedesktop.org"
+    href="http://freedesktop.org/software/"/>
+<repository type="tarball" name="people.freedesktop.org"
+    href="http://people.freedesktop.org/"/>
+<repository type="tarball" name="icon-theme.freedesktop.org"
+    href="http://icon-theme.freedesktop.org/releases/"/>
+<repository type="tarball" name="nice.freedesktop.org"
+    href="http://nice.freedesktop.org/releases/"/>
+<repository type="tarball" name="libpwquality"
+    href="https://fedorahosted.org/releases/l/i/libpwquality/"/>
+<repository type="tarball" name="ftp.mozilla.org"
+      href="http://ftp.mozilla.org/"/>
+<repository type="tarball" name="kernel.org"
+      href="http://www.kernel.org"/>
+<repository type="tarball" name="ftp.gnu.org"
+    href="http://ftp.gnu.org/gnu/"/>
+<repository type="tarball" name="libndp"
+    href="http://libndp.org/files/"/>
+<repository type="tarball" name="mir"
+    href="https://launchpad.net/mir/"/>
+<repository type="tarball" name="xorg-tar"
+    href="http://xorg.freedesktop.org/"/>
+<repository type="tarball" name="github-tar"
+    href="https://github.com/"/>
+<repository type="tarball" name="libxkbcommon"
+    href="http://xkbcommon.org/download/"/>
+<repository type="tarball" name="poppler.freedesktop.org"
+    href="http://poppler.freedesktop.org/"/>
+
+  <repository 
+    type="tarball"
+    name="tiff"
+    href="ftp://ftp.remotesensing.org/pub/libtiff/"
+  />
+
+  <repository 
+    type="tarball"
+    name="vips"
+    href="http://www.vips.ecs.soton.ac.uk/supported/"
+  />
+
+  <repository 
+    type="tarball"
+    name="vips-beta"
+    href="http://www.vips.ecs.soton.ac.uk/development/"
+  />
+
+  <repository 
+    type="tarball"
+    name="orc"
+    href="http://code.entropywave.com/download/orc/"
+  />
+
+  <repository 
+    type="tarball"
+    name="cam"
+    href="ftp://ftp.csx.cam.ac.uk/pub/software/programming/"
+  />
+
+  <repository 
+    type="tarball"
+    name="graphviz"
+    href="http://www.graphviz.org/pub/graphviz/stable/SOURCES/"
+  />
+
+  <repository 
+    type="tarball"
+    name="cfitsio"
+    href="http://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/"
+  />
+
+  <repository 
+    type="tarball"
+    name="fcgi"
+    href="http://www.fastcgi.com/dist/"
+  />
+
+  <repository 
+    type="tarball"
+    name="fftw"
+    href="http://www.fftw.org/"
+  />
+
+  <repository 
+    type="tarball" 
+    name="sourceforge" 
+    href="http://downloads.sourceforge.net/sourceforge/"
+  />
+
+  <repository 
+    type="tarball" 
+    name="nongnu" 
+    href="http://download.savannah.nongnu.org/releases/"
+  />
+
+  <repository 
+    type="tarball" 
+    name="magick" 
+    href="ftp://ftp.imagemagick.org/pub/ImageMagick/releases/"
+  />
+
+  <repository 
+    type="tarball" 
+    name="jpeg" 
+    href="http://www.ijg.org/files/"
+  />
+
+  <repository 
+    type="tarball" 
+    name="github" 
+    href="http://github.com/"
+  />
+
+  <repository 
+    type="tarball" 
+    name="openjpeg" 
+    href="http://openjpeg.googlecode.com/files/"
+  />
+
+  <repository 
+    type="tarball" 
+    name="webp" 
+    href="http://downloads.webmproject.org/releases/webp/"
+  />
+
+  <repository 
+    type="tarball" 
+    name="gnu" 
+    href="ftp://ftp.gnu.org/pub/gnu/"
+  />
+
+  <repository 
+    type="tarball" 
+    name="checkout" 
+    href="file:///home/john/GIT/build-win32/master/checkout"
+  />
+
+  <repository 
+    type="tarball" 
+    name="gnome" 
+    href="http://ftp.gnome.org/pub/GNOME/sources/"
+  />
+  
+  <repository
+    type="tarball"
+    name="sqlite3"
+    href="http://www.sqlite.org/"
+  />
+
+  <autotools id="gsl" 
+    autogen-sh="configure"
+    >
+    <branch
+      repo="gnu"
+      module="gsl/gsl-1.16.tar.gz"
+      version="1.16"
+    />
+  </autotools>
+
+  <!-- our own goffice module
+
+       0.9.x is gtk3, we are stuck with gtk2 for now, so we need the 0.8.x 
+       series
+
+       in ubuntu 12.04, goffice-0.8.17 crashes with -O2, make sure that's off 
+       in jhbuildrc when you make this module, see the README
+
+       this compiler bug fixed in 12.10
+
+       -->
+
+  <autotools id="goffice-noprint"
+    autogen-sh="configure"
+    autogenargs="--with-config-backend=win32"
+    makeargs="CFLAGS="
+    >
+    <branch
+      repo="gnome"
+      module="goffice/0.8/goffice-0.8.17.tar.xz"
+      version="0.8.17">
+    </branch>
+  </autotools>
+
+  <!-- fails linking 
+       
+       add -liberty to get regcomp() and friends 
+
+       edit lib/gvc/Makefile.am, append -liberty toi line 69
+
+       edit lib/gvpr/gprstate.c, remove WIN32 stuff
+
+       gvrender_core_dot.c fails with a variety of linking errors
+
+    -->
+
+  <autotools id="graphviz"
+    autogenargs="--enable-swig=no --enable-sharp=no --enable-guile=no --enable-java=no--enable-io=no --enable-lua=no --enable-ocaml=no --enable-perl=no --enable-php=no --enable-python=no --enable-r=no --enable-ruby=no --enable-tcl=no --with-rsvg=no --with-ghostscript=no"
+    >
+    <branch
+      repo="graphviz"
+      module="graphviz-2.28.0.tar.gz"
+      version="2.28.0">
+    </branch>
+  </autotools>
+
+  <!-- our theme ... disable all but clearlooks 
+
+       2.20.x is the last one that works with gtk2
+
+       -->
+
+  <autotools id="gtkengines"
+    autogen-sh="configure"
+    autogenargs="--disable-crux --disable-hc --disable-industrial --disable-mist --disable-redmond --disable-glide --disable-thinice"
+    >
+    <branch
+      repo="gnome"
+      module="gtk-engines/2.20/gtk-engines-2.20.2.tar.gz"
+      version="2.20.2"
+    />
+  </autotools>
+
+  <autotools id="nip2" 
+    autogen-sh="configure"
+    autogenargs="--enable-debug=no --without-libgvc"
+    >
+    <branch
+      repo="vips"
+      module="8.3/nip2-8.3.0.tar.gz"
+      version="8.3.0"
+    />
+    <dependencies>
+      <dep package="libvips"/>
+      <dep package="gsl"/>
+      <dep package="goffice-noprint"/>
+      <dep package="gtkengines"/>
+    </dependencies>
+  </autotools>
+
+</moduleset>
+
