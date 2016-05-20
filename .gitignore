@@ -3,3 +3,5 @@ checkout
 inst
 .*.swp
 vips-dev*.zip
+nip2-*.zip
+*.exe

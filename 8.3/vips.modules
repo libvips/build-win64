@@ -531,7 +531,7 @@
 
     -->
 
-  <autotools id="cairo" autogenargs="--disable-gl --disable-xlib --disable-xcb --enable-win32 --without-x --disable-svg --disable-ps --disable-script">
+  <autotools id="cairo" autogenargs="--disable-gl --disable-xlib --disable-xcb --enable-win32 --without-x --disable-script">
     <branch 
       repo="cairo" 
       module="cairo-1.14.6.tar.xz"

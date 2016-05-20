@@ -195,6 +195,27 @@
     />
   </autotools>
 
+  <autotools id="atk">
+    <branch/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="gobject-introspection"/>
+      <dep package="gtk-doc"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gtk+-2">
+    <branch checkoutdir="gtk+-2" module="gtk+" revision="gtk-2-24"/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="cairo"/>
+      <dep package="pango"/>
+      <dep package="atk"/>
+      <dep package="gdk-pixbuf"/>
+      <dep package="gobject-introspection"/>
+    </dependencies>
+  </autotools>
+
   <!-- our own goffice module
 
        0.9.x is gtk3, we are stuck with gtk2 for now, so we need the 0.8.x 
@@ -204,6 +225,8 @@
        in jhbuildrc when you make this module, see the README
 
        this compiler bug fixed in 12.10
+
+       the patch helps goffice find the pcre support in recent glibs
 
        -->
 
@@ -216,7 +239,11 @@
       repo="gnome"
       module="goffice/0.8/goffice-0.8.17.tar.xz"
       version="0.8.17">
+      <patch file="http://www.vips.ecs.soton.ac.uk/supported/8.3/win32/goffice-0.8-glib-pcre.patch" strip="1"/>
     </branch>
+    <dependencies>
+      <dep package="gtk+-2"/>
+    </dependencies>
   </autotools>
 
   <!-- fails linking 
@@ -241,6 +268,12 @@
     </branch>
   </autotools>
 
+  <!-- use murrine + arc instead
+
+  http://ftp.acc.umu.se/pub/GNOME/sources/murrine/0.98/murrine-0.98.2.tar.xz
+
+    -->
+
   <!-- our theme ... disable all but clearlooks 
 
        2.20.x is the last one that works with gtk2
@@ -263,13 +296,14 @@
     autogenargs="--enable-debug=no --without-libgvc"
     >
     <branch
-      repo="vips"
-      module="8.3/nip2-8.3.0.tar.gz"
-      version="8.3.0"
+      repo="vips-beta"
+      module="8.3/nip2-8.3.1.tar.gz"
+      version="8.3.1"
     />
     <dependencies>
       <dep package="libvips"/>
       <dep package="gsl"/>
+      <dep package="gtk+"/>
       <dep package="goffice-noprint"/>
       <dep package="gtkengines"/>
     </dependencies>
