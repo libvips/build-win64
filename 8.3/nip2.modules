@@ -243,6 +243,7 @@
     </branch>
     <dependencies>
       <dep package="gtk+-2"/>
+      <dep package="libgsf"/>
     </dependencies>
   </autotools>
 
@@ -278,13 +279,24 @@
     />
   </autotools>
 
+  <!-- we only want the gtk2 theme
+
+       sadly this fails as it insists on having an install of GNOME
+
+       build by hand, then extract just the gtk2 theme, and package as a zip
+
+       this is installed by "unpack.sh"
+
+    -->
+
   <autotools id="arc-theme"
-    autogen-sh="configure"
+    autogenargs="--disable-gtk3 --disable-darker --disable-dark --disable-cinnamon --disable-gnome-shell --disable-metacity --disable-unity --disable-xfwm --disable-xfce-notify --without-gnome"
     >
     <branch
       repo="github-tar"
       module="horst3180/arc-theme/archive/20160331.tar.gz"
       version="20160331"
+      checkoutdir="arc-theme-20160331"
     />
   </autotools>
 
