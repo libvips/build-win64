@@ -1,5 +1,7 @@
-- switch to murrine + arc
+- switch to murrine + arc ... package-nip2 needs to set up these
 
-- text is broken
+- make a build-nip2.sh script, cf. build.sh, build from docker
+
+- text is broken? does it work in win64 vips?
 
 - switch to release versions, not git, for gtk+ etc.

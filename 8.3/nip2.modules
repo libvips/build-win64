@@ -268,26 +268,23 @@
     </branch>
   </autotools>
 
-  <!-- use murrine + arc instead
-
-  http://ftp.acc.umu.se/pub/GNOME/sources/murrine/0.98/murrine-0.98.2.tar.xz
-
-    -->
-
-  <!-- our theme ... disable all but clearlooks 
-
-       2.20.x is the last one that works with gtk2
-
-       -->
-
-  <autotools id="gtkengines"
+  <autotools id="murrine"
     autogen-sh="configure"
-    autogenargs="--disable-crux --disable-hc --disable-industrial --disable-mist --disable-redmond --disable-glide --disable-thinice"
     >
     <branch
       repo="gnome"
-      module="gtk-engines/2.20/gtk-engines-2.20.2.tar.gz"
-      version="2.20.2"
+      module="murrine/0.98/murrine-0.98.2.tar.xz"
+      version="0.98.2"
+    />
+  </autotools>
+
+  <autotools id="arc-theme"
+    autogen-sh="configure"
+    >
+    <branch
+      repo="github-tar"
+      module="horst3180/arc-theme/archive/20160331.tar.gz"
+      version="20160331"
     />
   </autotools>
 
@@ -296,7 +293,7 @@
     autogenargs="--enable-debug=no --without-libgvc"
     >
     <branch
-      repo="vips-beta"
+      repo="vips"
       module="8.3/nip2-8.3.1.tar.gz"
       version="8.3.1"
     />
@@ -305,7 +302,7 @@
       <dep package="gsl"/>
       <dep package="gtk+"/>
       <dep package="goffice-noprint"/>
-      <dep package="gtkengines"/>
+      <dep package="murrine"/>
     </dependencies>
   </autotools>
 
