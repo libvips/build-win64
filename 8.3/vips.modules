@@ -792,6 +792,5 @@
       <dep package="libpng"/>
     </dependencies>
   </autotools>
-
 </moduleset>
 

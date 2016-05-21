@@ -196,23 +196,38 @@
   </autotools>
 
   <autotools id="atk">
-    <branch/>
+    <branch
+      repo="gnome"
+      module="atk/2.20/atk-2.20.0.tar.xz"
+      version="2.20.0"
+      />
     <dependencies>
       <dep package="glib"/>
-      <dep package="gobject-introspection"/>
       <dep package="gtk-doc"/>
     </dependencies>
   </autotools>
 
+  <!-- the offical 2.24.30 fails with linking errors - we use git master 2.24
+       wrapped up as a tarball
+
+       we don't just clone git master because it's horribly slow and doesn't 
+       cache well
+
+    -->
+
   <autotools id="gtk+-2">
-    <branch checkoutdir="gtk+-2" module="gtk+" revision="gtk-2-24"/>
+    <branch
+      repo="vips"
+      module="8.3/win32/gtk+-2.24.30a.tar.bz2"
+      version="2.24.30"
+      checkoutdir="gtk+-2.24.30"
+      />
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
       <dep package="pango"/>
       <dep package="atk"/>
       <dep package="gdk-pixbuf"/>
-      <dep package="gobject-introspection"/>
     </dependencies>
   </autotools>
 
@@ -285,7 +300,7 @@
 
        build by hand, then extract just the gtk2 theme, and package as a zip
 
-       this is installed by "unpack.sh"
+       this is installed earlier by "unpack.sh"
 
     -->
 
@@ -310,7 +325,7 @@
       version="8.3.1"
     />
     <dependencies>
-      <dep package="libvips"/>
+      <dep package="libvips-transform"/>
       <dep package="gsl"/>
       <dep package="gtk+"/>
       <dep package="goffice-noprint"/>

@@ -72,7 +72,7 @@ cp $gccmingwlibdir/*.dll $repackagedir/bin
 
 # turn on the theme
 cat > $repackagedir/etc/gtk-2.0/gtkrc <<EOF
-gtk-theme-name = "Clearlooks"
+gtk-theme-name = "Arc"
 EOF
 
 echo creating $nip2_package-$nip2_version.zip

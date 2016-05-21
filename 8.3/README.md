@@ -75,6 +75,25 @@ Run:
 
 To make a nice `vips-dev.zip` package. 
 
+## nip2
+
+There's a nip2 build here as well, just as above but run:
+
+	./get-win64-packages.sh
+	./unpack.sh
+	export BASEDIR=$(pwd)
+	jhbuild --file=jhbuildrc build --nodeps nip2
+	./package-nip2.sh
+
+It'll make a simple nsis installer too. 
+
 ## TODO
 
+* text is broken ... pango-ft2 is not building?
+
+* orc is not working
+
+* test nip2 build in docker
+
 * more testing
+
