@@ -89,6 +89,13 @@ It'll make a simple nsis installer too.
 
 ## TODO
 
+* plots are not working, we see:
+
+```
+E Unable to open module file "Z:\home\john\GIT\build-win64\8.3\nip2-8.3.1\lib\goffice\0.8.17\plugins\plot_xy\xy".
+  E 'Z:\home\john\GIT\build-win64\8.3\nip2-8.3.1\lib\goffice\0.8.17\plugins\plot_xy\xy.dll': Module not found.
+```
+
 * text is broken ... pango-ft2 is not building?
 
 * orc is not working

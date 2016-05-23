@@ -243,11 +243,13 @@
 
        the patch helps goffice find the pcre support in recent glibs
 
+       without-gtk doesn't seem to work in 0.8.17
+
        -->
 
   <autotools id="goffice-noprint"
     autogen-sh="configure"
-    autogenargs="--with-config-backend=win32"
+    autogenargs="--enable-shared --disable-static --with-config-backend=win32"
     makeargs="CFLAGS="
     >
     <branch
@@ -257,7 +259,6 @@
       <patch file="http://www.vips.ecs.soton.ac.uk/supported/8.3/win32/goffice-0.8-glib-pcre.patch" strip="1"/>
     </branch>
     <dependencies>
-      <dep package="gtk+-2"/>
       <dep package="libgsf"/>
     </dependencies>
   </autotools>
