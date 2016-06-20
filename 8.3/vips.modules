@@ -504,11 +504,13 @@
 
     -->
 
-  <autotools id="glib" autogenargs="--with-pcre=internal">
+  <autotools id="glib" 
+   autogenargs="--with-pcre=internal"
+   autogen-sh="configure">
     <branch
       repo="gnome"
-      module="glib/2.48/glib-2.48.0.tar.xz"
-      version="2.48.0"
+      module="glib/2.48/glib-2.49.1.tar.xz"
+      version="2.49.1"
       >
     </branch>
     <dependencies>
@@ -516,7 +518,8 @@
     </dependencies>
   </autotools>
 
-  <autotools id="pixman" autogen-sh="configure">
+  <autotools id="pixman" 
+   autogen-sh="configure">
     <branch 
       repo="cairo" 
       module="pixman-0.34.0.tar.gz"

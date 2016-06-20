@@ -75,9 +75,13 @@ cat > $repackagedir/etc/gtk-2.0/gtkrc <<EOF
 gtk-theme-name = "Arc"
 EOF
 
+echo nsis build disabled
+
 echo creating $nip2_package-$nip2_version.zip
 rm -f $nip2_package-$nip2_version.zip
 zip -r -qq $nip2_package-$nip2_version.zip $nip2_package-$nip2_version
+
+exit
 
 # have to make in a subdir to make sure makensis does not grab other stuff
 echo building installer nsis/$nip2_package-$nip2_version-setup.exe

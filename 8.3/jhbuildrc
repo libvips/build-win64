@@ -91,12 +91,12 @@ os.environ['ARFLAGS']  = '-ar rcs'
 os.environ['INSTALL']  = os.path.expanduser('~/.local/bin/install-check')
 
 # turn on the optimiser
-os.environ['CFLAGS']   += ' -O2 '
-os.environ['CXXFLAGS']   += ' -O2 '
+#os.environ['CFLAGS']   += ' -O2 '
+#os.environ['CXXFLAGS']   += ' -O2 '
 
 # turn on debugging
-#os.environ['CFLAGS']   += ' -g '
-#os.environ['CXXFLAGS']   += ' -g '
+os.environ['CFLAGS']   += ' -g '
+os.environ['CXXFLAGS']   += ' -g '
 
 # Populating autogenargs
 autogenargs  = ' --build='+os.environ['BUILD']
