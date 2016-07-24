@@ -201,6 +201,36 @@
     href="http://www.sqlite.org/"
   />
 
+  <repository
+    type="tarball"
+    name="xmlsoft"
+    href="ftp://xmlsoft.org/"
+  />
+
+  <autotools id="libiconv" 
+    autogen-sh="configure"
+    >
+    <branch
+      repo="gnu"
+      module="libiconv/libiconv-1.14.tar.gz"
+      version="1.14"
+    />
+  </autotools>
+
+  <autotools id="libxml2" 
+    autogen-sh="configure"
+    autogenargs="--without-python">
+    >
+    <branch
+      repo="xmlsoft"
+      module="libxml2/libxml2-2.9.4.tar.gz"
+      version="2.9.4"
+    />
+    <dependencies>
+      <dep package="libiconv"/>
+    </dependencies>
+  </autotools>
+
   <autotools id="libpng" 
     autogen-sh="configure"
     >
@@ -209,6 +239,9 @@
       module="libpng/libpng-1.6.21.tar.gz"
       version="1.6.21"
     />
+    <dependencies>
+      <dep package="libiconv"/>
+    </dependencies>
   </autotools>
 
   <!-- giflib does not automatically open binary when cross-compiling
@@ -226,6 +259,9 @@
       module="giflib/giflib-4.2.3.tar.gz"
       version="4.2.3"
     />
+    <dependencies>
+      <dep package="libiconv"/>
+    </dependencies>
   </autotools>
 
   <autotools id="libcroco" supports-non-srcdir-builds="no">
@@ -277,6 +313,9 @@
       module="fftw-3.3.4.tar.gz"
       version="3.3.4"
     />
+    <dependencies>
+      <dep package="libiconv"/>
+    </dependencies>
   </autotools>
 
   <autotools id="lcms" 
@@ -287,6 +326,9 @@
       module="lcms/lcms2-2.7.tar.gz"
       version="2.7"
     />
+    <dependencies>
+      <dep package="libiconv"/>
+    </dependencies>
   </autotools>
 
   <!-- needed by openslide
@@ -325,6 +367,9 @@
       module="2015/sqlite-autoconf-3081101.tar.gz"
       version="3.8.11.1"
     />
+    <dependencies>
+      <dep package="libiconv"/>
+    </dependencies>
   </autotools>
 
   <autotools id="openslide" 
@@ -364,6 +409,9 @@
       >
       <patch file="http://www.vips.ecs.soton.ac.uk/supported/7.30/win32/libjpeg-turbo-bool.patch" strip="1"/>
     </branch>
+    <dependencies>
+      <dep package="libiconv"/>
+    </dependencies>
   </autotools>
 
   <!-- openexr does not work with mingw, it becomes very confused re.
@@ -382,6 +430,9 @@
       >
       <patch file="http://www.vips.ecs.soton.ac.uk/supported/7.40/win32/libexif-0.6-shutter.patch" strip="1"/>
     </branch>
+    <dependencies>
+      <dep package="libiconv"/>
+    </dependencies>
   </autotools>
 
   <!-- the tiff on the gnome site needs a confusing libjpeg DLL, 
@@ -460,6 +511,9 @@
       module="orc-0.4.25.tar.xz"
       version="0.4.25"
     />
+    <dependencies>
+      <dep package="libiconv"/>
+    </dependencies>
   </autotools>
 
   <!-- cfitsio can't make a .dll with mingw ... only include it in nip2 builds 
@@ -478,6 +532,9 @@
       checkoutdir="cfitsio"
       >
     </branch>
+    <dependencies>
+      <dep package="libiconv"/>
+    </dependencies>
   </autotools>
 
   <autotools id="webp" 
@@ -489,6 +546,9 @@
       version="0.5.0"
       >
     </branch>
+    <dependencies>
+      <dep package="libiconv"/>
+    </dependencies>
   </autotools>
 
   <autotools id="libffi">
@@ -498,6 +558,9 @@
       version="3.2.1"
       >
     </branch>
+    <dependencies>
+      <dep package="libiconv"/>
+    </dependencies>
   </autotools>
 
   <!-- don't do any of doc stuff
@@ -513,6 +576,7 @@
     </branch>
     <dependencies>
       <dep package="libffi"/>
+      <dep package="libiconv"/>
     </dependencies>
   </autotools>
 
@@ -523,6 +587,9 @@
       version="0.34.0"
       >
     </branch>
+    <dependencies>
+      <dep package="libiconv"/>
+    </dependencies>
   </autotools>
 
   <!-- 1.14.4 fails to build in a cross-compiler
@@ -614,6 +681,7 @@
       version="2.2.0"
     />
     <dependencies>
+      <dep package="libiconv"/>
     </dependencies>
   </autotools>
 
@@ -643,6 +711,7 @@
       version="1.8.16"
     />
     <dependencies>
+      <dep package="libiconv"/>
     </dependencies>
   </autotools>
 
@@ -659,6 +728,7 @@
       version="1.5.6"
     />
     <dependencies>
+      <dep package="libiconv"/>
     </dependencies>
   </autotools>
 
@@ -687,9 +757,9 @@
 
     <branch
       repo="vips"
-      module="8.3/vips-8.3.1.tar.gz"
-      version="8.3.1"
-      checkoutdir="vips-8.3.1"
+      module="8.3/vips-8.3.2.tar.gz"
+      version="8.3.2"
+      checkoutdir="vips-8.3.2"
       >
     </branch>
 
@@ -732,13 +802,14 @@
 
     <branch
       repo="vips"
-      module="8.3/vips-8.3.1.tar.gz"
-      version="8.3.1"
-      checkoutdir="vips-8.3.1"
+      module="8.3/vips-8.3.2.tar.gz"
+      version="8.3.2"
+      checkoutdir="vips-8.3.2"
       >
     </branch>
 
     <dependencies>
+      <dep package="libxml2"/>
       <dep package="webp"/>
       <dep package="librsvg"/>
       <dep package="giflib"/>
@@ -766,9 +837,9 @@
 
     <branch
       repo="vips"
-      module="8.3/vips-8.3.1.tar.gz"
-      version="8.3.1"
-      checkoutdir="vips-8.3.1"
+      module="8.3/vips-8.3.2.tar.gz"
+      version="8.3.2"
+      checkoutdir="vips-8.3.2"
       >
       <patch file="file:///home/john/develop/transform-7.32/transform.patch" strip="1"/>
     </branch>

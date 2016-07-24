@@ -28,8 +28,6 @@ dependencies/freetype_2.4.4-1_win64.zip
 dependencies/freetype-dev_2.4.4-1_win64.zip
 dependencies/gettext-runtime-dev_0.18.1.1-2_win64.zip
 dependencies/gettext-runtime_0.18.1.1-2_win64.zip
-dependencies/libxml2_2.7.7-1_win64.zip
-dependencies/libxml2-dev_2.7.7-1_win64.zip
 dependencies/win-iconv-dev_tml-20100912_win64.zip
 dependencies/zlib_1.2.5-1_win64.zip
 dependencies/zlib-dev_1.2.5-1_win64.zip 
