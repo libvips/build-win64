@@ -81,7 +81,7 @@ There's a nip2 build here as well, just as above but run:
 	./get-win64-packages.sh
 	./unpack.sh
 	export BASEDIR=$(pwd)
-	jhbuild --file=jhbuildrc build --nodeps nip2
+	jhbuild --file=jhbuildrc --moduleset=nip2.modules build --nodeps nip2
 	./package-nip2.sh
 
 It'll make a simple nsis installer too. 
@@ -161,7 +161,12 @@ plot_new_gplot():plot.c
 	gog_plot_new_by_name( "GogXYPlot" );
 ```
   
-  returns NULL
+  returns NULL, because `g_type_from_name("GogXYPlot")` returned zero and it
+  therefore tried to load the plugin
+
+  we need to call the `go_plugin_init()` for XYPlot, I guess
+
+  how has gmodule changed since 2.24 or whatever the last functioning glib was?
 
 * text is broken ... pango-ft2 is not building?
 

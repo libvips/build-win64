@@ -236,15 +236,26 @@
     </dependencies>
   </autotools>
 
+
+  <!-- goffice keeps us on an old glib, an old glib forces an old pango, that
+       forces an old pangocairo, that forces an old librsvg
+
+    -->
+
   <autotools id="librsvg" 
     supports-non-srcdir-builds="no"
     autogenargs="--disable-introspection --disable-pixbuf-loader">
     >
-    <branch/>
+    <branch
+      repo="gnome"
+      module="librsvg/2.34/librsvg-2.34.2.tar.xz"
+      version="2.34.2"
+      >
+    </branch>
     <dependencies>
+      <dep package="libcroco"/>
       <dep package="glib"/>
       <dep package="gdk-pixbuf"/>
-      <dep package="libcroco"/>
       <dep package="pango"/>
     </dependencies>
   </autotools>
@@ -502,6 +513,9 @@
 
   <!-- don't do any of doc stuff
 
+       nip2 needs goffice to draw plots, and goffice does not build plugins 
+       correctly with later versions of glib
+
     -->
 
   <autotools id="glib" 
@@ -509,8 +523,8 @@
    autogen-sh="configure">
     <branch
       repo="gnome"
-      module="glib/2.48/glib-2.49.1.tar.xz"
-      version="2.49.1"
+      module="glib/2.28/glib-2.28.8.tar.xz"
+      version="2.28.8"
       >
     </branch>
     <dependencies>
@@ -548,11 +562,15 @@
     </dependencies>
   </autotools>
 
+  <!-- goffice keeps us on an old glib, an old glib forces an old pango
+
+    -->
+
   <autotools id="pango" autogenargs="--with-cairo --disable-introspection">
     <branch
       repo="gnome"
-      module="pango/1.40/pango-1.40.1.tar.xz"
-      version="1.40.1"
+      module="pango/1.29/pango-1.29.4.tar.xz"
+      version="1.29.4"
       >
     </branch>
     <dependencies>
@@ -566,6 +584,10 @@
 
        disable run-time loading of modules, it's difficult when cross-compiling
 
+       we are stuck on glib 2.28 thanks to goffice, so we need gdk-pixbuf 2.24
+
+       the patch adds a missing body for anim_iter_init
+
     -->
 
   <autotools id="gdk-pixbuf"
@@ -573,9 +595,10 @@
     >
     <branch
       repo="gnome"
-      module="gdk-pixbuf/2.34/gdk-pixbuf-2.34.0.tar.xz"
-      version="2.34.0"
+      module="gdk-pixbuf/2.24/gdk-pixbuf-2.24.1.tar.xz"
+      version="2.24.1"
       >
+      <patch file="http://www.vips.ecs.soton.ac.uk/supported/8.3/win32/gdk-pixbuf-anim-iter.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib"/>

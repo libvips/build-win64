@@ -3,8 +3,6 @@
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
 
-	<include href="vips.modules"/>
-
 <!-- git repos -->
 <repository type="git" name="git.gnome.org" default="yes"
     href="git://git.gnome.org/"/>
@@ -72,6 +70,12 @@
   />
 
   <repository 
+    type="tarball" 
+    name="cairo" 
+    href="http://www.cairographics.org/releases/"
+    />
+
+  <repository 
     type="tarball"
     name="vips"
     href="http://www.vips.ecs.soton.ac.uk/supported/"
@@ -85,8 +89,20 @@
 
   <repository 
     type="tarball"
+    name="sourceware"
+    href="ftp://sourceware.org/pub/"
+  />
+
+  <repository 
+    type="tarball"
+    name="hdf5"
+    href="http://www.hdfgroup.org/ftp/HDF5/current/src/"
+  />
+
+  <repository 
+    type="tarball"
     name="orc"
-    href="http://code.entropywave.com/download/orc/"
+    href="https://gstreamer.freedesktop.org/src/orc/"
   />
 
   <repository 
@@ -152,7 +168,7 @@
   <repository 
     type="tarball" 
     name="openjpeg" 
-    href="http://openjpeg.googlecode.com/files/"
+    href="https://github.com/uclouvain/openjpeg/archive/"
   />
 
   <repository 
@@ -178,12 +194,569 @@
     name="gnome" 
     href="http://ftp.gnome.org/pub/GNOME/sources/"
   />
-  
+
   <repository
     type="tarball"
     name="sqlite3"
     href="http://www.sqlite.org/"
   />
+
+  <!-- don't just include vips.modules
+
+       we are forced onto old versions of many packages by gtk2 and we don't 
+       want to push the libvips DLL back as well ... we have to maintain a 
+       separate libvips build in here
+
+    -->
+
+  <autotools id="libpng" 
+    autogen-sh="configure"
+    >
+    <branch
+      repo="sourceforge"
+      module="libpng/libpng-1.6.21.tar.gz"
+      version="1.6.21"
+    />
+  </autotools>
+
+  <!-- giflib does not automatically open binary when cross-compiling
+
+       giflib5 still has problems, use 4 for now
+
+    -->
+
+  <autotools id="giflib" 
+    autogen-sh="configure"
+    makeargs="CFLAGS=-D_OPEN_BINARY"
+    >
+    <branch
+      repo="sourceforge"
+      module="giflib/giflib-4.2.3.tar.gz"
+      version="4.2.3"
+    />
+  </autotools>
+
+  <autotools id="libcroco" supports-non-srcdir-builds="no">
+    <pkg-config>libcroco-0.6.pc</pkg-config>
+    <branch />
+    <dependencies>
+      <dep package="glib"/>
+    </dependencies>
+  </autotools>
+
+  <!-- goffice keeps us on an old glib, an old glib forces an old pango, that
+       forces an old pangocairo, that forces an old librsvg
+
+    -->
+
+  <autotools id="librsvg" 
+    supports-non-srcdir-builds="no"
+    autogenargs="--disable-introspection --disable-pixbuf-loader">
+    >
+    <branch
+      repo="gnome"
+      module="librsvg/2.34/librsvg-2.34.2.tar.xz"
+      version="2.34.2"
+      >
+    </branch>
+    <dependencies>
+      <dep package="libcroco"/>
+      <dep package="glib"/>
+      <dep package="gdk-pixbuf"/>
+      <dep package="pango"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="poppler" 
+    autogenargs="--with-font-configuration=win32 --disable-xpdf-headers --disable-splash-output --enable-poppler-glib --disable-gtk-test --disable-utils --disable-poppler-cpp" 
+    makeargs="POPPLER_GLIB_DISABLE_DEPRECATED="
+    >
+    <pkg-config>poppler-glib.pc</pkg-config>
+    <branch repo="poppler.freedesktop.org"
+            module="poppler-0.42.0.tar.xz"
+            version="0.42.0"
+      />
+    <dependencies>
+      <dep package="cairo"/>
+      <dep package="openjpeg"/>
+      <dep package="glib"/>
+    </dependencies>
+    <after>
+      <dep package="gdk-pixbuf"/>
+    </after>
+  </autotools>
+
+  <autotools id="fftw3" 
+    autogen-sh="configure"
+    autogenargs="--disable-static --enable-shared --disable-threads"
+    >
+    <branch
+      repo="fftw"
+      module="fftw-3.3.4.tar.gz"
+      version="3.3.4"
+    />
+  </autotools>
+
+  <autotools id="lcms" 
+    autogen-sh="configure"
+    >
+    <branch
+      repo="sourceforge"
+      module="lcms/lcms2-2.7.tar.gz"
+      version="2.7"
+    />
+  </autotools>
+
+  <!-- needed by openslide
+
+       openjpeg 2.1 does not make or install a .pc file, we copy one in earlier
+       during unpack.sh
+
+       BASEDIR is set for us by build.sh
+
+       -->
+
+  <cmake id="openjpeg"
+    cmakeargs="-DCMAKE_TOOLCHAIN_FILE=$BASEDIR/Toolchain-x86_64-w64-mingw32.cmake"
+    >
+    <branch 
+      repo="openjpeg"
+      module="version.2.1.tar.gz"
+      checkoutdir="openjpeg-2.1"
+      version="2.1"
+    />
+    <dependencies>
+      <dep package="lcms"/>
+      <dep package="tiff"/>
+    </dependencies>
+  </cmake>
+
+  <!-- starting in openslide-3.4.0, sqlite3 is a requirement.
+
+       -->
+
+  <autotools id="sqlite3"
+    autogen-sh="configure"
+    >
+    <branch
+      repo="sqlite3"
+      module="2015/sqlite-autoconf-3081101.tar.gz"
+      version="3.8.11.1"
+    />
+  </autotools>
+
+  <autotools id="openslide" 
+    autogen-sh="configure"
+    >
+    <branch
+      repo="github"
+      module="openslide/openslide/releases/download/v3.4.1/openslide-3.4.1.tar.gz"
+      version="3.4.1"
+      >
+    </branch>
+    <dependencies>
+      <dep package="cairo"/>
+      <dep package="gdk-pixbuf"/>
+      <dep package="openjpeg"/>
+      <dep package="sqlite3"/>
+    </dependencies>
+  </autotools>
+
+  <!-- the turbo one is 2x to 4x faster 
+
+       the patch changes the "typedef int boolean" that libjpeg-turbo 
+       provides, it causes problems later on for imagemagick
+
+       without-turbojpeg turns off a library we don't use (we just use the 
+       libjpeg API)
+
+       -->
+
+  <autotools id="libjpeg-turbo" 
+    autogen-sh="configure --without-turbojpeg"
+    >
+    <branch
+      repo="sourceforge"
+      module="libjpeg-turbo/1.4.0/libjpeg-turbo-1.4.2.tar.gz"
+      version="1.4.2"
+      >
+      <patch file="http://www.vips.ecs.soton.ac.uk/supported/7.30/win32/libjpeg-turbo-bool.patch" strip="1"/>
+    </branch>
+  </autotools>
+
+  <!-- openexr does not work with mingw, it becomes very confused re.
+       threading -->
+
+  <!-- the patch sanity checks the shutter speed and stops pow(2, -inf), which
+       causes an uncaught math exception on mingw -->
+
+  <autotools id="libexif" 
+    autogen-sh="configure"
+    >
+    <branch
+      repo="sourceforge"
+      module="libexif/libexif-0.6.21.tar.gz"
+      version="0.6.21"
+      >
+      <patch file="http://www.vips.ecs.soton.ac.uk/supported/7.40/win32/libexif-0.6-shutter.patch" strip="1"/>
+    </branch>
+  </autotools>
+
+  <!-- the tiff on the gnome site needs a confusing libjpeg DLL, 
+       make our own  
+
+       tiff 4.0.3 fails to build a C++ DLL with:
+
+       i686-w64-mingw32-g++: error: unrecognized option 
+       		'-enable-auto-image-base'
+
+       disable the C++ API for now, we don't use it anyway
+
+       -->
+
+  <autotools id="tiff" 
+    autogen-sh="./configure"
+    autogenargs="--disable-cxx"
+    >
+    <branch
+      repo="tiff"
+      module="tiff-4.0.6.tar.gz"
+      version="4.0.6"
+      >
+    </branch>
+    <dependencies>
+      <dep package="libjpeg-turbo"/>
+    </dependencies>
+  </autotools>
+
+  <!-- libMagick++.dll fails to link due to some exception problem, disable it
+
+       disable largefile support, we rely on vips for that and ImageMagick's 
+       detection does not work when cross-compiling
+
+       disable openmp, ubuntu 14.04 mingw has a broken libgomp
+
+       6.9.0-10 and later don't build under mingw
+
+       6.9.2-3 confirmed to also fail, some sort of locale issue
+
+       6.9.3-10 and later use intsafe.h which does not yet have an 
+       implementation on mingw
+
+       since we are forced to use a very old version, don't use vips + IM on 
+       Windows if you are at all concerned about security :( 
+
+    -->
+
+  <autotools id="imagemagick" 
+    autogen-sh="configure"
+    autogenargs="--without-threads --without-x --with-modules=no --with-openexr=no --without-gvc --without-lqr --without-magick-plus-plus --disable-largefile --without-rsvg --disable-openmp"
+    >
+    <branch
+      repo="magick"
+      module="ImageMagick-6.8.9-10.tar.xz"
+      version="6.8.9"
+    />
+    <dependencies>
+      <dep package="lcms"/>
+      <dep package="fftw3"/>
+      <dep package="tiff"/>
+      <dep package="libjpeg-turbo"/>
+    </dependencies>
+  </autotools>
+
+  <!-- build vips with orc and you get segv if you try to use it, not tried
+       to track down why, leave it off now for
+
+    -->
+
+  <autotools id="orc-0.4" 
+    autogen-sh="configure"
+    >
+    <branch
+      repo="orc"
+      module="orc-0.4.25.tar.xz"
+      version="0.4.25"
+    />
+  </autotools>
+
+  <!-- cfitsio can't make a .dll with mingw ... only include it in nip2 builds 
+       where we don't care about making a libvips.dll
+
+    -->
+
+  <autotools id="cfitsio" 
+    autogen-sh="configure"
+    autogenargs="--disable-hera --without-gsiftp"
+    >
+    <branch
+      repo="cfitsio"
+      module="cfitsio3380.tar.gz"
+      version="3.38"
+      checkoutdir="cfitsio"
+      >
+    </branch>
+  </autotools>
+
+  <autotools id="webp" 
+    autogen-sh="configure"
+    >
+    <branch
+      repo="webp"
+      module="libwebp-0.5.0.tar.gz"
+      version="0.5.0"
+      >
+    </branch>
+  </autotools>
+
+  <autotools id="libffi">
+    <branch
+      repo="sourceware"
+      module="libffi/libffi-3.2.1.tar.gz"
+      version="3.2.1"
+      >
+    </branch>
+  </autotools>
+
+  <!-- don't do any of doc stuff
+
+       nip2 needs goffice to draw plots, and goffice does not build plugins 
+       correctly with later versions of glib
+
+       gtk+-2.24.30 needs glib 2.30+
+
+    -->
+
+  <autotools id="glib" 
+   autogenargs="--with-pcre=internal"
+   autogen-sh="configure">
+    <branch
+      repo="gnome"
+      module="glib/2.30/glib-2.30.3.tar.xz"
+      version="2.30.3"
+      >
+    </branch>
+    <dependencies>
+      <dep package="libffi"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="pixman" 
+   autogen-sh="configure">
+    <branch 
+      repo="cairo" 
+      module="pixman-0.34.0.tar.gz"
+      version="0.34.0"
+      >
+    </branch>
+  </autotools>
+
+  <!-- 1.14.4 fails to build in a cross-compiler
+
+       openslide needs the pdf backend
+
+    -->
+
+  <autotools id="cairo" autogenargs="--disable-gl --disable-xlib --disable-xcb --enable-win32 --without-x --disable-script">
+    <branch 
+      repo="cairo" 
+      module="cairo-1.14.6.tar.xz"
+      version="1.14.6"
+      >
+    </branch>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="pixman"/>
+      <dep package="libpng"/>
+    </dependencies>
+  </autotools>
+
+  <!-- goffice keeps us on an old glib, an old glib forces an old pango
+
+       include the basic-win32 module and avoid finding DLLs at runtime
+
+    -->
+
+  <autotools id="pango" 
+    autogen-sh="configure"
+    autogenargs="--with-cairo --disable-introspection --with-included-modules=basic-win32 --with-dynamic-modules=no"
+    >
+    <branch
+      repo="gnome"
+      module="pango/1.29/pango-1.29.4.tar.xz"
+      version="1.29.4"
+      >
+    </branch>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="cairo"/>
+    </dependencies>
+  </autotools>
+
+  <!-- don't build from git ... it does some introspection to build the test
+       suite build files, which won't work in cross-compiler mode
+
+       disable run-time loading of modules, it's difficult when cross-compiling
+
+       we are stuck on glib 2.28 thanks to goffice, so we need gdk-pixbuf 2.24
+
+       the patch adds a missing body for anim_iter_init
+
+    -->
+
+  <autotools id="gdk-pixbuf"
+    autogenargs="--disable-introspection --disable-installed-tests --disable-always-build-tests --disable-glibtest --with-included-loaders=png,gdip-jpeg"
+    >
+    <branch
+      repo="gnome"
+      module="gdk-pixbuf/2.24/gdk-pixbuf-2.24.1.tar.xz"
+      version="2.24.1"
+      >
+      <patch file="http://www.vips.ecs.soton.ac.uk/supported/8.3/win32/gdk-pixbuf-anim-iter.patch" strip="1"/>
+    </branch>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="libjpeg-turbo"/>
+      <dep package="tiff"/>
+      <dep package="libpng"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="libgsf"
+    autogen-sh="configure"
+    autogenargs="--without-gdk-pixbuf"
+    >
+    <branch
+      repo="gnome"
+      module="libgsf/1.14/libgsf-1.14.36.tar.xz"
+      version="1.14.36">
+    </branch>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="gdk-pixbuf"/>
+    </dependencies>
+  </autotools>
+
+  <!-- openexr has a range of problems cross-compiling to win
+
+       the first thing it does it build a couple of small programs to generate 
+       some headers, but of course they need to be compiled with the 
+       non-cross-compiler argh
+
+    -->
+
+  <autotools id="ilmbase"
+    autogen-sh="configure"
+    >
+    <branch 
+      repo="nongnu"
+      module="openexr/ilmbase-2.2.0.tar.gz"
+      version="2.2.0"
+    />
+    <dependencies>
+    </dependencies>
+  </autotools>
+
+  <autotools id="openexr"
+    autogen-sh="configure"
+    >
+    <branch 
+      repo="nongnu"
+      module="openexr/openexr-2.2.0.tar.gz"
+      version="2.2.0"
+    />
+    <dependencies>
+      <dep package="ilmbase"/>
+    </dependencies>
+  </autotools>
+
+  <!-- sadly hdf5 does not like cross-compiling
+
+    -->
+
+  <autotools id="hdf5"
+    autogen-sh="configure"
+    >
+    <branch 
+      repo="hdf5"
+      module="hdf5-1.8.16.tar.gz"
+      version="1.8.16"
+    />
+    <dependencies>
+    </dependencies>
+  </autotools>
+
+  <!-- use matio without hdf5, see above
+
+    -->
+
+  <autotools id="matio"
+    autogen-sh="configure"
+    >
+    <branch 
+      repo="sourceforge"
+      module="matio/matio-1.5.6.tar.gz"
+      version="1.5.6"
+    />
+    <dependencies>
+    </dependencies>
+  </autotools>
+
+  <!-- cfitsio cannot make a .dll with mingw, only include it if you must 
+       have it
+
+       the transform patch is some non-LGPL code we paste into binaries 
+
+       introspection won't work cross-platform since we can't easily run our
+       objects ... fix this by including the typelibs in the dist later
+
+       use -O3 to turn on the auto vectorizer, this gives a useful speedup in 
+       7.38 and later
+
+       orc causes an immediate segv, not tried to diagnose yet
+
+      <dep package="orc-0.4"/>
+
+    -->
+
+  <!-- same as -all, but with the transform patch
+
+    -->
+
+  <autotools id="libvips-transform"
+    autogen-sh="configure"
+    autogenargs="--enable-debug=no --without-OpenEXR --disable-introspection "
+    makeargs="CFLAGS=-O3 CXXFLAGS=-O3"
+    >
+
+    <branch
+      repo="vips"
+      module="8.3/vips-8.3.2.tar.gz"
+      version="8.3.2"
+      checkoutdir="vips-8.3.2"
+      >
+      <patch file="file:///home/john/develop/transform-7.32/transform.patch" strip="1"/>
+    </branch>
+
+    <dependencies>
+      <dep package="matio"/>
+      <dep package="webp"/>
+      <dep package="librsvg"/>
+      <dep package="giflib"/>
+      <dep package="poppler"/>
+      <dep package="glib"/>
+      <dep package="pango"/>
+      <dep package="fftw3"/>
+      <dep package="libgsf"/>
+      <dep package="libjpeg-turbo"/>
+      <dep package="openslide"/>
+      <dep package="tiff"/>
+      <dep package="lcms"/>
+      <dep package="libexif"/>
+      <dep package="imagemagick"/>
+      <dep package="libpng"/>
+    </dependencies>
+  </autotools>
 
   <autotools id="gsl" 
     autogen-sh="configure"
@@ -195,15 +768,20 @@
     />
   </autotools>
 
-  <autotools id="atk">
+  <!-- 1.33.6 fails to build with our glib
+
+    -->
+
+  <autotools id="atk"
+    autogen-sh="configure"
+    >
     <branch
       repo="gnome"
-      module="atk/2.20/atk-2.20.0.tar.xz"
-      version="2.20.0"
+      module="atk/2.0/atk-2.0.1.tar.xz"
+      version="2.0.1"
       />
     <dependencies>
       <dep package="glib"/>
-      <dep package="gtk-doc"/>
     </dependencies>
   </autotools>
 
