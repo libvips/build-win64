@@ -326,8 +326,8 @@
     >
     <branch
       repo="sourceforge"
-      module="lcms/lcms2-2.7.tar.gz"
-      version="2.7"
+      module="lcms/lcms2-2.8.tar.gz"
+      version="2.8"
     />
     <dependencies>
       <dep package="libiconv"/>
