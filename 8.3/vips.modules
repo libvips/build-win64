@@ -236,8 +236,8 @@
     >
     <branch
       repo="sourceforge"
-      module="libpng/libpng-1.6.21.tar.gz"
-      version="1.6.21"
+      module="libpng/libpng-1.6.23.tar.gz"
+      version="1.6.23"
     />
     <dependencies>
       <dep package="libiconv"/>
@@ -245,8 +245,6 @@
   </autotools>
 
   <!-- giflib does not automatically open binary when cross-compiling
-
-       giflib5 still has problems, use 4 for now
 
     -->
 
@@ -256,8 +254,8 @@
     >
     <branch
       repo="sourceforge"
-      module="giflib/giflib-4.2.3.tar.gz"
-      version="4.2.3"
+      module="giflib/giflib-5.1.4.tar.gz"
+      version="5.1.4"
     />
     <dependencies>
       <dep package="libiconv"/>
@@ -292,8 +290,8 @@
     >
     <pkg-config>poppler-glib.pc</pkg-config>
     <branch repo="poppler.freedesktop.org"
-            module="poppler-0.42.0.tar.xz"
-            version="0.42.0"
+            module="poppler-0.46.0.tar.xz"
+            version="0.46.0"
       />
     <dependencies>
       <dep package="cairo"/>
@@ -318,6 +316,10 @@
       <dep package="libiconv"/>
     </dependencies>
   </autotools>
+
+  <!-- 2.8 was uploaded as a tar, not a tar.gz ... use 2.7 for now
+
+    -->
 
   <autotools id="lcms" 
     autogen-sh="configure"
@@ -346,7 +348,7 @@
     >
     <branch 
       repo="openjpeg"
-      module="version.2.1.tar.gz"
+      module="v2.1.1.tar.gz"
       checkoutdir="openjpeg-2.1"
       version="2.1"
     />
@@ -356,7 +358,7 @@
     </dependencies>
   </cmake>
 
-  <!-- starting in openslide-3.4.0, sqlite3 is a requirement.
+  <!-- starting with openslide-3.4.0, sqlite3 is a requirement.
 
        -->
 
@@ -365,8 +367,8 @@
     >
     <branch
       repo="sqlite3"
-      module="2015/sqlite-autoconf-3081101.tar.gz"
-      version="3.8.11.1"
+      module="2016/sqlite-autoconf-3130000.tar.gz"
+      version="3.13.0"
     />
     <dependencies>
       <dep package="libiconv"/>
@@ -398,15 +400,15 @@
        without-turbojpeg turns off a library we don't use (we just use the 
        libjpeg API)
 
-       -->
+    -->
 
   <autotools id="libjpeg-turbo" 
     autogen-sh="configure --without-turbojpeg"
     >
     <branch
       repo="sourceforge"
-      module="libjpeg-turbo/1.4.0/libjpeg-turbo-1.4.2.tar.gz"
-      version="1.4.2"
+      module="libjpeg-turbo/1.5.0/libjpeg-turbo-1.5.0.tar.gz"
+      version="1.5.0"
       >
       <patch file="http://www.vips.ecs.soton.ac.uk/supported/7.30/win32/libjpeg-turbo-bool.patch" strip="1"/>
     </branch>
@@ -416,10 +418,12 @@
   </autotools>
 
   <!-- openexr does not work with mingw, it becomes very confused re.
-       threading -->
+       threading 
 
-  <!-- the patch sanity checks the shutter speed and stops pow(2, -inf), which
-       causes an uncaught math exception on mingw -->
+       the patch sanity checks the shutter speed and stops pow(2, -inf), which
+       causes an uncaught math exception on mingw 
+
+    -->
 
   <autotools id="libexif" 
     autogen-sh="configure"
@@ -436,10 +440,7 @@
     </dependencies>
   </autotools>
 
-  <!-- the tiff on the gnome site needs a confusing libjpeg DLL, 
-       make our own  
-
-       tiff 4.0.3 fails to build a C++ DLL with:
+  <!-- tiff 4.0.3 fails to build a C++ DLL with:
 
        i686-w64-mingw32-g++: error: unrecognized option 
        		'-enable-auto-image-base'
@@ -528,8 +529,8 @@
     >
     <branch
       repo="cfitsio"
-      module="cfitsio3380.tar.gz"
-      version="3.38"
+      module="cfitsio3390.tar.gz"
+      version="3.39"
       checkoutdir="cfitsio"
       >
     </branch>
@@ -543,8 +544,8 @@
     >
     <branch
       repo="webp"
-      module="libwebp-0.5.0.tar.gz"
-      version="0.5.0"
+      module="libwebp-0.5.1.tar.gz"
+      version="0.5.1"
       >
     </branch>
     <dependencies>
@@ -566,14 +567,17 @@
 
   <!-- don't do any of doc stuff
 
+       the patch puts an unprotected sys/socket inside an ifdef in gmessage.c
+
     -->
 
   <autotools id="glib" autogenargs="--with-pcre=internal">
     <branch
       repo="gnome"
-      module="glib/2.48/glib-2.48.0.tar.xz"
-      version="2.48.0"
+      module="glib/2.49/glib-2.49.4.tar.xz"
+      version="2.49.4"
       >
+      <patch file="http://www.vips.ecs.soton.ac.uk/supported/8.3/win32/glib-2.49.4-socket.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libffi"/>
@@ -638,8 +642,8 @@
     >
     <branch
       repo="gnome"
-      module="gdk-pixbuf/2.34/gdk-pixbuf-2.34.0.tar.xz"
-      version="2.34.0"
+      module="gdk-pixbuf/2.35/gdk-pixbuf-2.35.2.tar.xz"
+      version="2.35.2"
       >
     </branch>
     <dependencies>
@@ -656,8 +660,8 @@
     >
     <branch
       repo="gnome"
-      module="libgsf/1.14/libgsf-1.14.36.tar.xz"
-      version="1.14.36">
+      module="libgsf/1.14/libgsf-1.14.39.tar.xz"
+      version="1.14.39">
     </branch>
     <dependencies>
       <dep package="glib"/>
@@ -665,7 +669,7 @@
     </dependencies>
   </autotools>
 
-  <!-- openexr has a range of problems cross-compiling to win
+  <!-- openexr has a range of problems cross-compiling 
 
        the first thing it does it build a couple of small programs to generate 
        some headers, but of course they need to be compiled with the 
@@ -717,6 +721,8 @@
   </autotools>
 
   <!-- use matio without hdf5, see above
+
+       1.5.8 fails to build in a cross-compiler
 
     -->
 
