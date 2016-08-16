@@ -264,7 +264,11 @@
 
   <autotools id="libcroco" supports-non-srcdir-builds="no">
     <pkg-config>libcroco-0.6.pc</pkg-config>
-    <branch />
+    <branch
+      repo="gnome"
+      module="libcroco/0.6/libcroco-0.6.11.tar.xz"
+      version="0.6.11">
+    </branch>
     <dependencies>
       <dep package="glib"/>
       <dep package="libxml2"/>
@@ -275,7 +279,11 @@
     supports-non-srcdir-builds="no"
     autogenargs="--disable-introspection --disable-pixbuf-loader">
     >
-    <branch/>
+    <branch
+      repo="gnome"
+      module="librsvg/2.40/librsvg-2.40.16.tar.xz"
+      version="2.40.16">
+    </branch>
     <dependencies>
       <dep package="glib"/>
       <dep package="gdk-pixbuf"/>
