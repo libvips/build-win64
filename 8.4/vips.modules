@@ -425,7 +425,7 @@
     </dependencies>
   </autotools>
 
-  <!-- openexr does not work with mingw, it becomes very confused re.
+  <!-- OpenEXR does not work with mingw, it becomes very confused re.
        threading 
 
        the patch sanity checks the shutter speed and stops pow(2, -inf), which
@@ -771,9 +771,9 @@
     >
 
     <branch
-      repo="vips"
-      module="8.3/vips-8.3.3.tar.gz"
-      version="8.3.3"
+      repo="vips-beta"
+      module="8.4/vips-8.4.0.tar.gz"
+      version="8.4.0"
       >
     </branch>
 
@@ -815,9 +815,9 @@
     >
 
     <branch
-      repo="vips"
-      module="8.3/vips-8.3.3.tar.gz"
-      version="8.3.3"
+      repo="vips-beta"
+      module="8.4/vips-8.4.0.tar.gz"
+      version="8.4.0"
       >
     </branch>
 
@@ -849,9 +849,9 @@
     >
 
     <branch
-      repo="vips"
-      module="8.3/vips-8.3.3.tar.gz"
-      version="8.3.3"
+      repo="vips-beta"
+      module="8.4/vips-8.4.0.tar.gz"
+      version="8.4.0"
       >
       <patch file="file:///home/john/develop/transform-7.32/transform.patch" strip="1"/>
     </branch>
