@@ -811,7 +811,7 @@
   <autotools id="libvips-web"
     autogen-sh="configure"
     autogenargs="--enable-debug=no --without-OpenEXR --without-matio --without-ppm --without-analyze --without-radiance --disable-introspection "
-    makeargs="CFLAGS=-O3 CXXFLAGS=-O3"
+    makeargs="CFLAGS=-g CXXFLAGS=-g"
     >
 
     <branch
