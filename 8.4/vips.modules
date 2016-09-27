@@ -66,7 +66,7 @@
   <repository 
     type="tarball"
     name="tiff"
-    href="ftp://ftp.remotesensing.org/pub/libtiff/"
+    href="http://download.osgeo.org/libtiff/"
   />
 
   <repository 
