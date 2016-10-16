@@ -236,8 +236,8 @@
     >
     <branch
       repo="sourceforge"
-      module="libpng/libpng-1.6.23.tar.gz"
-      version="1.6.23"
+      module="libpng/libpng-1.6.25.tar.gz"
+      version="1.6.25"
     />
     <dependencies>
       <dep package="libiconv"/>
@@ -415,8 +415,8 @@
     >
     <branch
       repo="sourceforge"
-      module="libjpeg-turbo/1.5.0/libjpeg-turbo-1.5.0.tar.gz"
-      version="1.5.0"
+      module="libjpeg-turbo/1.5.1/libjpeg-turbo-1.5.1.tar.gz"
+      version="1.5.1"
       >
       <patch file="http://www.vips.ecs.soton.ac.uk/supported/7.30/win32/libjpeg-turbo-bool.patch" strip="1"/>
     </branch>
@@ -518,8 +518,8 @@
     >
     <branch
       repo="orc"
-      module="orc-0.4.25.tar.xz"
-      version="0.4.25"
+      module="orc-0.4.26.tar.xz"
+      version="0.4.26"
     />
     <dependencies>
       <dep package="libiconv"/>
@@ -628,8 +628,8 @@
   <autotools id="pango" autogenargs="--with-cairo --disable-introspection">
     <branch
       repo="gnome"
-      module="pango/1.40/pango-1.40.1.tar.xz"
-      version="1.40.1"
+      module="pango/1.40/pango-1.40.3.tar.xz"
+      version="1.40.3"
       >
     </branch>
     <dependencies>
@@ -646,12 +646,12 @@
     -->
 
   <autotools id="gdk-pixbuf"
-    autogenargs="--disable-introspection --disable-installed-tests --disable-always-build-tests --disable-glibtest --with-included-loaders=png,gdip-jpeg"
+    autogenargs="--disable-introspection --disable-installed-tests --disable-always-build-tests --disable-glibtest --disable-modules --with-included-loaders 'png,jpeg'"
     >
     <branch
       repo="gnome"
-      module="gdk-pixbuf/2.35/gdk-pixbuf-2.35.2.tar.xz"
-      version="2.35.2"
+      module="gdk-pixbuf/2.36/gdk-pixbuf-2.36.0.tar.xz"
+      version="2.36.0"
       >
     </branch>
     <dependencies>
@@ -668,8 +668,8 @@
     >
     <branch
       repo="gnome"
-      module="libgsf/1.14/libgsf-1.14.39.tar.xz"
-      version="1.14.39">
+      module="libgsf/1.14/libgsf-1.14.40.tar.xz"
+      version="1.14.40">
     </branch>
     <dependencies>
       <dep package="glib"/>
