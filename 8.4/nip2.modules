@@ -66,7 +66,7 @@
   <repository 
     type="tarball"
     name="tiff"
-    href="http://download.osgeo.org/libtiff/"
+    href="ftp://ftp.remotesensing.org/pub/libtiff/"
   />
 
   <repository 
@@ -201,35 +201,13 @@
     href="http://www.sqlite.org/"
   />
 
-  <repository
-    type="tarball"
-    name="xmlsoft"
-    href="ftp://xmlsoft.org/"
-  />
+  <!-- don't just include vips.modules
 
-  <autotools id="libiconv" 
-    autogen-sh="configure"
-    >
-    <branch
-      repo="gnu"
-      module="libiconv/libiconv-1.14.tar.gz"
-      version="1.14"
-    />
-  </autotools>
+       we are forced onto old versions of many packages by gtk2 and we don't 
+       want to push the libvips DLL back as well ... we have to maintain a 
+       separate libvips build in here
 
-  <autotools id="libxml2" 
-    autogen-sh="configure"
-    autogenargs="--without-python">
-    >
-    <branch
-      repo="xmlsoft"
-      module="libxml2/libxml2-2.9.4.tar.gz"
-      version="2.9.4"
-    />
-    <dependencies>
-      <dep package="libiconv"/>
-    </dependencies>
-  </autotools>
+    -->
 
   <autotools id="libpng" 
     autogen-sh="configure"
@@ -239,12 +217,11 @@
       module="libpng/libpng-1.6.25.tar.gz"
       version="1.6.25"
     />
-    <dependencies>
-      <dep package="libiconv"/>
-    </dependencies>
   </autotools>
 
   <!-- giflib does not automatically open binary when cross-compiling
+
+       giflib5 still has problems, use 4 for now
 
     -->
 
@@ -257,9 +234,6 @@
       module="giflib/giflib-5.1.4.tar.gz"
       version="5.1.4"
     />
-    <dependencies>
-      <dep package="libiconv"/>
-    </dependencies>
   </autotools>
 
   <autotools id="libcroco" supports-non-srcdir-builds="no">
@@ -320,14 +294,7 @@
       module="fftw-3.3.4.tar.gz"
       version="3.3.4"
     />
-    <dependencies>
-      <dep package="libiconv"/>
-    </dependencies>
   </autotools>
-
-  <!-- 2.8 was uploaded as a tar, not a tar.gz ... use 2.7 for now
-
-    -->
 
   <autotools id="lcms" 
     autogen-sh="configure"
@@ -337,9 +304,6 @@
       module="lcms/lcms2-2.8.tar.gz"
       version="2.8"
     />
-    <dependencies>
-      <dep package="libiconv"/>
-    </dependencies>
   </autotools>
 
   <!-- needed by openslide
@@ -366,7 +330,7 @@
     </dependencies>
   </cmake>
 
-  <!-- starting with openslide-3.4.0, sqlite3 is a requirement.
+  <!-- starting in openslide-3.4.0, sqlite3 is a requirement.
 
        -->
 
@@ -408,7 +372,7 @@
        without-turbojpeg turns off a library we don't use (we just use the 
        libjpeg API)
 
-    -->
+       -->
 
   <autotools id="libjpeg-turbo" 
     autogen-sh="configure --without-turbojpeg"
@@ -425,13 +389,11 @@
     </dependencies>
   </autotools>
 
-  <!-- OpenEXR does not work with mingw, it becomes very confused re.
-       threading 
+  <!-- openexr does not work with mingw, it becomes very confused re.
+       threading -->
 
-       the patch sanity checks the shutter speed and stops pow(2, -inf), which
-       causes an uncaught math exception on mingw 
-
-    -->
+  <!-- the patch sanity checks the shutter speed and stops pow(2, -inf), which
+       causes an uncaught math exception on mingw -->
 
   <autotools id="libexif" 
     autogen-sh="configure"
@@ -443,12 +405,12 @@
       >
       <patch file="http://www.vips.ecs.soton.ac.uk/supported/7.40/win32/libexif-0.6-shutter.patch" strip="1"/>
     </branch>
-    <dependencies>
-      <dep package="libiconv"/>
-    </dependencies>
   </autotools>
 
-  <!-- tiff 4.0.3 fails to build a C++ DLL with:
+  <!-- the tiff on the gnome site needs a confusing libjpeg DLL, 
+       make our own  
+
+       tiff 4.0.3 fails to build a C++ DLL with:
 
        i686-w64-mingw32-g++: error: unrecognized option 
        		'-enable-auto-image-base'
@@ -521,9 +483,6 @@
       module="orc-0.4.26.tar.xz"
       version="0.4.26"
     />
-    <dependencies>
-      <dep package="libiconv"/>
-    </dependencies>
   </autotools>
 
   <!-- cfitsio can't make a .dll with mingw ... only include it in nip2 builds 
@@ -542,9 +501,6 @@
       checkoutdir="cfitsio"
       >
     </branch>
-    <dependencies>
-      <dep package="libiconv"/>
-    </dependencies>
   </autotools>
 
   <autotools id="webp" 
@@ -556,9 +512,6 @@
       version="0.5.1"
       >
     </branch>
-    <dependencies>
-      <dep package="libiconv"/>
-    </dependencies>
   </autotools>
 
   <autotools id="libffi">
@@ -568,9 +521,6 @@
       version="3.2.1"
       >
     </branch>
-    <dependencies>
-      <dep package="libiconv"/>
-    </dependencies>
   </autotools>
 
   <!-- don't do any of doc stuff
@@ -593,16 +543,14 @@
     </dependencies>
   </autotools>
 
-  <autotools id="pixman" autogen-sh="configure">
+  <autotools id="pixman" 
+   autogen-sh="configure">
     <branch 
       repo="cairo" 
       module="pixman-0.34.0.tar.gz"
       version="0.34.0"
       >
     </branch>
-    <dependencies>
-      <dep package="libiconv"/>
-    </dependencies>
   </autotools>
 
   <!-- 1.14.4 fails to build in a cross-compiler
@@ -611,7 +559,7 @@
 
     -->
 
-  <autotools id="cairo" autogenargs="--disable-gl --disable-xlib --disable-xcb --enable-win32 --without-x --disable-svg --disable-ps --disable-script">
+  <autotools id="cairo" autogenargs="--disable-gl --disable-xlib --disable-xcb --enable-win32 --without-x --disable-script">
     <branch 
       repo="cairo" 
       module="cairo-1.14.6.tar.xz"
@@ -637,6 +585,17 @@
       <dep package="cairo"/>
     </dependencies>
   </autotools>
+
+  <!-- don't build from git ... it does some introspection to build the test
+       suite build files, which won't work in cross-compiler mode
+
+       disable run-time loading of modules, it's difficult when cross-compiling
+
+       we are stuck on glib 2.28 thanks to goffice, so we need gdk-pixbuf 2.24
+
+       the patch adds a missing body for anim_iter_init
+
+    -->
 
   <!-- don't build from git ... it does some introspection to build the test
        suite build files, which won't work in cross-compiler mode
@@ -676,7 +635,7 @@
     </dependencies>
   </autotools>
 
-  <!-- openexr has a range of problems cross-compiling 
+  <!-- openexr has a range of problems cross-compiling to win
 
        the first thing it does it build a couple of small programs to generate 
        some headers, but of course they need to be compiled with the 
@@ -693,7 +652,6 @@
       version="2.2.0"
     />
     <dependencies>
-      <dep package="libiconv"/>
     </dependencies>
   </autotools>
 
@@ -723,13 +681,10 @@
       version="1.8.16"
     />
     <dependencies>
-      <dep package="libiconv"/>
     </dependencies>
   </autotools>
 
   <!-- use matio without hdf5, see above
-
-       1.5.8 fails to build in a cross-compiler
 
     -->
 
@@ -742,7 +697,6 @@
       version="1.5.6"
     />
     <dependencies>
-      <dep package="libiconv"/>
     </dependencies>
   </autotools>
 
@@ -762,80 +716,6 @@
       <dep package="orc-0.4"/>
 
     -->
-
-  <autotools id="libvips-all"
-    autogen-sh="configure"
-    autogenargs="--enable-debug=no --without-OpenEXR --disable-introspection "
-    makeargs="CFLAGS=-O3 CXXFLAGS=-O3"
-    >
-
-    <branch
-      repo="vips"
-      module="8.4/vips-8.4.2.tar.gz"
-      version="8.4.2"
-      >
-    </branch>
-
-    <dependencies>
-      <dep package="matio"/>
-      <dep package="webp"/>
-      <dep package="librsvg"/>
-      <dep package="giflib"/>
-      <dep package="poppler"/>
-      <dep package="glib"/>
-      <dep package="pango"/>
-      <dep package="fftw3"/>
-      <dep package="libgsf"/>
-      <dep package="libjpeg-turbo"/>
-      <dep package="tiff"/>
-      <dep package="openslide"/>
-      <dep package="lcms"/>
-      <dep package="libexif"/>
-      <dep package="imagemagick"/>
-      <dep package="libpng"/>
-    </dependencies>
-  </autotools>
-
-  <!-- libvips with a set of deps for web use
-
-       don't include support for less-used file formats in an attempt to 
-       reduce the attack surface
-
-       don't include poppler, it's GPL
-
-       don't include imagemagick to try to keep the surface down
-
-    -->
-
-  <autotools id="libvips-web"
-    autogen-sh="configure"
-    autogenargs="--enable-debug=no --without-OpenEXR --without-matio --without-ppm --without-analyze --without-radiance --disable-introspection "
-    makeargs="CFLAGS=-O3 CXXFLAGS=-O3"
-    >
-
-    <branch
-      repo="vips"
-      module="8.4/vips-8.4.2.tar.gz"
-      version="8.4.2"
-      >
-    </branch>
-
-    <dependencies>
-      <dep package="libxml2"/>
-      <dep package="webp"/>
-      <dep package="librsvg"/>
-      <dep package="giflib"/>
-      <dep package="glib"/>
-      <dep package="pango"/>
-      <dep package="fftw3"/>
-      <dep package="libgsf"/>
-      <dep package="libjpeg-turbo"/>
-      <dep package="tiff"/>
-      <dep package="lcms"/>
-      <dep package="libexif"/>
-      <dep package="libpng"/>
-    </dependencies>
-  </autotools>
 
   <!-- same as -all, but with the transform patch
 
@@ -872,6 +752,158 @@
       <dep package="libexif"/>
       <dep package="imagemagick"/>
       <dep package="libpng"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gsl" 
+    autogen-sh="configure"
+    >
+    <branch
+      repo="gnu"
+      module="gsl/gsl-1.16.tar.gz"
+      version="1.16"
+    />
+  </autotools>
+
+  <!-- 1.33.6 fails to build with our glib
+
+    -->
+
+  <autotools id="atk"
+    autogen-sh="configure"
+    >
+    <branch
+      repo="gnome"
+      module="atk/2.0/atk-2.0.1.tar.xz"
+      version="2.0.1"
+      />
+    <dependencies>
+      <dep package="glib"/>
+    </dependencies>
+  </autotools>
+
+  <!-- the offical 2.24.30 fails with linking errors - we use git master 2.24
+       wrapped up as a tarball
+
+       we don't just clone git master because it's horribly slow and doesn't 
+       cache well
+
+    -->
+
+  <autotools id="gtk+-2">
+    <branch
+      repo="vips"
+      module="8.3/win32/gtk+-2.24.30a.tar.bz2"
+      version="2.24.30"
+      checkoutdir="gtk+-2.24.30"
+      />
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="cairo"/>
+      <dep package="pango"/>
+      <dep package="atk"/>
+      <dep package="gdk-pixbuf"/>
+    </dependencies>
+  </autotools>
+
+  <!-- our own goffice module
+
+       0.9.x is gtk3, we are stuck with gtk2 for now, so we need the 0.8.x 
+       series
+
+       in ubuntu 12.04, goffice-0.8.17 crashes with -O2, make sure that's off 
+       in jhbuildrc when you make this module, see the README
+
+       this compiler bug fixed in 12.10
+
+       the patch helps goffice find the pcre support in recent glibs
+
+       -->
+
+  <autotools id="goffice-noprint"
+    autogen-sh="configure"
+    autogenargs="--with-config-backend=win32"
+    >
+    <branch
+      repo="gnome"
+      module="goffice/0.8/goffice-0.8.17.tar.xz"
+      version="0.8.17">
+      <patch file="http://www.vips.ecs.soton.ac.uk/supported/8.3/win32/goffice-0.8-glib-pcre.patch" strip="1"/>
+    </branch>
+    <dependencies>
+      <dep package="gtk+-2"/>
+      <dep package="libgsf"/>
+    </dependencies>
+  </autotools>
+
+  <!-- fails linking 
+       
+       add -liberty to get regcomp() and friends 
+
+       edit lib/gvc/Makefile.am, append -liberty toi line 69
+
+       edit lib/gvpr/gprstate.c, remove WIN32 stuff
+
+       gvrender_core_dot.c fails with a variety of linking errors
+
+    -->
+
+  <autotools id="graphviz"
+    autogenargs="--enable-swig=no --enable-sharp=no --enable-guile=no --enable-java=no--enable-io=no --enable-lua=no --enable-ocaml=no --enable-perl=no --enable-php=no --enable-python=no --enable-r=no --enable-ruby=no --enable-tcl=no --with-rsvg=no --with-ghostscript=no"
+    >
+    <branch
+      repo="graphviz"
+      module="graphviz-2.28.0.tar.gz"
+      version="2.28.0">
+    </branch>
+  </autotools>
+
+  <autotools id="murrine"
+    autogen-sh="configure"
+    >
+    <branch
+      repo="gnome"
+      module="murrine/0.98/murrine-0.98.2.tar.xz"
+      version="0.98.2"
+    />
+  </autotools>
+
+  <!-- we only want the gtk2 theme
+
+       sadly this fails as it insists on having an install of GNOME
+
+       build by hand, then extract just the gtk2 theme, and package as a zip
+
+       this is installed earlier by "unpack.sh"
+
+    -->
+
+  <autotools id="arc-theme"
+    autogenargs="--disable-gtk3 --disable-darker --disable-dark --disable-cinnamon --disable-gnome-shell --disable-metacity --disable-unity --disable-xfwm --disable-xfce-notify --without-gnome"
+    >
+    <branch
+      repo="github-tar"
+      module="horst3180/arc-theme/archive/20160331.tar.gz"
+      version="20160331"
+      checkoutdir="arc-theme-20160331"
+    />
+  </autotools>
+
+  <autotools id="nip2" 
+    autogen-sh="configure"
+    autogenargs="--enable-debug=no --without-libgvc"
+    >
+    <branch
+      repo="vips"
+      module="8.4/nip2-8.4.0.tar.gz"
+      version="8.4.0"
+    />
+    <dependencies>
+      <dep package="libvips-transform"/>
+      <dep package="gsl"/>
+      <dep package="gtk+-2"/>
+      <dep package="goffice-noprint"/>
+      <dep package="murrine"/>
     </dependencies>
   </autotools>
 
