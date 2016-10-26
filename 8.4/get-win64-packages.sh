@@ -12,7 +12,7 @@ while read PACKAGE; do
 
     # see if we need to download the package.
     if [ ! -e "$packagedir/$NAME" ]; then
-      echo "fetching $NAME ..."
+	  echo "fetching $NAME ..."
       ( cd $packagedir ; \
           wget ftp://ftp.gnome.org/pub/GNOME/binaries/win64/$PACKAGE )
     fi
@@ -32,10 +32,3 @@ dependencies/win-iconv-dev_tml-20100912_win64.zip
 dependencies/zlib_1.2.5-1_win64.zip
 dependencies/zlib-dev_1.2.5-1_win64.zip 
 EOF
-
-# we want the arc theme too
-if [ ! -e "$packagedir/arc.zip" ]; then
-  echo "fetching arc.zip ..."
-  ( cd $packagedir ; \
-      wget http://www.vips.ecs.soton.ac.uk/supported/8.3/win32/arc.zip )
-fi

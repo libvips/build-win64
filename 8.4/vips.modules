@@ -66,7 +66,7 @@
   <repository 
     type="tarball"
     name="tiff"
-    href="ftp://ftp.remotesensing.org/pub/libtiff/"
+    href="http://download.osgeo.org/libtiff/"
   />
 
   <repository 
@@ -236,8 +236,8 @@
     >
     <branch
       repo="sourceforge"
-      module="libpng/libpng-1.6.23.tar.gz"
-      version="1.6.23"
+      module="libpng/libpng-1.6.25.tar.gz"
+      version="1.6.25"
     />
     <dependencies>
       <dep package="libiconv"/>
@@ -275,12 +275,6 @@
     </dependencies>
   </autotools>
 
-
-  <!-- goffice keeps us on an old glib, an old glib forces an old pango, that
-       forces an old pangocairo, that forces an old librsvg
-
-    -->
-
   <autotools id="librsvg" 
     supports-non-srcdir-builds="no"
     autogenargs="--disable-introspection --disable-pixbuf-loader">
@@ -291,9 +285,9 @@
       version="2.40.16">
     </branch>
     <dependencies>
-      <dep package="libcroco"/>
       <dep package="glib"/>
       <dep package="gdk-pixbuf"/>
+      <dep package="libcroco"/>
       <dep package="pango"/>
     </dependencies>
   </autotools>
@@ -421,8 +415,8 @@
     >
     <branch
       repo="sourceforge"
-      module="libjpeg-turbo/1.5.0/libjpeg-turbo-1.5.0.tar.gz"
-      version="1.5.0"
+      module="libjpeg-turbo/1.5.1/libjpeg-turbo-1.5.1.tar.gz"
+      version="1.5.1"
       >
       <patch file="http://www.vips.ecs.soton.ac.uk/supported/7.30/win32/libjpeg-turbo-bool.patch" strip="1"/>
     </branch>
@@ -431,7 +425,7 @@
     </dependencies>
   </autotools>
 
-  <!-- openexr does not work with mingw, it becomes very confused re.
+  <!-- OpenEXR does not work with mingw, it becomes very confused re.
        threading 
 
        the patch sanity checks the shutter speed and stops pow(2, -inf), which
@@ -524,8 +518,8 @@
     >
     <branch
       repo="orc"
-      module="orc-0.4.25.tar.xz"
-      version="0.4.25"
+      module="orc-0.4.26.tar.xz"
+      version="0.4.26"
     />
     <dependencies>
       <dep package="libiconv"/>
@@ -581,11 +575,11 @@
 
   <!-- don't do any of doc stuff
 
+       the patch puts an unprotected sys/socket inside an ifdef in gmessage.c
+
     -->
 
-  <autotools id="glib" 
-   autogenargs="--with-pcre=internal"
-   autogen-sh="configure">
+  <autotools id="glib" autogenargs="--with-pcre=internal">
     <branch
       repo="gnome"
       module="glib/2.49/glib-2.49.4.tar.xz"
@@ -599,8 +593,7 @@
     </dependencies>
   </autotools>
 
-  <autotools id="pixman" 
-   autogen-sh="configure">
+  <autotools id="pixman" autogen-sh="configure">
     <branch 
       repo="cairo" 
       module="pixman-0.34.0.tar.gz"
@@ -618,7 +611,7 @@
 
     -->
 
-  <autotools id="cairo" autogenargs="--disable-gl --disable-xlib --disable-xcb --enable-win32 --without-x --disable-script">
+  <autotools id="cairo" autogenargs="--disable-gl --disable-xlib --disable-xcb --enable-win32 --without-x --disable-svg --disable-ps --disable-script">
     <branch 
       repo="cairo" 
       module="cairo-1.14.6.tar.xz"
@@ -632,15 +625,11 @@
     </dependencies>
   </autotools>
 
-  <!-- goffice keeps us on an old glib, an old glib forces an old pango
-
-    -->
-
   <autotools id="pango" autogenargs="--with-cairo --disable-introspection">
     <branch
       repo="gnome"
-      module="pango/1.29/pango-1.29.4.tar.xz"
-      version="1.29.4"
+      module="pango/1.40/pango-1.40.3.tar.xz"
+      version="1.40.3"
       >
     </branch>
     <dependencies>
@@ -654,21 +643,16 @@
 
        disable run-time loading of modules, it's difficult when cross-compiling
 
-       we are stuck on glib 2.28 thanks to goffice, so we need gdk-pixbuf 2.24
-
-       the patch adds a missing body for anim_iter_init
-
     -->
 
   <autotools id="gdk-pixbuf"
-    autogenargs="--disable-introspection --disable-installed-tests --disable-always-build-tests --disable-glibtest --with-included-loaders=png,gdip-jpeg"
+    autogenargs="--disable-introspection --disable-installed-tests --disable-always-build-tests --disable-glibtest --disable-modules --with-included-loaders 'png,jpeg'"
     >
     <branch
       repo="gnome"
-      module="gdk-pixbuf/2.35/gdk-pixbuf-2.35.2.tar.xz"
-      version="2.35.2"
+      module="gdk-pixbuf/2.36/gdk-pixbuf-2.36.0.tar.xz"
+      version="2.36.0"
       >
-      <patch file="http://www.vips.ecs.soton.ac.uk/supported/8.3/win32/gdk-pixbuf-anim-iter.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib"/>
@@ -684,8 +668,8 @@
     >
     <branch
       repo="gnome"
-      module="libgsf/1.14/libgsf-1.14.39.tar.xz"
-      version="1.14.39">
+      module="libgsf/1.14/libgsf-1.14.40.tar.xz"
+      version="1.14.40">
     </branch>
     <dependencies>
       <dep package="glib"/>
@@ -788,8 +772,8 @@
 
     <branch
       repo="vips"
-      module="8.3/vips-8.3.3.tar.gz"
-      version="8.3.3"
+      module="8.4/vips-8.4.2.tar.gz"
+      version="8.4.2"
       >
     </branch>
 
@@ -827,13 +811,13 @@
   <autotools id="libvips-web"
     autogen-sh="configure"
     autogenargs="--enable-debug=no --without-OpenEXR --without-matio --without-ppm --without-analyze --without-radiance --disable-introspection "
-    makeargs="CFLAGS=-g CXXFLAGS=-g"
+    makeargs="CFLAGS=-O3 CXXFLAGS=-O3"
     >
 
     <branch
       repo="vips"
-      module="8.3/vips-8.3.3.tar.gz"
-      version="8.3.3"
+      module="8.4/vips-8.4.2.tar.gz"
+      version="8.4.2"
       >
     </branch>
 
@@ -866,8 +850,8 @@
 
     <branch
       repo="vips"
-      module="8.3/vips-8.3.3.tar.gz"
-      version="8.3.3"
+      module="8.4/vips-8.4.2.tar.gz"
+      version="8.4.2"
       >
       <patch file="file:///home/john/develop/transform-7.32/transform.patch" strip="1"/>
     </branch>
@@ -891,5 +875,6 @@
       <dep package="libpng"/>
     </dependencies>
   </autotools>
+
 </moduleset>
 

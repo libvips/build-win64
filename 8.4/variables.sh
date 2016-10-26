@@ -1,11 +1,11 @@
 # included by all scripts .. edit versions here, and in vips.modules
 
 nip2_package=nip2
-nip2_version=8.3.1
+nip2_version=8.4
 
 vips_package=vips
-vips_version=8.3
-vips_minor_version=3
+vips_version=8.4
+vips_minor_version=2
 
 # build-win32/x.xx dir we are building
 basedir=$(pwd)
