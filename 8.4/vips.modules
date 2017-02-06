@@ -64,6 +64,12 @@
     href="http://poppler.freedesktop.org/"/>
 
   <repository 
+    type="tarball" 
+    name="checkout" 
+    href="file:///home/john/GIT/build-win64/8.4/checkout/"
+  />
+
+  <repository 
     type="tarball"
     name="tiff"
     href="http://download.osgeo.org/libtiff/"
@@ -181,12 +187,6 @@
     type="tarball" 
     name="gnu" 
     href="ftp://ftp.gnu.org/pub/gnu/"
-  />
-
-  <repository 
-    type="tarball" 
-    name="checkout" 
-    href="file:///home/john/GIT/build-win32/master/checkout"
   />
 
   <repository 
@@ -873,6 +873,19 @@
       <dep package="libexif"/>
       <dep package="imagemagick"/>
       <dep package="libpng"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="ptmfit" 
+    autogen-sh="configure"
+    >
+    <branch
+      repo="checkout"
+      module="ptmfit-2.4.0.tar.gz"
+      version="2.4.0"
+    />
+    <dependencies>
+      <dep package="libvips-web"/>
     </dependencies>
   </autotools>
 
