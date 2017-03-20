@@ -772,8 +772,9 @@
 
     <branch
       repo="vips-beta"
-      module="8.5/vips-8.5.0.tar.gz"
+      module="8.5/vips-8.5.0d.tar.gz"
       version="8.5.0"
+      checkoutdir="vips-8.5.0"
       >
     </branch>
 
@@ -816,13 +817,13 @@
 
     <branch
       repo="vips-beta"
-      module="8.5/vips-8.5.0.tar.gz"
+      module="8.5/vips-8.5.0d.tar.gz"
       version="8.5.0"
+      checkoutdir="vips-8.5.0"
       >
     </branch>
 
     <dependencies>
-      <dep package="libxml2"/>
       <dep package="webp"/>
       <dep package="librsvg"/>
       <dep package="giflib"/>
@@ -850,8 +851,9 @@
 
     <branch
       repo="vips-beta"
-      module="8.5/vips-8.5.0.tar.gz"
+      module="8.5/vips-8.5.0d.tar.gz"
       version="8.5.0"
+      checkoutdir="vips-8.5.0"
       >
       <patch file="file:///home/john/develop/transform-7.32/transform.patch" strip="1"/>
     </branch>
