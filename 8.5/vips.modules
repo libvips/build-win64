@@ -84,7 +84,7 @@
   <repository 
     type="tarball"
     name="vips"
-    href="http://www.vips.ecs.soton.ac.uk/supported/"
+    href="https://github.com/jcupitt/libvips/releases/download/"
   />
 
   <repository 
@@ -771,10 +771,9 @@
     >
 
     <branch
-      repo="vips-beta"
-      module="8.5/vips-8.5.0d.tar.gz"
-      version="8.5.0"
-      checkoutdir="vips-8.5.0"
+      repo="vips"
+      module="v8.5.1/vips-8.5.1.tar.gz"
+      version="8.5.1"
       >
     </branch>
 
@@ -816,10 +815,9 @@
     >
 
     <branch
-      repo="vips-beta"
-      module="8.5/vips-8.5.0d.tar.gz"
-      version="8.5.0"
-      checkoutdir="vips-8.5.0"
+      repo="vips"
+      module="v8.5.1/vips-8.5.1.tar.gz"
+      version="8.5.1"
       >
     </branch>
 
@@ -850,10 +848,9 @@
     >
 
     <branch
-      repo="vips-beta"
-      module="8.5/vips-8.5.0d.tar.gz"
-      version="8.5.0"
-      checkoutdir="vips-8.5.0"
+      repo="vips"
+      module="v8.5.1/vips-8.5.1.tar.gz"
+      version="8.5.1"
       >
       <patch file="file:///home/john/develop/transform-7.32/transform.patch" strip="1"/>
     </branch>
