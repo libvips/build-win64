@@ -463,8 +463,8 @@
     >
     <branch
       repo="tiff"
-      module="tiff-4.0.6.tar.gz"
-      version="4.0.6"
+      module="tiff-4.0.7.tar.gz"
+      version="4.0.7"
       >
     </branch>
     <dependencies>
@@ -552,8 +552,8 @@
     >
     <branch
       repo="webp"
-      module="libwebp-0.5.1.tar.gz"
-      version="0.5.1"
+      module="libwebp-0.6.0.tar.gz"
+      version="0.6.0"
       >
     </branch>
     <dependencies>
@@ -582,10 +582,9 @@
   <autotools id="glib" autogenargs="--with-pcre=internal">
     <branch
       repo="gnome"
-      module="glib/2.49/glib-2.49.4.tar.xz"
-      version="2.49.4"
+      module="glib/2.52/glib-2.52.0.tar.xz"
+      version="2.52.0"
       >
-      <patch file="http://www.vips.ecs.soton.ac.uk/supported/8.3/win32/glib-2.49.4-socket.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libffi"/>
@@ -614,8 +613,8 @@
   <autotools id="cairo" autogenargs="--disable-gl --disable-xlib --disable-xcb --enable-win32 --without-x --disable-svg --disable-ps --disable-script">
     <branch 
       repo="cairo" 
-      module="cairo-1.14.6.tar.xz"
-      version="1.14.6"
+      module="cairo-1.14.8.tar.xz"
+      version="1.14.8"
       >
     </branch>
     <dependencies>
@@ -628,8 +627,8 @@
   <autotools id="pango" autogenargs="--with-cairo --disable-introspection">
     <branch
       repo="gnome"
-      module="pango/1.40/pango-1.40.3.tar.xz"
-      version="1.40.3"
+      module="pango/1.40/pango-1.40.4.tar.xz"
+      version="1.40.4"
       >
     </branch>
     <dependencies>
@@ -668,8 +667,8 @@
     >
     <branch
       repo="gnome"
-      module="libgsf/1.14/libgsf-1.14.40.tar.xz"
-      version="1.14.40">
+      module="libgsf/1.14/libgsf-1.14.41.tar.xz"
+      version="1.14.41">
     </branch>
     <dependencies>
       <dep package="glib"/>

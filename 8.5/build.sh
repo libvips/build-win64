@@ -7,7 +7,7 @@
 # export this to vips.modules ... cmake needs it
 export BASEDIR=$basedir
 
-vips_site=http://www.vips.ecs.soton.ac.uk/supported/$vips_version
+vips_site=https://github.com/jcupitt/libvips/releases/download/v$vips_version.$vips_minor_version
 
 # basic setup ... must do this before the native build, since it'll wipe the
 # install area
