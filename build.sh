@@ -15,6 +15,9 @@ if ! type docker > /dev/null; then
   exit 1
 fi
 
+# Ensure latest Ubuntu LTS base image
+docker pull ubuntu:xenial
+
 # Create a machine image with all the required build tools pre-installed
 docker build -t libvips-build-win64 container
 

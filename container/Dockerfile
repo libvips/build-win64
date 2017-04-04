@@ -1,4 +1,4 @@
-FROM ubuntu:wily
+FROM ubuntu:xenial
 MAINTAINER Lovell Fuller <npm@lovell.info>
 
 # Install dependencies ... these come in two parts: the first set are for the
@@ -9,6 +9,7 @@ RUN dpkg --add-architecture i386 && \
   apt-get install -y \
     build-essential \
     libxml2-dev \
+    libexpat1-dev \
     glib2.0-dev \
     gobject-introspection \
     python-gi-dev \
