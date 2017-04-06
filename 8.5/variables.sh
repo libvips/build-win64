@@ -5,7 +5,7 @@ nip2_version=8.5
 
 vips_package=vips
 vips_version=8.5
-vips_minor_version=1
+vips_minor_version=2
 
 # build-win32/x.xx dir we are building
 basedir=$(pwd)

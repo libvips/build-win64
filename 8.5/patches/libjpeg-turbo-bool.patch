@@ -1,0 +1,12 @@
+diff -Naur libjpeg-turbo-1.2.1.orig/jmorecfg.h libjpeg-turbo-1.2.1/jmorecfg.h
+--- libjpeg-turbo-1.2.1.orig/jmorecfg.h	2012-06-30 00:52:08.000000000 +0100
++++ libjpeg-turbo-1.2.1/jmorecfg.h	2013-01-16 16:43:54.438171071 +0000
+@@ -225,7 +225,7 @@
+  */
+ 
+ #ifndef HAVE_BOOLEAN
+-typedef int boolean;
++typedef unsigned char boolean;
+ #endif
+ #ifndef FALSE			/* in case these macros already exist */
+ #define FALSE	0		/* values of boolean */

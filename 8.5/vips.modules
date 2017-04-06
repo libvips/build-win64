@@ -89,12 +89,6 @@
 
   <repository 
     type="tarball"
-    name="vips-beta"
-    href="http://www.vips.ecs.soton.ac.uk/development/"
-  />
-
-  <repository 
-    type="tarball"
     name="sourceware"
     href="ftp://sourceware.org/pub/"
   />
@@ -418,7 +412,7 @@
       module="libjpeg-turbo/1.5.1/libjpeg-turbo-1.5.1.tar.gz"
       version="1.5.1"
       >
-      <patch file="http://www.vips.ecs.soton.ac.uk/supported/7.30/win32/libjpeg-turbo-bool.patch" strip="1"/>
+      <patch file="patches/libjpeg-turbo-bool.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libiconv"/>
@@ -441,7 +435,7 @@
       module="libexif/libexif-0.6.21.tar.gz"
       version="0.6.21"
       >
-      <patch file="http://www.vips.ecs.soton.ac.uk/supported/7.40/win32/libexif-0.6-shutter.patch" strip="1"/>
+      <patch file="patches/libexif-0.6-shutter.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libiconv"/>
@@ -771,8 +765,8 @@
 
     <branch
       repo="vips"
-      module="v8.5.1/vips-8.5.1.tar.gz"
-      version="8.5.1"
+      module="v8.5.2/vips-8.5.2.tar.gz"
+      version="8.5.2"
       >
     </branch>
 
@@ -815,8 +809,8 @@
 
     <branch
       repo="vips"
-      module="v8.5.1/vips-8.5.1.tar.gz"
-      version="8.5.1"
+      module="v8.5.2/vips-8.5.2.tar.gz"
+      version="8.5.2"
       >
     </branch>
 
@@ -848,8 +842,8 @@
 
     <branch
       repo="vips"
-      module="v8.5.1/vips-8.5.1.tar.gz"
-      version="8.5.1"
+      module="v8.5.2/vips-8.5.2.tar.gz"
+      version="8.5.2"
       >
       <patch file="file:///home/john/develop/transform-7.32/transform.patch" strip="1"/>
     </branch>
