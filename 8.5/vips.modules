@@ -569,8 +569,6 @@
 
   <!-- don't do any of doc stuff
 
-       the patch puts an unprotected sys/socket inside an ifdef in gmessage.c
-
     -->
 
   <autotools id="glib" autogenargs="--with-pcre=internal">
@@ -765,8 +763,8 @@
 
     <branch
       repo="vips"
-      module="v8.5.2/vips-8.5.2.tar.gz"
-      version="8.5.2"
+      module="v8.5.3/vips-8.5.3.tar.gz"
+      version="8.5.3"
       >
     </branch>
 
@@ -809,8 +807,8 @@
 
     <branch
       repo="vips"
-      module="v8.5.2/vips-8.5.2.tar.gz"
-      version="8.5.2"
+      module="v8.5.3/vips-8.5.3.tar.gz"
+      version="8.5.3"
       >
     </branch>
 
@@ -842,8 +840,8 @@
 
     <branch
       repo="vips"
-      module="v8.5.2/vips-8.5.2.tar.gz"
-      version="8.5.2"
+      module="v8.5.3/vips-8.5.3.tar.gz"
+      version="8.5.3"
       >
       <patch file="file:///home/john/develop/transform-7.32/transform.patch" strip="1"/>
     </branch>
