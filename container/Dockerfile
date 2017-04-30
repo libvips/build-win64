@@ -4,7 +4,9 @@ MAINTAINER Lovell Fuller <npm@lovell.info>
 # Install dependencies ... these come in two parts: the first set are for the
 # native linux build we need to do to generate the typelib, the second set for
 # the cross-platform win64 build
-RUN dpkg --add-architecture i386 && \
+RUN \
+  echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections && \
+  dpkg --add-architecture i386 && \
   apt-get update && \
   apt-get install -y \
     build-essential \
@@ -31,5 +33,5 @@ RUN dpkg --add-architecture i386 && \
 
 # Create a default, non-root 'build' user
 RUN groupadd -r build && useradd -m -g build build
-WORKDIR /home/build
+WORKDIR /data
 USER build
