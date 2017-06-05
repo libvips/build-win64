@@ -338,15 +338,12 @@
 
   <!-- needed by openslide
 
-       openjpeg 2.1 does not make or install a .pc file, we copy one in earlier
-       during unpack.sh
-
        BASEDIR is set for us by build.sh
 
        -->
 
   <cmake id="openjpeg"
-    cmakeargs="-DCMAKE_TOOLCHAIN_FILE=$BASEDIR/Toolchain-x86_64-w64-mingw32.cmake"
+    cmakeargs="-DBUILD_PKGCONFIG_FILES=ON -DCMAKE_TOOLCHAIN_FILE=$BASEDIR/Toolchain-x86_64-w64-mingw32.cmake"
     >
     <branch 
       repo="openjpeg"
@@ -397,7 +394,8 @@
   <!-- the turbo one is 2x to 4x faster 
 
        the patch changes the "typedef int boolean" that libjpeg-turbo 
-       provides, it causes problems later on for imagemagick
+       provides, it conflicts with some standard Windows headers and causes 
+       compile errors later
 
        without-turbojpeg turns off a library we don't use (we just use the 
        libjpeg API)
