@@ -238,6 +238,28 @@
     </dependencies>
   </autotools>
 
+  <!-- icu will pull in standard linux headers, which we don't want
+
+    -->
+
+  <autotools id="harfbuzz"
+    autogen-sh="configure"
+    autogenargs="--with-icu=no"
+    >
+    <branch 
+      repo="freedesktop.org"
+      module="harfbuzz/release/harfbuzz-1.4.6.tar.bz2"
+      version="1.4.6"
+    />
+    <dependencies>
+      <dep package="libiconv"/>
+      <dep package="expat"/>
+      <dep package="freetype"/>
+      <dep package="cairo"/>
+      <dep package="fontconfig"/>
+    </dependencies>
+  </autotools>
+
   <!-- 2.12.3 fails with a gperf problem
 
     -->
@@ -673,6 +695,7 @@
       <dep package="glib"/>
       <dep package="cairo"/>
       <dep package="freetype"/>
+      <dep package="harfbuzz"/>
     </dependencies>
   </autotools>
 
