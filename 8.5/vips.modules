@@ -226,6 +226,7 @@
 
   <autotools id="freetype"
     autogen-sh="configure"
+    autogenargs="--enable-static"
     >
     <branch 
       repo="nongnu"
@@ -274,6 +275,7 @@
     />
     <dependencies>
       <dep package="libiconv"/>
+      <dep package="libpng"/>
       <dep package="expat"/>
       <dep package="freetype"/>
     </dependencies>
