@@ -20,8 +20,6 @@ while read PACKAGE; do
     echo "I don't know what to do with $PACKAGE as it doesn't match anything I am looking for."
   fi
 done << EOF
-dependencies/gettext-runtime-dev_0.18.1.1-2_win64.zip
-dependencies/gettext-runtime_0.18.1.1-2_win64.zip
 dependencies/zlib_1.2.5-1_win64.zip
 dependencies/zlib-dev_1.2.5-1_win64.zip 
 EOF
