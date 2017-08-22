@@ -211,6 +211,20 @@
     />
   </autotools>
 
+  <autotools id="gettext" 
+    autogen-sh="configure"
+    autogenargs="--disable-java --disable-native-java --disable-csharp --enable-static --enable-threads=win32 --without-emacs --disable-openmp --without-cvs --without-git --with-included-libcroco --with-included-libunistring --with-included-libxml --with-included-glib"
+    >
+    <branch
+      repo="gnu"
+      module="gettext/gettext-0.19.8.tar.xz"
+      version="0.19.8"
+    />
+    <dependencies>
+      <dep package="libiconv"/>
+    </dependencies>
+  </autotools>
+
   <autotools id="expat" 
     autogen-sh="configure"
     >
@@ -234,7 +248,7 @@
       version="2.8.0"
     />
     <dependencies>
-      <dep package="libiconv"/>
+      <dep package="gettext"/>
       <dep package="expat"/>
     </dependencies>
   </autotools>
@@ -253,7 +267,7 @@
       version="1.4.6"
     />
     <dependencies>
-      <dep package="libiconv"/>
+      <dep package="gettext"/>
       <dep package="expat"/>
       <dep package="freetype"/>
       <dep package="cairo"/>
@@ -274,7 +288,7 @@
       version="2.12.1"
     />
     <dependencies>
-      <dep package="libiconv"/>
+      <dep package="gettext"/>
       <dep package="libpng"/>
       <dep package="expat"/>
       <dep package="freetype"/>
@@ -291,7 +305,7 @@
       version="2.9.4"
     />
     <dependencies>
-      <dep package="libiconv"/>
+      <dep package="gettext"/>
     </dependencies>
   </autotools>
 
@@ -304,7 +318,7 @@
       version="1.6.25"
     />
     <dependencies>
-      <dep package="libiconv"/>
+      <dep package="gettext"/>
     </dependencies>
   </autotools>
 
@@ -322,7 +336,7 @@
       version="5.1.4"
     />
     <dependencies>
-      <dep package="libiconv"/>
+      <dep package="gettext"/>
     </dependencies>
   </autotools>
 
@@ -385,7 +399,7 @@
       version="3.3.4"
     />
     <dependencies>
-      <dep package="libiconv"/>
+      <dep package="gettext"/>
     </dependencies>
   </autotools>
 
@@ -402,7 +416,7 @@
       version="2.8"
     />
     <dependencies>
-      <dep package="libiconv"/>
+      <dep package="gettext"/>
     </dependencies>
   </autotools>
 
@@ -440,7 +454,7 @@
       version="3.13.0"
     />
     <dependencies>
-      <dep package="libiconv"/>
+      <dep package="gettext"/>
     </dependencies>
   </autotools>
 
@@ -483,7 +497,7 @@
       <patch file="patches/libjpeg-turbo-bool.patch" strip="1"/>
     </branch>
     <dependencies>
-      <dep package="libiconv"/>
+      <dep package="gettext"/>
     </dependencies>
   </autotools>
 
@@ -506,7 +520,7 @@
       <patch file="patches/libexif-0.6-shutter.patch" strip="1"/>
     </branch>
     <dependencies>
-      <dep package="libiconv"/>
+      <dep package="gettext"/>
     </dependencies>
   </autotools>
 
@@ -584,7 +598,7 @@
       version="0.4.26"
     />
     <dependencies>
-      <dep package="libiconv"/>
+      <dep package="gettext"/>
     </dependencies>
   </autotools>
 
@@ -605,7 +619,7 @@
       >
     </branch>
     <dependencies>
-      <dep package="libiconv"/>
+      <dep package="gettext"/>
     </dependencies>
   </autotools>
 
@@ -619,7 +633,7 @@
       >
     </branch>
     <dependencies>
-      <dep package="libiconv"/>
+      <dep package="gettext"/>
     </dependencies>
   </autotools>
 
@@ -631,7 +645,7 @@
       >
     </branch>
     <dependencies>
-      <dep package="libiconv"/>
+      <dep package="gettext"/>
     </dependencies>
   </autotools>
 
@@ -648,7 +662,7 @@
     </branch>
     <dependencies>
       <dep package="libffi"/>
-      <dep package="libiconv"/>
+      <dep package="gettext"/>
     </dependencies>
   </autotools>
 
@@ -660,7 +674,7 @@
       >
     </branch>
     <dependencies>
-      <dep package="libiconv"/>
+      <dep package="gettext"/>
     </dependencies>
   </autotools>
 
@@ -757,7 +771,7 @@
       version="2.2.0"
     />
     <dependencies>
-      <dep package="libiconv"/>
+      <dep package="gettext"/>
     </dependencies>
   </autotools>
 
@@ -787,7 +801,7 @@
       version="1.8.16"
     />
     <dependencies>
-      <dep package="libiconv"/>
+      <dep package="gettext"/>
     </dependencies>
   </autotools>
 
@@ -806,7 +820,7 @@
       version="1.5.6"
     />
     <dependencies>
-      <dep package="libiconv"/>
+      <dep package="gettext"/>
     </dependencies>
   </autotools>
 
@@ -835,8 +849,8 @@
 
     <branch
       repo="vips"
-      module="v8.5.6/vips-8.5.6.tar.gz"
-      version="8.5.6"
+      module="v8.5.7/vips-8.5.7.tar.gz"
+      version="8.5.7"
       >
     </branch>
 
@@ -879,8 +893,8 @@
 
     <branch
       repo="vips"
-      module="v8.5.6/vips-8.5.6.tar.gz"
-      version="8.5.6"
+      module="v8.5.7/vips-8.5.7.tar.gz"
+      version="8.5.7"
       >
     </branch>
 
@@ -912,8 +926,8 @@
 
     <branch
       repo="vips"
-      module="v8.5.6/vips-8.5.6.tar.gz"
-      version="8.5.6"
+      module="v8.5.7/vips-8.5.7.tar.gz"
+      version="8.5.7"
       >
       <patch file="file:///home/john/develop/transform-7.32/transform.patch" strip="1"/>
     </branch>
