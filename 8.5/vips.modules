@@ -849,8 +849,8 @@
 
     <branch
       repo="vips"
-      module="v8.5.7/vips-8.5.7.tar.gz"
-      version="8.5.7"
+      module="v8.5.8/vips-8.5.8.tar.gz"
+      version="8.5.8"
       >
     </branch>
 
@@ -893,8 +893,8 @@
 
     <branch
       repo="vips"
-      module="v8.5.7/vips-8.5.7.tar.gz"
-      version="8.5.7"
+      module="v8.5.8/vips-8.5.8.tar.gz"
+      version="8.5.8"
       >
     </branch>
 
@@ -926,8 +926,8 @@
 
     <branch
       repo="vips"
-      module="v8.5.7/vips-8.5.7.tar.gz"
-      version="8.5.7"
+      module="v8.5.8/vips-8.5.8.tar.gz"
+      version="8.5.8"
       >
       <patch file="file:///home/john/develop/transform-7.32/transform.patch" strip="1"/>
     </branch>
