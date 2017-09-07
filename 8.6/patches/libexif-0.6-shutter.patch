@@ -1,0 +1,14 @@
+diff -Naur libexif-0.6.21.orig/libexif/exif-entry.c libexif-0.6.21/libexif/exif-entry.c
+--- libexif-0.6.21.orig/libexif/exif-entry.c	2014-07-26 15:06:28.532471610 +0100
++++ libexif-0.6.21/libexif/exif-entry.c	2014-07-26 15:07:56.720469298 +0100
+@@ -1101,6 +1101,10 @@
+ 			break;
+ 		}
+ 		d = (double) v_srat.numerator / (double) v_srat.denominator;
++		/* Crazy numbers can cause math exceptions on some platforms.
++		 */
++		if( d < 0 )
++			d = 0;
+ 		snprintf (val, maxlen, _("%.02f EV"), d);
+ 		d = 1. / pow (2, d);
+ 		if (d < 1)

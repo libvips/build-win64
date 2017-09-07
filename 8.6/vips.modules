@@ -213,7 +213,7 @@
 
   <autotools id="gettext" 
     autogen-sh="configure"
-    autogenargs="--disable-java --disable-native-java  --disable-csharp --enable-threads=win32 --without-emacs --disable-openmp --without-cvs --without-git --with-included-libcroco --with-included-libunistring --with-included-libxml --with-included-glib --disable-silent-rules"
+    autogenargs="--disable-java --disable-native-java --disable-csharp --enable-static --enable-threads=win32 --without-emacs --disable-openmp --without-cvs --without-git --with-included-libcroco --with-included-libunistring --with-included-libxml --with-included-glib"
     >
     <branch
       repo="gnu"
@@ -684,10 +684,7 @@
 
     -->
 
-  <autotools id="cairo" 
-    autogenargs="--disable-gl --disable-xlib --disable-xcb --enable-win32 --without-x --disable-svg --disable-ps --disable-script"
-    autogen-sh="configure"
-    >
+  <autotools id="cairo" autogenargs="--disable-gl --disable-xlib --disable-xcb --enable-win32 --without-x --disable-ps --disable-script">
     <branch 
       repo="cairo" 
       module="cairo-1.14.8.tar.xz"
@@ -852,8 +849,8 @@
 
     <branch
       repo="vips"
-      module="v8.5.8/vips-8.5.8.tar.gz"
-      version="8.5.8"
+      module="v8.6.0-alpha2/vips-8.6.0-1.tar.gz"
+      version="8.6.0"
       >
     </branch>
 
@@ -896,8 +893,8 @@
 
     <branch
       repo="vips"
-      module="v8.5.8/vips-8.5.8.tar.gz"
-      version="8.5.8"
+      module="v8.6.0-alpha2/vips-8.6.0-1.tar.gz"
+      version="8.6.0"
       >
     </branch>
 
@@ -929,8 +926,8 @@
 
     <branch
       repo="vips"
-      module="v8.5.8/vips-8.5.8.tar.gz"
-      version="8.5.8"
+      module="v8.6.0-alpha2/vips-8.6.0-1.tar.gz"
+      version="8.6.0"
       >
       <patch file="file:///home/john/develop/transform-7.32/transform.patch" strip="1"/>
     </branch>
