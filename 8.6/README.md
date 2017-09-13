@@ -8,7 +8,7 @@ instead, see the README in the parent directory to make a binary using
 a Docker container. Only keep reading if you want to work on the build
 scripts.
 
-On Ubuntu, follow these steps:
+On Ubuntu, follow these steps as a regular user:
 
 ### Install mingw
 
@@ -21,22 +21,9 @@ our DLLs.
 
 ### Install `jhbuild`
 
-I installed from git, but the packaged `jhbuild` might work. 
+`jhbuild` runs the whole builds process. Install the packaged version:
 
-Follow these instructions:
-
-https://developer.gnome.org/jhbuild/3.12/getting-started.html.en
-
-Briefly:
-
-	sudo apt-get install yelp-tools
-	git clone git://git.gnome.org/jhbuild
-	cd jhbuild
-	./autogen.sh
-	make
-	make install
-
-add `~/.local/bin` to your `PATH`.
+	sudo apt-get install jhbuild
 
 ### Check the build variables
 
@@ -45,7 +32,7 @@ settings are right.
 
 ### Fetch binary dependencies
 
-We use some binary zips for basic things like `libz` and `gettext`. Run:
+We use a couple of binary zips for basic things like `libz`. Run:
 
 	./get-win64-packages.sh
 
@@ -62,7 +49,7 @@ Run:
 	export BASEDIR=$(pwd)
 	jhbuild --file=jhbuildrc build --nodeps libvips-all
 
-BASEDIR is needed by vips.modules to pass the toolchain file to cmake. 
+`BASEDIR` is needed by vips.modules to pass the toolchain file to cmake. 
 It will take a while. 
 
 You can use libvips-web and libvips-transform as targets too.
