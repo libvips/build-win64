@@ -19,8 +19,8 @@ vips_site=https://github.com/jcupitt/libvips/releases/download/v$vips_version.$v
 if [ ! -d $linux_install ]; then
   ( mkdir native-linux-build; cd native-linux-build; \
     vips_name=$vips_package-$vips_version.$vips_minor_version
-    wget $vips_site/${vips_name}.tar.gz &&
-    tar xf ${vips_name}.tar.gz &&
+    wget $vips_site-alpha4/${vips_name}-3.tar.gz &&
+    tar xf ${vips_name}-3.tar.gz &&
     cd $vips_name &&
     CFLAGS="-g" CXXFLAGS="-g" ./configure --prefix=$basedir/vips &&
     make &&

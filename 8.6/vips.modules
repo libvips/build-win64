@@ -230,8 +230,8 @@
     >
     <branch
       repo="sourceforge"
-      module="expat/expat-2.2.0.tar.bz2"
-      version="2.2.0"
+      module="expat/expat-2.2.3.tar.bz2"
+      version="2.2.3"
     />
     <dependencies>
       <dep package="gettext"/>
@@ -263,8 +263,8 @@
     >
     <branch 
       repo="freedesktop.org"
-      module="harfbuzz/release/harfbuzz-1.4.6.tar.bz2"
-      version="1.4.6"
+      module="harfbuzz/release/harfbuzz-1.4.8.tar.bz2"
+      version="1.4.8"
     />
     <dependencies>
       <dep package="gettext"/>
@@ -284,8 +284,8 @@
     >
     <branch 
       repo="freedesktop.org"
-      module="fontconfig/release/fontconfig-2.12.1.tar.gz"
-      version="2.12.1"
+      module="fontconfig/release/fontconfig-2.12.4.tar.gz"
+      version="2.12.4"
     />
     <dependencies>
       <dep package="gettext"/>
@@ -314,8 +314,8 @@
     >
     <branch
       repo="sourceforge"
-      module="libpng/libpng-1.6.25.tar.gz"
-      version="1.6.25"
+      module="libpng/libpng-1.6.30.tar.gz"
+      version="1.6.30"
     />
     <dependencies>
       <dep package="gettext"/>
@@ -359,8 +359,8 @@
     >
     <branch
       repo="gnome"
-      module="librsvg/2.40/librsvg-2.40.17.tar.xz"
-      version="2.40.17">
+      module="librsvg/2.40/librsvg-2.40.18.tar.xz"
+      version="2.40.18">
     </branch>
     <dependencies>
       <dep package="glib"/>
@@ -491,8 +491,8 @@
     >
     <branch
       repo="sourceforge"
-      module="libjpeg-turbo/1.5.1/libjpeg-turbo-1.5.1.tar.gz"
-      version="1.5.1"
+      module="libjpeg-turbo/1.5.2/libjpeg-turbo-1.5.2.tar.gz"
+      version="1.5.2"
       >
       <patch file="patches/libjpeg-turbo-bool.patch" strip="1"/>
     </branch>
@@ -539,8 +539,8 @@
     >
     <branch
       repo="tiff"
-      module="tiff-4.0.7.tar.gz"
-      version="4.0.7"
+      module="tiff-4.0.8.tar.gz"
+      version="4.0.8"
       >
     </branch>
     <dependencies>
@@ -594,8 +594,8 @@
     >
     <branch
       repo="orc"
-      module="orc-0.4.26.tar.xz"
-      version="0.4.26"
+      module="orc-0.4.27.tar.xz"
+      version="0.4.27"
     />
     <dependencies>
       <dep package="gettext"/>
@@ -656,8 +656,8 @@
   <autotools id="glib" autogenargs="--with-pcre=internal">
     <branch
       repo="gnome"
-      module="glib/2.52/glib-2.52.0.tar.xz"
-      version="2.52.0"
+      module="glib/2.53/glib-2.53.5.tar.xz"
+      version="2.53.5"
       >
     </branch>
     <dependencies>
@@ -703,8 +703,8 @@
   <autotools id="pango" autogenargs="--with-cairo --disable-introspection">
     <branch
       repo="gnome"
-      module="pango/1.40/pango-1.40.5.tar.xz"
-      version="1.40.5"
+      module="pango/1.40/pango-1.40.10.tar.xz"
+      version="1.40.10"
       >
     </branch>
     <dependencies>

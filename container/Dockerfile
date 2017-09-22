@@ -27,6 +27,7 @@ RUN \
     xmlto \
     wget \
     yelp-tools \
+    gperf \
     libglib2.0-dev \
     wine \
     wine1.6-amd64
