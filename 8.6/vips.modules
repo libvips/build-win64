@@ -309,6 +309,11 @@
     </dependencies>
   </autotools>
 
+  <!-- The latest libpng v1.6.32 doesn't play nicely with cairo so I've only
+       pushed it as far as v1.6.30
+
+    -->
+
   <autotools id="libpng" 
     autogen-sh="configure"
     >
