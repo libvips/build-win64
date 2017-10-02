@@ -275,10 +275,6 @@
     </dependencies>
   </autotools>
 
-  <!-- 2.12.3 fails with a gperf problem
-
-    -->
-
   <autotools id="fontconfig"
     autogen-sh="configure"
     >
@@ -854,7 +850,7 @@
 
     <branch
       repo="vips"
-      module="v8.6.0-alpha4/vips-8.6.0-3.tar.gz"
+      module="v8.6.0-alpha5/vips-8.6.0-4.tar.gz"
       version="8.6.0"
       checkoutdir="8.6.0"
       >
@@ -899,7 +895,7 @@
 
     <branch
       repo="vips"
-      module="v8.6.0-alpha4/vips-8.6.0-3.tar.gz"
+      module="v8.6.0-alpha5/vips-8.6.0-4.tar.gz"
       version="8.6.0"
       checkoutdir="8.6.0"
       >
@@ -933,7 +929,7 @@
 
     <branch
       repo="vips"
-      module="v8.6.0-alpha4/vips-8.6.0-3.tar.gz"
+      module="v8.6.0-alpha5/vips-8.6.0-4.tar.gz"
       version="8.6.0"
       checkoutdir="8.6.0"
       >
