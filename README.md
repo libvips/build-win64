@@ -43,12 +43,6 @@ directly in `jhbuild`.
 
 ### TODO
 
-- linux build needs to include all components that the win build has, so pdf,
-  svg, gif etc. 
-
-  maybe we should just include a good typelib? and Vips.py too? much simpler
-  than trying to build a complete linux install in the container
-
 - could turn on orc now
 
 - try installing win64 python and running it under wine so we can run the test

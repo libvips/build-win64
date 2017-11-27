@@ -850,7 +850,7 @@
 
     <branch
       repo="vips"
-      module="v8.6.0-alpha5/vips-8.6.0-4.tar.gz"
+      module="v8.6.0-beta1/vips-8.6.0-beta1.tar.gz"
       version="8.6.0"
       checkoutdir="8.6.0"
       >
@@ -895,7 +895,7 @@
 
     <branch
       repo="vips"
-      module="v8.6.0-alpha5/vips-8.6.0-4.tar.gz"
+      module="v8.6.0-beta1/vips-8.6.0-beta1.tar.gz"
       version="8.6.0"
       checkoutdir="8.6.0"
       >
@@ -929,7 +929,7 @@
 
     <branch
       repo="vips"
-      module="v8.6.0-alpha5/vips-8.6.0-4.tar.gz"
+      module="v8.6.0-beta1/vips-8.6.0-beta1.tar.gz"
       version="8.6.0"
       checkoutdir="8.6.0"
       >
