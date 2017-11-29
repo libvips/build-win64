@@ -230,8 +230,8 @@
     >
     <branch
       repo="sourceforge"
-      module="expat/expat-2.2.3.tar.bz2"
-      version="2.2.3"
+      module="expat/expat-2.2.5.tar.bz2"
+      version="2.2.5"
     />
     <dependencies>
       <dep package="gettext"/>
@@ -244,8 +244,8 @@
     >
     <branch 
       repo="nongnu"
-      module="freetype/freetype-2.8.tar.gz"
-      version="2.8.0"
+      module="freetype/freetype-2.8.1.tar.gz"
+      version="2.8.1"
     />
     <dependencies>
       <dep package="gettext"/>
@@ -263,8 +263,8 @@
     >
     <branch 
       repo="freedesktop.org"
-      module="harfbuzz/release/harfbuzz-1.4.8.tar.bz2"
-      version="1.4.8"
+      module="harfbuzz/release/harfbuzz-1.7.1.tar.bz2"
+      version="1.7.1"
     />
     <dependencies>
       <dep package="gettext"/>
@@ -280,8 +280,8 @@
     >
     <branch 
       repo="freedesktop.org"
-      module="fontconfig/release/fontconfig-2.12.4.tar.gz"
-      version="2.12.4"
+      module="fontconfig/release/fontconfig-2.12.6.tar.gz"
+      version="2.12.6"
     />
     <dependencies>
       <dep package="gettext"/>
@@ -297,8 +297,8 @@
     >
     <branch
       repo="xmlsoft"
-      module="libxml2/libxml2-2.9.4.tar.gz"
-      version="2.9.4"
+      module="libxml2/libxml2-2.9.7.tar.gz"
+      version="2.9.7"
     />
     <dependencies>
       <dep package="gettext"/>
@@ -413,8 +413,8 @@
     >
     <branch
       repo="sourceforge"
-      module="lcms/lcms2-2.8.tar.gz"
-      version="2.8"
+      module="lcms/lcms2-2.9.tar.gz"
+      version="2.9"
     />
     <dependencies>
       <dep package="gettext"/>
@@ -540,8 +540,8 @@
     >
     <branch
       repo="tiff"
-      module="tiff-4.0.8.tar.gz"
-      version="4.0.8"
+      module="tiff-4.0.9.tar.gz"
+      version="4.0.9"
       >
     </branch>
     <dependencies>
@@ -595,8 +595,8 @@
     >
     <branch
       repo="orc"
-      module="orc-0.4.27.tar.xz"
-      version="0.4.27"
+      module="orc-0.4.28.tar.xz"
+      version="0.4.28"
     />
     <dependencies>
       <dep package="gettext"/>
@@ -654,11 +654,15 @@
 
     -->
 
+  <!-- glib 2.55.0 is available but the g_stat refactoring is slightly buggy
+  https://github.com/GNOME/glib/commit/53bd6a359f2c48e7729f89902097c892c8aa6fea
+  -->
+
   <autotools id="glib" autogenargs="--with-pcre=internal">
     <branch
       repo="gnome"
-      module="glib/2.53/glib-2.53.5.tar.xz"
-      version="2.53.5"
+      module="glib/2.54/glib-2.54.2.tar.xz"
+      version="2.54.2"
       >
     </branch>
     <dependencies>
@@ -704,8 +708,8 @@
   <autotools id="pango" autogenargs="--with-cairo --disable-introspection">
     <branch
       repo="gnome"
-      module="pango/1.40/pango-1.40.10.tar.xz"
-      version="1.40.10"
+      module="pango/1.40/pango-1.40.14.tar.xz"
+      version="1.40.14"
       >
     </branch>
     <dependencies>
@@ -746,8 +750,8 @@
     >
     <branch
       repo="gnome"
-      module="libgsf/1.14/libgsf-1.14.41.tar.xz"
-      version="1.14.41">
+      module="libgsf/1.14/libgsf-1.14.42.tar.xz"
+      version="1.14.42">
     </branch>
     <dependencies>
       <dep package="glib"/>
