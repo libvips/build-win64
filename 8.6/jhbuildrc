@@ -88,7 +88,6 @@ os.environ['CFLAGS']   = '-mms-bitfields -march=x86-64 -I'+prefix+'/include'
 os.environ['CPPFLAGS'] = '-I'+prefix+'/include'
 os.environ['CXXFLAGS'] = '-mms-bitfields -march=x86-64'
 os.environ['ARFLAGS']  = '-ar rcs'
-os.environ['INSTALL']  = os.path.expanduser('~/.local/bin/install-check')
 
 # turn on the optimiser
 os.environ['CFLAGS']   += ' -O2 '
