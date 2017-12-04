@@ -3,10 +3,10 @@
 This set of scripts build a 64-bit vips binary for Windows. They won't
 make a 64-bit nip2, see `build-win32` for that.
 
-You don't need to follow these instructions to make a Windows binary,
-instead, see the README in the parent directory to make a binary using
+You don't need to follow these instructions to make a Windows binary.
+Instead, see the README in the parent directory to make a binary using
 a Docker container. Only keep reading if you want to work on the build
-scripts.
+scripts themselves. 
 
 On Ubuntu, follow these steps as a regular user:
 
