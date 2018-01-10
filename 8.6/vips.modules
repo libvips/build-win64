@@ -244,8 +244,8 @@
     >
     <branch 
       repo="nongnu"
-      module="freetype/freetype-2.8.1.tar.gz"
-      version="2.8.1"
+      module="freetype/freetype-2.9.tar.gz"
+      version="2.9"
     />
     <dependencies>
       <dep package="gettext"/>
@@ -263,8 +263,8 @@
     >
     <branch 
       repo="freedesktop.org"
-      module="harfbuzz/release/harfbuzz-1.7.1.tar.bz2"
-      version="1.7.1"
+      module="harfbuzz/release/harfbuzz-1.7.4.tar.bz2"
+      version="1.7.4"
     />
     <dependencies>
       <dep package="gettext"/>
@@ -354,14 +354,15 @@
     </dependencies>
   </autotools>
 
+  <!-- librsvg v2.40.20 has a small memory leak, v2.42.0+ requires Rust toolchain -->
   <autotools id="librsvg" 
     supports-non-srcdir-builds="no"
     autogenargs="--disable-introspection --disable-pixbuf-loader">
     >
     <branch
       repo="gnome"
-      module="librsvg/2.40/librsvg-2.40.18.tar.xz"
-      version="2.40.18">
+      module="librsvg/2.40/librsvg-2.40.19.tar.xz"
+      version="2.40.19">
     </branch>
     <dependencies>
       <dep package="glib"/>
@@ -492,8 +493,8 @@
     >
     <branch
       repo="sourceforge"
-      module="libjpeg-turbo/1.5.2/libjpeg-turbo-1.5.2.tar.gz"
-      version="1.5.2"
+      module="libjpeg-turbo/1.5.3/libjpeg-turbo-1.5.3.tar.gz"
+      version="1.5.3"
       >
       <patch file="patches/libjpeg-turbo-bool.patch" strip="1"/>
     </branch>
@@ -692,8 +693,8 @@
   <autotools id="cairo" autogenargs="--disable-gl --disable-xlib --disable-xcb --enable-win32 --without-x --disable-ps --disable-script">
     <branch 
       repo="cairo" 
-      module="cairo-1.14.8.tar.xz"
-      version="1.14.8"
+      module="cairo-1.14.12.tar.xz"
+      version="1.14.12"
       >
     </branch>
     <dependencies>
