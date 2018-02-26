@@ -201,6 +201,28 @@
     href="ftp://xmlsoft.org/"
   />
 
+  <repository
+    type="tarball"
+    name="zlib"
+    href="https://zlib.net/"
+  />
+
+  <!-- zlib will make libzlib.dll, but we want libz.dll ... patch CMakeLists.txt
+
+    -->
+
+  <cmake id="zlib"
+    cmakeargs="-DAMD64=ON -DCMAKE_TOOLCHAIN_FILE=$BASEDIR/Toolchain-x86_64-w64-mingw32.cmake"
+    >
+    <branch
+      repo="zlib"
+      module="zlib-1.2.11.tar.gz"
+      version="1.2.11"
+      >
+      <patch file="patches/zlib-name.patch" strip="1"/>
+    </branch>
+  </cmake>
+
   <autotools id="libiconv" 
     autogen-sh="configure"
     >
@@ -234,6 +256,7 @@
       version="2.2.5"
     />
     <dependencies>
+      <dep package="zlib"/>
       <dep package="gettext"/>
     </dependencies>
   </autotools>
@@ -319,6 +342,7 @@
       version="1.6.30"
     />
     <dependencies>
+      <dep package="zlib"/>
       <dep package="gettext"/>
     </dependencies>
   </autotools>
@@ -337,6 +361,7 @@
       version="5.1.4"
     />
     <dependencies>
+      <dep package="zlib"/>
       <dep package="gettext"/>
     </dependencies>
   </autotools>
@@ -418,6 +443,7 @@
       version="2.9"
     />
     <dependencies>
+      <dep package="zlib"/>
       <dep package="gettext"/>
     </dependencies>
   </autotools>
@@ -470,6 +496,7 @@
       >
     </branch>
     <dependencies>
+      <dep package="zlib"/>
       <dep package="cairo"/>
       <dep package="gdk-pixbuf"/>
       <dep package="openjpeg"/>
@@ -499,6 +526,7 @@
       <patch file="patches/libjpeg-turbo-bool.patch" strip="1"/>
     </branch>
     <dependencies>
+      <dep package="zlib"/>
       <dep package="gettext"/>
     </dependencies>
   </autotools>
@@ -522,6 +550,7 @@
       <patch file="patches/libexif-0.6-shutter.patch" strip="1"/>
     </branch>
     <dependencies>
+      <dep package="zlib"/>
       <dep package="gettext"/>
     </dependencies>
   </autotools>
@@ -546,6 +575,7 @@
       >
     </branch>
     <dependencies>
+      <dep package="zlib"/>
       <dep package="libjpeg-turbo"/>
     </dependencies>
   </autotools>
@@ -621,12 +651,14 @@
       >
     </branch>
     <dependencies>
+      <dep package="zlib"/>
       <dep package="gettext"/>
     </dependencies>
   </autotools>
 
   <autotools id="webp" 
     autogen-sh="configure"
+    autogenargs="--enable-libwebpmux --enable-libwebpdemux"
     >
     <branch
       repo="webp"
@@ -635,6 +667,10 @@
       >
     </branch>
     <dependencies>
+      <dep package="libpng"/>
+      <dep package="libjpeg-turbo"/>
+      <dep package="giflib"/>
+      <dep package="tiff"/>
       <dep package="gettext"/>
     </dependencies>
   </autotools>
@@ -667,6 +703,7 @@
       >
     </branch>
     <dependencies>
+      <dep package="zlib"/>
       <dep package="libffi"/>
       <dep package="gettext"/>
     </dependencies>
@@ -680,6 +717,7 @@
       >
     </branch>
     <dependencies>
+      <dep package="zlib"/>
       <dep package="gettext"/>
     </dependencies>
   </autotools>
@@ -777,6 +815,7 @@
       version="2.2.0"
     />
     <dependencies>
+      <dep package="zlib"/>
       <dep package="gettext"/>
     </dependencies>
   </autotools>
@@ -827,6 +866,7 @@
     />
     <dependencies>
       <dep package="gettext"/>
+      <dep package="zlib"/>
     </dependencies>
   </autotools>
 

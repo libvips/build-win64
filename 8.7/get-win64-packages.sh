@@ -6,6 +6,9 @@ mkdir -p $installdir
 mkdir -p $packagedir
 mkdir -p $checkoutdir
 
+# we no longer download any pre-compiled packages, but keep this stuff around
+# for now
+
 while read PACKAGE; do
   if [[ $PACKAGE =~ [^/]*$ ]]; then
     NAME=$BASH_REMATCH
@@ -20,7 +23,5 @@ while read PACKAGE; do
     echo "I don't know what to do with $PACKAGE as it doesn't match anything I am looking for."
   fi
 done << EOF
-dependencies/zlib_1.2.5-1_win64.zip
-dependencies/zlib-dev_1.2.5-1_win64.zip 
 EOF
 
