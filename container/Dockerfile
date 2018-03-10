@@ -1,8 +1,7 @@
 FROM ubuntu:xenial
 MAINTAINER Lovell Fuller <npm@lovell.info>
 
-# croco needs gtk-doc
-# we use wine to test the build
+# basic stuff
 RUN \
   echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections && \
   dpkg --add-architecture i386 && \
@@ -11,16 +10,22 @@ RUN \
     build-essential \
     jhbuild \
     libtool \
-    gtk-doc-tools \
+    intltool \
     mingw-w64 \
     mingw-w64-tools \
     nasm \
-    cmake \
+    cmake 
+
+# strange extras for certain packages
+# croco needs gtk-doc
+# we use wine to test the build
+RUN \
+  apt-get install -y \
+    gtk-doc-tools \
     xmlto \
     wget \
     yelp-tools \
     gperf \
-    libglib2.0-dev \
     wine \
     wine1.6-amd64
 
