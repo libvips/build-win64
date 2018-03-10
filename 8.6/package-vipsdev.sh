@@ -24,7 +24,19 @@ echo cleaning build $repackagedir
 
 ( cd $repackagedir/bin ; strip --strip-unneeded *.exe )
 
-( cd $repackagedir/share ; rm -rf aclocal glib-2.0 gtk-2.0 info jhbuild man xml themes )
+# we only want dynamic libs, so get rid of everything that is not .dll.a
+( cd $repackagedir/lib ; mkdir ../poop ; mv *.dll.a ../poop ; rm *.a ; mv ../poop/* . ; rmdir ../poop )
+
+# libvips does not distribute cmake files
+rm -rf $repackagedir/lib/cmake
+rm -rf $repackagedir/lib/openjpeg-*
+
+# lib gettext is only for maintenance
+rm -rf $repackagedir/lib/gettext
+
+rm $repackagedir/lib/xml2Conf.sh
+
+( cd $repackagedir/share ; rm -rf aclocal glib-2.0 gtk-2.0 info jhbuild man xml themes doc bash-completion gdb gettext* thumbnailers )
 
 ( cd $repackagedir/share/gtk-doc/html ; rm -rf * )
 
@@ -49,6 +61,11 @@ cp $gccmingwlibdir/*.dll $repackagedir/bin
 # don't need these two
 ( cd $repackagedir/bin ; rm -f libgomp*.dll )
 ( cd $repackagedir/bin ; rm -f libgfortran*.dll )
+
+# fetch from git
+for i in COPYING ChangeLog README.md AUTHORS; do 
+  cp $checkoutdir/vips-$vips_version.$vips_micro_version/$i $repackagedir 
+done
 
 # ... and test we startup OK
 echo -n "testing build ... "
