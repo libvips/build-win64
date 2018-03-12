@@ -9,6 +9,12 @@ echo copying install area $installdir
 rm -rf $repackagedir
 cp -r $installdir $repackagedir
 
+# some mingws will write some libs to lib64, strangely
+if [ -d $repackagedir/lib64 ]; then
+	cp -r $repackagedir/lib64/* $repackagedir/lib
+	rm -rf $repackagedir/lib64
+fi
+
 echo generating import files 
 
 ./gendeflibs.sh
@@ -21,6 +27,9 @@ echo cleaning build $repackagedir
 ( cd $repackagedir/bin ; mkdir ../poop ; mv *vips* ../poop ; mv *.dll ../poop ; rm -f * ; mv ../poop/* . ; rmdir ../poop )
 
 ( cd $repackagedir/bin ; rm -f vips-8.* )
+
+# no need for this
+rm $repackagedir/bin/vipsprofile
 
 ( cd $repackagedir/bin ; strip --strip-unneeded *.exe )
 
@@ -62,7 +71,6 @@ cp $gccmingwlibdir/*.dll $repackagedir/bin
 ( cd $repackagedir/bin ; rm -f libgomp*.dll )
 ( cd $repackagedir/bin ; rm -f libgfortran*.dll )
 
-# fetch from git
 for i in COPYING ChangeLog README.md AUTHORS; do 
   cp $checkoutdir/vips-$vips_version.$vips_micro_version/$i $repackagedir 
 done
