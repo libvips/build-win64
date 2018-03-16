@@ -2,7 +2,7 @@ packages
 checkout
 inst
 .*.swp
-vips-dev*.zip
 native-linux-build
-vips-dev-*
+vips-dev*
+vips-dbg*
 vips/

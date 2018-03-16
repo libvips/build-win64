@@ -216,7 +216,7 @@
     -->
 
   <cmake id="zlib"
-    cmakeargs="-D AMD64=ON -D CMAKE_TOOLCHAIN_FILE=$BASEDIR/Toolchain-x86_64-w64-mingw32.cmake"
+    cmakeargs="-D CMAKE_TOOLCHAIN_FILE=$BASEDIR/Toolchain-x86_64-w64-mingw32.cmake"
     use-ninja="False"
     >
     <branch
