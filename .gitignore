@@ -6,3 +6,7 @@ native-linux-build
 vips-dev*
 vips-dbg*
 vips/
+.wget-hsts
+.cache
+.local
+.wine

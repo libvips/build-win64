@@ -29,7 +29,5 @@ RUN \
     wine \
     wine1.6-amd64
 
-# Create a default, non-root 'build' user
-RUN groupadd -r build && useradd -m -g build build
+# the versioned subdirectory is mounted here
 WORKDIR /data
-USER build

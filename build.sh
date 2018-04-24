@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ $# -lt 1 ]; then
   echo "Usage: $0 VERSION [DEPS]"
@@ -9,6 +9,11 @@ if [ $# -lt 1 ]; then
 fi
 VERSION="$1"
 DEPS="${2:-all}"
+
+if [ x$(whoami) == x"root" ]; then
+  echo "Please don't run as root -- instead, add yourself to the docker group"
+  exit 1
+fi
 
 if ! type docker > /dev/null; then
   echo "Please install docker"
@@ -21,11 +26,15 @@ docker pull ubuntu:xenial
 # Create a machine image with all the required build tools pre-installed
 docker build -t libvips-build-win64 container
 
-# Run build scripts inside container, with versioned subdirectory 
-# mounted at /data
+# Run build scripts inside container
+# 	- inheriting the currnet uid and gid
+# 	- versioned subdirectory mounted at /data
+# 	- set ~ to /data as well, since jhbuild likes to cache stuff there
 docker run --rm -t \
+	-u $(id -u):$(id -g) \
 	-v $PWD/$VERSION:/data \
 	-e "DEPS=$DEPS" \
+	-e "HOME=/data" \
 	libvips-build-win64 \
 	sh -c ./build.sh
 

@@ -11,25 +11,15 @@ extra stuff on the host machine, and everything is automated.
 
 First, install docker:
 
-```
-sudo apt-get install docker.io
-```
+https://docs.docker.com/engine/installation/
 
-On some Ubuntu installs, docker can fail to see DNS thanks to some interaction
-with NetworkManager. If it can't download stuff, edit `/etc/default/docker`
-and uncomment the line:
+Make sure you're in the docker group so you can run docker without needing
+`sudo`.
 
-```
-DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4"
-```
-
-And restart docker.
-
-Then pass the build instructions to the docker service. You have to run
-this as root.
+Now run the build script:
 
 ```
-sudo ./build.sh 8.3
+$ ./build.sh 8.6
 ```
 
 At the end of the build, the script will display the paths of all the
@@ -38,7 +28,7 @@ this process can take an hour, even on a powerful machine.
 
 ### Build with `jhbuild`
 
-See the README in the 8.1 subdirectory for instructions for building
+See the README in the 8.x subdirectory for instructions for building
 directly in `jhbuild`.
 
 ### TODO
