@@ -216,7 +216,7 @@
     -->
 
   <cmake id="zlib"
-    cmakeargs="-D AMD64=ON -D CMAKE_TOOLCHAIN_FILE=$BASEDIR/Toolchain-x86_64-w64-mingw32.cmake"
+    cmakeargs="-D CMAKE_TOOLCHAIN_FILE=$BASEDIR/Toolchain-x86_64-w64-mingw32.cmake"
     use-ninja="False"
     >
     <branch
@@ -786,6 +786,8 @@
 
        openslide needs the pdf backend
 
+       node canvas needs a cairo with SVG support, so don't disable-svg
+
     -->
 
   <autotools id="cairo" 
@@ -806,7 +808,7 @@
     </dependencies>
   </autotools>
 
-  <!-- 1.41 uses fribidi, which does not yes cross-compile well
+  <!-- pango 1.41 uses fribidi, which does not yet cross-compile well
 
     -->
 
@@ -830,7 +832,7 @@
   <!-- don't build from git ... it does some introspection to build the test
        suite build files, which won't work in cross-compiler mode
 
-       disable run-time loading of modules, it's difficult when cross-compiling
+       disable run-time loading of modules .. it's difficult when cross-compiling
 
        2.36.6 fails to build with an error in the thumbnailer
 
