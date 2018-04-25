@@ -1,12 +1,19 @@
 # build-win64
 
 Build a libvips binary for 64-bit Windows. The resulting zip file includes all
-necessary DLLs and EXEs.
+necessary DLLs, EXEs, headers, etc.
+
+Only use this repo if you MUST build libvips yourself. There are pre-compiled
+binaries for libvips here:
+
+https://github.com/jcupitt/libvips/releases
+
+One of those would probably be a better idea. 
 
 ### Build with docker
 
 Docker will make a light-weight virtual machine containing all the
-tools you need and build inside that. You won't need to install any
+tools you need and then build inside that. You won't need to install any
 extra stuff on the host machine, and everything is automated.
 
 First, install docker:
