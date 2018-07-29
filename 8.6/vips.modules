@@ -618,7 +618,7 @@
     -->
 
   <autotools id="tiff" 
-    autogen-sh="configure"
+    autogen-sh="./configure"
     autogenargs="--disable-cxx"
     >
     <branch

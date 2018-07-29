@@ -207,12 +207,17 @@
     href="https://zlib.net/"
   />
 
-  <!-- zlib will make libzlib.dll, but we want libz.dll ... patch CMakeLists.txt
+  <!-- the zlib configure is a bit basic and does not support
+       cross-compiling, so use cmake 
+
+       zlib will make libzlib.dll, but we want libz.dll so we must 
+       patch CMakeLists.txt
 
     -->
 
   <cmake id="zlib"
-    cmakeargs="-DAMD64=ON -DCMAKE_TOOLCHAIN_FILE=$BASEDIR/Toolchain-x86_64-w64-mingw32.cmake"
+    cmakeargs="-D CMAKE_TOOLCHAIN_FILE=$BASEDIR/Toolchain-x86_64-w64-mingw32.cmake"
+    use-ninja="False"
     >
     <branch
       repo="zlib"
@@ -228,8 +233,8 @@
     >
     <branch
       repo="gnu"
-      module="libiconv/libiconv-1.14.tar.gz"
-      version="1.14"
+      module="libiconv/libiconv-1.15.tar.gz"
+      version="1.15"
     />
   </autotools>
 
@@ -286,8 +291,8 @@
     >
     <branch 
       repo="freedesktop.org"
-      module="harfbuzz/release/harfbuzz-1.7.4.tar.bz2"
-      version="1.7.4"
+      module="harfbuzz/release/harfbuzz-1.7.6.tar.bz2"
+      version="1.7.6"
     />
     <dependencies>
       <dep package="gettext"/>
@@ -295,6 +300,23 @@
       <dep package="freetype"/>
       <dep package="cairo"/>
       <dep package="fontconfig"/>
+    </dependencies>
+  </autotools>
+
+  <!-- I had a go, but it seems a little immature still and fails with a 
+       range of errors
+
+    -->
+
+  <autotools id="fribidi"
+    >
+    <branch 
+      repo="github"
+      module="fribidi/fribidi/archive/v1.0.1.tar.gz"
+      version="1.0.1"
+      checkoutdir="fribidi-1.0.1"
+    />
+    <dependencies>
     </dependencies>
   </autotools>
 
@@ -314,14 +336,18 @@
     </dependencies>
   </autotools>
 
+  <!-- no longer needed by libvips, but some of the deps need it
+
+    -->
+
   <autotools id="libxml2" 
     autogen-sh="configure"
     autogenargs="--without-python">
     >
     <branch
       repo="xmlsoft"
-      module="libxml2/libxml2-2.9.7.tar.gz"
-      version="2.9.7"
+      module="libxml2/libxml2-2.9.8.tar.gz"
+      version="2.9.8"
     />
     <dependencies>
       <dep package="gettext"/>
@@ -379,7 +405,11 @@
     </dependencies>
   </autotools>
 
-  <!-- librsvg v2.40.20 has a small memory leak, v2.42.0+ requires Rust toolchain -->
+  <!-- librsvg v2.40.20 has a small memory leak, v2.42.0+ requires 
+       Rust toolchain 
+
+    -->
+
   <autotools id="librsvg" 
     supports-non-srcdir-builds="no"
     autogenargs="--disable-introspection --disable-pixbuf-loader">
@@ -396,6 +426,31 @@
       <dep package="pango"/>
     </dependencies>
   </autotools>
+
+  <!-- here's one for poppler 0.62, but it fails cross-compiling with a
+       mysterious c++ link error, probably the same thing that affects 
+       current openjpeg, see below
+
+  <cmake id="poppler"
+    cmakeargs="-D CMAKE_TOOLCHAIN_FILE=$BASEDIR/Toolchain-x86_64-w64-mingw32.cmake -D FONT_CONFIGURATION=win32 -D ENABLE_XPDF_HEADERS=OFF -D ENABLE_SPLASH=OFF -D ENABLE_GLIB=ON -D ENABLE_UTILS=OFF -D ENABLE_CPP=OFF"
+    use-ninja="False"
+    >
+    <pkg-config>poppler-glib.pc</pkg-config>
+    <branch repo="poppler.freedesktop.org"
+            module="poppler-0.62.0.tar.xz"
+            version="0.62.0"
+      />
+    <dependencies>
+      <dep package="cairo"/>
+      <dep package="openjpeg"/>
+      <dep package="glib"/>
+    </dependencies>
+    <after>
+      <dep package="gdk-pixbuf"/>
+    </after>
+  </cmake>
+
+    -->
 
   <autotools id="poppler" 
     autogenargs="--with-font-configuration=win32 --disable-xpdf-headers --disable-splash-output --enable-poppler-glib --disable-gtk-test --disable-utils --disable-poppler-cpp" 
@@ -422,17 +477,13 @@
     >
     <branch
       repo="fftw"
-      module="fftw-3.3.4.tar.gz"
-      version="3.3.4"
+      module="fftw-3.3.7.tar.gz"
+      version="3.3.7"
     />
     <dependencies>
       <dep package="gettext"/>
     </dependencies>
   </autotools>
-
-  <!-- 2.8 was uploaded as a tar, not a tar.gz ... use 2.7 for now
-
-    -->
 
   <autotools id="lcms" 
     autogen-sh="configure"
@@ -452,10 +503,15 @@
 
        BASEDIR is set for us by build.sh
 
-       -->
+       2.1.1 works
+
+       2.3 fails with a mysterious c++ error
+
+    -->
 
   <cmake id="openjpeg"
     cmakeargs="-DBUILD_PKGCONFIG_FILES=ON -DCMAKE_TOOLCHAIN_FILE=$BASEDIR/Toolchain-x86_64-w64-mingw32.cmake"
+    use-ninja="False"
     >
     <branch 
       repo="openjpeg"
@@ -471,15 +527,15 @@
 
   <!-- starting with openslide-3.4.0, sqlite3 is a requirement.
 
-       -->
+    -->
 
   <autotools id="sqlite3"
     autogen-sh="configure"
     >
     <branch
       repo="sqlite3"
-      module="2016/sqlite-autoconf-3130000.tar.gz"
-      version="3.13.0"
+      module="2018/sqlite-autoconf-3220000.tar.gz"
+      version="3.22.0"
     />
     <dependencies>
       <dep package="gettext"/>
@@ -562,7 +618,7 @@
 
        disable the C++ API for now, we don't use it anyway
 
-       -->
+    -->
 
   <autotools id="tiff" 
     autogen-sh="./configure"
@@ -593,6 +649,8 @@
 
        6.9.3-10 and later use intsafe.h which does not yet have an 
        implementation on mingw
+
+       7.x is much slower (though libvips does support it)
 
        since we are forced to use a very old version, don't use vips + IM on 
        Windows if you are at all concerned about security :( 
@@ -645,8 +703,8 @@
     >
     <branch
       repo="cfitsio"
-      module="cfitsio3390.tar.gz"
-      version="3.39"
+      module="cfitsio3430.tar.gz"
+      version="3.43"
       checkoutdir="cfitsio"
       >
     </branch>
@@ -662,8 +720,8 @@
     >
     <branch
       repo="webp"
-      module="libwebp-0.6.0.tar.gz"
-      version="0.6.0"
+      module="libwebp-0.6.1.tar.gz"
+      version="0.6.1"
       >
     </branch>
     <dependencies>
@@ -695,7 +753,9 @@
   https://github.com/GNOME/glib/commit/53bd6a359f2c48e7729f89902097c892c8aa6fea
   -->
 
-  <autotools id="glib" autogenargs="--with-pcre=internal">
+  <autotools id="glib" 
+    autogenargs="--with-pcre=internal"
+    >
     <branch
       repo="gnome"
       module="glib/2.54/glib-2.54.2.tar.xz"
@@ -709,7 +769,9 @@
     </dependencies>
   </autotools>
 
-  <autotools id="pixman" autogen-sh="configure">
+  <autotools id="pixman" 
+    autogen-sh="configure"
+    >
     <branch 
       repo="cairo" 
       module="pixman-0.34.0.tar.gz"
@@ -726,9 +788,13 @@
 
        openslide needs the pdf backend
 
+       node canvas needs a cairo with SVG support, so don't disable-svg
+
     -->
 
-  <autotools id="cairo" autogenargs="--disable-gl --disable-xlib --disable-xcb --enable-win32 --without-x --disable-ps --disable-script">
+  <autotools id="cairo" 
+    autogenargs="--disable-gl --disable-xlib --disable-xcb --enable-win32 --without-x --disable-ps --disable-script"
+    >
     <branch 
       repo="cairo" 
       module="cairo-1.14.12.tar.xz"
@@ -744,7 +810,13 @@
     </dependencies>
   </autotools>
 
-  <autotools id="pango" autogenargs="--with-cairo --disable-introspection">
+  <!-- pango 1.41 uses fribidi, which does not yet cross-compile well
+
+    -->
+
+  <autotools id="pango" 
+    autogenargs="--with-cairo --disable-introspection"
+    >
     <branch
       repo="gnome"
       module="pango/1.40/pango-1.40.14.tar.xz"
@@ -763,6 +835,8 @@
        suite build files, which won't work in cross-compiler mode
 
        disable run-time loading of modules, it's difficult when cross-compiling
+
+       2.36.6 fails to build with an error in the thumbnailer
 
     -->
 
@@ -794,7 +868,6 @@
     </branch>
     <dependencies>
       <dep package="glib"/>
-      <dep package="gdk-pixbuf"/>
     </dependencies>
   </autotools>
 
@@ -842,22 +915,26 @@
     >
     <branch 
       repo="hdf5"
-      module="hdf5-1.8.16.tar.gz"
-      version="1.8.16"
+      module="hdf5-1.10.1.tar.gz"
+      version="1.10.1"
     />
     <dependencies>
       <dep package="gettext"/>
+      <dep package="zlib"/>
     </dependencies>
   </autotools>
 
   <!-- use matio without hdf5, see above
 
-       1.5.8 fails to build in a cross-compiler
+       1.5.6 works
+
+       1.5.8 and 1.5.11 fail to build in a cross-compiler
 
     -->
 
   <autotools id="matio"
     autogen-sh="configure"
+    autogenargs="--disable-static"
     >
     <branch 
       repo="sourceforge"
@@ -895,9 +972,8 @@
 
     <branch
       repo="vips"
-      module="v8.7.0/vips-8.7.0.tar.gz"
+      module="v8.7.0-rc1/vips-8.7.0.tar.gz"
       version="8.7.0"
-      checkoutdir="8.7.0"
       >
     </branch>
 
@@ -940,7 +1016,7 @@
 
     <branch
       repo="vips"
-      module="v8.7.0/vips-8.7.0.tar.gz"
+      module="v8.7.0-rc1/vips-8.7.0.tar.gz"
       version="8.7.0"
       checkoutdir="8.7.0"
       >
@@ -974,7 +1050,7 @@
 
     <branch
       repo="vips"
-      module="v8.7.0/vips-8.7.0.tar.gz"
+      module="v8.7.0-rc1/vips-8.7.0.tar.gz"
       version="8.7.0"
       checkoutdir="8.7.0"
       >
