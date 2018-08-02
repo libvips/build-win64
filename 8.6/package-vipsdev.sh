@@ -1,19 +1,24 @@
 #!/bin/bash
 
+# set -x
+set -e
+
+if [ $# -lt 1 ]; then
+  echo "Usage: $0 [DEPS]"
+  echo "Build libvips for win"
+  echo "DEPS is the group of dependencies to build libvips with,"
+  echo "    defaults to 'all'"
+  exit 1
+fi
+
 . variables.sh
 
-# set -x
+deps="${1:-all}"
 
 echo copying install area $installdir
 
 rm -rf $repackagedir
 cp -r $installdir $repackagedir
-
-# some mingws will write some libs to lib64, strangely
-if [ -d $repackagedir/lib64 ]; then
-	cp -r $repackagedir/lib64/* $repackagedir/lib
-	rm -rf $repackagedir/lib64
-fi
 
 echo generating import files 
 
@@ -23,31 +28,25 @@ echo cleaning build $repackagedir
 
 ( cd $repackagedir ; rm -rf _jhbuild )
 
+for i in COPYING ChangeLog README.md AUTHORS; do 
+  ( cp $basedir/$checkoutdir/vips-$vips_version.$vips_minor_version/$i $repackagedir )
+done
+
+# rename all the $mingw_prefix-animate etc. without the prefix
+( cd $repackagedir/bin ; for i in $mingw_prefix*; do mv $i `echo $i | sed s/$mingw_prefix//`; done )
+
 # clean /bin 
 ( cd $repackagedir/bin ; mkdir ../poop ; mv *vips* ../poop ; mv *.dll ../poop ; rm -f * ; mv ../poop/* . ; rmdir ../poop )
 
 ( cd $repackagedir/bin ; rm -f vips-8.* )
 
-# no need for this
-rm $repackagedir/bin/vipsprofile
-
 ( cd $repackagedir/bin ; strip --strip-unneeded *.exe )
 
-# we only want dynamic libs, so get rid of everything that is not .dll.a
-( cd $repackagedir/lib ; mkdir ../poop ; mv *.dll.a ../poop ; rm *.a ; mv ../poop/* . ; rmdir ../poop )
+( cd $repackagedir/bin ; strip --strip-unneeded *.dll )
 
-# libvips does not distribute cmake files
-rm -rf $repackagedir/lib/cmake
-rm -rf $repackagedir/lib/openjpeg-*
+( cd $repackagedir/share ; rm -rf aclocal glib-2.0 gtk-2.0 info jhbuild man xml themes )
 
-# lib gettext is only for maintenance
-rm -rf $repackagedir/lib/gettext
-
-rm $repackagedir/lib/xml2Conf.sh
-
-( cd $repackagedir/share ; rm -rf aclocal glib-2.0 gtk-2.0 info jhbuild man xml themes doc bash-completion gdb gettext* thumbnailers )
-
-( cd $repackagedir/share/gtk-doc/html ; rm -rf * )
+( cd $repackagedir/share/gtk-doc/html ; mkdir ../poop ; mv libvips ../poop ; rm -rf * ; mv ../poop/* . ; rmdir ../poop )
 
 # we only support GB and de locales 
 ( cd $repackagedir/share/locale ; mkdir ../poop ; mv en_GB de ../poop ; rm -rf * ; mv ../poop/* . ; rmdir ../poop )
@@ -71,20 +70,7 @@ cp $gccmingwlibdir/*.dll $repackagedir/bin
 ( cd $repackagedir/bin ; rm -f libgomp*.dll )
 ( cd $repackagedir/bin ; rm -f libgfortran*.dll )
 
-for i in COPYING ChangeLog README.md AUTHORS; do 
-  cp $checkoutdir/vips-$vips_version.$vips_micro_version/$i $repackagedir 
-done
-
-# ... and test we startup OK
-echo -n "testing build ... "
-wine $repackagedir/bin/vips.exe --help > /dev/null
-if [ "$?" -ne "0" ]; then
-  echo WARNING: vips.exe failed to run
-else
-  echo ok
-fi
-
-zipfile=$vips_package-dev-w64-$DEPS-$vips_version.$vips_micro_version.zip
+zipfile=$vips_package-dev-w64-$deps-$vips_version.$vips_minor_version.zip
 echo creating $zipfile
 rm -f $zipfile
 zip -r -qq $zipfile $repackagedir

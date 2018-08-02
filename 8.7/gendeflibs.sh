@@ -6,6 +6,7 @@
 dlltool=${mingw_prefix}dlltool
 
 # set -x
+set -e
 
 cd $repackagedir
 
@@ -24,12 +25,12 @@ for dllfile in bin/*.dll; do
 
 	if [ ! -f lib/$defname ]; then
 		echo generating lib/$defname file for $base
-		gendef - $dllfile > lib/$defname
+		gendef - $dllfile > lib/$defname 2> /dev/null
 	fi
 
 	if [ ! -f lib/$libname ]; then
 		echo generating lib/$libname file for $base
-		$dlltool -d lib/$defname -l lib/$libname -D $dllfile
+		$dlltool -d lib/$defname -l lib/$libname -D $dllfile 2> /dev/null
 	fi
 done
 
