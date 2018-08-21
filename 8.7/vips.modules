@@ -78,7 +78,7 @@
   <repository 
     type="tarball" 
     name="cairo" 
-    href="http://www.cairographics.org/releases/"
+    href="http://www.cairographics.org/snapshots/"
     />
 
   <repository 
@@ -257,8 +257,8 @@
     >
     <branch
       repo="sourceforge"
-      module="expat/expat-2.2.5.tar.bz2"
-      version="2.2.5"
+      module="expat/expat-2.2.6.tar.bz2"
+      version="2.2.6"
     />
     <dependencies>
       <dep package="zlib"/>
@@ -272,8 +272,8 @@
     >
     <branch 
       repo="nongnu"
-      module="freetype/freetype-2.9.tar.gz"
-      version="2.9"
+      module="freetype/freetype-2.9.1.tar.gz"
+      version="2.9.1"
     />
     <dependencies>
       <dep package="gettext"/>
@@ -291,8 +291,8 @@
     >
     <branch 
       repo="freedesktop.org"
-      module="harfbuzz/release/harfbuzz-1.7.6.tar.bz2"
-      version="1.7.6"
+      module="harfbuzz/release/harfbuzz-1.8.7.tar.bz2"
+      version="1.8.7"
     />
     <dependencies>
       <dep package="gettext"/>
@@ -720,8 +720,8 @@
     >
     <branch
       repo="webp"
-      module="libwebp-0.6.1.tar.gz"
-      version="0.6.1"
+      module="libwebp-1.0.0.tar.gz"
+      version="1.0.0"
       >
     </branch>
     <dependencies>
@@ -758,8 +758,8 @@
     >
     <branch
       repo="gnome"
-      module="glib/2.54/glib-2.54.2.tar.xz"
-      version="2.54.2"
+      module="glib/2.54/glib-2.54.3.tar.xz"
+      version="2.54.3"
       >
     </branch>
     <dependencies>
@@ -797,8 +797,8 @@
     >
     <branch 
       repo="cairo" 
-      module="cairo-1.14.12.tar.xz"
-      version="1.14.12"
+      module="cairo-1.15.12.tar.xz"
+      version="1.15.12"
       >
     </branch>
     <dependencies>
@@ -972,7 +972,7 @@
 
     <branch
       repo="vips"
-      module="v8.7.0-rc1/vips-8.7.0.tar.gz"
+      module="v8.7.0-rc2/vips-8.7.0.tar.gz"
       version="8.7.0"
       >
     </branch>
@@ -1016,7 +1016,7 @@
 
     <branch
       repo="vips"
-      module="v8.7.0-rc1/vips-8.7.0.tar.gz"
+      module="v8.7.0-rc2/vips-8.7.0.tar.gz"
       version="8.7.0"
       checkoutdir="8.7.0"
       >
@@ -1028,13 +1028,13 @@
       <dep package="giflib"/>
       <dep package="glib"/>
       <dep package="pango"/>
-      <dep package="fftw3"/>
       <dep package="libgsf"/>
       <dep package="libjpeg-turbo"/>
       <dep package="tiff"/>
       <dep package="lcms"/>
       <dep package="libexif"/>
       <dep package="libpng"/>
+      <dep package="orc-0.4"/>
     </dependencies>
   </autotools>
 
@@ -1050,7 +1050,7 @@
 
     <branch
       repo="vips"
-      module="v8.7.0-rc1/vips-8.7.0.tar.gz"
+      module="v8.7.0-rc2/vips-8.7.0.tar.gz"
       version="8.7.0"
       checkoutdir="8.7.0"
       >
