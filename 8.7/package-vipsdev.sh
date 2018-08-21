@@ -29,11 +29,8 @@ echo cleaning build $repackagedir
 ( cd $repackagedir ; rm -rf _jhbuild )
 
 for i in COPYING ChangeLog README.md AUTHORS; do 
-  ( cp $basedir/$checkoutdir/vips-$vips_version.$vips_minor_version/$i $repackagedir )
+  ( cp $basedir/$checkoutdir/$vips_version.$vips_minor_version/$i $repackagedir )
 done
-
-# rename all the $mingw_prefix-animate etc. without the prefix
-( cd $repackagedir/bin ; for i in $mingw_prefix*; do mv $i `echo $i | sed s/$mingw_prefix//`; done )
 
 # clean /bin 
 ( cd $repackagedir/bin ; mkdir ../poop ; mv *vips* ../poop ; mv *.dll ../poop ; rm -f * ; mv ../poop/* . ; rmdir ../poop )
