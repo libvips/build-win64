@@ -14,7 +14,7 @@ On Ubuntu, follow these steps as a regular user:
 
 You need the mingw cross-compiler to generate 64-bit Windows binaries.
 
-	sudo apt-get install mingw-w64 mingw-w64-tools
+	sudo apt install mingw-w64 mingw-w64-tools
 
 The `tools` package provides `gendef`, which we use to generate .def files for
 our DLLs.
@@ -30,22 +30,11 @@ our DLLs.
 Have a look in `variables.sh` and make sure the version numbers and other
 settings are right. 
 
-### Fetch binary dependencies
-
-We use a couple of binary zips for basic things like `libz`. Run:
-
-	./get-win64-packages.sh
-
-To fetch the zips. Run:
-
-	./unpack.sh
-
-To wipe `inst/` and reinitialize it from the zips.
-
 ### Build
 
 Run:
 
+  ./clean.sh
 	export BASEDIR=$(pwd)
 	jhbuild --file=jhbuildrc build --nodeps libvips-all
 
@@ -54,7 +43,7 @@ It will take a while.
 
 You can use libvips-web and libvips-transform as targets too.
 
-## Package
+### Package
 
 Run:
 
@@ -62,6 +51,6 @@ Run:
 
 To make a nice `vips-dev.zip` package. 
 
-## TODO
+### TODO
 
 * more testing

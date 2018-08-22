@@ -309,6 +309,7 @@
     -->
 
   <autotools id="fribidi"
+    autogen-sh="configure"
     >
     <branch 
       repo="github"
@@ -392,7 +393,10 @@
     </dependencies>
   </autotools>
 
-  <autotools id="libcroco" supports-non-srcdir-builds="no">
+  <autotools id="libcroco" 
+    autogen-sh="configure"
+    supports-non-srcdir-builds="no"
+    >
     <pkg-config>libcroco-0.6.pc</pkg-config>
     <branch
       repo="gnome"
@@ -411,6 +415,7 @@
     -->
 
   <autotools id="librsvg" 
+    autogen-sh="configure"
     supports-non-srcdir-builds="no"
     autogenargs="--disable-introspection --disable-pixbuf-loader">
     >
@@ -453,6 +458,7 @@
     -->
 
   <autotools id="poppler" 
+    autogen-sh="configure"
     autogenargs="--with-font-configuration=win32 --disable-xpdf-headers --disable-splash-output --enable-poppler-glib --disable-gtk-test --disable-utils --disable-poppler-cpp" 
     makeargs="POPPLER_GLIB_DISABLE_DEPRECATED="
     >
@@ -572,7 +578,8 @@
     -->
 
   <autotools id="libjpeg-turbo" 
-    autogen-sh="configure --without-turbojpeg"
+    autogen-sh="configure"
+    autogenargs="--without-turbojpeg"
     >
     <branch
       repo="sourceforge"
@@ -621,7 +628,7 @@
     -->
 
   <autotools id="tiff" 
-    autogen-sh="./configure"
+    autogen-sh="configure"
     autogenargs="--disable-cxx"
     >
     <branch
@@ -733,7 +740,9 @@
     </dependencies>
   </autotools>
 
-  <autotools id="libffi">
+  <autotools id="libffi"
+    autogen-sh="configure"
+    >
     <branch
       repo="sourceware"
       module="libffi/libffi-3.2.1.tar.gz"
@@ -754,6 +763,7 @@
   -->
 
   <autotools id="glib" 
+    autogen-sh="configure"
     autogenargs="--with-pcre=internal"
     >
     <branch
@@ -793,6 +803,7 @@
     -->
 
   <autotools id="cairo" 
+    autogen-sh="configure"
     autogenargs="--disable-gl --disable-xlib --disable-xcb --enable-win32 --without-x --disable-ps --disable-script"
     >
     <branch 
@@ -815,6 +826,7 @@
     -->
 
   <autotools id="pango" 
+    autogen-sh="configure"
     autogenargs="--with-cairo --disable-introspection"
     >
     <branch
@@ -841,6 +853,7 @@
     -->
 
   <autotools id="gdk-pixbuf"
+    autogen-sh="configure"
     autogenargs="--disable-introspection --disable-installed-tests --disable-always-build-tests --disable-glibtest --disable-modules --with-included-loaders 'png,jpeg'"
     >
     <branch
