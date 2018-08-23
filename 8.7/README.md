@@ -47,9 +47,9 @@ You can use libvips-web and libvips-transform as targets too.
 
 Run:
 
-	./package-vipsdev.sh 
+	./package-vipsdev.sh web
 
-To make a nice `vips-dev.zip` package. 
+To make a nice `vips-dev-w64-web-x.y.z.zip` package. 
 
 ### TODO
 
