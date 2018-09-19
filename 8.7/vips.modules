@@ -985,7 +985,7 @@
 
     <branch
       repo="vips"
-      module="v8.7.0-rc3/vips-8.7.0-rc3.tar.gz"
+      module="v8.7.0/vips-8.7.0.tar.gz"
       version="8.7.0"
       >
     </branch>
@@ -1029,7 +1029,7 @@
 
     <branch
       repo="vips"
-      module="v8.7.0-rc3/vips-8.7.0-rc3.tar.gz"
+      module="v8.7.0/vips-8.7.0.tar.gz"
       version="8.7.0"
       checkoutdir="8.7.0"
       >
@@ -1063,7 +1063,7 @@
 
     <branch
       repo="vips"
-      module="v8.7.0-rc3/vips-8.7.0-rc3.tar.gz"
+      module="v8.7.0/vips-8.7.0.tar.gz"
       version="8.7.0"
       checkoutdir="8.7.0"
       >
