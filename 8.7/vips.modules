@@ -244,8 +244,8 @@
     >
     <branch
       repo="gnu"
-      module="gettext/gettext-0.19.8.tar.xz"
-      version="0.19.8"
+      module="gettext/gettext-0.19.8.1.tar.xz"
+      version="0.19.8.1"
     />
     <dependencies>
       <dep package="libiconv"/>
