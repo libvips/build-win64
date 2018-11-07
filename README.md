@@ -6,7 +6,7 @@ necessary DLLs, EXEs, headers, etc.
 Only use this repo if you MUST build libvips yourself. There are pre-compiled
 binaries for libvips here:
 
-https://github.com/jcupitt/libvips/releases
+https://github.com/libvips/libvips/releases
 
 One of those would probably be a better idea. 
 
@@ -26,7 +26,7 @@ Make sure you're in the docker group so you can run docker without needing
 Now run the build script:
 
 ```
-$ ./build.sh 8.6
+$ ./build.sh 8.7
 ```
 
 At the end of the build, the script will display the paths of all the
