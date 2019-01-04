@@ -784,8 +784,8 @@
     >
     <branch 
       repo="cairo" 
-      module="pixman-0.34.0.tar.gz"
-      version="0.34.0"
+      module="pixman-0.33.6.tar.gz"
+      version="0.33.6"
       >
     </branch>
     <dependencies>
@@ -876,8 +876,8 @@
     >
     <branch
       repo="gnome"
-      module="libgsf/1.14/libgsf-1.14.42.tar.xz"
-      version="1.14.42">
+      module="libgsf/1.14/libgsf-1.14.45.tar.xz"
+      version="1.14.45">
     </branch>
     <dependencies>
       <dep package="glib"/>
@@ -985,8 +985,8 @@
 
     <branch
       repo="vips"
-      module="v8.7.2/vips-8.7.2.tar.gz"
-      version="8.7.2"
+      module="v8.7.3/vips-8.7.3.tar.gz"
+      version="8.7.3"
       >
     </branch>
 
@@ -1029,9 +1029,8 @@
 
     <branch
       repo="vips"
-      module="v8.7.2/vips-8.7.2.tar.gz"
-      version="8.7.2"
-      checkoutdir="8.7.2"
+      module="v8.7.3/vips-8.7.3.tar.gz"
+      version="8.7.3"
       >
     </branch>
 
@@ -1063,9 +1062,8 @@
 
     <branch
       repo="vips"
-      module="v8.7.2/vips-8.7.2.tar.gz"
-      version="8.7.2"
-      checkoutdir="8.7.2"
+      module="v8.7.3/vips-8.7.3.tar.gz"
+      version="8.7.3"
       >
       <patch file="file:///home/john/develop/transform-7.32/transform.patch" strip="1"/>
     </branch>

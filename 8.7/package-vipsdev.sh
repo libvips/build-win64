@@ -29,7 +29,7 @@ echo cleaning build $repackagedir
 ( cd $repackagedir ; rm -rf _jhbuild )
 
 for i in COPYING ChangeLog README.md AUTHORS; do 
-  ( cp $basedir/$checkoutdir/$vips_version.$vips_minor_version/$i $repackagedir )
+  ( cp $basedir/$checkoutdir/$vips_package-$vips_version.$vips_minor_version/$i $repackagedir )
 done
 
 # clean /bin 
