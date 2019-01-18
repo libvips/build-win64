@@ -78,7 +78,7 @@
   <repository 
     type="tarball" 
     name="cairo" 
-    href="http://www.cairographics.org/snapshots/"
+    href="http://www.cairographics.org/releases/"
     />
 
   <repository 
@@ -291,8 +291,8 @@
     >
     <branch 
       repo="freedesktop.org"
-      module="harfbuzz/release/harfbuzz-1.8.7.tar.bz2"
-      version="1.8.7"
+      module="harfbuzz/release/harfbuzz-2.3.0.tar.bz2"
+      version="2.3.0"
     />
     <dependencies>
       <dep package="gettext"/>
@@ -347,8 +347,8 @@
     >
     <branch
       repo="xmlsoft"
-      module="libxml2/libxml2-2.9.8.tar.gz"
-      version="2.9.8"
+      module="libxml2/libxml2-2.9.9.tar.gz"
+      version="2.9.9"
     />
     <dependencies>
       <dep package="gettext"/>
@@ -633,8 +633,8 @@
     >
     <branch
       repo="tiff"
-      module="tiff-4.0.9.tar.gz"
-      version="4.0.9"
+      module="tiff-4.0.10.tar.gz"
+      version="4.0.10"
       >
     </branch>
     <dependencies>
@@ -727,8 +727,8 @@
     >
     <branch
       repo="webp"
-      module="libwebp-1.0.0.tar.gz"
-      version="1.0.0"
+      module="libwebp-1.0.2.tar.gz"
+      version="1.0.2"
       >
     </branch>
     <dependencies>
@@ -784,8 +784,8 @@
     >
     <branch 
       repo="cairo" 
-      module="pixman-0.33.6.tar.gz"
-      version="0.33.6"
+      module="pixman-0.36.0.tar.gz"
+      version="0.36.0"
       >
     </branch>
     <dependencies>
@@ -808,8 +808,8 @@
     >
     <branch 
       repo="cairo" 
-      module="cairo-1.15.12.tar.xz"
-      version="1.15.12"
+      module="cairo-1.16.0.tar.xz"
+      version="1.16.0"
       >
     </branch>
     <dependencies>
@@ -985,8 +985,8 @@
 
     <branch
       repo="vips"
-      module="v8.7.3/vips-8.7.3.tar.gz"
-      version="8.7.3"
+      module="v8.7.4/vips-8.7.4.tar.gz"
+      version="8.7.4"
       >
     </branch>
 
@@ -1029,8 +1029,8 @@
 
     <branch
       repo="vips"
-      module="v8.7.3/vips-8.7.3.tar.gz"
-      version="8.7.3"
+      module="v8.7.4/vips-8.7.4.tar.gz"
+      version="8.7.4"
       >
     </branch>
 
@@ -1062,8 +1062,8 @@
 
     <branch
       repo="vips"
-      module="v8.7.3/vips-8.7.3.tar.gz"
-      version="8.7.3"
+      module="v8.7.4/vips-8.7.4.tar.gz"
+      version="8.7.4"
       >
       <patch file="file:///home/john/develop/transform-7.32/transform.patch" strip="1"/>
     </branch>
