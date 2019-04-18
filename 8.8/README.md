@@ -29,7 +29,7 @@ our DLLs.
 
 Various other packages required during the build:
 
-	sudo apt install cmake nasm gperf
+	sudo apt install cmake nasm gperf intltool
 
 ### Check the build variables
 
