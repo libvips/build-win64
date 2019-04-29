@@ -89,6 +89,18 @@
 
   <repository 
     type="tarball"
+    name="libheif"
+    href="https://github.com/strukturag/libheif/releases/download/"
+  />
+
+  <repository 
+    type="tarball"
+    name="libde265"
+    href="https://github.com/strukturag/libde265/releases/download/"
+  />
+
+  <repository 
+    type="tarball"
     name="sourceware"
     href="ftp://sourceware.org/pub/"
   />
@@ -960,6 +972,47 @@
     </dependencies>
   </autotools>
 
+  <autotools id="libde265"
+    autogen-sh="configure"
+    autogenargs="--disable-static"
+    >
+    <branch 
+      repo="libde265"
+      module="v1.0.3/libde265-1.0.3.tar.gz"
+      version="1.0.3"
+    />
+    <dependencies>
+      <dep package="gettext"/>
+    </dependencies>
+  </autotools>
+
+  <!-- don't list libx265 as a dep, it's GPL (part of ffmpeg)
+
+       libde265 (decode) is LGPL
+
+       1.3.2 and 1.4.0 fails to compile with some kind of mutex issue, needs 
+       investigating
+
+    -->
+
+  <autotools id="libheif"
+    autogen-sh="configure"
+    autogenargs="--disable-static"
+    >
+    <branch 
+      repo="libheif"
+      module="v1.4.0/libheif-1.4.0.tar.gz"
+      version="1.4.0"
+    />
+    <dependencies>
+      <dep package="gettext"/>
+      <dep package="libjpeg-turbo"/>
+      <dep package="libpng"/>
+      <dep package="gdk-pixbuf"/>
+      <dep package="libde265"/>
+    </dependencies>
+  </autotools>
+
   <!-- cfitsio cannot make a .dll with mingw, only include it if you must 
        have it
 
@@ -985,8 +1038,9 @@
 
     <branch
       repo="vips"
-      module="v8.8.0/vips-8.8.0.tar.gz"
+      module="v8.8.0-rc1/vips-8.8.0-rc1a.tar.gz"
       version="8.8.0"
+      checkoutdir="vips-8.8.0"
       >
     </branch>
 
@@ -1029,8 +1083,9 @@
 
     <branch
       repo="vips"
-      module="v8.8.0/vips-8.8.0.tar.gz"
+      module="v8.8.0-rc1/vips-8.8.0-rc1a.tar.gz"
       version="8.8.0"
+      checkoutdir="vips-8.8.0"
       >
     </branch>
 
@@ -1046,7 +1101,6 @@
       <dep package="lcms"/>
       <dep package="libexif"/>
       <dep package="libpng"/>
-      <dep package="orc-0.4"/>
     </dependencies>
   </autotools>
 
@@ -1062,8 +1116,9 @@
 
     <branch
       repo="vips"
-      module="v8.8.0/vips-8.8.0.tar.gz"
+      module="v8.8.0-rc1/vips-8.8.0-rc1a.tar.gz"
       version="8.8.0"
+      checkoutdir="vips-8.8.0"
       >
       <patch file="file:///home/john/develop/transform-7.32/transform.patch" strip="1"/>
     </branch>
