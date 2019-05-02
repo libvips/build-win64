@@ -15,9 +15,6 @@ fi
 
 deps="${1:-all}"
 
-# export this to vips.modules ... cmake needs it
-export BASEDIR=$basedir
-
 ./clean.sh && \
   jhbuild --file=jhbuildrc build --nodeps libvips-$deps && \
   ./package-vipsdev.sh $deps

@@ -34,12 +34,6 @@ addpath('PKG_CONFIG_PATH', os.path.join(prefix, 'lib', 'pkgconfig'))
 # or it'll see host .pc files
 os.environ['PKG_CONFIG_LIBDIR'] = os.path.join(prefix, 'lib', 'pkgconfig')
 
-# .pc files from binary packages have something like 
-#     prefix=c:/devel/target/f3002dbeeb43fd4ea5385fb6fa4de06f
-# at the top ... we need to override this prefix with our own
-# don't use "--define-variable=prefix=/poop", some pkg-config get confused
-os.environ['PKG_CONFIG'] = '/usr/bin/pkg-config --define-variable prefix=' + prefix
-
 # comment these two out or we get pkg-config errors, investigate
 # pkg-config will always search $libdir, usually /usr/lib/pkgconfig -- we want
 # to stop it seeing any host packages, so turn this off
@@ -50,16 +44,18 @@ os.environ['PKG_CONFIG'] = '/usr/bin/pkg-config --define-variable prefix=' + pre
 # mingw-w64 on debian uses this:
 mingw_tool_prefix = 'x86_64-w64-mingw32-'
 
+# Don't export the CC and CXX enviroment variables, see:
+# https://github.com/mesonbuild/meson/issues/3782#issuecomment-399736252
 mingw_tools = {
 	'ADDR2LINE': 'addr2line',
 	'AS': 'as', 
-	'CC': 'gcc-win32', 
-	'CPP': 'cpp-win32',
+#	'CC': 'gcc', 
+	'CPP': 'cpp',
 	'CPPFILT': 'c++filt', 
-	'CXX': 'g++-win32',
+#	'CXX': 'g++', 
 	'DLLTOOL': 'dlltool', 
 	'DLLWRAP': 'dllwrap',
-	'GCOV': 'gcov-win32', 
+	'GCOV': 'gcov', 
 	'LD': 'ld', 
 	'NM': 'nm',
 	'OBJCOPY': 'objcopy', 
@@ -130,6 +126,10 @@ makeargs = '-j1'
 
 use_ninja = False
 
-# we want to force in-tree builds ... some packages (like matio) break with 
-# out of tree builds
-buildroot = None
+# we want to force out of tree builds ... some packages (like harfbuzz)
+# break with in-tree builds
+buildroot = os.path.join(basedir, 'build')
+
+# override command line arguments
+cmakeargs = '-DCMAKE_TOOLCHAIN_FILE=' + basedir + '/Toolchain-x86_64-w64-mingw32.cmake'
+mesonargs = '--cross-file ' + basedir + '/x86_64-w64-mingw32-crossfile.meson'

@@ -40,8 +40,6 @@ directly in `jhbuild`.
 
 ### TODO
 
-- could turn on orc now
-
 - try installing win64 python and running it under wine so we can run the test
   suite? who knows, it could work
 

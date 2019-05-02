@@ -27,7 +27,7 @@ repackagedir=$vips_package-dev-$vips_version
 # if VIPSHOME is defined, take that, otherwise we're probaly a containerized
 # build, look for it here
 if [ $VIPSHOME ]; then
-	linux_install="$VIPSHOME"
+  linux_install="$VIPSHOME"
 else
-	linux_install=$basedir/vips
+  linux_install=$basedir/vips
 fi
