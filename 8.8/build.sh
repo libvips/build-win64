@@ -15,6 +15,6 @@ fi
 
 deps="${1:-all}"
 
-./clean.sh && \
-  jhbuild --file=jhbuildrc build --nodeps libvips-$deps && \
-  ./package-vipsdev.sh $deps
+./clean.sh \
+  && jhbuild --file=jhbuildrc build --nodeps libvips-$deps \
+  && ./package-vipsdev.sh $deps

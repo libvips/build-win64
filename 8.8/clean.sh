@@ -3,13 +3,18 @@
 . variables.sh
 
 echo "Wiping install area $installdir"
-
 rm -rf $installdir
 mkdir $installdir
 
 echo "Cleaning checkout area $checkoutdir"
-
 for i in $checkoutdir/*; do
+  if [ -d $i ]; then
+    rm -rf $i
+  fi
+done
+
+echo "Cleaning build area $builddir"
+for i in $builddir/*; do
   if [ -d $i ]; then
     rm -rf $i
   fi

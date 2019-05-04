@@ -153,10 +153,15 @@
     name="nongnu"
     href="http://download.savannah.nongnu.org/releases/"/>
 
+  <!-- we download from the github repo in the hope that releases will be 
+       deleted less often
+
+    -->
+
   <repository
     type="tarball"
     name="magick"
-    href="ftp://ftp.imagemagick.org/pub/ImageMagick/releases/"/>
+    href="https://github.com/ImageMagick/ImageMagick6/archive/"/>
 
   <repository
     type="tarball"
@@ -582,8 +587,9 @@
     autogenargs="--without-x --without-lzma --without-modules --without-openexr --without-heic --without-gvc --without-lqr --without-magick-plus-plus --disable-largefile --without-rsvg --without-zlib --disable-openmp">
     <branch
       repo="magick"
-      module="ImageMagick-6.9.10-42.tar.xz"
-      version="6.9.10-42"/>
+      module="6.9.10-43.tar.gz"
+      version="6.9.10-43"
+      checkoutdir="ImageMagick6-6.9.10-43"/>
     <dependencies>
       <dep package="lcms"/>
       <dep package="fftw3"/>
@@ -951,7 +957,7 @@
       module="v8.8.0-rc1/vips-8.8.0-rc1a.tar.gz"
       version="8.8.0"
       checkoutdir="vips-8.8.0">
-      <patch file="file:///home/john/develop/transform-7.32/transform.patch" strip="1"/>
+      <patch file="patches/transform.patch" strip="1"/>
     </branch>
 
     <dependencies>

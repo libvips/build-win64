@@ -77,8 +77,7 @@ echo "Copying packaging files"
 
 cp $basedir/$checkoutdir/$vips_package-$vips_version.$vips_minor_version/{AUTHORS,ChangeLog,COPYING,README.md} $repackagedir
 
-echo "Creating $zipfile"
-
 zipfile=$vips_package-dev-w64-$deps-$vips_version.$vips_minor_version.zip
+echo "Creating $zipfile"
 rm -f $zipfile
 zip -r -qq $zipfile $repackagedir

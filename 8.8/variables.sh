@@ -19,6 +19,9 @@ installdir=inst
 # jhbuild will download sources to here 
 checkoutdir=checkout
 
+# do out of tree builds here
+builddir=build
+
 mingw_prefix=x86_64-w64-mingw32-
 
 repackagedir=$vips_package-dev-$vips_version

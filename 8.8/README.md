@@ -21,9 +21,10 @@ our DLLs.
 
 ### Install `jhbuild`
 
-`jhbuild` runs the whole builds process. Install the packaged version:
+You need to install jhbuild from source to get meson support. 
+You need to install pe-util from source as well. 
 
-	sudo apt install jhbuild
+Check Dockerfile.
 
 ### Other packages 
 
@@ -41,11 +42,7 @@ settings are right.
 Run:
 
   ./clean.sh
-	export BASEDIR=$(pwd)
 	jhbuild --file=jhbuildrc build --nodeps libvips-all
-
-`BASEDIR` is needed by vips.modules to pass the toolchain file to cmake. 
-It will take a while. 
 
 You can use libvips-web and libvips-transform as targets too.
 
@@ -57,6 +54,3 @@ Run:
 
 To make a nice `vips-dev-w64-web-x.y.z.zip` package. 
 
-### TODO
-
-* more testing
