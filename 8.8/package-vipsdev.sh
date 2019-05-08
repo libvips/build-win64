@@ -15,59 +15,69 @@ fi
 
 deps="${1:-all}"
 
-echo copying install area $installdir
-
+# Make sure that the repackaging dir is empty
 rm -rf $repackagedir
-cp -r $installdir $repackagedir
+mkdir -p $repackagedir/bin
 
-echo generating import files 
+echo "Copying libvips and dependencies"
+
+# Copy libvips and dependencies with pe-util
+/usr/local/bin/peldd \
+  $installdir/bin/libvips-cpp-42.dll \
+  --clear-path \
+  --path $installdir/bin \
+  --path /usr/lib/gcc/x86_64-w64-mingw32/*-posix \
+  --path /usr/x86_64-w64-mingw32/lib/ \
+  -a \
+  -w USERENV.dll \
+  -w USP10.dll \
+  -w DNSAPI.dll \
+  -w IPHLPAPI.DLL \
+  -w MSIMG32.DLL | xargs cp -t $repackagedir/bin
+
+echo "Copying install area $installdir"
+
+# Follow symlinks when copying /share and /etc
+cp -Lr $installdir/{share,etc} $repackagedir
+
+# Copy everything from /lib and /include, then delete the symlinks
+cp -r $installdir/{lib,include} $repackagedir
+find $repackagedir/{lib,include} -type l -exec rm -f {} \;
+
+echo "Generating import files"
 
 ./gendeflibs.sh
 
-echo cleaning build $repackagedir
+echo "Cleaning unnecessary files / directories"
 
-( cd $repackagedir ; rm -rf _jhbuild )
+# TODO Do we need to keep /share/doc and /share/gtk-doc?
+rm -rf $repackagedir/share/{aclocal,bash-completion,doc,glib-2.0,gtk-2.0,info,gtk-doc,installed-tests,man,thumbnailers,xml}
 
-for i in COPYING ChangeLog README.md AUTHORS; do 
-  ( cp $basedir/$checkoutdir/$vips_package-$vips_version.$vips_minor_version/$i $repackagedir )
-done
+rm -rf $repackagedir/include/cairo
 
-# clean /bin 
-( cd $repackagedir/bin ; mkdir ../poop ; mv *vips* ../poop ; mv *.dll ../poop ; rm -f * ; mv ../poop/* . ; rmdir ../poop )
+rm -rf $repackagedir/lib/{*cairo*,*gdk*,ldscripts}
+find $repackagedir/lib -name "*.la" -exec rm -f {} \;
 
-( cd $repackagedir/bin ; rm -f vips-8.* )
+# We only support GB and de locales
+find $repackagedir/share/locale -mindepth 1 -maxdepth 1 -type d ! -name "en_GB" ! -name "de" -exec rm -rf {} \;
 
-( cd $repackagedir/bin ; strip --strip-unneeded *.exe )
+echo "Copying vips executables"
 
-( cd $repackagedir/bin ; strip --strip-unneeded *.dll )
+# We still need to copy the vips executables
+cp $installdir/bin/{vips,vipsedit,vipsheader,vipsthumbnail}.exe $repackagedir/bin/
+cp $installdir/bin/vipsprofile $repackagedir/bin/
 
-( cd $repackagedir/share ; rm -rf aclocal glib-2.0 gtk-2.0 info jhbuild man xml themes )
+echo "Strip unneeded symbols"
 
-( cd $repackagedir/share/gtk-doc/html ; mkdir ../poop ; mv libvips ../poop ; rm -rf * ; mv ../poop/* . ; rmdir ../poop )
+# Remove all symbols that are not needed
+strip --strip-unneeded $repackagedir/bin/*.exe
+strip --strip-unneeded $repackagedir/bin/*.dll
 
-# we only support GB and de locales 
-( cd $repackagedir/share/locale ; mkdir ../poop ; mv en_GB de ../poop ; rm -rf * ; mv ../poop/* . ; rmdir ../poop )
-( cd $repackagedir/share/locale ; find . -name "gtk*.mo" -exec rm {} \; )
-( cd $repackagedir/share/locale ; find . -name "atk*.mo" -exec rm {} \; )
+echo "Copying packaging files"
 
-( cd $repackagedir/include ; rm -rf atk-1.0 cairo gtk-2.0 libglade-2.0 ) 
-
-( cd $repackagedir ; rm -rf make man manifest src )
-
-( cd $repackagedir/etc ; rm -rf gtk-2.0 gconf )
-
-( cd $repackagedir/lib ; rm -rf *atk* *cairo* *gdk* *gtk*  )
-( cd $repackagedir/lib ; find . -name "*.la" -exec rm {} \; )
-
-# we need to copy the C++ runtime dlls in there
-gccmingwlibdir=/usr/lib/gcc/x86_64-w64-mingw32/*-win32
-cp $gccmingwlibdir/*.dll $repackagedir/bin
-
-# don't need these two
-( cd $repackagedir/bin ; rm -f libgomp*.dll )
-( cd $repackagedir/bin ; rm -f libgfortran*.dll )
+cp $basedir/$checkoutdir/$vips_package-$vips_version.$vips_minor_version/{AUTHORS,ChangeLog,COPYING,README.md} $repackagedir
 
 zipfile=$vips_package-dev-w64-$deps-$vips_version.$vips_minor_version.zip
-echo creating $zipfile
+echo "Creating $zipfile"
 rm -f $zipfile
 zip -r -qq $zipfile $repackagedir

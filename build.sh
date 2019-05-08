@@ -29,27 +29,27 @@ docker pull ubuntu:bionic
 docker build -t libvips-build-win64 container
 
 # Run build scripts inside container
-# 	- inheriting the current uid and gid
-# 	- versioned subdirectory mounted at /data
-# 	- set ~ to /data as well, since jhbuild likes to cache stuff there
+# - inheriting the current uid and gid
+# - versioned subdirectory mounted at /data
+# - set ~ to /data as well, since jhbuild likes to cache stuff there
 docker run --rm -t \
-	-u $(id -u):$(id -g) \
-	-v $PWD/$version:/data \
-	-e "HOME=/data" \
-	libvips-build-win64 \
-	$deps
+  -u $(id -u):$(id -g) \
+  -v $PWD/$version:/data \
+  -e "HOME=/data" \
+  libvips-build-win64 \
+  $deps
 
 # test outside the container ... saves us having to install wine inside docker
-if type wine > /dev/null; then
+if [ -x "$(command -v wine)" ]; then
   echo -n "found wine, testing build ... "
   wine $version/vips-dev-$version/bin/vips.exe --help > /dev/null
   if [ "$?" -ne "0" ]; then
-    echo WARNING: vips.exe failed to run
+    echo "WARNING: vips.exe failed to run"
   else
-    echo ok
+    echo "ok"
   fi
 fi
 
 # List result
-echo successful build
+echo "Successful build"
 ls -al $PWD/$version/*.zip

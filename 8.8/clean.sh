@@ -2,20 +2,25 @@
 
 . variables.sh
 
-echo wiping install area $installdir
-
+echo "Wiping install area $installdir"
 rm -rf $installdir
 mkdir $installdir
 
-echo cleaning checkout area $checkoutdir
-
+echo "Cleaning checkout area $checkoutdir"
 for i in $checkoutdir/*; do
-	if [ -d $i ]; then
-		rm -rf $i
-	fi
+  if [ -d $i ]; then
+    rm -rf $i
+  fi
 done
 
-echo cleaning misc files
+echo "Cleaning build area $builddir"
+for i in $builddir/*; do
+  if [ -d $i ]; then
+    rm -rf $i
+  fi
+done
+
+echo "Cleaning misc files"
 
 rm -f $basedir/*.zip
 rm -f $basedir/*.exe

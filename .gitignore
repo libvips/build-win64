@@ -1,5 +1,6 @@
 packages
 checkout
+build
 inst
 .*.swp
 native-linux-build
