@@ -859,9 +859,6 @@
 
   <!-- the transform patch is some non-LGPL code we paste into binaries
 
-       introspection won't work cross-platform since we can't easily run our
-       objects ... fix this by including the typelibs in the dist later
-
        use -O3 to turn on the auto vectorizer, this gives a useful speedup in
        7.38 and later
 
@@ -874,7 +871,7 @@
 
     <branch
       repo="vips"
-      module="v8.8.0-rc2/vips-8.8.0-rc2.tar.gz"
+      module="v8.8.0-rc3/vips-8.8.0-rc3.tar.gz"
       version="8.8.0"
       checkoutdir="vips-8.8.0"/>
 
@@ -908,6 +905,8 @@
 
        don't include poppler, it's GPL
 
+       don't include fftw, it's GPL
+
        don't include imagemagick to try to keep the surface down
 
        don't include libheif/libde265 since HEVC implementations (of which H.265 is one) have legal problems, see for e.g.:
@@ -923,7 +922,7 @@
 
     <branch
       repo="vips"
-      module="v8.8.0-rc2/vips-8.8.0-rc2.tar.gz"
+      module="v8.8.0-rc3/vips-8.8.0-rc3.tar.gz"
       version="8.8.0"
       checkoutdir="vips-8.8.0"/>
 
@@ -954,7 +953,7 @@
 
     <branch
       repo="vips"
-      module="v8.8.0-rc2/vips-8.8.0-rc2.tar.gz"
+      module="v8.8.0-rc3/vips-8.8.0-rc3.tar.gz"
       version="8.8.0"
       checkoutdir="vips-8.8.0">
       <patch file="patches/transform.patch" strip="1"/>
