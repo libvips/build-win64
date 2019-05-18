@@ -12,9 +12,13 @@ set(BUILD_STATIC OFF CACHE BOOL "BUILD_STATIC")
 set(LIBTYPE SHARED)
 
 ## programs
-SET(CMAKE_C_COMPILER x86_64-w64-mingw32-gcc)
-SET(CMAKE_CXX_COMPILER x86_64-w64-mingw32-g++)
-SET(CMAKE_RC_COMPILER x86_64-w64-mingw32-windres)
+set(CMAKE_C_COMPILER x86_64-w64-mingw32-gcc)
+
+if(NOT CMAKE_CXX_COMPILER)
+  set(CMAKE_CXX_COMPILER x86_64-w64-mingw32-g++)
+endif()
+
+set(CMAKE_RC_COMPILER x86_64-w64-mingw32-windres)
 # Don't set the following variables in our toolchain,
 # because it will break the cfitsio/harfbuzz build, see:
 # https://cmake.org/pipermail/cmake/2010-March/035540.html
@@ -22,7 +26,7 @@ SET(CMAKE_RC_COMPILER x86_64-w64-mingw32-windres)
 # SET(CMAKE_RANLIB x86_64-w64-mingw32-ranlib)
 
 # target environment location
-SET(CMAKE_FIND_ROOT_PATH /data/inst CACHE PATH "List of root paths to search on the filesystem")
+set(CMAKE_FIND_ROOT_PATH /data/inst CACHE PATH "List of root paths to search on the filesystem")
 set(CMAKE_PREFIX_PATH /data/inst CACHE PATH "List of directories specifying installation prefixes to be searched")
 set(CMAKE_INSTALL_PREFIX /data/inst CACHE PATH "Installation Prefix")
 

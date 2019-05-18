@@ -26,7 +26,7 @@ echo "Copying libvips and dependencies"
   $installdir/bin/libvips-cpp-42.dll \
   --clear-path \
   --path $installdir/bin \
-  --path /usr/lib/gcc/x86_64-w64-mingw32/*-posix \
+  --path /usr/lib/gcc/x86_64-w64-mingw32/*-win32 \
   --path /usr/x86_64-w64-mingw32/lib/ \
   -a \
   -w USERENV.dll \

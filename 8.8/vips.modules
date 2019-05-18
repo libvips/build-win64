@@ -402,8 +402,12 @@
     </dependencies>
   </autotools>
 
+  <!-- Build with g++-posix because Poppler needs std::recursive_mutex
+
+    -->
+
   <cmake id="poppler"
-    cmakeargs="-DENABLE_ZLIB=ON -DENABLE_LIBTIFF=ON -DENABLE_LIBPNG=ON -DENABLE_GLIB=ON -DENABLE_CMS='lcms2' -DENABLE_LIBOPENJPEG='openjpeg2' -DENABLE_DCTDECODER='libjpeg' -DFONT_CONFIGURATION=win32 -DENABLE_SPLASH=OFF -DENABLE_CPP=OFF"
+    cmakeargs="-DCMAKE_CXX_COMPILER=/usr/bin/x86_64-w64-mingw32-g++-posix -DENABLE_ZLIB=ON -DENABLE_LIBTIFF=ON -DENABLE_LIBPNG=ON -DENABLE_GLIB=ON -DENABLE_CMS='lcms2' -DENABLE_LIBOPENJPEG='openjpeg2' -DENABLE_DCTDECODER='libjpeg' -DFONT_CONFIGURATION=win32 -DENABLE_SPLASH=OFF -DENABLE_CPP=OFF"
     use-ninja="False">
     <pkg-config>poppler-glib.pc</pkg-config>
     <branch
@@ -658,7 +662,7 @@
     -->
 
   <meson id="glib"
-    mesonargs="-Dforce_posix_threads=true -Dinternal_pcre=true -Diconv='external'">
+    mesonargs="-Dforce_posix_threads=false -Dinternal_pcre=true -Diconv='external'">
     <branch
       repo="gnome"
       module="glib/2.61/glib-2.61.0.tar.xz"
