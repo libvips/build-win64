@@ -4,17 +4,17 @@
 set -e
 
 if [ $# -lt 1 ]; then
-  echo "Usage: $0 [DEPS]"
-  echo "Build libvips for win"
-  echo "DEPS is the group of dependencies to build libvips with,"
-  echo "    defaults to 'all'"
+  echo "Usage: $0 TARGET [VARIANT]"
+  echo "Build jhbuild TARGET for win, eg.:"
+  echo "    $0 libvips web"
   exit 1
 fi
 
+target="${1}"
+variant="${2:all}"
+
 . variables.sh
 
-deps="${1:-all}"
-
 ./clean.sh \
-  && jhbuild --file=jhbuildrc build --nodeps libvips-$deps \
-  && ./package-vipsdev.sh $deps
+   && jhbuild --file=jhbuildrc build --nodeps $target-$variant \
+   && ./package-$target.sh $variant

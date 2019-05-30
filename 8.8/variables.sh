@@ -1,7 +1,8 @@
 # included by all scripts .. edit versions here, and in vips.modules
 
 nip2_package=nip2
-nip2_version=8.6
+nip2_version=8.8
+nip2_minor_version=0
 
 vips_package=vips
 vips_version=8.8

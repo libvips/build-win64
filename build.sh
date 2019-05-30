@@ -2,15 +2,17 @@
 
 set -e
 
-if [ $# -lt 1 ]; then
-  echo "Usage: $0 VERSION [DEPS]"
-  echo "Build libvips for win64 using Docker"
+if [ $# -lt 2 ]; then
+  echo "Usage: $0 VERSION TARGET [VARIANT]"
+  echo "Build jhbuild TARGET for win64 inside a Docker container"
   echo "VERSION is the name of a versioned subdirectory, e.g. 8.1"
-  echo "DEPS is the group of dependencies to build libvips with, defaults to 'all'"
+  echo "TARGET is the jhbuild target, eg. libvips"
+  echo "VARIANT is the target variant, eg. 'all'"
   exit 1
 fi
 version="$1"
-deps="${2:-all}"
+target="$2"
+variant="${3:-all}"
 
 if [ x$(whoami) == x"root" ]; then
   echo "Please don't run as root -- instead, add yourself to the docker group"
@@ -36,20 +38,31 @@ docker run --rm -t \
   -u $(id -u):$(id -g) \
   -v $PWD/$version:/data \
   -e "HOME=/data" \
-  libvips-build-win64 \
-  $deps
+  libvips-build-win64 $target $variant
 
 # test outside the container ... saves us having to install wine inside docker
 if [ -x "$(command -v wine)" ]; then
-  echo -n "found wine, testing build ... "
-  wine $version/vips-dev-$version/bin/vips.exe --help > /dev/null
-  if [ "$?" -ne "0" ]; then
-    echo "WARNING: vips.exe failed to run"
+  echo -n "Found wine, testing build ... "
+  if [ x"$target" = x"libvips" ]; then
+    exe="$version/vips-dev-$version/bin/vips.exe"
+  elif [ x"$target" = x"nip2" ]; then
+    exe="$version/nip2-$version.*/bin/nip2.exe"
   else
-    echo "ok"
+    exe=
+  fi
+
+  if [ x"$exe" != x"" ]; then
+    wine $exe --help > /dev/null
+    if [ "$?" -ne "0" ]; then
+      echo "WARNING: $exe failed to run"
+    else
+      echo "ok"
+    fi
+  else
+    echo "no exe to test"
   fi
 fi
 
 # List result
 echo "Successful build"
-ls -al $PWD/$version/*.zip
+ls -al $version/*.zip

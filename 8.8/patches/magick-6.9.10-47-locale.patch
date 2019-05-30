@@ -1,0 +1,12 @@
+diff -Naur ImageMagick6-6.9.10-47.orig/magick/locale.c ImageMagick6-6.9.10-47/magick/locale.c
+--- ImageMagick6-6.9.10-47.orig/magick/locale.c	2019-05-29 13:37:51.505848873 +0100
++++ ImageMagick6-6.9.10-47/magick/locale.c	2019-05-29 13:39:19.617686340 +0100
+@@ -62,7 +62,7 @@
+ /*
+   Define declarations.
+ */
+-#if defined(MAGICKCORE_HAVE_NEWLOCALE) || defined(MAGICKCORE_WINDOWS_SUPPORT)
++#if (defined(MAGICKCORE_HAVE_NEWLOCALE) || defined(MAGICKCORE_WINDOWS_SUPPORT)) && !defined(__MINGW32__)
+ #  define MAGICKCORE_LOCALE_SUPPORT
+ #endif
+ #define LocaleFilename  "locale.xml"

@@ -83,6 +83,12 @@
     name="vips"
     href="https://github.com/libvips/libvips/releases/download/"/>
 
+  <repository 
+    type="tarball"
+    name="nip2"
+    href="https://github.com/libvips/nip2/releases/download/"
+  />
+
   <repository
     type="tarball"
     name="libheif"
@@ -582,7 +588,9 @@
 
        disable openmp, ubuntu 14.04 mingw has a broken libgomp
 
-       7.x is much slower (though libvips does support it)
+       7.x is much slower (though libvips does support it), so we use 6
+
+       the patch disables locale support ... win7 is missing _free_locale()
 
     -->
 
@@ -591,9 +599,11 @@
     autogenargs="--without-x --without-lzma --without-modules --without-openexr --without-heic --without-gvc --without-lqr --without-magick-plus-plus --disable-largefile --without-rsvg --without-zlib --disable-openmp">
     <branch
       repo="magick"
-      module="6.9.10-43.tar.gz"
-      version="6.9.10-43"
-      checkoutdir="ImageMagick6-6.9.10-43"/>
+      module="6.9.10-47.tar.gz"
+      version="6.9.10-47"
+      checkoutdir="ImageMagick6-6.9.10-47">
+      <patch file="patches/magick-6.9.10-47-locale.patch" strip="1"/>
+    </branch>
     <dependencies>
       <dep package="lcms"/>
       <dep package="fftw3"/>
@@ -688,13 +698,15 @@
 
   <!-- openslide needs the pdf backend
 
-       node canvas needs a cairo with SVG support, so don't disable-svg
+       node canvas needs a cairo with SVG support
+
+       goffice needs cairo-ps
 
     -->
 
   <autotools id="cairo"
     autogen-sh="configure"
-    autogenargs="--disable-gl --disable-xlib --disable-xcb --enable-win32 --without-x --disable-ps --disable-script">
+    autogenargs="--disable-gl --disable-xlib --disable-xcb --enable-win32 --without-x --disable-script">
     <branch
       repo="cairo"
       module="cairo-1.16.0.tar.xz"
@@ -875,7 +887,7 @@
 
     <branch
       repo="vips"
-      module="v8.8.0-rc3/vips-8.8.0-rc3.tar.gz"
+      module="v8.8.0/vips-8.8.0.tar.gz"
       version="8.8.0"
       checkoutdir="vips-8.8.0"/>
 
@@ -926,7 +938,7 @@
 
     <branch
       repo="vips"
-      module="v8.8.0-rc3/vips-8.8.0-rc3.tar.gz"
+      module="v8.8.0/vips-8.8.0.tar.gz"
       version="8.8.0"
       checkoutdir="vips-8.8.0"/>
 
@@ -957,7 +969,7 @@
 
     <branch
       repo="vips"
-      module="v8.8.0-rc3/vips-8.8.0-rc3.tar.gz"
+      module="v8.8.0/vips-8.8.0.tar.gz"
       version="8.8.0"
       checkoutdir="vips-8.8.0">
       <patch file="patches/transform.patch" strip="1"/>
@@ -994,6 +1006,124 @@
       version="2.4.0"/>
     <dependencies>
       <dep package="libvips-web"/>
+    </dependencies>
+  </autotools>
+
+  <!-- stuff for nip2
+
+    -->
+
+  <autotools id="gsl" 
+    autogen-sh="configure"
+    >
+    <branch
+      repo="gnu"
+      module="gsl/gsl-1.16.tar.gz"
+      version="1.16"
+    />
+  </autotools>
+
+  <!-- 1.32.0 fails with our old glib, G_CONST_RETURN
+
+       1.26.0 fails with our old glib, G_CONST_RETURN
+
+       1.19.6 fails with our old glib, G_CONST_RETURN
+
+       1.91.92 fails with our old glib, G_CONST_RETURN
+
+    -->
+
+  <autotools id="atk"
+    >
+    <branch 
+      repo="gnome"
+      module="atk/2.11/atk-2.11.92.tar.xz"
+      version="2.11.92"
+    />
+    <dependencies>
+      <dep package="glib"/>
+    </dependencies>
+  </autotools>
+
+  <!-- the patch adds _WIN64 to Makefile.in to help it build the def 
+       file correctly
+
+    -->
+
+  <autotools id="gtk+"
+    autogen-sh="configure"
+    >
+    <branch 
+      repo="gnome"
+      module="gtk+/2.24/gtk+-2.24.32.tar.xz"
+      version="2.24.32">
+      <patch file="patches/gtk+-2.24.32-win64.patch" strip="1"/>
+    </branch>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="pango"/>
+      <dep package="cairo"/>
+      <dep package="gdk-pixbuf"/>
+      <dep package="atk"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="goffice-noprint"
+    autogen-sh="configure"
+    autogenargs="--with-config-backend=win32"
+    >
+    <branch
+      repo="gnome"
+      module="goffice/0.8/goffice-0.8.17.tar.xz"
+      version="0.8.17">
+      <patch file="patches/goffice-0.8-glib-pcre.patch" strip="1"/>
+    </branch>
+  </autotools>
+
+  <autotools id="gtkengines"
+    autogen-sh="configure"
+    autogenargs="--disable-crux --disable-hc --disable-industrial --disable-mist --disable-redmond --disable-glide --disable-thinice"
+    >
+    <branch
+      repo="gnome"
+      module="gtk-engines/2.20/gtk-engines-2.20.2.tar.gz"
+      version="2.20.2"
+    />
+  </autotools>
+
+  <autotools id="nip2-all" 
+    autogen-sh="configure"
+    autogenargs="--enable-debug=no --without-libgvc"
+    >
+    <branch
+      repo="nip2"
+      module="v8.7.1/nip2-8.7.1.tar.gz"
+      version="8.7.1"
+    />
+    <dependencies>
+      <dep package="libvips-all"/>
+      <dep package="gtk+"/>
+      <dep package="gsl"/>
+      <dep package="goffice-noprint"/>
+      <dep package="gtkengines"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="nip2-transform" 
+    autogen-sh="configure"
+    autogenargs="--enable-debug=no --without-libgvc"
+    >
+    <branch
+      repo="nip2"
+      module="v8.7.1/nip2-8.7.1.tar.gz"
+      version="8.7.1"
+    />
+    <dependencies>
+      <dep package="libvips-transform"/>
+      <dep package="gtk+"/>
+      <dep package="gsl"/>
+      <dep package="goffice-noprint"/>
+      <dep package="gtkengines"/>
     </dependencies>
   </autotools>
 

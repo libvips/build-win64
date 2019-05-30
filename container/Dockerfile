@@ -25,18 +25,24 @@ RUN echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula selec
     python3-pip \
     # needed by pe-util
     libboost-filesystem-dev \
-    libboost-system-dev
+    libboost-system-dev \
+    # needed for gtk+ build
+    gdk-pixbuf2.0 \
+    # needed for nip2 build
+    flex \
+    bison \
+    nsis
 
 # build source packages here
 WORKDIR /usr/local/src
 
 # install JHBuild from source for Meson support
 RUN git clone https://github.com/GNOME/jhbuild.git \
-   && cd jhbuild \
-   && git checkout -b stable $JHBUILD_REVISION \
-   && ./autogen.sh --prefix=/usr/local \
-   && make \
-   && make install
+  && cd jhbuild \
+  && git checkout -b stable $JHBUILD_REVISION \
+  && ./autogen.sh --prefix=/usr/local \
+  && make \
+  && make install
 
 # install Ninja and Meson
 RUN pip3 install ninja meson

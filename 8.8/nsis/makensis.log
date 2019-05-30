@@ -1,0 +1,1165 @@
+MakeNSIS v2.51-1 - Copyright 1995-2015 Contributors
+See the file COPYING for license details.
+Credits can be found in the Users Manual.
+
+Command line defined: "VERSION=8.8.0"
+Processing config: 
+Processing plugin dlls: "/usr/share/nsis/Plugins/*.dll"
+ - AdvSplash::show
+ - Banner::destroy
+ - Banner::getWindow
+ - Banner::show
+ - BgImage::AddImage
+ - BgImage::AddText
+ - BgImage::Clear
+ - BgImage::Destroy
+ - BgImage::Redraw
+ - BgImage::SetBg
+ - BgImage::SetReturn
+ - BgImage::Sound
+ - Dialer::AttemptConnect
+ - Dialer::AutodialHangup
+ - Dialer::AutodialOnline
+ - Dialer::AutodialUnattended
+ - Dialer::GetConnectedState
+ - InstallOptions::dialog
+ - InstallOptions::initDialog
+ - InstallOptions::show
+ - LangDLL::LangDialog
+ - Math::Script
+ - NSISdl::download
+ - NSISdl::download_quiet
+ - Splash::show
+ - StartMenu::Init
+ - StartMenu::Select
+ - StartMenu::Show
+ - System::Alloc
+ - System::Call
+ - System::Copy
+ - System::Free
+ - System::Get
+ - System::Int64Op
+ - System::Store
+ - TypeLib::GetLibVersion
+ - TypeLib::Register
+ - TypeLib::UnRegister
+ - UserInfo::GetAccountType
+ - UserInfo::GetName
+ - UserInfo::GetOriginalAccountType
+ - VPatch::GetFileCRC32
+ - VPatch::GetFileMD5
+ - VPatch::vpatchfile
+ - nsDialogs::Create
+ - nsDialogs::CreateControl
+ - nsDialogs::CreateItem
+ - nsDialogs::CreateTimer
+ - nsDialogs::GetUserData
+ - nsDialogs::KillTimer
+ - nsDialogs::OnBack
+ - nsDialogs::OnChange
+ - nsDialogs::OnClick
+ - nsDialogs::OnNotify
+ - nsDialogs::SelectFileDialog
+ - nsDialogs::SelectFolderDialog
+ - nsDialogs::SetRTL
+ - nsDialogs::SetUserData
+ - nsDialogs::Show
+ - nsExec::Exec
+ - nsExec::ExecToLog
+ - nsExec::ExecToStack
+
+!define: "MUI_INSERT_NSISCONF"=""
+
+Changing directory to: "/data/nsis"
+
+Processing script file: "nip2.nsi"
+!include: "/usr/share/nsis/Include/MUI2.nsh"
+!include: "/usr/share/nsis/Contrib/Modern UI 2/MUI2.nsh"
+NSIS Modern User Interface version 2.0 - Copyright 2002-2015 Joost Verburg (/usr/share/nsis/Contrib/Modern UI 2/MUI2.nsh:8)
+!define: "MUI_INCLUDED"=""
+!define: "MUI_SYSVERSION"="2.0"
+!define: "MUI_VERBOSE"="3"
+!include: closed: "/usr/share/nsis/Contrib/Modern UI 2/MUI2.nsh"
+!include: closed: "/usr/share/nsis/Include/MUI2.nsh"
+Name: "nip2-8.8.0"
+OutFile: "nip2-8.8.0-setup.exe"
+SetCompressor: LZMA
+InstallDir: "$LOCALAPPDATA\VIPS"
+InstallRegKey: "HKCU\Software\VIPS\"
+Var: "StartMenuFolder"
+!define: "MUI_ABORTWARNING"=""
+!define: "MUI_HEADERIMAGE"=""
+!define: "MUI_HEADERIMAGE_BITMAP"="nip2.bmp"
+!define: "MUI_HEADERIMAGE_UNBITMAP"="nip2.bmp"
+!define: "MUI_WELCOMEFINISHPAGE_BITMAP"="welcome.bmp"
+!define: "MUI_UNWELCOMEFINISHPAGE_BITMAP"="welcome.bmp"
+!define: "MUI_ICON"="nip2-icon.ico"
+!define: "MUI_UNICON"="/usr/share/nsis\Contrib\Graphics\Icons\orange-uninstall-nsis.ico"
+!define: "MUI_WELCOMEPAGE_TITLE"="Welcome to nip2-8.8.0"
+!define: "MUI_WELCOMEPAGE_TEXT"="nip2 is a GUI for the VIPS image processing library. It is rather like a cross between a spreadsheet and a paint program.
+
+This installer will copy the necessary files to your hard drive and add an item to your Start Menu."
+!insertmacro: MUI_PAGE_WELCOME
+!insertmacro: end of MUI_PAGE_WELCOME
+!insertmacro: MUI_PAGE_LICENSE
+!insertmacro: end of MUI_PAGEDECLARATION_LICENSE
+!insertmacro: end of MUI_PAGE_LICENSE
+!insertmacro: MUI_PAGE_DIRECTORY
+!insertmacro: end of MUI_PAGE_DIRECTORY
+!define: "MUI_STARTMENUPAGE_REGISTRY_ROOT"="HKCU"
+!define: "MUI_STARTMENUPAGE_REGISTRY_KEY"="Software\VIPS"
+!define: "MUI_STARTMENUPAGE_REGISTRY_VALUENAME"="Start Menu Folder"
+!insertmacro: MUI_PAGE_STARTMENU
+!insertmacro: end of MUI_PAGE_STARTMENU
+!insertmacro: MUI_PAGE_INSTFILES
+!insertmacro: end of MUI_PAGE_INSTFILES
+!define: "MUI_FINISHPAGE_TEXT"="nip2 has been successfully installed."
+!define: "MUI_FINISHPAGE_RUN"="$INSTDIR\nip2-8.8.0\bin\nip2.exe"
+!define: "MUI_FINISHPAGE_RUN_TEXT"="Run nip2 now"
+!define: "MUI_FINISHPAGE_LINK"="Visit the VIPS website"
+!define: "MUI_FINISHPAGE_LINK_LOCATION"="http://www.vips.ecs.soton.ac.uk"
+!insertmacro: MUI_PAGE_FINISH
+!insertmacro: end of MUI_PAGE_FINISH
+!insertmacro: MUI_UNPAGE_WELCOME
+!insertmacro: end of MUI_UNPAGE_WELCOME
+!insertmacro: MUI_UNPAGE_CONFIRM
+!insertmacro: end of MUI_UNPAGE_CONFIRM
+!insertmacro: MUI_UNPAGE_INSTFILES
+!insertmacro: end of MUI_UNPAGE_INSTFILES
+!insertmacro: MUI_UNPAGE_FINISH
+!insertmacro: end of MUI_UNPAGE_FINISH
+!insertmacro: MUI_LANGUAGE
+!insertmacro: end of MUI_LANGUAGE
+Section: "Dummy Section" ->(SecDummy)
+SetOutPath: "$INSTDIR"
+File: Descending to: "./nip2-8.8.0/"
+File: "AUTHORS" [compress] 658/978 bytes
+File: "COPYING" [compress] 8816/26530 bytes
+File: "ChangeLog" [compress] 43712/131180 bytes
+File: "README.md" [compress] 3873/10039 bytes
+File: Descending to: "./nip2-8.8.0/bin/"
+File: "convert.exe" [compress] 6903/19088 bytes
+File: "gspawn-win64-helper-console.exe" [compress] 8215/23057 bytes
+File: "gspawn-win64-helper.exe" [compress] 8245/23057 bytes
+File: "libMagickCore-6.Q16-6.dll" [compress] 1299461/4030606 bytes
+File: "libMagickWand-6.Q16-6.dll" [compress] 217427/999365 bytes
+File: "libatk-1.0-0.dll" [compress] 35671/131283 bytes
+File: "libcairo-2.dll" [compress] 383836/942540 bytes
+File: "libcfitsio.dll" [compress] 431504/1356452 bytes
+File: "libcroco-0.6-3.dll" [compress] 66577/216201 bytes
+File: "libde265.dll" [compress] 291377/1616343 bytes
+File: "libexif-12.dll" [compress] 60493/228259 bytes
+File: "libexpat-1.dll" [compress] 59100/195014 bytes
+File: "libffi-6.dll" [compress] 13914/33584 bytes
+File: "libfftw3-3.dll" [compress] 368784/1063502 bytes
+File: "libfontconfig-1.dll" [compress] 112586/275006 bytes
+File: "libfreetype-6.dll" [compress] 274951/603759 bytes
+File: "libfribidi-0.dll" [compress] 21321/119041 bytes
+File: "libgcc_s_seh-1.dll" [compress] 31286/82039 bytes
+File: "libgdk-win32-2.0-0.dll" [compress] 234533/643829 bytes
+File: "libgdk_pixbuf-2.0-0.dll" [compress] 62985/175864 bytes
+File: "libgif-7.dll" [compress] 16279/50258 bytes
+File: "libgio-2.0-0.dll" [compress] 447778/1490645 bytes
+File: "libglib-2.0-0.dll" [compress] 445673/1348025 bytes
+File: "libgmodule-2.0-0.dll" [compress] 9481/26900 bytes
+File: "libgobject-2.0-0.dll" [compress] 112239/336402 bytes
+File: "libgsf-1-114.dll" [compress] 84890/242959 bytes
+File: "libgsl-0.dll" [compress] 617480/2074834 bytes
+File: "libgslcblas-0.dll" [compress] 76919/272681 bytes
+File: "libgtk-win32-2.0-0.dll" [compress] 1083763/3248600 bytes
+File: "libharfbuzz.dll" [compress] 377213/1091010 bytes
+File: "libheif.dll" [compress] 141698/434100 bytes
+File: "libiconv-2.dll" [compress] 502358/950279 bytes
+File: "libintl.dll" [compress] 6197/18656 bytes
+File: "libjpeg-62.dll" [compress] 150915/668119 bytes
+File: "liblcms2-2.dll" [compress] 125239/327856 bytes
+File: "libmatio-9.dll" [compress] 73990/362149 bytes
+File: "libopenjp2.dll" [compress] 144042/361024 bytes
+File: "libopenslide-0.dll" [compress] 76773/198135 bytes
+File: "liborc-0.4-0.dll" [compress] 125146/491849 bytes
+File: "libpango-1.0-0.dll" [compress] 98461/263219 bytes
+File: "libpangocairo-1.0-0.dll" [compress] 23506/71503 bytes
+File: "libpangoft2-1.0-0.dll" [compress] 31778/94568 bytes
+File: "libpangowin32-1.0-0.dll" [compress] 41759/103382 bytes
+File: "libpixman-1-0.dll" [compress] 219766/658890 bytes
+File: "libpng16-16.dll" [compress] 99534/222862 bytes
+File: "libpoppler-87.dll" [compress] 670789/2299264 bytes
+File: "libpoppler-glib-8.dll" [compress] 104871/351947 bytes
+File: "librsvg-2-2.dll" [compress] 88767/244432 bytes
+File: "libsqlite3-0.dll" [compress] 474634/1016702 bytes
+File: "libstdc++-6.dll" [compress] 319392/1402815 bytes
+File: "libtiff-5.dll" [compress] 137597/449473 bytes
+File: "libvips-42.dll" [compress] 1232211/4155402 bytes
+File: "libwebp-7.dll" [compress] 188068/458526 bytes
+File: "libwebpdemux-2.dll" [compress] 10483/26113 bytes
+File: "libwebpmux-3.dll" [compress] 22053/51032 bytes
+File: "libwinpthread-1.dll" [compress] 21589/56466 bytes
+File: "libxml2-2.dll" [compress] 468698/1246297 bytes
+File: "libz1.dll" [compress] 43818/92726 bytes
+File: "nip2-cli.exe" [compress] 7644/22261 bytes
+File: "nip2.exe" [compress] 633373/1833835 bytes
+File: Descending to: "./nip2-8.8.0/etc/"
+File: Descending to: "./nip2-8.8.0/etc/ImageMagick-6/"
+File: "coder.xml" [compress] 484/899 bytes
+File: "colors.xml" [compress] 515/1383 bytes
+File: "delegates.xml" [compress] 2132/13412 bytes
+File: "log.xml" [compress] 765/1642 bytes
+File: "magic.xml" [compress] 471/888 bytes
+File: "mime.xml" [compress] 13562/134216 bytes
+File: "policy.xml" [compress] 1202/3612 bytes
+File: "quantization-table.xml" [compress] 1115/2369 bytes
+File: "thresholds.xml" [compress] 3427/11453 bytes
+File: "type-apple.xml" [compress] 2985/29218 bytes
+File: "type-dejavu.xml" [compress] 893/8490 bytes
+File: "type-ghostscript.xml" [compress] 1037/7572 bytes
+File: "type-urw-base35.xml" [compress] 1123/8162 bytes
+File: "type-windows.xml" [compress] 1673/13706 bytes
+File: "type.xml" [compress] 291/572 bytes
+File: Descending to: "./nip2-8.8.0/etc/fonts/"
+File: "fonts.conf" [compress] 1095/2539 bytes
+File: Descending to: "./nip2-8.8.0/etc/fonts/conf.d/"
+File: "10-hinting-slight.conf" [compress] 455/696 bytes
+File: "10-scale-bitmap-fonts.conf" [compress] 703/2228 bytes
+File: "20-unhint-small-vera.conf" [compress] 617/1537 bytes
+File: "30-metric-aliases.conf" [compress] 1786/13274 bytes
+File: "40-nonlatin.conf" [compress] 822/5424 bytes
+File: "45-generic.conf" [compress] 820/3543 bytes
+File: "45-latin.conf" [compress] 881/6600 bytes
+File: "49-sansserif.conf" [compress] 396/799 bytes
+File: "50-user.conf" [compress] 450/911 bytes
+File: "51-local.conf" [compress] 285/423 bytes
+File: "60-generic.conf" [compress] 853/2041 bytes
+File: "60-latin.conf" [compress] 655/2068 bytes
+File: "65-fonts-persian.conf" [compress] 2393/10293 bytes
+File: "65-nonlatin.conf" [compress] 1353/8170 bytes
+File: "69-unifont.conf" [compress] 364/847 bytes
+File: "80-delicious.conf" [compress] 379/597 bytes
+File: "90-synthetic.conf" [compress] 777/1917 bytes
+File: "README" [compress] 553/978 bytes
+File: Descending to: "./nip2-8.8.0/etc/gtk-2.0/"
+File: "gtkrc" [compress] 30 bytes
+File: "im-multipress.conf" [compress] 597/890 bytes
+File: Descending to: "./nip2-8.8.0/lib/"
+File: Descending to: "./nip2-8.8.0/lib/goffice/"
+File: Descending to: "./nip2-8.8.0/lib/goffice/0.8.17/"
+File: Descending to: "./nip2-8.8.0/lib/goffice/0.8.17/plugins/"
+File: Descending to: "./nip2-8.8.0/lib/goffice/0.8.17/plugins/plot_barcol/"
+File: "barcol.a" [compress] 23129/92302 bytes
+File: "gog-area-prefs.ui" [compress] 379/924 bytes
+File: "gog-barcol-prefs.ui" [compress] 723/5414 bytes
+File: "gog-minmax-prefs.ui" [compress] 535/2330 bytes
+File: "plot-types.xml" [compress] 1214/10559 bytes
+File: "plugin.xml" [compress] 2981/15173 bytes
+File: Descending to: "./nip2-8.8.0/lib/goffice/0.8.17/plugins/plot_distrib/"
+File: "distrib.a" [compress] 21188/84308 bytes
+File: "gog-boxplot-prefs.ui" [compress] 1021/7647 bytes
+File: "gog-double-histogram-prefs.ui" [compress] 413/1562 bytes
+File: "gog-histogram-prefs.ui" [compress] 477/2366 bytes
+File: "plot-types.xml" [compress] 552/2546 bytes
+File: "plugin.xml" [compress] 1744/7489 bytes
+File: Descending to: "./nip2-8.8.0/lib/goffice/0.8.17/plugins/plot_pie/"
+File: "gog-pie-prefs.ui" [compress] 977/7107 bytes
+File: "gog-pie-series.ui" [compress] 644/2956 bytes
+File: "gog-ring-prefs.ui" [compress] 1058/9337 bytes
+File: "pie.a" [compress] 12426/41222 bytes
+File: "plot-types.xml" [compress] 706/3184 bytes
+File: "plugin.xml" [compress] 2098/9438 bytes
+File: Descending to: "./nip2-8.8.0/lib/goffice/0.8.17/plugins/plot_radar/"
+File: "gog-color-polar-prefs.ui" [compress] 378/898 bytes
+File: "gog-polar-prefs.ui" [compress] 380/925 bytes
+File: "plot-types.xml" [compress] 449/1467 bytes
+File: "plugin.xml" [compress] 1883/9737 bytes
+File: "radar.a" [compress] 11385/42736 bytes
+File: Descending to: "./nip2-8.8.0/lib/goffice/0.8.17/plugins/plot_surface/"
+File: "gog-xyz-prefs.ui" [compress] 359/918 bytes
+File: "gog-xyz-surface-prefs.ui" [compress] 935/9471 bytes
+File: "plot-types.xml" [compress] 378/1036 bytes
+File: "plugin.xml" [compress] 1737/9247 bytes
+File: "surface.a" [compress] 22643/80230 bytes
+File: Descending to: "./nip2-8.8.0/lib/goffice/0.8.17/plugins/plot_xy/"
+File: "gog-bubble-prefs.ui" [compress] 899/6911 bytes
+File: "gog-xy-color-prefs.ui" [compress] 377/895 bytes
+File: "gog-xy-dropbar-prefs.ui" [compress] 660/3441 bytes
+File: "gog-xy-prefs.ui" [compress] 378/922 bytes
+File: "gog-xy-series-prefs.ui" [compress] 416/1035 bytes
+File: "plot-types.xml" [compress] 1092/5202 bytes
+File: "plugin.xml" [compress] 2245/11159 bytes
+File: "xy.a" [compress] 19986/76930 bytes
+File: Descending to: "./nip2-8.8.0/lib/goffice/0.8.17/plugins/reg_linear/"
+File: "linreg.a" [compress] 7339/29278 bytes
+File: "plugin.xml" [compress] 1472/10748 bytes
+File: "reg-types.xml" [compress] 249/634 bytes
+File: Descending to: "./nip2-8.8.0/lib/goffice/0.8.17/plugins/reg_logfit/"
+File: "logfit.a" [compress] 2321/6926 bytes
+File: "plugin.xml" [compress] 1112/5152 bytes
+File: "reg-types.xml" [compress] 204/232 bytes
+File: Descending to: "./nip2-8.8.0/lib/goffice/0.8.17/plugins/smoothing/"
+File: "gog-exp-smooth.ui" [compress] 568/2537 bytes
+File: "gog-moving-avg.ui" [compress] 612/2833 bytes
+File: "plugin.xml" [compress] 1490/5866 bytes
+File: "smoothing.a" [compress] 5673/20166 bytes
+File: "types.xml" [compress] 210/342 bytes
+File: Descending to: "./nip2-8.8.0/lib/gtk-2.0/"
+File: Descending to: "./nip2-8.8.0/lib/gtk-2.0/2.10.0/"
+File: Descending to: "./nip2-8.8.0/lib/gtk-2.0/2.10.0/engines/"
+File: "libclearlooks.a" [compress] 60605/237942 bytes
+File: "libpixmap.dll" [compress] 61766/371083 bytes
+File: "libpixmap.dll.a" [compress] 499/3312 bytes
+File: "libwimp.dll" [compress] 70324/406501 bytes
+File: "libwimp.dll.a" [compress] 498/3290 bytes
+File: Descending to: "./nip2-8.8.0/lib/gtk-2.0/2.10.0/immodules/"
+File: "im-am-et.dll" [compress] 51032/339118 bytes
+File: "im-am-et.dll.a" [compress] 475/3300 bytes
+File: "im-cedilla.dll" [compress] 48896/325807 bytes
+File: "im-cedilla.dll.a" [compress] 472/3318 bytes
+File: "im-cyrillic-translit.dll" [compress] 49254/327406 bytes
+File: "im-cyrillic-translit.dll.a" [compress] 491/3420 bytes
+File: "im-ime.dll" [compress] 54738/349008 bytes
+File: "im-ime.dll.a" [compress] 469/3278 bytes
+File: "im-inuktitut.dll" [compress] 49246/327874 bytes
+File: "im-inuktitut.dll.a" [compress] 478/3340 bytes
+File: "im-ipa.dll" [compress] 48873/326272 bytes
+File: "im-ipa.dll.a" [compress] 469/3278 bytes
+File: "im-multipress.dll" [compress] 51019/336854 bytes
+File: "im-multipress.dll.a" [compress] 471/3344 bytes
+File: "im-thai.dll" [compress] 50745/333137 bytes
+File: "im-thai.dll.a" [compress] 465/3282 bytes
+File: "im-ti-er.dll" [compress] 50620/339118 bytes
+File: "im-ti-er.dll.a" [compress] 476/3300 bytes
+File: "im-ti-et.dll" [compress] 50772/339118 bytes
+File: "im-ti-et.dll.a" [compress] 476/3300 bytes
+File: "im-viqr.dll" [compress] 49206/327849 bytes
+File: "im-viqr.dll.a" [compress] 465/3282 bytes
+File: Descending to: "./nip2-8.8.0/lib/gtk-2.0/include/"
+File: "gdkconfig.h" [compress] 338/620 bytes
+File: Descending to: "./nip2-8.8.0/lib/gtk-2.0/modules/"
+File: "libgail.dll" [compress] 137771/732262 bytes
+File: "libgail.dll.a" [compress] 4063/93278 bytes
+File: Descending to: "./nip2-8.8.0/share/"
+File: Descending to: "./nip2-8.8.0/share/ImageMagick-6/"
+File: "english.xml" [compress] 7102/49347 bytes
+File: "francais.xml" [compress] 8178/51908 bytes
+File: "locale.xml" [compress] 616/2461 bytes
+File: Descending to: "./nip2-8.8.0/share/appdata/"
+File: "nip2.appdata.xml" [compress] 693/1185 bytes
+File: Descending to: "./nip2-8.8.0/share/applications/"
+File: "nip2.desktop" [compress] 228/278 bytes
+File: Descending to: "./nip2-8.8.0/share/fontconfig/"
+File: Descending to: "./nip2-8.8.0/share/fontconfig/conf.avail/"
+File: "10-autohint.conf" [compress] 465/706 bytes
+File: "10-hinting-full.conf" [compress] 454/692 bytes
+File: "10-hinting-medium.conf" [compress] 456/696 bytes
+File: "10-hinting-none.conf" [compress] 454/692 bytes
+File: "10-hinting-slight.conf" [compress] 0/696 bytes
+File: "10-no-sub-pixel.conf" [compress] 469/723 bytes
+File: "10-scale-bitmap-fonts.conf" [compress] 0/2228 bytes
+File: "10-sub-pixel-bgr.conf" [compress] 484/748 bytes
+File: "10-sub-pixel-rgb.conf" [compress] 483/748 bytes
+File: "10-sub-pixel-vbgr.conf" [compress] 490/758 bytes
+File: "10-sub-pixel-vrgb.conf" [compress] 489/758 bytes
+File: "10-unhinted.conf" [compress] 459/701 bytes
+File: "11-lcdfilter-default.conf" [compress] 478/771 bytes
+File: "11-lcdfilter-legacy.conf" [compress] 481/768 bytes
+File: "11-lcdfilter-light.conf" [compress] 480/765 bytes
+File: "20-unhint-small-vera.conf" [compress] 0/1537 bytes
+File: "25-unhint-nonlatin.conf" [compress] 530/3489 bytes
+File: "30-metric-aliases.conf" [compress] 0/13274 bytes
+File: "40-nonlatin.conf" [compress] 0/5424 bytes
+File: "45-generic.conf" [compress] 0/3543 bytes
+File: "45-latin.conf" [compress] 0/6600 bytes
+File: "49-sansserif.conf" [compress] 0/799 bytes
+File: "50-user.conf" [compress] 0/911 bytes
+File: "51-local.conf" [compress] 0/423 bytes
+File: "60-generic.conf" [compress] 0/2041 bytes
+File: "60-latin.conf" [compress] 0/2068 bytes
+File: "65-fonts-persian.conf" [compress] 0/10293 bytes
+File: "65-khmer.conf" [compress] 259/464 bytes
+File: "65-nonlatin.conf" [compress] 0/8170 bytes
+File: "69-unifont.conf" [compress] 0/847 bytes
+File: "70-no-bitmaps.conf" [compress] 299/487 bytes
+File: "70-yes-bitmaps.conf" [compress] 299/487 bytes
+File: "80-delicious.conf" [compress] 0/597 bytes
+File: "90-synthetic.conf" [compress] 0/1917 bytes
+File: Descending to: "./nip2-8.8.0/share/gettext-0.19.8/"
+File: Descending to: "./nip2-8.8.0/share/gettext-0.19.8/its/"
+File: "appdata.its" [compress] 201/444 bytes
+File: "appdata.loc" [compress] 143/192 bytes
+File: "glade.loc" [compress] 177/585 bytes
+File: "glade1.its" [compress] 294/874 bytes
+File: "glade2.its" [compress] 409/1273 bytes
+File: "gsettings.its" [compress] 295/647 bytes
+File: "gsettings.loc" [compress] 145/197 bytes
+File: "gtkbuilder.its" [compress] 310/764 bytes
+File: Descending to: "./nip2-8.8.0/share/glib-2.0/"
+File: Descending to: "./nip2-8.8.0/share/glib-2.0/codegen/"
+File: "__init__.py" [compress] 648/984 bytes
+File: "codegen.py" [compress] 20348/221901 bytes
+File: "codegen_docbook.py" [compress] 2799/16253 bytes
+File: "codegen_main.py" [compress] 2795/12454 bytes
+File: "config.py" [compress] 546/819 bytes
+File: "dbustypes.py" [compress] 2529/19568 bytes
+File: "parser.py" [compress] 2153/12715 bytes
+File: "utils.py" [compress] 1540/4003 bytes
+File: Descending to: "./nip2-8.8.0/share/glib-2.0/gdb/"
+File: "glib_gdb.py" [compress] 1923/7425 bytes
+File: "gobject_gdb.py" [compress] 2492/10205 bytes
+File: Descending to: "./nip2-8.8.0/share/glib-2.0/gettext/"
+File: Descending to: "./nip2-8.8.0/share/glib-2.0/gettext/po/"
+File: "Makefile.in.in" [compress] 2744/8076 bytes
+File: Descending to: "./nip2-8.8.0/share/glib-2.0/schemas/"
+File: "gschema.dtd" [compress] 950/2876 bytes
+File: Descending to: "./nip2-8.8.0/share/goffice/"
+File: Descending to: "./nip2-8.8.0/share/goffice/0.8.17/"
+File: Descending to: "./nip2-8.8.0/share/goffice/0.8.17/patterns/"
+File: "svg-patterns.xml" [compress] 2292/15859 bytes
+File: Descending to: "./nip2-8.8.0/share/goffice/0.8.17/ui/"
+File: "go-3d-rotation-sel.ui" [compress] 713/3957 bytes
+File: "go-font-sel.ui" [compress] 675/6640 bytes
+File: "go-format-sel.ui" [compress] 2088/31544 bytes
+File: "go-image-save-dialog-extra.ui" [compress] 866/5156 bytes
+File: "go-image-sel.ui" [compress] 1334/11961 bytes
+File: "go-rotation-sel.ui" [compress] 829/5861 bytes
+File: "go-style-prefs.ui" [compress] 2514/45772 bytes
+File: "gog-3d-box-prefs.ui" [compress] 809/7104 bytes
+File: "gog-axis-prefs.ui" [compress] 1843/32281 bytes
+File: "gog-equation-prefs.ui" [compress] 565/2239 bytes
+File: "gog-error-bar-prefs.ui" [compress] 1362/17266 bytes
+File: "gog-graph-prefs.ui" [compress] 768/3820 bytes
+File: "gog-guru-type-selector.ui" [compress] 889/7596 bytes
+File: "gog-guru.ui" [compress] 1333/16573 bytes
+File: "gog-object-prefs.ui" [compress] 1665/27706 bytes
+File: "gog-plot-prefs.ui" [compress] 1046/12964 bytes
+File: "gog-reg-curve-prefs.ui" [compress] 545/2797 bytes
+File: "gog-reg-eqn-prefs.ui" [compress] 434/1644 bytes
+File: "gog-series-prefs.ui" [compress] 1105/7140 bytes
+File: Descending to: "./nip2-8.8.0/share/gtk-2.0/"
+File: Descending to: "./nip2-8.8.0/share/gtk-2.0/demo/"
+File: "alphatest.png" [compress] 24606/26529 bytes
+File: "apple-red.png" [compress] 3545 bytes
+File: "appwindow.c" [compress] 4877/19446 bytes
+File: "assistant.c" [compress] 1833/6745 bytes
+File: "background.jpg" [compress] 13582/22219 bytes
+File: "builder.c" [compress] 644/1474 bytes
+File: "button_box.c" [compress] 885/3427 bytes
+File: "changedisplay.c" [compress] 4945/18404 bytes
+File: "clipboard.c" [compress] 2115/10149 bytes
+File: "colorsel.c" [compress] 1270/3669 bytes
+File: "combobox.c" [compress] 3164/11610 bytes
+File: "demo.ui" [compress] 1633/12169 bytes
+File: "dialog.c" [compress] 1422/5917 bytes
+File: "drawingarea.c" [compress] 2605/8993 bytes
+File: "editable_cells.c" [compress] 2619/11165 bytes
+File: "entry_buffer.c" [compress] 714/1730 bytes
+File: "entry_completion.c" [compress] 995/2658 bytes
+File: "expander.c" [compress] 680/1504 bytes
+File: "floppybuddy.gif" [compress] 1842/5216 bytes
+File: "gnome-applets.png" [compress] 3090 bytes
+File: "gnome-calendar.png" [compress] 2755 bytes
+File: "gnome-foot.png" [compress] 2916 bytes
+File: "gnome-fs-directory.png" [compress] 2044 bytes
+File: "gnome-fs-regular.png" [compress] 1795 bytes
+File: "gnome-gimp.png" [compress] 3410 bytes
+File: "gnome-gmush.png" [compress] 3244 bytes
+File: "gnome-gsame.png" [compress] 4263 bytes
+File: "gnu-keys.png" [compress] 3852 bytes
+File: "gtk-logo-rgb.gif" [compress] 6385/6427 bytes
+File: "hypertext.c" [compress] 2659/9938 bytes
+File: "iconview.c" [compress] 2767/8720 bytes
+File: "iconview_edit.c" [compress] 1424/3877 bytes
+File: "images.c" [compress] 3116/12388 bytes
+File: "infobar.c" [compress] 982/4053 bytes
+File: "links.c" [compress] 1015/2382 bytes
+File: "list_store.c" [compress] 2609/9847 bytes
+File: "menus.c" [compress] 1854/6385 bytes
+File: "offscreen_window.c" [compress] 3623/18709 bytes
+File: "offscreen_window2.c" [compress] 3438/17377 bytes
+File: "panes.c" [compress] 1401/5925 bytes
+File: "pickers.c" [compress] 733/2503 bytes
+File: "pixbufs.c" [compress] 2292/6772 bytes
+File: "printing.c" [compress] 1801/5812 bytes
+File: "rotated_text.c" [compress] 2414/6915 bytes
+File: "search_entry.c" [compress] 2155/10315 bytes
+File: "sizegroup.c" [compress] 1714/5274 bytes
+File: "spinner.c" [compress] 855/2938 bytes
+File: "stock_browser.c" [compress] 3461/15658 bytes
+File: "textscroll.c" [compress] 1653/5516 bytes
+File: "textview.c" [compress] 5144/22858 bytes
+File: "toolpalette.c" [compress] 4729/27536 bytes
+File: "tree_store.c" [compress] 2810/14312 bytes
+File: "ui_manager.c" [compress] 2031/8593 bytes
+File: Descending to: "./nip2-8.8.0/share/gtk-engines/"
+File: "clearlooks.xml" [compress] 19871/116702 bytes
+File: Descending to: "./nip2-8.8.0/share/locale/"
+File: "locale.alias" [compress] 1485/3116 bytes
+File: Descending to: "./nip2-8.8.0/share/locale/de/"
+File: Descending to: "./nip2-8.8.0/share/locale/de/LC_MESSAGES/"
+File: "gdk-pixbuf.mo" [compress] 6921/23846 bytes
+File: "gettext-runtime.mo" [compress] 3250/9907 bytes
+File: "gettext-tools.mo" [compress] 28138/118250 bytes
+File: "glib20.mo" [compress] 34538/132241 bytes
+File: "libgsf.mo" [compress] 5015/13832 bytes
+File: Descending to: "./nip2-8.8.0/share/locale/en_GB/"
+File: Descending to: "./nip2-8.8.0/share/locale/en_GB/LC_MESSAGES/"
+File: "gdk-pixbuf.mo" [compress] 4280/21706 bytes
+File: "glib20.mo" [compress] 20523/118953 bytes
+File: "libgsf.mo" [compress] 2951/12202 bytes
+File: Descending to: "./nip2-8.8.0/share/mime/"
+File: "XMLnamespaces" [compress] 0 bytes
+File: "aliases" [compress] 0 bytes
+File: "generic-icons" [compress] 0 bytes
+File: "globs" [compress] 109 bytes
+File: "globs2" [compress] 112 bytes
+File: "icons" [compress] 0 bytes
+File: "magic" [compress] 46 bytes
+File: "mime.cache" [compress] 104/240 bytes
+File: "subclasses" [compress] 0 bytes
+File: "treemagic" [compress] 16 bytes
+File: "types" [compress] 13 bytes
+File: "version" [compress] 4 bytes
+File: Descending to: "./nip2-8.8.0/share/mime/image/"
+File: "x-vips.xml" [compress] 241/317 bytes
+File: Descending to: "./nip2-8.8.0/share/mime/packages/"
+File: "nip2.xml" [compress] 268/436 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/"
+File: Descending to: "./nip2-8.8.0/share/nip2/compat/"
+File: Descending to: "./nip2-8.8.0/share/nip2/compat/7.10/"
+File: "Colour.def" [compress] 3653/15144 bytes
+File: "Filter.def" [compress] 6699/29808 bytes
+File: "Format.def" [compress] 468/1196 bytes
+File: "Histogram.def" [compress] 1114/2924 bytes
+File: "Image.def" [compress] 8404/37585 bytes
+File: "Math.def" [compress] 2794/11408 bytes
+File: "Matrix.def" [compress] 2393/8970 bytes
+File: "Tasks.def" [compress] 6491/23475 bytes
+File: "Widgets.def" [compress] 425/1131 bytes
+File: "_convert.def" [compress] 3984/15122 bytes
+File: "_generate.def" [compress] 1149/2670 bytes
+File: "_joe_extra.def" [compress] 2574/12929 bytes
+File: "_joe_utilities.def" [compress] 5122/20035 bytes
+File: "_list.def" [compress] 2624/7967 bytes
+File: "_predicate.def" [compress] 2346/8703 bytes
+File: "_stdenv.def" [compress] 8775/38651 bytes
+File: "_types.def" [compress] 8953/35818 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/compat/7.12/"
+File: "Colour.def" [compress] 3621/15096 bytes
+File: "Filter.def" [compress] 8667/36814 bytes
+File: "Format.def" [compress] 1298/3271 bytes
+File: "Histogram.def" [compress] 2309/7733 bytes
+File: "Image.def" [compress] 9516/42195 bytes
+File: "Math.def" [compress] 3389/14189 bytes
+File: "Matrix.def" [compress] 2186/8633 bytes
+File: "Preferences.ws" [compress] 3504/32642 bytes
+File: "Tasks.def" [compress] 6527/23136 bytes
+File: "Widgets.def" [compress] 463/1259 bytes
+File: "_convert.def" [compress] 4721/17693 bytes
+File: "_generate.def" [compress] 1141/2656 bytes
+File: "_joe_extra.def" [compress] 2770/13703 bytes
+File: "_joe_utilities.def" [compress] 5107/20009 bytes
+File: "_list.def" [compress] 2851/8979 bytes
+File: "_predicate.def" [compress] 2956/11031 bytes
+File: "_stdenv.def" [compress] 11511/47769 bytes
+File: "_types.def" [compress] 9866/39429 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/compat/7.14/"
+File: "Colour.def" [compress] 3621/15053 bytes
+File: "Filter.def" [compress] 9068/39026 bytes
+File: "Histogram.def" [compress] 2383/8018 bytes
+File: "Image.def" [compress] 9521/42138 bytes
+File: "Math.def" [compress] 3023/12576 bytes
+File: "Matrix.def" [compress] 2187/8627 bytes
+File: "Object.def" [compress] 462/1168 bytes
+File: "Preferences.ws" [compress] 3463/32668 bytes
+File: "Tasks.def" [compress] 7367/25598 bytes
+File: "Widgets.def" [compress] 0/1259 bytes
+File: "_Object.def" [compress] 2965/11500 bytes
+File: "_convert.def" [compress] 4782/18050 bytes
+File: "_generate.def" [compress] 0/2656 bytes
+File: "_joe_extra.def" [compress] 0/13703 bytes
+File: "_joe_utilities.def" [compress] 0/20009 bytes
+File: "_list.def" [compress] 2869/8966 bytes
+File: "_predicate.def" [compress] 3139/11692 bytes
+File: "_stdenv.def" [compress] 12373/50981 bytes
+File: "_types.def" [compress] 7429/28143 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/compat/7.16/"
+File: "Colour.def" [compress] 0/15053 bytes
+File: "Filter.def" [compress] 9036/38946 bytes
+File: "Histogram.def" [compress] 0/8018 bytes
+File: "Image.def" [compress] 10208/44692 bytes
+File: "Math.def" [compress] 3114/12832 bytes
+File: "Matrix.def" [compress] 2190/8625 bytes
+File: "Object.def" [compress] 0/1168 bytes
+File: "Preferences.ws" [compress] 3410/32199 bytes
+File: "Tasks.def" [compress] 7379/25703 bytes
+File: "Widgets.def" [compress] 0/1259 bytes
+File: "_Object.def" [compress] 2921/11275 bytes
+File: "_convert.def" [compress] 4774/18165 bytes
+File: "_generate.def" [compress] 0/2656 bytes
+File: "_joe_extra.def" [compress] 2785/13826 bytes
+File: "_joe_utilities.def" [compress] 0/20009 bytes
+File: "_list.def" [compress] 2940/9170 bytes
+File: "_predicate.def" [compress] 3148/11729 bytes
+File: "_stdenv.def" [compress] 13105/52949 bytes
+File: "_types.def" [compress] 7583/28727 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/compat/7.24/"
+File: "Colour.def" [compress] 3700/15424 bytes
+File: "Filter.def" [compress] 9165/39541 bytes
+File: "Histogram.def" [compress] 2208/6485 bytes
+File: "Image.def" [compress] 10481/46093 bytes
+File: "Math.def" [compress] 3189/13183 bytes
+File: "Matrix.def" [compress] 2181/8583 bytes
+File: "Object.def" [compress] 0/1168 bytes
+File: "Tasks.def" [compress] 7478/26251 bytes
+File: "Widgets.def" [compress] 0/1259 bytes
+File: "_Object.def" [compress] 2916/11269 bytes
+File: "_convert.def" [compress] 4990/18680 bytes
+File: "_generate.def" [compress] 1110/2503 bytes
+File: "_joe_extra.def" [compress] 2505/11944 bytes
+File: "_joe_utilities.def" [compress] 5430/20839 bytes
+File: "_list.def" [compress] 3022/9512 bytes
+File: "_predicate.def" [compress] 0/11729 bytes
+File: "_stdenv.def" [compress] 14164/57189 bytes
+File: "_types.def" [compress] 7879/29146 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/compat/7.26/"
+File: "Colour.def" [compress] 3704/15423 bytes
+File: "Filter.def" [compress] 10498/44689 bytes
+File: "Histogram.def" [compress] 2246/6624 bytes
+File: "Image.def" [compress] 10942/48306 bytes
+File: "Math.def" [compress] 0/13183 bytes
+File: "Matrix.def" [compress] 2640/10460 bytes
+File: "Object.def" [compress] 0/1168 bytes
+File: "Tasks.def" [compress] 7480/26251 bytes
+File: "Widgets.def" [compress] 0/1259 bytes
+File: "_Object.def" [compress] 0/11269 bytes
+File: "_convert.def" [compress] 4657/17473 bytes
+File: "_generate.def" [compress] 0/2503 bytes
+File: "_joe_extra.def" [compress] 2608/12413 bytes
+File: "_joe_utilities.def" [compress] 5428/20837 bytes
+File: "_list.def" [compress] 0/9512 bytes
+File: "_predicate.def" [compress] 0/11729 bytes
+File: "_stdenv.def" [compress] 14726/59861 bytes
+File: "_types.def" [compress] 7747/28696 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/compat/7.28/"
+File: "Colour.def" [compress] 0/15423 bytes
+File: "Filter.def" [compress] 10430/44376 bytes
+File: "Histogram.def" [compress] 0/6624 bytes
+File: "Image.def" [compress] 11362/49986 bytes
+File: "Math.def" [compress] 0/13183 bytes
+File: "Matrix.def" [compress] 0/10460 bytes
+File: "Object.def" [compress] 0/1168 bytes
+File: "Tasks.def" [compress] 0/26251 bytes
+File: "Widgets.def" [compress] 0/1259 bytes
+File: "_Object.def" [compress] 0/11269 bytes
+File: "_convert.def" [compress] 4674/17504 bytes
+File: "_generate.def" [compress] 0/2503 bytes
+File: "_joe_extra.def" [compress] 2681/12727 bytes
+File: "_joe_utilities.def" [compress] 0/20837 bytes
+File: "_list.def" [compress] 0/9512 bytes
+File: "_predicate.def" [compress] 0/11729 bytes
+File: "_stdenv.def" [compress] 15149/61365 bytes
+File: "_types.def" [compress] 7635/28371 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/compat/7.38/"
+File: "Colour.def" [compress] 3929/16274 bytes
+File: "Filter.def" [compress] 0/44376 bytes
+File: "Histogram.def" [compress] 2267/6729 bytes
+File: "Image.def" [compress] 11537/50610 bytes
+File: "Math.def" [compress] 3197/13205 bytes
+File: "Matrix.def" [compress] 2843/11225 bytes
+File: "Object.def" [compress] 454/1157 bytes
+File: "Tasks.def" [compress] 7645/26697 bytes
+File: "Widgets.def" [compress] 0/1259 bytes
+File: "_Object.def" [compress] 0/11269 bytes
+File: "_convert.def" [compress] 4692/17561 bytes
+File: "_generate.def" [compress] 1685/3949 bytes
+File: "_joe_extra.def" [compress] 2751/12903 bytes
+File: "_joe_utilities.def" [compress] 0/20837 bytes
+File: "_list.def" [compress] 3101/9795 bytes
+File: "_predicate.def" [compress] 3294/13654 bytes
+File: "_stdenv.def" [compress] 15994/65017 bytes
+File: "_types.def" [compress] 0/28371 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/compat/7.40/"
+File: "Colour.def" [compress] 0/16274 bytes
+File: "Filter.def" [compress] 9279/40208 bytes
+File: "Histogram.def" [compress] 2422/7308 bytes
+File: "Image.def" [compress] 0/50610 bytes
+File: "Magick.def" [compress] 7958/49751 bytes
+File: "Math.def" [compress] 0/13205 bytes
+File: "Matrix.def" [compress] 0/11225 bytes
+File: "Object.def" [compress] 0/1157 bytes
+File: "Preferences.ws" [compress] 3614/33787 bytes
+File: "Tasks.def" [compress] 0/26697 bytes
+File: "Widgets.def" [compress] 0/1259 bytes
+File: "_Object.def" [compress] 0/11269 bytes
+File: "_convert.def" [compress] 4690/17560 bytes
+File: "_generate.def" [compress] 0/3949 bytes
+File: "_joe_extra.def" [compress] 0/12903 bytes
+File: "_joe_utilities.def" [compress] 0/20837 bytes
+File: "_list.def" [compress] 0/9795 bytes
+File: "_magick.def" [compress] 6315/22642 bytes
+File: "_predicate.def" [compress] 0/13654 bytes
+File: "_stdenv.def" [compress] 16145/66914 bytes
+File: "_types.def" [compress] 7672/28449 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/compat/7.8/"
+File: "Capture.def" [compress] 1855/4732 bytes
+File: "Colour.def" [compress] 2374/16630 bytes
+File: "Filter.def" [compress] 2139/12563 bytes
+File: "Format.def" [compress] 1612/4776 bytes
+File: "Histogram.def" [compress] 660/1553 bytes
+File: "Image.def" [compress] 3048/10879 bytes
+File: "Math.def" [compress] 1800/5801 bytes
+File: "Morphology.def" [compress] 1121/3251 bytes
+File: "Mosaic.def" [compress] 1942/8847 bytes
+File: "New.def" [compress] 2740/12518 bytes
+File: "Print.def" [compress] 2012/6926 bytes
+File: "Resize.def" [compress] 906/2462 bytes
+File: "Rotate.def" [compress] 804/2439 bytes
+File: "Statistics.def" [compress] 1211/3141 bytes
+File: "X_ray.def" [compress] 3378/10765 bytes
+File: "_convert.def" [compress] 3538/13585 bytes
+File: "_errors.def" [compress] 622/1499 bytes
+File: "_generate.def" [compress] 915/1921 bytes
+File: "_list.def" [compress] 0/7967 bytes
+File: "_predicate.def" [compress] 1017/2888 bytes
+File: "_stdenv.def" [compress] 6797/29448 bytes
+File: "_types.def" [compress] 7836/33071 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/compat/7.9/"
+File: "Capture.def" [compress] 0/4732 bytes
+File: "Colour.def" [compress] 0/16630 bytes
+File: "Filter.def" [compress] 0/12563 bytes
+File: "Format.def" [compress] 0/4776 bytes
+File: "Histogram.def" [compress] 0/1553 bytes
+File: "Image.def" [compress] 0/10879 bytes
+File: "Math.def" [compress] 0/5801 bytes
+File: "Morphology.def" [compress] 0/3251 bytes
+File: "Mosaic.def" [compress] 0/8847 bytes
+File: "New.def" [compress] 0/12518 bytes
+File: "Print.def" [compress] 0/6926 bytes
+File: "Resize.def" [compress] 0/2462 bytes
+File: "Rotate.def" [compress] 0/2439 bytes
+File: "Statistics.def" [compress] 0/3141 bytes
+File: "X_ray.def" [compress] 0/10765 bytes
+File: "_convert.def" [compress] 0/13585 bytes
+File: "_errors.def" [compress] 0/1499 bytes
+File: "_generate.def" [compress] 908/1897 bytes
+File: "_list.def" [compress] 0/7967 bytes
+File: "_predicate.def" [compress] 0/2888 bytes
+File: "_stdenv.def" [compress] 0/29448 bytes
+File: "_types.def" [compress] 7833/33122 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/compat/8.2/"
+File: "Colour.def" [compress] 3947/16344 bytes
+File: "Filter.def" [compress] 9298/39756 bytes
+File: "Histogram.def" [compress] 0/7308 bytes
+File: "Image.def" [compress] 11732/51490 bytes
+File: "Magick.def" [compress] 0/49751 bytes
+File: "Math.def" [compress] 0/13205 bytes
+File: "Matrix.def" [compress] 0/11225 bytes
+File: "Object.def" [compress] 0/1157 bytes
+File: "Preferences.ws" [compress] 3614/33787 bytes
+File: "Tasks.def" [compress] 0/26697 bytes
+File: "Widgets.def" [compress] 0/1259 bytes
+File: "_Object.def" [compress] 0/11269 bytes
+File: "_convert.def" [compress] 0/17560 bytes
+File: "_generate.def" [compress] 0/3949 bytes
+File: "_joe_extra.def" [compress] 0/12903 bytes
+File: "_joe_utilities.def" [compress] 0/20837 bytes
+File: "_list.def" [compress] 0/9795 bytes
+File: "_magick.def" [compress] 0/22642 bytes
+File: "_predicate.def" [compress] 0/13654 bytes
+File: "_stdenv.def" [compress] 16072/66190 bytes
+File: "_types.def" [compress] 0/28449 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/compat/8.3/"
+File: "Colour.def" [compress] 0/16344 bytes
+File: "Filter.def" [compress] 9629/40643 bytes
+File: "Histogram.def" [compress] 2419/7301 bytes
+File: "Image.def" [compress] 11744/51454 bytes
+File: "Magick.def" [compress] 0/49751 bytes
+File: "Math.def" [compress] 0/13205 bytes
+File: "Matrix.def" [compress] 0/11225 bytes
+File: "Object.def" [compress] 0/1157 bytes
+File: "Preferences.ws" [compress] 0/33787 bytes
+File: "Tasks.def" [compress] 7643/26683 bytes
+File: "Widgets.def" [compress] 0/1259 bytes
+File: "_Object.def" [compress] 0/11269 bytes
+File: "_convert.def" [compress] 5079/18595 bytes
+File: "_generate.def" [compress] 0/3949 bytes
+File: "_joe_extra.def" [compress] 2745/12861 bytes
+File: "_joe_utilities.def" [compress] 0/20837 bytes
+File: "_list.def" [compress] 0/9795 bytes
+File: "_magick.def" [compress] 6155/22161 bytes
+File: "_predicate.def" [compress] 0/13654 bytes
+File: "_stdenv.def" [compress] 15642/65021 bytes
+File: "_types.def" [compress] 7797/29289 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/compat/8.4/"
+File: "Colour.def" [compress] 0/16344 bytes
+File: "Filter.def" [compress] 0/40643 bytes
+File: "Histogram.def" [compress] 0/7301 bytes
+File: "Image.def" [compress] 11891/52345 bytes
+File: "Magick.def" [compress] 0/49751 bytes
+File: "Math.def" [compress] 0/13205 bytes
+File: "Matrix.def" [compress] 0/11225 bytes
+File: "Object.def" [compress] 0/1157 bytes
+File: "Preferences.ws" [compress] 3616/33786 bytes
+File: "Tasks.def" [compress] 0/26683 bytes
+File: "Widgets.def" [compress] 0/1259 bytes
+File: "_Object.def" [compress] 0/11269 bytes
+File: "_convert.def" [compress] 0/18595 bytes
+File: "_generate.def" [compress] 0/3949 bytes
+File: "_joe_extra.def" [compress] 0/12861 bytes
+File: "_joe_utilities.def" [compress] 0/20837 bytes
+File: "_list.def" [compress] 0/9795 bytes
+File: "_magick.def" [compress] 0/22161 bytes
+File: "_predicate.def" [compress] 0/13654 bytes
+File: "_stdenv.def" [compress] 15695/65295 bytes
+File: "_types.def" [compress] 0/29289 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/compat/8.5/"
+File: "Colour.def" [compress] 0/16344 bytes
+File: "Filter.def" [compress] 9661/40710 bytes
+File: "Histogram.def" [compress] 2449/7411 bytes
+File: "Image.def" [compress] 12196/53636 bytes
+File: "Magick.def" [compress] 0/49751 bytes
+File: "Math.def" [compress] 0/13205 bytes
+File: "Matrix.def" [compress] 0/11225 bytes
+File: "Object.def" [compress] 0/1157 bytes
+File: "Preferences.ws" [compress] 0/33786 bytes
+File: "Tasks.def" [compress] 0/26683 bytes
+File: "Widgets.def" [compress] 0/1259 bytes
+File: "_Object.def" [compress] 0/11269 bytes
+File: "_convert.def" [compress] 5197/19327 bytes
+File: "_generate.def" [compress] 0/3949 bytes
+File: "_joe_extra.def" [compress] 0/12861 bytes
+File: "_joe_utilities.def" [compress] 5424/20834 bytes
+File: "_list.def" [compress] 0/9795 bytes
+File: "_magick.def" [compress] 0/22161 bytes
+File: "_predicate.def" [compress] 0/13654 bytes
+File: "_stdenv.def" [compress] 15884/66680 bytes
+File: "_types.def" [compress] 0/29289 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/compat/8.6/"
+File: "Colour.def" [compress] 3968/16598 bytes
+File: "Filter.def" [compress] 0/40710 bytes
+File: "Histogram.def" [compress] 2489/7543 bytes
+File: "Image.def" [compress] 12409/55007 bytes
+File: "Magick.def" [compress] 0/49751 bytes
+File: "Math.def" [compress] 0/13205 bytes
+File: "Matrix.def" [compress] 0/11225 bytes
+File: "Object.def" [compress] 0/1157 bytes
+File: "Tasks.def" [compress] 0/26683 bytes
+File: "Widgets.def" [compress] 0/1259 bytes
+File: "_Object.def" [compress] 0/11269 bytes
+File: "_convert.def" [compress] 5412/20889 bytes
+File: "_generate.def" [compress] 0/3949 bytes
+File: "_joe_extra.def" [compress] 2964/13487 bytes
+File: "_joe_utilities.def" [compress] 0/20834 bytes
+File: "_list.def" [compress] 0/9795 bytes
+File: "_magick.def" [compress] 0/22161 bytes
+File: "_predicate.def" [compress] 3305/13725 bytes
+File: "_stdenv.def" [compress] 15934/67118 bytes
+File: "_types.def" [compress] 8395/31415 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/data/"
+File: "AdobeRGB1998.icc" [compress] 280/580 bytes
+File: "cmyk.icm" [compress] 314375/961644 bytes
+File: "macbeth_lab_d50.mat" [compress] 284/426 bytes
+File: "macbeth_lab_d65.mat" [compress] 373/579 bytes
+File: "nip-slider-16.png" [compress] 565 bytes
+File: "nip2-icon.ico" [compress] 21827/71690 bytes
+File: "rachel.con" [compress] 49/76 bytes
+File: "sRGB.icm" [compress] 2307/6922 bytes
+File: "stock-alert-22.png" [compress] 718 bytes
+File: "stock-led-blue-18.png" [compress] 456 bytes
+File: "stock-led-cyan-18.png" [compress] 524 bytes
+File: "stock-led-green-18.png" [compress] 461 bytes
+File: "stock-led-off-18.png" [compress] 539 bytes
+File: "stock-led-red-18.png" [compress] 461 bytes
+File: "stock-led-yellow-18.png" [compress] 527 bytes
+File: "stock-padlock-closed-22.png" [compress] 614 bytes
+File: "stock-tool-bucket-fill-22.png" [compress] 1205/1211 bytes
+File: "stock-tool-ink-22.png" [compress] 1011 bytes
+File: "stock-tool-move-22.png" [compress] 510 bytes
+File: "stock-tool-path-22.png" [compress] 820 bytes
+File: "stock-tool-rect-select-22.png" [compress] 196 bytes
+File: "stock-tool-select-22.png" [compress] 407 bytes
+File: "stock-tool-smudge-22.png" [compress] 927 bytes
+File: "stock-tool-text-22.png" [compress] 539 bytes
+File: "vips-128.png" [compress] 25340 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/data/examples/"
+File: "print_test_image.v" [compress] 496578/1739296 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/data/examples/1_point_mosaic/"
+File: "1pt_mosaic.ws" [compress] 1504/18799 bytes
+File: "cd1.1.jpg" [compress] 21305 bytes
+File: "cd1.2.jpg" [compress] 22441 bytes
+File: "cd2.1.jpg" [compress] 22392 bytes
+File: "cd2.2.jpg" [compress] 23903 bytes
+File: "cd3.1.jpg" [compress] 22241 bytes
+File: "cd3.2.jpg" [compress] 22156 bytes
+File: "cd4.1.jpg" [compress] 22096 bytes
+File: "cd4.2.jpg" [compress] 24257 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/data/examples/2_point_mosaic/"
+File: "2pts_mosaic.ws" [compress] 1188/13035 bytes
+File: "example_im_01.jpg" [compress] 22534/22843 bytes
+File: "example_im_02.jpg" [compress] 22640/22657 bytes
+File: "example_im_03.jpg" [compress] 30173 bytes
+File: "example_im_04.jpg" [compress] 28771 bytes
+File: "example_im_05.jpg" [compress] 33104/33142 bytes
+File: "example_im_06.jpg" [compress] 37139/37151 bytes
+File: "full_image.jpg" [compress] 172790 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/data/examples/businesscard/"
+File: "businesscard.ws" [compress] 2092/25854 bytes
+File: "slanted_oval_vase2.jpg" [compress] 23530/23859 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/data/examples/clone/"
+File: "clone.ws" [compress] 1006/6178 bytes
+File: "example_im_01.png" [compress] 87700 bytes
+File: "example_im_02.png" [compress] 84384 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/data/examples/framing/"
+File: "framing.ws" [compress] 1609/20327 bytes
+File: "framing_complex.png" [compress] 102082/102507 bytes
+File: "framing_corner.png" [compress] 17620 bytes
+File: "framing_distorted_frame.png" [compress] 70674/70886 bytes
+File: "framing_picture.jpg" [compress] 13053 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/data/examples/logo/"
+File: "logo2.ws" [compress] 2908/53491 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/data/examples/manual_balance/"
+File: "manual_balance.ws" [compress] 1014/6752 bytes
+File: "mask_01.png" [compress] 334/846 bytes
+File: "mask_02.png" [compress] 266/782 bytes
+File: "mask_03.png" [compress] 290/829 bytes
+File: "mask_control.png" [compress] 339/1096 bytes
+File: "simp_base.png" [compress] 254942/278913 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/data/examples/overlays_and_blending/"
+File: "blend_example_ir.jpg" [compress] 10631/11530 bytes
+File: "blend_example_vis.jpg" [compress] 6006/6793 bytes
+File: "blend_example_xray.jpg" [compress] 4064/5114 bytes
+File: "overlay_blend.ws" [compress] 1110/8723 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/data/examples/registering/"
+File: "example_im_1.jpg" [compress] 0/6793 bytes
+File: "example_im_2.jpg" [compress] 4440/4798 bytes
+File: "example_im_3.jpg" [compress] 4287/4446 bytes
+File: "example_im_4.jpg" [compress] 5800/5992 bytes
+File: "registering.ws" [compress] 1306/16431 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/rc/"
+File: "ipgtkrc" [compress] 558/1802 bytes
+File: Descending to: "./nip2-8.8.0/share/nip2/start/"
+File: "Colour.def" [compress] 0/16598 bytes
+File: "Filter.def" [compress] 9665/40894 bytes
+File: "Histogram.def" [compress] 0/7543 bytes
+File: "Image.def" [compress] 12587/55598 bytes
+File: "Magick.def" [compress] 0/49751 bytes
+File: "Math.def" [compress] 0/13205 bytes
+File: "Matrix.def" [compress] 0/11225 bytes
+File: "Object.def" [compress] 0/1157 bytes
+File: "Preferences.ws" [compress] 3616/33786 bytes
+File: "Tasks.def" [compress] 0/26683 bytes
+File: "Widgets.def" [compress] 0/1259 bytes
+File: "_Object.def" [compress] 0/11269 bytes
+File: "_convert.def" [compress] 0/20889 bytes
+File: "_generate.def" [compress] 0/3949 bytes
+File: "_joe_extra.def" [compress] 0/13487 bytes
+File: "_joe_utilities.def" [compress] 0/20834 bytes
+File: "_list.def" [compress] 0/9795 bytes
+File: "_magick.def" [compress] 0/22161 bytes
+File: "_predicate.def" [compress] 0/13725 bytes
+File: "_stdenv.def" [compress] 16037/67791 bytes
+File: "_types.def" [compress] 8413/31461 bytes
+File: Descending to: "./nip2-8.8.0/share/pixmaps/"
+File: Descending to: "./nip2-8.8.0/share/pixmaps/goffice/"
+File: Descending to: "./nip2-8.8.0/share/pixmaps/goffice/0.8.17/"
+File: "area.xpm" [compress] 250/680 bytes
+File: "bar-hboth.png" [compress] 243 bytes
+File: "bar-hminus.png" [compress] 242 bytes
+File: "bar-hplus.png" [compress] 245 bytes
+File: "bar-none.png" [compress] 244 bytes
+File: "bar-vboth.png" [compress] 242 bytes
+File: "bar-vminus.png" [compress] 251 bytes
+File: "bar-vplus.png" [compress] 248 bytes
+File: "bar.xpm" [compress] 224/691 bytes
+File: "bubble.xpm" [compress] 239/694 bytes
+File: "chart_area_1_1.png" [compress] 2579 bytes
+File: "chart_area_1_2.png" [compress] 2588 bytes
+File: "chart_area_1_3.png" [compress] 2105 bytes
+File: "chart_bar_1_1.png" [compress] 1587 bytes
+File: "chart_bar_1_2.png" [compress] 1660 bytes
+File: "chart_bar_1_3.png" [compress] 1739 bytes
+File: "chart_bar_2_1.png" [compress] 463 bytes
+File: "chart_bar_2_2.png" [compress] 295 bytes
+File: "chart_bar_2_3.png" [compress] 275 bytes
+File: "chart_boxplot_1_1.png" [compress] 1819 bytes
+File: "chart_boxplot_1_2.png" [compress] 1971 bytes
+File: "chart_boxplot_2_1.png" [compress] 2226 bytes
+File: "chart_boxplot_2_2.png" [compress] 2372 bytes
+File: "chart_bubble_1_1.png" [compress] 2773 bytes
+File: "chart_color_polar_1_1.png" [compress] 3954/3975 bytes
+File: "chart_colored_1_1.png" [compress] 2410 bytes
+File: "chart_column_1_1.png" [compress] 1700 bytes
+File: "chart_column_1_2.png" [compress] 1682 bytes
+File: "chart_column_1_3.png" [compress] 1749 bytes
+File: "chart_column_2_1.png" [compress] 268 bytes
+File: "chart_column_2_2.png" [compress] 298 bytes
+File: "chart_column_2_3.png" [compress] 310 bytes
+File: "chart_column_3_1.png" [compress] 359 bytes
+File: "chart_cone_1_1.png" [compress] 328 bytes
+File: "chart_cone_1_2.png" [compress] 313 bytes
+File: "chart_cone_1_3.png" [compress] 388 bytes
+File: "chart_cone_2_1.png" [compress] 347 bytes
+File: "chart_cone_2_2.png" [compress] 335 bytes
+File: "chart_cone_2_3.png" [compress] 383 bytes
+File: "chart_cone_3_1.png" [compress] 424 bytes
+File: "chart_contour_1_1.png" [compress] 2487 bytes
+File: "chart_contour_2_1.png" [compress] 2861 bytes
+File: "chart_cylinder_1_1.png" [compress] 326 bytes
+File: "chart_cylinder_1_2.png" [compress] 335 bytes
+File: "chart_cylinder_1_3.png" [compress] 411 bytes
+File: "chart_cylinder_2_1.png" [compress] 296 bytes
+File: "chart_cylinder_2_2.png" [compress] 298 bytes
+File: "chart_cylinder_2_3.png" [compress] 329 bytes
+File: "chart_cylinder_3_1.png" [compress] 420 bytes
+File: "chart_dropbar_1_1.png" [compress] 1520 bytes
+File: "chart_dropbar_1_2.png" [compress] 1536 bytes
+File: "chart_dropbar_1_3.png" [compress] 1958 bytes
+File: "chart_dropbar_1_4.png" [compress] 1940 bytes
+File: "chart_histogram_1_1.png" [compress] 1798 bytes
+File: "chart_histogram_1_3.png" [compress] 2321 bytes
+File: "chart_histogram_1_4.png" [compress] 2493 bytes
+File: "chart_histogram_2_1.png" [compress] 1891 bytes
+File: "chart_line_1_1.png" [compress] 3494 bytes
+File: "chart_line_1_2.png" [compress] 3408 bytes
+File: "chart_line_1_3.png" [compress] 2512 bytes
+File: "chart_line_2_1.png" [compress] 3424 bytes
+File: "chart_line_2_2.png" [compress] 3263 bytes
+File: "chart_line_2_3.png" [compress] 2610 bytes
+File: "chart_line_3_1.png" [compress] 442 bytes
+File: "chart_minmax_1_1.png" [compress] 1616 bytes
+File: "chart_minmax_1_2.png" [compress] 1627 bytes
+File: "chart_minmax_2_1.png" [compress] 2040 bytes
+File: "chart_minmax_2_2.png" [compress] 2098 bytes
+File: "chart_pie_1_1.png" [compress] 2676 bytes
+File: "chart_pie_1_2.png" [compress] 281 bytes
+File: "chart_pie_1_3.png" [compress] 316 bytes
+File: "chart_pie_2_1.png" [compress] 3044 bytes
+File: "chart_pie_2_2.png" [compress] 325 bytes
+File: "chart_pie_2_3.png" [compress] 294 bytes
+File: "chart_pie_3_1.png" [compress] 2485 bytes
+File: "chart_pie_3_2.png" [compress] 2950 bytes
+File: "chart_polar_1_1.png" [compress] 3740/3774 bytes
+File: "chart_prob_1_1.png" [compress] 2358 bytes
+File: "chart_pyramid_1_1.png" [compress] 315 bytes
+File: "chart_pyramid_1_2.png" [compress] 317 bytes
+File: "chart_pyramid_1_3.png" [compress] 338 bytes
+File: "chart_pyramid_2_1.png" [compress] 324 bytes
+File: "chart_pyramid_2_2.png" [compress] 326 bytes
+File: "chart_pyramid_2_3.png" [compress] 336 bytes
+File: "chart_pyramid_3_1.png" [compress] 396 bytes
+File: "chart_radar_1_1.png" [compress] 4057 bytes
+File: "chart_radar_1_2.png" [compress] 3841 bytes
+File: "chart_radar_1_3.png" [compress] 3037 bytes
+File: "chart_ring_1_1.png" [compress] 3463 bytes
+File: "chart_ring_1_2.png" [compress] 4265 bytes
+File: "chart_scatter_1_1.png" [compress] 1967 bytes
+File: "chart_scatter_2_1.png" [compress] 302 bytes
+File: "chart_scatter_2_2.png" [compress] 277 bytes
+File: "chart_scatter_3_1.png" [compress] 3547 bytes
+File: "chart_scatter_3_2.png" [compress] 3563 bytes
+File: "chart_scatter_3_3.png" [compress] 3550 bytes
+File: "chart_scatter_4_1.png" [compress] 1780 bytes
+File: "chart_scatter_4_2.png" [compress] 1773 bytes
+File: "chart_scatter_4_3.png" [compress] 1803 bytes
+File: "chart_scatter_4_4.png" [compress] 1810 bytes
+File: "chart_stock_1_1.png" [compress] 169 bytes
+File: "chart_stock_1_2.png" [compress] 198 bytes
+File: "chart_stock_2_1.png" [compress] 241 bytes
+File: "chart_stock_2_2.png" [compress] 251 bytes
+File: "chart_surface_2_1.png" [compress] 3819 bytes
+File: "chart_surface_2_2.png" [compress] 4179/4183 bytes
+File: "color.xpm" [compress] 181/582 bytes
+File: "column.xpm" [compress] 222/694 bytes
+File: "contour.xpm" [compress] 157/524 bytes
+File: "dist.xpm" [compress] 151/506 bytes
+File: "doughnut.xpm" [compress] 259/689 bytes
+File: "dropbar.xpm" [compress] 156/524 bytes
+File: "linegraph.xpm" [compress] 246/697 bytes
+File: "minmax.xpm" [compress] 121/493 bytes
+File: "pie.xpm" [compress] 246/691 bytes
+File: "polar.png" [compress] 470 bytes
+File: "radar.xpm" [compress] 266/681 bytes
+File: "scatter.xpm" [compress] 235/695 bytes
+File: "stock.xpm" [compress] 234/695 bytes
+File: "surface.xpm" [compress] 254/683 bytes
+File: Descending to: "./nip2-8.8.0/share/themes/"
+File: Descending to: "./nip2-8.8.0/share/themes/Clearlooks/"
+File: Descending to: "./nip2-8.8.0/share/themes/Clearlooks/gtk-2.0/"
+File: "gtkrc" [compress] 3107/11322 bytes
+File: Descending to: "./nip2-8.8.0/share/themes/Default/"
+File: Descending to: "./nip2-8.8.0/share/themes/Default/gtk-2.0-key/"
+File: "gtkrc" [compress] 82 bytes
+File: Descending to: "./nip2-8.8.0/share/themes/Emacs/"
+File: Descending to: "./nip2-8.8.0/share/themes/Emacs/gtk-2.0-key/"
+File: "gtkrc" [compress] 1179/3818 bytes
+File: Descending to: "./nip2-8.8.0/share/themes/MS-Windows/"
+File: Descending to: "./nip2-8.8.0/share/themes/MS-Windows/gtk-2.0/"
+File: "gtkrc" [compress] 893/1825 bytes
+File: Descending to: "./nip2-8.8.0/share/themes/Raleigh/"
+File: Descending to: "./nip2-8.8.0/share/themes/Raleigh/gtk-2.0/"
+File: "gtkrc" [compress] 65/69 bytes
+File: Returning to: "."
+WriteRegStr: HKCU\Software\VIPS\=$INSTDIR
+WriteUninstaller: "$INSTDIR\Uninstall.exe"
+!insertmacro: MUI_STARTMENU_WRITE_BEGIN
+!insertmacro: end of MUI_STARTMENU_WRITE_BEGIN
+CreateDirectory: "$SMPROGRAMS\$StartMenuFolder"
+CreateShortCut: "$SMPROGRAMS\$StartMenuFolder\nip2-8.8.0.lnk"->"$INSTDIR\nip2-8.8.0\bin\nip2.exe"  icon:,0, showmode=0x0, hotkey=0x0, comment=
+CreateShortCut: "$SMPROGRAMS\$StartMenuFolder\Uninstall nip2-8.8.0.lnk"->"$INSTDIR\Uninstall.exe"  icon:,0, showmode=0x0, hotkey=0x0, comment=
+!insertmacro: MUI_STARTMENU_WRITE_END
+!insertmacro: end of MUI_STARTMENU_WRITE_END
+SectionEnd
+Section: "Uninstall"
+RMDir: /r "$INSTDIR\nip2-8.8.0"
+Delete: "$INSTDIR\Uninstall.exe"
+RMDir: "$INSTDIR"
+!insertmacro: MUI_STARTMENU_GETFOLDER
+!insertmacro: end of MUI_STARTMENU_GETFOLDER
+Delete: "$SMPROGRAMS\$StartMenuFolder\Uninstall nip2-8.8.0.lnk"
+Delete: "$SMPROGRAMS\$StartMenuFolder\nip2-8.8.0.lnk"
+RMDir: "$SMPROGRAMS\$StartMenuFolder"
+DeleteRegKey: HKCU\Software\VIPS
+SectionEnd
+LangString: "DESC_SecDummy" 1033 "A test section."
+!insertmacro: MUI_FUNCTION_DESCRIPTION_BEGIN
+warning: unknown variable/constant "mui.ComponentsPage.DescriptionText" detected, ignoring (macro:MUI_DESCRIPTION_BEGIN:4)
+warning: unknown variable/constant "mui.ComponentsPage.DescriptionText" detected, ignoring (macro:MUI_DESCRIPTION_BEGIN:5)
+warning: unknown variable/constant "mui.ComponentsPage.DescriptionText.Info" detected, ignoring (macro:MUI_DESCRIPTION_BEGIN:6)
+warning: unknown variable/constant "mui.ComponentsPage.DescriptionText" detected, ignoring (macro:MUI_DESCRIPTION_BEGIN:6)
+!insertmacro: end of MUI_FUNCTION_DESCRIPTION_BEGIN
+!insertmacro: MUI_DESCRIPTION_TEXT
+warning: unknown variable/constant "mui.ComponentsPage.DescriptionText" detected, ignoring (macro:MUI_DESCRIPTION_TEXT:6)
+warning: unknown variable/constant "mui.ComponentsPage.DescriptionText" detected, ignoring (macro:MUI_DESCRIPTION_TEXT:7)
+warning: unknown variable/constant "mui.ComponentsPage.DescriptionText" detected, ignoring (macro:MUI_DESCRIPTION_TEXT:8)
+!insertmacro: end of MUI_DESCRIPTION_TEXT
+!insertmacro: MUI_FUNCTION_DESCRIPTION_END
+!insertmacro: end of MUI_FUNCTION_DESCRIPTION_END
+
+Processed 1 file, writing output:
+Adding plug-ins initializing function... Done!
+Processing pages... Done!
+Removing unused resources... Done!
+Generating language tables... Done!
+Generating uninstaller... Done!
+
+Output: "/data/nsis/nip2-8.8.0-setup.exe"
+Install: 7 pages (448 bytes), 1 section (1048 bytes), 1508 instructions (42224 bytes), 846 strings (34274 bytes), 1 language table (330 bytes).
+Uninstall: 5 pages (320 bytes), 
+1 section (1048 bytes), 415 instructions (11620 bytes), 176 strings (2723 bytes), 1 language table (290 bytes).
+Datablock optimizer saved 707751 bytes (~3.6%).
+
+Using lzma compression.
+
+EXE header size:              161280 / 74752 bytes
+Install code:                  16487 / 78724 bytes
+Install data:               18491914 / 61569136 bytes
+Uninstall code+data:          151977 / 167226 bytes
+CRC (0x80B3197A):                  4 / 4 bytes
+
+Total size:                 18821662 / 61889842 bytes (30.4%)
+
+7 warnings:
+  unknown variable/constant "mui.ComponentsPage.DescriptionText" detected, ignoring (macro:MUI_DESCRIPTION_BEGIN:4)
+  unknown variable/constant "mui.ComponentsPage.DescriptionText" detected, ignoring (macro:MUI_DESCRIPTION_BEGIN:5)
+  unknown variable/constant "mui.ComponentsPage.DescriptionText.Info" detected, ignoring (macro:MUI_DESCRIPTION_BEGIN:6)
+  unknown variable/constant "mui.ComponentsPage.DescriptionText" detected, ignoring (macro:MUI_DESCRIPTION_BEGIN:6)
+  unknown variable/constant "mui.ComponentsPage.DescriptionText" detected, ignoring (macro:MUI_DESCRIPTION_TEXT:6)
+  unknown variable/constant "mui.ComponentsPage.DescriptionText" detected, ignoring (macro:MUI_DESCRIPTION_TEXT:7)
+  unknown variable/constant "mui.ComponentsPage.DescriptionText" detected, ignoring (macro:MUI_DESCRIPTION_TEXT:8)

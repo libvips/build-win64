@@ -1,0 +1,24 @@
+diff -Naur goffice-0.8.17-orig/configure goffice-0.8.17/configure
+--- goffice-0.8.17-orig/configure	2011-06-17 02:24:27.000000000 +0000
++++ goffice-0.8.17/configure	2016-05-20 08:18:22.859039407 +0000
+@@ -15161,7 +15161,7 @@
+ $as_echo_n "checking for G_REGEX_ERROR_STRAY_BACKSLASH... " >&6; }
+ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+-#include <glib/gregex.h>
++#include <glib.h>
+ int
+ main ()
+ {
+diff -Naur goffice-0.8.17-orig/configure.in goffice-0.8.17/configure.in
+--- goffice-0.8.17-orig/configure.in	2011-06-16 23:46:53.000000000 +0000
++++ goffice-0.8.17/configure.in	2016-05-20 08:18:51.899989729 +0000
+@@ -493,7 +493,7 @@
+ CFLAGS="$CFLAGS $GOFFICE_CFLAGS"
+ LIBS="$GOFFICE_LIBS $LIBS"
+ AC_MSG_CHECKING([for G_REGEX_ERROR_STRAY_BACKSLASH])
+-AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <glib/gregex.h>]], [[GRegexError error=G_REGEX_ERROR_STRAY_BACKSLASH;]])],
++AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <glib.h>]], [[GRegexError error=G_REGEX_ERROR_STRAY_BACKSLASH;]])],
+                [AC_DEFINE(HAVE_G_REGEX_ERROR_STRAY_BACKSLASH, 1, [Define if G_REGEX_ERROR_STRAY_BACKSLASH is defined])
+ 	        glib_has_G_REGEX_ERROR_STRAY_BACKSLASH=yes
+                 AC_MSG_RESULT(yes)],
