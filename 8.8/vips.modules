@@ -737,7 +737,9 @@
     <branch
       repo="gnome"
       module="gdk-pixbuf/2.38/gdk-pixbuf-2.38.1.tar.xz"
-      version="2.38.1"/>
+      version="2.38.1">
+      <patch file="patches/gdk-pixbuf-libjpeg-turbo.patch" strip="1"/>
+    </branch>
     <dependencies>
       <dep package="glib"/>
       <dep package="libjpeg-turbo"/>
@@ -875,7 +877,7 @@
 
     <branch
       repo="vips"
-      module="v8.8.0-rc3/vips-8.8.0-rc3.tar.gz"
+      module="v8.8.0/vips-8.8.0.tar.gz"
       version="8.8.0"
       checkoutdir="vips-8.8.0"/>
 
@@ -926,7 +928,7 @@
 
     <branch
       repo="vips"
-      module="v8.8.0-rc3/vips-8.8.0-rc3.tar.gz"
+      module="v8.8.0/vips-8.8.0.tar.gz"
       version="8.8.0"
       checkoutdir="vips-8.8.0"/>
 
@@ -957,7 +959,7 @@
 
     <branch
       repo="vips"
-      module="v8.8.0-rc3/vips-8.8.0-rc3.tar.gz"
+      module="v8.8.0/vips-8.8.0.tar.gz"
       version="8.8.0"
       checkoutdir="vips-8.8.0">
       <patch file="patches/transform.patch" strip="1"/>
