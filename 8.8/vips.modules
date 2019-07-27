@@ -264,8 +264,8 @@
     autogenargs="--enable-static">
     <branch
       repo="nongnu"
-      module="freetype/freetype-2.10.0.tar.gz"
-      version="2.10.0"/>
+      module="freetype/freetype-2.10.1.tar.gz"
+      version="2.10.1"/>
     <dependencies>
       <dep package="gettext"/>
       <dep package="expat"/>
@@ -281,8 +281,8 @@
     use-ninja="False">
     <branch
       repo="freedesktop.org"
-      module="harfbuzz/release/harfbuzz-2.4.0.tar.bz2"
-      version="2.4.0">
+      module="harfbuzz/release/harfbuzz-2.5.3.tar.xz"
+      version="2.5.3">
       <patch file="patches/harfbuzz-2-fixes.patch" strip="1"/>
     </branch>
     <dependencies>
@@ -635,8 +635,8 @@
     autogenargs="--enable-libwebpmux --enable-libwebpdemux">
     <branch
       repo="webp"
-      module="libwebp-1.0.2.tar.gz"
-      version="1.0.2"/>
+      module="libwebp-1.0.3.tar.gz"
+      version="1.0.3"/>
     <dependencies>
       <dep package="libpng"/>
       <dep package="libjpeg-turbo"/>
