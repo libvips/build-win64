@@ -1,0 +1,929 @@
+<?xml version="1.0"?>
+<!DOCTYPE moduleset SYSTEM "moduleset.dtd">
+<?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
+<moduleset>
+
+  <!-- tarball repos -->
+  <repository 
+    type="tarball" 
+    name="freedesktop.org"
+    href="http://freedesktop.org/software/"/>
+
+  <repository
+    type="tarball" 
+    name="poppler.freedesktop.org"
+    href="http://poppler.freedesktop.org/"/>
+
+  <repository
+    type="tarball"
+    name="checkout"
+    href="file:///home/john/GIT/build-win64/8.4/checkout/"/>
+
+  <repository
+    type="tarball"
+    name="tiff"
+    href="http://download.osgeo.org/libtiff/"/>
+
+  <repository
+    type="tarball"
+    name="cairo"
+    href="http://www.cairographics.org/releases/"/>
+
+  <repository
+    type="tarball"
+    name="vips"
+    href="https://github.com/libvips/libvips/releases/download/"/>
+
+  <repository
+    type="tarball"
+    name="libheif"
+    href="https://github.com/strukturag/libheif/releases/download/"/>
+
+  <repository
+    type="tarball"
+    name="libde265"
+    href="https://github.com/strukturag/libde265/releases/download/"/>
+
+  <repository
+    type="tarball"
+    name="openslide"
+    href="https://github.com/openslide/openslide/releases/download/"/>
+
+  <repository
+    type="tarball"
+    name="fribidi"
+    href="https://github.com/fribidi/fribidi/releases/download/"/>
+
+  <repository
+    type="tarball"
+    name="sourceware"
+    href="ftp://sourceware.org/pub/"/>
+
+  <repository
+    type="tarball"
+    name="hdf5"
+    href="http://www.hdfgroup.org/ftp/HDF5/current/src/"/>
+
+  <repository
+    type="tarball"
+    name="orc"
+    href="https://gstreamer.freedesktop.org/src/orc/"/>
+
+  <repository
+    type="tarball"
+    name="cfitsio"
+    href="http://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/"/>
+
+  <repository
+    type="tarball"
+    name="fftw"
+    href="http://www.fftw.org/"/>
+
+  <repository
+    type="tarball"
+    name="sourceforge"
+    href="http://downloads.sourceforge.net/sourceforge/"/>
+
+  <repository
+    type="tarball"
+    name="nongnu"
+    href="http://download.savannah.nongnu.org/releases/"/>
+
+  <!-- we download from the github repo in the hope that releases will be 
+       deleted less often
+
+    -->
+
+  <repository
+    type="tarball"
+    name="magick"
+    href="https://github.com/ImageMagick/ImageMagick6/archive/"/>
+
+  <repository
+    type="tarball"
+    name="openjpeg"
+    href="https://github.com/uclouvain/openjpeg/archive/"/>
+
+  <repository
+    type="tarball"
+    name="webp"
+    href="http://downloads.webmproject.org/releases/webp/"/>
+
+  <repository
+    type="tarball"
+    name="gnu"
+    href="ftp://ftp.gnu.org/pub/gnu/"/>
+
+  <repository
+    type="tarball"
+    name="gnome"
+    href="http://ftp.gnome.org/pub/GNOME/sources/"/>
+
+  <repository
+    type="tarball"
+    name="sqlite3"
+    href="http://www.sqlite.org/"/>
+
+  <repository
+    type="tarball"
+    name="xmlsoft"
+    href="ftp://xmlsoft.org/"/>
+
+  <repository
+    type="tarball"
+    name="zlib"
+    href="https://zlib.net/"/>
+
+  <!-- the zlib configure is a bit basic and does not support
+       cross-compiling, so use cmake
+
+       zlib will make libzlib.dll, but we want libz.dll so we must
+       patch CMakeLists.txt
+
+    -->
+
+  <cmake id="zlib"
+    cmakeargs="-DINSTALL_PKGCONFIG_DIR:PATH=lib/pkgconfig"
+    use-ninja="False">
+    <branch
+      repo="zlib"
+      module="zlib-1.2.11.tar.gz"
+      version="1.2.11">
+      <patch file="patches/zlib-name.patch" strip="1"/>
+    </branch>
+  </cmake>
+
+  <autotools id="libiconv"
+    autogen-sh="configure">
+    <branch
+      repo="gnu"
+      module="libiconv/libiconv-1.15.tar.gz"
+      version="1.15"/>
+  </autotools>
+
+  <autotools id="gettext"
+    autogen-sh="configure"
+    autogenargs="--disable-java --disable-native-java --disable-csharp --enable-static --enable-threads=win32 --without-emacs --disable-openmp --without-cvs --without-git --with-included-libcroco --with-included-libunistring --with-included-libxml --with-included-glib">
+    <branch
+      repo="gnu"
+      module="gettext/gettext-0.19.8.1.tar.xz"
+      version="0.19.8.1"/>
+    <dependencies>
+      <dep package="libiconv"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="expat"
+    autogen-sh="configure">
+    <branch
+      repo="sourceforge"
+      module="expat/expat-2.2.7.tar.bz2"
+      version="2.2.7"/>
+    <dependencies>
+      <dep package="zlib"/>
+      <dep package="gettext"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="freetype"
+    autogen-sh="configure"
+    autogenargs="--enable-static">
+    <branch
+      repo="nongnu"
+      module="freetype/freetype-2.10.1.tar.gz"
+      version="2.10.1"/>
+    <dependencies>
+      <dep package="gettext"/>
+      <dep package="expat"/>
+    </dependencies>
+  </autotools>
+
+  <!-- icu will pull in standard linux headers, which we don't want
+
+    -->
+
+  <cmake id="harfbuzz"
+    cmakeargs="-DHB_HAVE_GLIB=ON -DHB_HAVE_FREETYPE=ON -DHB_HAVE_ICU=OFF -DHAVE_SYS_MMAN_H=OFF -DHB_BUILD_UTILS=OFF -DHB_BUILD_TESTS=OFF"
+    use-ninja="False">
+    <branch
+      repo="freedesktop.org"
+      module="harfbuzz/release/harfbuzz-2.5.3.tar.xz"
+      version="2.5.3">
+      <patch file="patches/harfbuzz-2-fixes.patch" strip="1"/>
+    </branch>
+    <dependencies>
+      <dep package="gettext"/>
+      <dep package="glib"/>
+      <dep package="expat"/>
+      <dep package="freetype"/>
+      <dep package="cairo"/>
+      <dep package="fontconfig"/>
+    </dependencies>
+  </cmake>
+
+  <autotools id="fribidi"
+    autogen-sh="configure">
+    <branch
+      repo="fribidi"
+      module="v1.0.5/fribidi-1.0.5.tar.bz2"
+      version="1.0.5"
+      checkoutdir="fribidi-1.0.5"/>
+    <dependencies>
+    </dependencies>
+  </autotools>
+
+  <autotools id="fontconfig"
+    autogen-sh="configure"
+    autogenargs="--disable-docs">
+    <branch
+      repo="freedesktop.org"
+      module="fontconfig/release/fontconfig-2.13.1.tar.gz"
+      version="2.13.1">
+      <patch file="patches/fontconfig-2-fixes.patch" strip="1"/>
+    </branch>
+    <dependencies>
+      <dep package="gettext"/>
+      <dep package="expat"/>
+      <dep package="freetype"/>
+    </dependencies>
+  </autotools>
+
+  <!-- no longer needed by libvips, but some of the deps need it
+
+    -->
+
+  <autotools id="libxml2"
+    autogen-sh="configure"
+    autogenargs="--without-python">
+    <branch
+      repo="xmlsoft"
+      module="libxml2/libxml2-2.9.9.tar.gz"
+      version="2.9.9"/>
+    <dependencies>
+      <dep package="gettext"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="libpng"
+    autogen-sh="configure">
+    <branch
+      repo="sourceforge"
+      module="libpng/libpng-1.6.37.tar.gz"
+      version="1.6.37"/>
+    <dependencies>
+      <dep package="zlib"/>
+      <dep package="gettext"/>
+    </dependencies>
+  </autotools>
+
+  <!-- giflib does not automatically open binary when cross-compiling
+
+    -->
+
+  <autotools id="giflib"
+    autogen-sh="configure"
+    makeargs="CFLAGS=-D_OPEN_BINARY">
+    <branch
+      repo="sourceforge"
+      module="giflib/giflib-5.1.4.tar.gz"
+      version="5.1.4"/>
+    <dependencies>
+      <dep package="zlib"/>
+      <dep package="gettext"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="libcroco"
+    autogen-sh="configure"
+    supports-non-srcdir-builds="no">
+    <pkg-config>libcroco-0.6.pc</pkg-config>
+    <branch
+      repo="gnome"
+      module="libcroco/0.6/libcroco-0.6.13.tar.xz"
+      version="0.6.13"/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="libxml2"/>
+    </dependencies>
+  </autotools>
+
+  <!-- librsvg v2.40.20 has a small memory leak, v2.42.0+ requires
+       Rust toolchain
+
+    -->
+
+  <autotools id="librsvg"
+    autogen-sh="configure"
+    supports-non-srcdir-builds="no"
+    autogenargs="--disable-introspection --disable-pixbuf-loader">
+    <branch
+      repo="gnome"
+      module="librsvg/2.40/librsvg-2.40.19.tar.xz"
+      version="2.40.19"/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="gdk-pixbuf"/>
+      <dep package="libcroco"/>
+      <dep package="pango"/>
+    </dependencies>
+  </autotools>
+
+  <!-- Build with g++-posix because Poppler needs std::recursive_mutex
+
+    -->
+
+  <cmake id="poppler"
+    cmakeargs="-DCMAKE_CXX_COMPILER=/usr/bin/x86_64-w64-mingw32-g++-posix -DENABLE_ZLIB=ON -DENABLE_LIBTIFF=ON -DENABLE_LIBPNG=ON -DENABLE_GLIB=ON -DENABLE_CMS='lcms2' -DENABLE_LIBOPENJPEG='openjpeg2' -DENABLE_DCTDECODER='libjpeg' -DFONT_CONFIGURATION=win32 -DENABLE_SPLASH=OFF -DENABLE_CPP=OFF"
+    use-ninja="False">
+    <pkg-config>poppler-glib.pc</pkg-config>
+    <branch
+      repo="poppler.freedesktop.org"
+      module="poppler-0.79.0.tar.xz"
+      version="0.79.0"/>
+    <dependencies>
+      <dep package="zlib"/>
+      <dep package="cairo"/>
+      <dep package="libjpeg-turbo"/>
+      <dep package="freetype"/>
+      <dep package="libpng"/>
+      <dep package="tiff"/>
+      <dep package="lcms"/>
+      <dep package="openjpeg"/>
+      <dep package="glib"/>
+    </dependencies>
+    <after>
+      <dep package="gdk-pixbuf"/>
+    </after>
+  </cmake>
+
+  <autotools id="fftw3"
+    autogen-sh="configure"
+    autogenargs="--disable-static --enable-shared --disable-threads">
+    <branch
+      repo="fftw"
+      module="fftw-3.3.8.tar.gz"
+      version="3.3.8"/>
+    <dependencies>
+      <dep package="gettext"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="lcms"
+    autogen-sh="configure">
+    <branch
+      repo="sourceforge"
+      module="lcms/lcms2-2.9.tar.gz"
+      version="2.9"/>
+    <dependencies>
+      <dep package="zlib"/>
+      <dep package="gettext"/>
+    </dependencies>
+  </autotools>
+
+  <!-- needed by openslide and poppler
+
+    -->
+
+  <cmake id="openjpeg"
+    cmakeargs="-DBUILD_PKGCONFIG_FILES=ON -DBUILD_TESTING=OFF"
+    use-ninja="False">
+    <branch
+      repo="openjpeg"
+      module="v2.3.1.tar.gz"
+      checkoutdir="openjpeg-2.3.1"
+      version="2.3.1"/>
+    <dependencies>
+      <dep package="lcms"/>
+      <dep package="tiff"/>
+    </dependencies>
+  </cmake>
+
+  <!-- starting with openslide-3.4.0, sqlite3 is a requirement.
+
+    -->
+
+  <autotools id="sqlite3"
+    autogen-sh="configure">
+    <branch
+      repo="sqlite3"
+      module="2019/sqlite-autoconf-3280000.tar.gz"
+      version="3.28.0"/>
+    <dependencies>
+      <dep package="gettext"/>
+    </dependencies>
+  </autotools>
+
+  <!-- the openslide-3-fixes.patch handles UTF-8 
+       filenames correctly and fixes compile errors
+       with labeled statements named `OUT`.
+
+       switch `autogen-sh="autoreconf"` to `autogen-sh="configure"`
+       once the patch is accepted by upstream.
+
+    -->
+
+  <autotools id="openslide"
+    autogen-sh="autoreconf">
+    <branch
+      repo="openslide"
+      module="v3.4.1/openslide-3.4.1.tar.gz"
+      version="3.4.1">
+      <patch file="patches/openslide-3-fixes.patch" strip="1"/>
+    </branch>
+    <dependencies>
+      <dep package="zlib"/>
+      <dep package="cairo"/>
+      <dep package="gdk-pixbuf"/>
+      <dep package="openjpeg"/>
+      <dep package="sqlite3"/>
+    </dependencies>
+  </autotools>
+
+  <!-- the turbo one is 2x to 4x faster
+
+       the patch fixes compatibility with "basestd.h" header
+
+       WITH_TURBOJPEG=OFF turns off a library we don't use (we just use the
+       libjpeg API)
+
+    -->
+
+  <cmake id="libjpeg-turbo"
+    cmakeargs="-DCMAKE_INSTALL_LIBDIR:PATH=lib -DWITH_TURBOJPEG=OFF -DENABLE_SHARED=ON -DENABLE_STATIC=OFF"
+    use-ninja="False">
+    <branch
+      repo="sourceforge"
+      module="libjpeg-turbo/2.0.2/libjpeg-turbo-2.0.2.tar.gz"
+      version="2.0.2">
+      <patch file="patches/libjpeg-turbo-compatibility.patch" strip="1"/>
+    </branch>
+    <dependencies>
+      <dep package="zlib"/>
+      <dep package="gettext"/>
+    </dependencies>
+  </cmake>
+
+  <!-- OpenEXR does not work with mingw, it becomes very confused re.
+       threading
+
+       the patch sanity checks the shutter speed and stops pow(2, -inf), which
+       causes an uncaught math exception on mingw
+
+    -->
+
+  <autotools id="libexif"
+    autogen-sh="configure">
+    <branch
+      repo="sourceforge"
+      module="libexif/libexif-0.6.21.tar.gz"
+      version="0.6.21">
+      <patch file="patches/libexif-0.6-shutter.patch" strip="1"/>
+    </branch>
+    <dependencies>
+      <dep package="zlib"/>
+      <dep package="gettext"/>
+    </dependencies>
+  </autotools>
+
+  <!-- disable the C++ API for now, we don't use it anyway
+
+    -->
+
+  <autotools id="tiff"
+    autogen-sh="configure"
+    autogenargs="--without-x --disable-cxx --disable-lzma">
+    <branch
+      repo="tiff"
+      module="tiff-4.0.10.tar.gz"
+      version="4.0.10"/>
+    <dependencies>
+      <dep package="zlib"/>
+      <dep package="libjpeg-turbo"/>
+    </dependencies>
+  </autotools>
+
+  <!-- libMagick++.dll fails to link due to some exception problem, disable it
+
+       disable largefile support, we rely on vips for that and ImageMagick's
+       detection does not work when cross-compiling
+
+       disable openmp, ubuntu 14.04 mingw has a broken libgomp
+
+       7.x is much slower (though libvips does support it)
+
+    -->
+
+  <autotools id="imagemagick"
+    autogen-sh="configure"
+    autogenargs="--without-x --without-lzma --without-modules --without-openexr --without-heic --without-gvc --without-lqr --without-magick-plus-plus --disable-largefile --without-rsvg --without-zlib --disable-openmp">
+    <branch
+      repo="magick"
+      module="6.9.10-58.tar.gz"
+      version="6.9.10-58"
+      checkoutdir="ImageMagick6-6.9.10-58"/>
+    <dependencies>
+      <dep package="lcms"/>
+      <dep package="fftw3"/>
+      <dep package="tiff"/>
+      <dep package="libjpeg-turbo"/>
+    </dependencies>
+  </autotools>
+
+  <meson id="orc-0.4"
+    mesonargs="-Dbenchmarks=disabled -Dexamples=disabled -Dgtk_doc=disabled -Dtests=disabled">
+    <branch
+      repo="orc"
+      module="orc-0.4.29.tar.xz"
+      version="0.4.29">
+      <patch file="patches/orc-0.4-fixes.patch" strip="1"/>
+    </branch>
+    <dependencies>
+      <dep package="gettext"/>
+    </dependencies>
+  </meson>
+
+  <cmake id="cfitsio"
+    use-ninja="False">
+    <branch
+      repo="cfitsio"
+      module="cfitsio3450.tar.gz"
+      version="3.45"
+      checkoutdir="cfitsio">
+      <patch file="patches/cfitsio-3-fixes.patch" strip="1"/>
+    </branch>
+    <dependencies>
+      <dep package="zlib"/>
+      <dep package="gettext"/>
+    </dependencies>
+  </cmake>
+
+  <autotools id="webp"
+    autogen-sh="configure"
+    autogenargs="--enable-libwebpmux --enable-libwebpdemux">
+    <branch
+      repo="webp"
+      module="libwebp-1.0.3.tar.gz"
+      version="1.0.3"/>
+    <dependencies>
+      <dep package="libpng"/>
+      <dep package="libjpeg-turbo"/>
+      <dep package="giflib"/>
+      <dep package="tiff"/>
+      <dep package="gettext"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="libffi"
+    autogen-sh="configure">
+    <branch
+      repo="sourceware"
+      module="libffi/libffi-3.2.1.tar.gz"
+      version="3.2.1"/>
+    <dependencies>
+      <dep package="gettext"/>
+    </dependencies>
+  </autotools>
+
+  <!-- don't do any of doc stuff
+
+    -->
+
+  <meson id="glib"
+    mesonargs="-Dforce_posix_threads=false -Dinternal_pcre=true -Diconv='external'">
+    <branch
+      repo="gnome"
+      module="glib/2.61/glib-2.61.0.tar.xz"
+      version="2.61.0"/>
+    <dependencies>
+      <dep package="zlib"/>
+      <dep package="libffi"/>
+      <dep package="gettext"/>
+    </dependencies>
+  </meson>
+
+  <autotools id="pixman"
+    autogen-sh="configure">
+    <branch
+      repo="cairo"
+      module="pixman-0.38.4.tar.gz"
+      version="0.38.4"/>
+    <dependencies>
+      <dep package="zlib"/>
+      <dep package="gettext"/>
+    </dependencies>
+  </autotools>
+
+  <!-- openslide needs the pdf backend
+
+       node canvas needs a cairo with SVG support, so don't disable-svg
+
+    -->
+
+  <autotools id="cairo"
+    autogen-sh="configure"
+    autogenargs="--disable-gl --disable-xlib --disable-xcb --enable-win32 --without-x --disable-ps --disable-script">
+    <branch
+      repo="cairo"
+      module="cairo-1.16.0.tar.xz"
+      version="1.16.0"/>
+    <dependencies>
+      <dep package="fontconfig"/>
+      <dep package="freetype"/>
+      <dep package="glib"/>
+      <dep package="pixman"/>
+      <dep package="libpng"/>
+    </dependencies>
+  </autotools>
+
+  <meson id="pango"
+    mesonargs="-Dgir=false">
+    <branch
+      repo="gnome"
+      module="pango/1.43/pango-1.43.0.tar.xz"
+      version="1.43.0">
+      <patch file="patches/pango-1-fixes.patch" strip="1"/>
+    </branch>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="cairo"/>
+      <dep package="freetype"/>
+      <dep package="harfbuzz"/>
+      <dep package="fribidi"/>
+    </dependencies>
+  </meson>
+
+  <!-- don't build from git ... it does some introspection to build the test
+       suite build files, which won't work in cross-compiler mode
+
+       disable run-time loading of modules, it's difficult when cross-compiling
+
+    -->
+
+  <meson id="gdk-pixbuf"
+    mesonargs="-Dbuiltin_loaders='jpeg,png,tiff' -Dgir=false -Dx11=false">
+    <branch
+      repo="gnome"
+      module="gdk-pixbuf/2.38/gdk-pixbuf-2.38.1.tar.xz"
+      version="2.38.1">
+      <patch file="patches/gdk-pixbuf-libjpeg-turbo.patch" strip="1"/>
+    </branch>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="libjpeg-turbo"/>
+      <dep package="tiff"/>
+      <dep package="libpng"/>
+    </dependencies>
+  </meson>
+
+  <autotools id="libgsf"
+    autogen-sh="configure"
+    autogenargs="--without-gdk-pixbuf">
+    <branch
+      repo="gnome"
+      module="libgsf/1.14/libgsf-1.14.45.tar.xz"
+      version="1.14.45"/>
+    <dependencies>
+      <dep package="glib"/>
+    </dependencies>
+  </autotools>
+
+  <!-- openexr has a range of problems cross-compiling
+
+       the first thing it does it build a couple of small programs to generate
+       some headers, but of course they need to be compiled with the
+       non-cross-compiler argh
+
+    -->
+
+  <autotools id="ilmbase"
+    autogen-sh="configure">
+    <branch
+      repo="nongnu"
+      module="openexr/ilmbase-2.2.0.tar.gz"
+      version="2.2.0"/>
+    <dependencies>
+      <dep package="zlib"/>
+      <dep package="gettext"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="openexr"
+    autogen-sh="configure">
+    <branch
+      repo="nongnu"
+      module="openexr/openexr-2.2.0.tar.gz"
+      version="2.2.0"/>
+    <dependencies>
+      <dep package="ilmbase"/>
+    </dependencies>
+  </autotools>
+
+  <!-- sadly hdf5 does not like cross-compiling
+
+    -->
+
+  <autotools id="hdf5"
+    autogen-sh="configure">
+    <branch
+      repo="hdf5"
+      module="hdf5-1.10.1.tar.gz"
+      version="1.10.1"/>
+    <dependencies>
+      <dep package="gettext"/>
+      <dep package="zlib"/>
+    </dependencies>
+  </autotools>
+
+  <!-- use matio without hdf5, see above
+
+    -->
+
+  <autotools id="matio"
+    autogen-sh="configure"
+    autogenargs="--disable-static ac_cv_va_copy=C99">
+    <branch
+      repo="sourceforge"
+      module="matio/matio-1.5.17.tar.gz"
+      version="1.5.17"/>
+    <dependencies>
+      <dep package="gettext"/>
+      <dep package="zlib"/>
+    </dependencies>
+  </autotools>
+
+  <!-- explictly add the -msse4.1 flags for libde265,
+       otherwise it will cause build errors for the 32-bit target of MinGW-w64
+
+    -->
+
+  <cmake id="libde265"
+    cmakeargs="-DCMAKE_C_FLAGS='-msse4.1' -DCMAKE_CXX_FLAGS='-msse4.1' -DDISABLE_SSE=OFF"
+    use-ninja="False">
+    <branch
+      repo="libde265"
+      module="v1.0.3/libde265-1.0.3.tar.gz"
+      version="1.0.3">
+      <patch file="patches/libde265-1-fixes.patch" strip="1"/>
+    </branch>
+    <dependencies>
+      <dep package="gettext"/>
+    </dependencies>
+  </cmake>
+
+  <!-- don't list libx265 as a dep, it's GPL (part of ffmpeg)
+
+       libde265 (decode) is LGPL
+
+    -->
+
+  <cmake id="libheif"
+    use-ninja="False">
+    <branch
+      repo="libheif"
+      module="v1.4.0/libheif-1.4.0.tar.gz"
+      version="1.4.0">
+      <patch file="patches/libheif-1-fixes.patch" strip="1"/>
+    </branch>
+    <dependencies>
+      <dep package="gettext"/>
+      <dep package="libde265"/>
+    </dependencies>
+  </cmake>
+
+  <!-- the transform patch is some non-LGPL code we paste into binaries
+
+       use -O3 to turn on the auto vectorizer, this gives a useful speedup in
+       7.38 and later
+
+    -->
+
+  <autotools id="libvips-all"
+    autogen-sh="configure"
+    autogenargs="--enable-debug=no --without-OpenEXR --without-pdfium --without-imagequant --disable-introspection"
+    makeargs="CFLAGS=-O3 CXXFLAGS=-O3">
+
+    <branch
+      repo="vips"
+      module="v8.9.0/vips-8.9.0.tar.gz"
+      version="8.9.0"
+      checkoutdir="vips-8.9.0"/>
+
+    <dependencies>
+      <dep package="cfitsio"/>
+      <dep package="matio"/>
+      <dep package="webp"/>
+      <dep package="librsvg"/>
+      <dep package="giflib"/>
+      <dep package="poppler"/>
+      <dep package="glib"/>
+      <dep package="orc-0.4"/>
+      <dep package="pango"/>
+      <dep package="fftw3"/>
+      <dep package="libgsf"/>
+      <dep package="libjpeg-turbo"/>
+      <dep package="tiff"/>
+      <dep package="openslide"/>
+      <dep package="lcms"/>
+      <dep package="libexif"/>
+      <dep package="imagemagick"/>
+      <dep package="libpng"/>
+      <dep package="libheif"/>
+    </dependencies>
+  </autotools>
+
+  <!-- libvips with a set of deps for web use
+
+       don't include support for less-used file formats in an attempt to
+       reduce the attack surface
+
+       don't include poppler, it's GPL
+
+       don't include fftw, it's GPL
+
+       don't include imagemagick to try to keep the surface down
+
+       don't include libheif/libde265 since HEVC implementations (of which H.265 is one) have legal problems, see for e.g.:
+       https://bugzilla.redhat.com/show_bug.cgi?id=1129691#c3
+       https://lists.fedoraproject.org/archives/list/legal@lists.fedoraproject.org/thread/GDOFPFQKWJF5CRU7BNWNTJ756AIZOMYK/
+
+    -->
+
+  <autotools id="libvips-web"
+    autogen-sh="configure"
+    autogenargs="--enable-debug=no --without-OpenEXR --without-matio --without-ppm --without-analyze --without-radiance --disable-introspection"
+    makeargs="CFLAGS=-O3 CXXFLAGS=-O3">
+
+    <branch
+      repo="vips"
+      module="v8.9.0/vips-8.9.0.tar.gz"
+      version="8.9.0"
+      checkoutdir="vips-8.9.0"/>
+
+    <dependencies>
+      <dep package="webp"/>
+      <dep package="librsvg"/>
+      <dep package="giflib"/>
+      <dep package="glib"/>
+      <dep package="orc-0.4"/>
+      <dep package="pango"/>
+      <dep package="libgsf"/>
+      <dep package="libjpeg-turbo"/>
+      <dep package="tiff"/>
+      <dep package="lcms"/>
+      <dep package="libexif"/>
+      <dep package="libpng"/>
+    </dependencies>
+  </autotools>
+
+  <!-- same as -all, but with the transform patch
+
+    -->
+
+  <autotools id="libvips-transform"
+    autogen-sh="configure"
+    autogenargs="--enable-debug=no --without-OpenEXR --disable-introspection "
+    makeargs="CFLAGS=-O3 CXXFLAGS=-O3">
+
+    <branch
+      repo="vips"
+      module="v8.9.0/vips-8.9.0.tar.gz"
+      version="8.9.0"
+      checkoutdir="vips-8.9.0">
+      <patch file="patches/transform.patch" strip="1"/>
+    </branch>
+
+    <dependencies>
+      <dep package="cfitsio"/>
+      <dep package="matio"/>
+      <dep package="webp"/>
+      <dep package="librsvg"/>
+      <dep package="giflib"/>
+      <dep package="poppler"/>
+      <dep package="glib"/>
+      <dep package="orc-0.4"/>
+      <dep package="pango"/>
+      <dep package="fftw3"/>
+      <dep package="libgsf"/>
+      <dep package="libjpeg-turbo"/>
+      <dep package="tiff"/>
+      <dep package="openslide"/>
+      <dep package="lcms"/>
+      <dep package="libexif"/>
+      <dep package="imagemagick"/>
+      <dep package="libpng"/>
+      <dep package="libheif"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="ptmfit"
+    autogen-sh="configure">
+    <branch
+      repo="checkout"
+      module="ptmfit-2.4.0.tar.gz"
+      version="2.4.0"/>
+    <dependencies>
+      <dep package="libvips-web"/>
+    </dependencies>
+  </autotools>
+
+</moduleset>
