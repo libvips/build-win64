@@ -606,7 +606,9 @@
     <branch
       repo="cairo"
       module="pixman-0.38.4.tar.gz"
-      version="0.38.4"/>
+      version="0.38.4">
+      <patch file="patches/pixman-0.3-fixes.patch" strip="1"/>
+    </branch>
     <dependencies>
       <dep package="zlib"/>
       <dep package="gettext"/>
