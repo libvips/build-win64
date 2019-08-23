@@ -1,0 +1,77 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Basile Clement <basile-pixman@clement.pm>
+Date: Tue, 9 Apr 2019 23:16:13 +0200
+Subject: [PATCH 1/1] Fix bilinear filter computation in wide pipeline
+
+The recently introduced wide pipeline for filters has a typo which
+causes it to improperly compute bilinear interpolation positions,
+causing various glitches when enabled.
+
+This patch uses the proper computation for bilinear interpolation in the
+wide pipeline.  It also makes related `if` statements conformant to the
+CODING_STYLE:
+
+* If a substatement spans multiple lines, then there must be braces
+  around it.
+
+* If one substatement of an if statement has braces, then the other
+  must too.
+
+Signed-off-by: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+
+diff --git a/pixman/pixman-bits-image.c b/pixman/pixman-bits-image.c
+index 1111111..2222222 100644
+--- a/pixman/pixman-bits-image.c
++++ b/pixman/pixman-bits-image.c
+@@ -432,29 +432,38 @@ bits_image_fetch_pixel_filtered (bits_image_t  *image,
+ 
+     case PIXMAN_FILTER_CONVOLUTION:
+ 	if (wide)
++	{
+ 	    bits_image_fetch_pixel_convolution (image, x, y,
+ 						get_pixel, out,
+ 						accum_float,
+ 						reduce_float);
++	}
+ 	else
++	{
+ 	    bits_image_fetch_pixel_convolution (image, x, y,
+ 						get_pixel, out,
+ 						accum_32, reduce_32);
++	}
+ 	break;
+ 
+     case PIXMAN_FILTER_SEPARABLE_CONVOLUTION:
+ 	if (wide)
++	{
+ 	    bits_image_fetch_pixel_separable_convolution (image, x, y,
+ 							  get_pixel, out,
+ 							  accum_float,
+ 							  reduce_float);
++	}
+ 	else
++	{
+ 	    bits_image_fetch_pixel_separable_convolution (image, x, y,
+ 							  get_pixel, out,
+ 							  accum_32, reduce_32);
++	}
+         break;
+ 
+     default:
++	assert (0);
+         break;
+     }
+ }
+diff --git a/pixman/pixman-inlines.h b/pixman/pixman-inlines.h
+index 1111111..2222222 100644
+--- a/pixman/pixman-inlines.h
++++ b/pixman/pixman-inlines.h
+@@ -231,7 +231,7 @@ bilinear_interpolation_float (argb_t tl, argb_t tr,
+     argb_t r;
+ 
+     distxy = distx * disty;
+-    distxiy = distx - (1.f - distxy);
++    distxiy = distx * (1.f - disty);
+     distixy = (1.f - distx) * disty;
+     distixiy = (1.f - distx) * (1.f - disty);
+ 
