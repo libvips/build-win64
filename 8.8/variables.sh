@@ -5,7 +5,7 @@ nip2_version=8.6
 
 vips_package=vips
 vips_version=8.8
-vips_minor_version=1
+vips_minor_version=2
 
 # build-win32/x.xx dir we are building
 basedir=$(pwd)
@@ -25,12 +25,3 @@ builddir=build
 mingw_prefix=x86_64-w64-mingw32-
 
 repackagedir=$vips_package-dev-$vips_version
-
-# we need a native linux install to pull the typelib from
-# if VIPSHOME is defined, take that, otherwise we're probaly a containerized
-# build, look for it here
-if [ $VIPSHOME ]; then
-  linux_install="$VIPSHOME"
-else
-  linux_install=$basedir/vips
-fi

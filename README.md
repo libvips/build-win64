@@ -26,7 +26,7 @@ Make sure you're in the docker group so you can run docker without needing
 Now run the build script:
 
 ```
-$ ./build.sh 8.7
+$ ./build.sh 8.8 web
 ```
 
 At the end of the build, the script will display the paths of all the

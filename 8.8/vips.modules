@@ -806,9 +806,9 @@
 
     <branch
       repo="vips"
-      module="v8.8.1/vips-8.8.1.tar.gz"
-      version="8.8.1"
-      checkoutdir="vips-8.8.1"/>
+      module="v8.8.2/vips-8.8.2.tar.gz"
+      version="8.8.2"
+      checkoutdir="vips-8.8.2"/>
 
     <dependencies>
       <dep package="cfitsio"/>
@@ -857,9 +857,9 @@
 
     <branch
       repo="vips"
-      module="v8.8.1/vips-8.8.1.tar.gz"
-      version="8.8.1"
-      checkoutdir="vips-8.8.1"/>
+      module="v8.8.2/vips-8.8.2.tar.gz"
+      version="8.8.2"
+      checkoutdir="vips-8.8.2"/>
 
     <dependencies>
       <dep package="webp"/>
@@ -888,9 +888,9 @@
 
     <branch
       repo="vips"
-      module="v8.8.1/vips-8.8.1.tar.gz"
-      version="8.8.1"
-      checkoutdir="vips-8.8.1">
+      module="v8.8.2/vips-8.8.2.tar.gz"
+      version="8.8.2"
+      checkoutdir="vips-8.8.2">
       <patch file="patches/transform.patch" strip="1"/>
     </branch>
 
