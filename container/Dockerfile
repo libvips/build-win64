@@ -41,10 +41,6 @@ RUN git clone https://github.com/GNOME/jhbuild.git \
 # install Ninja and Meson
 RUN pip3 install ninja meson
 
-# TODO: remove if https://github.com/mesonbuild/meson/pull/3939 is merged
-RUN cd `python3 -c "import site; print(site.getsitepackages()[0])"` \
-  && curl $MESON_PATCH | git apply -v
-
 # build pe-util, handy for copying DLL dependencies
 RUN git clone --recurse-submodules https://github.com/gsauthof/pe-util.git \
   && cd pe-util \

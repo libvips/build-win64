@@ -25,12 +25,3 @@ builddir=build
 mingw_prefix=x86_64-w64-mingw32-
 
 repackagedir=$vips_package-dev-$vips_version
-
-# we need a native linux install to pull the typelib from
-# if VIPSHOME is defined, take that, otherwise we're probaly a containerized
-# build, look for it here
-if [ $VIPSHOME ]; then
-  linux_install="$VIPSHOME"
-else
-  linux_install=$basedir/vips
-fi
