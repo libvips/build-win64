@@ -177,8 +177,8 @@
     autogen-sh="configure">
     <branch
       repo="sourceforge"
-      module="expat/expat-2.2.7.tar.bz2"
-      version="2.2.7"/>
+      module="expat/expat-2.2.9.tar.bz2"
+      version="2.2.9"/>
     <dependencies>
       <dep package="zlib"/>
       <dep package="gettext"/>
@@ -207,8 +207,8 @@
     use-ninja="False">
     <branch
       repo="freedesktop.org"
-      module="harfbuzz/release/harfbuzz-2.5.3.tar.xz"
-      version="2.5.3">
+      module="harfbuzz/release/harfbuzz-2.6.4.tar.xz"
+      version="2.6.4">
       <patch file="patches/harfbuzz-2-fixes.patch" strip="1"/>
     </branch>
     <dependencies>
@@ -225,9 +225,9 @@
     autogen-sh="configure">
     <branch
       repo="fribidi"
-      module="v1.0.5/fribidi-1.0.5.tar.bz2"
-      version="1.0.5"
-      checkoutdir="fribidi-1.0.5"/>
+      module="v1.0.8/fribidi-1.0.8.tar.bz2"
+      version="1.0.8"
+      checkoutdir="fribidi-1.0.8"/>
     <dependencies>
     </dependencies>
   </autotools>
@@ -237,9 +237,8 @@
     autogenargs="--disable-docs">
     <branch
       repo="freedesktop.org"
-      module="fontconfig/release/fontconfig-2.13.1.tar.gz"
-      version="2.13.1">
-      <patch file="patches/fontconfig-2-fixes.patch" strip="1"/>
+      module="fontconfig/release/fontconfig-2.13.92.tar.gz"
+      version="2.13.92">
     </branch>
     <dependencies>
       <dep package="gettext"/>
@@ -257,8 +256,8 @@
     autogenargs="--without-python">
     <branch
       repo="xmlsoft"
-      module="libxml2/libxml2-2.9.9.tar.gz"
-      version="2.9.9"/>
+      module="libxml2/libxml2-2.9.10.tar.gz"
+      version="2.9.10"/>
     <dependencies>
       <dep package="gettext"/>
     </dependencies>
@@ -453,8 +452,8 @@
     use-ninja="False">
     <branch
       repo="sourceforge"
-      module="libjpeg-turbo/2.0.2/libjpeg-turbo-2.0.2.tar.gz"
-      version="2.0.2">
+      module="libjpeg-turbo/2.0.3/libjpeg-turbo-2.0.3.tar.gz"
+      version="2.0.3">
       <patch file="patches/libjpeg-turbo-compatibility.patch" strip="1"/>
     </branch>
     <dependencies>
@@ -494,8 +493,8 @@
     autogenargs="--without-x --disable-cxx --disable-lzma">
     <branch
       repo="tiff"
-      module="tiff-4.0.10.tar.gz"
-      version="4.0.10"/>
+      module="tiff-4.1.0.tar.gz"
+      version="4.1.0"/>
     <dependencies>
       <dep package="zlib"/>
       <dep package="libjpeg-turbo"/>
@@ -533,8 +532,8 @@
     mesonargs="-Dbenchmarks=disabled -Dexamples=disabled -Dgtk_doc=disabled -Dtests=disabled">
     <branch
       repo="orc"
-      module="orc-0.4.29.tar.xz"
-      version="0.4.29">
+      module="orc-0.4.31.tar.xz"
+      version="0.4.31">
       <patch file="patches/orc-0.4-fixes.patch" strip="1"/>
     </branch>
     <dependencies>
@@ -577,8 +576,8 @@
     autogen-sh="configure">
     <branch
       repo="sourceware"
-      module="libffi/libffi-3.2.1.tar.gz"
-      version="3.2.1"/>
+      module="libffi/libffi-3.3.tar.gz"
+      version="3.3"/>
     <dependencies>
       <dep package="gettext"/>
     </dependencies>
@@ -806,7 +805,7 @@
 
     <branch
       repo="vips"
-      module="v8.9.0-alpha1/vips-8.9.0-alpha1.tar.gz"
+      module="v8.9.0-beta2/vips-8.9.0-beta2.tar.gz"
       version="8.9.0"
       checkoutdir="vips-8.9.0"/>
 
@@ -857,7 +856,7 @@
 
     <branch
       repo="vips"
-      module="v8.9.0-alpha1/vips-8.9.0-alpha1.tar.gz"
+      module="v8.9.0-beta2/vips-8.9.0-beta2.tar.gz"
       version="8.9.0"
       checkoutdir="vips-8.9.0"/>
 
@@ -888,7 +887,7 @@
 
     <branch
       repo="vips"
-      module="v8.9.0-alpha1/vips-8.9.0-alpha1.tar.gz"
+      module="v8.9.0-beta2/vips-8.9.0-beta2.tar.gz"
       version="8.9.0"
       checkoutdir="vips-8.9.0">
       <patch file="patches/transform.patch" strip="1"/>
