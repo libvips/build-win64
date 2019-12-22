@@ -157,8 +157,8 @@
     autogen-sh="configure">
     <branch
       repo="gnu"
-      module="libiconv/libiconv-1.15.tar.gz"
-      version="1.15"/>
+      module="libiconv/libiconv-1.16.tar.gz"
+      version="1.16"/>
   </autotools>
 
   <autotools id="gettext"
@@ -591,8 +591,8 @@
     mesonargs="-Dforce_posix_threads=false -Dinternal_pcre=true -Diconv='external'">
     <branch
       repo="gnome"
-      module="glib/2.61/glib-2.61.0.tar.xz"
-      version="2.61.0"/>
+      module="glib/2.63/glib-2.63.3.tar.xz"
+      version="2.63.3"/>
     <dependencies>
       <dep package="zlib"/>
       <dep package="libffi"/>
@@ -664,8 +664,8 @@
     mesonargs="-Dbuiltin_loaders='jpeg,png,tiff' -Dgir=false -Dx11=false">
     <branch
       repo="gnome"
-      module="gdk-pixbuf/2.38/gdk-pixbuf-2.38.1.tar.xz"
-      version="2.38.1">
+      module="gdk-pixbuf/2.40/gdk-pixbuf-2.40.0.tar.xz"
+      version="2.40.0">
       <patch file="patches/gdk-pixbuf-libjpeg-turbo.patch" strip="1"/>
     </branch>
     <dependencies>
@@ -681,8 +681,8 @@
     autogenargs="--without-gdk-pixbuf">
     <branch
       repo="gnome"
-      module="libgsf/1.14/libgsf-1.14.45.tar.xz"
-      version="1.14.45"/>
+      module="libgsf/1.14/libgsf-1.14.46.tar.xz"
+      version="1.14.46"/>
     <dependencies>
       <dep package="glib"/>
     </dependencies>
@@ -805,7 +805,7 @@
 
     <branch
       repo="vips"
-      module="v8.9.0-beta2/vips-8.9.0-beta2.tar.gz"
+      module="v8.9.0-rc1/vips-8.9.0-rc1.tar.gz"
       version="8.9.0"
       checkoutdir="vips-8.9.0"/>
 
@@ -856,7 +856,7 @@
 
     <branch
       repo="vips"
-      module="v8.9.0-beta2/vips-8.9.0-beta2.tar.gz"
+      module="v8.9.0-rc1/vips-8.9.0-rc1.tar.gz"
       version="8.9.0"
       checkoutdir="vips-8.9.0"/>
 
@@ -887,7 +887,7 @@
 
     <branch
       repo="vips"
-      module="v8.9.0-beta2/vips-8.9.0-beta2.tar.gz"
+      module="v8.9.0-rc1/vips-8.9.0-rc1.tar.gz"
       version="8.9.0"
       checkoutdir="vips-8.9.0">
       <patch file="patches/transform.patch" strip="1"/>
