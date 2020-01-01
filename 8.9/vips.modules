@@ -805,7 +805,7 @@
 
     <branch
       repo="vips"
-      module="v8.9.0-rc3/vips-8.9.0-rc3.tar.gz"
+      module="v8.9.0-rc4/vips-8.9.0-rc4.tar.gz"
       version="8.9.0"
       checkoutdir="vips-8.9.0"/>
 
@@ -856,7 +856,7 @@
 
     <branch
       repo="vips"
-      module="v8.9.0-rc3/vips-8.9.0-rc3.tar.gz"
+      module="v8.9.0-rc4/vips-8.9.0-rc4.tar.gz"
       version="8.9.0"
       checkoutdir="vips-8.9.0"/>
 
@@ -887,7 +887,7 @@
 
     <branch
       repo="vips"
-      module="v8.9.0-rc3/vips-8.9.0-rc3.tar.gz"
+      module="v8.9.0-rc4/vips-8.9.0-rc4.tar.gz"
       version="8.9.0"
       checkoutdir="vips-8.9.0">
       <patch file="patches/transform.patch" strip="1"/>
