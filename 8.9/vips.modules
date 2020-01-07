@@ -452,8 +452,8 @@
     use-ninja="False">
     <branch
       repo="sourceforge"
-      module="libjpeg-turbo/2.0.3/libjpeg-turbo-2.0.3.tar.gz"
-      version="2.0.3">
+      module="libjpeg-turbo/2.0.4/libjpeg-turbo-2.0.4.tar.gz"
+      version="2.0.4">
       <patch file="patches/libjpeg-turbo-compatibility.patch" strip="1"/>
     </branch>
     <dependencies>
@@ -561,8 +561,8 @@
     autogenargs="--enable-libwebpmux --enable-libwebpdemux">
     <branch
       repo="webp"
-      module="libwebp-1.0.3.tar.gz"
-      version="1.0.3"/>
+      module="libwebp-1.1.0.tar.gz"
+      version="1.1.0"/>
     <dependencies>
       <dep package="libpng"/>
       <dep package="libjpeg-turbo"/>
@@ -805,7 +805,7 @@
 
     <branch
       repo="vips"
-      module="v8.9.0-rc4/vips-8.9.0-rc4.tar.gz"
+      module="v8.9.0/vips-8.9.0.tar.gz"
       version="8.9.0"
       checkoutdir="vips-8.9.0"/>
 
@@ -856,7 +856,7 @@
 
     <branch
       repo="vips"
-      module="v8.9.0-rc4/vips-8.9.0-rc4.tar.gz"
+      module="v8.9.0/vips-8.9.0.tar.gz"
       version="8.9.0"
       checkoutdir="vips-8.9.0"/>
 
@@ -887,7 +887,7 @@
 
     <branch
       repo="vips"
-      module="v8.9.0-rc4/vips-8.9.0-rc4.tar.gz"
+      module="v8.9.0/vips-8.9.0.tar.gz"
       version="8.9.0"
       checkoutdir="vips-8.9.0">
       <patch file="patches/transform.patch" strip="1"/>
