@@ -1,4 +1,5 @@
 packages
+.bash_history
 checkout
 build
 inst
