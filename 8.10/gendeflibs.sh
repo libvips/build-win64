@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # this script makes .def and .lib files for all the dlls we've built
 

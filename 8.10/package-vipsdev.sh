@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # set -x
 set -e
@@ -21,12 +21,22 @@ mkdir -p $repackagedir/bin
 
 echo "Copying libvips and dependencies"
 
+# We need a POSIX-compliant libstdc++-6.dll,
+# if we build the -all flavour. Poppler,
+# OpenEXR and libde265 needs a libstdc++
+# with <thread> and <mutex> functionality.
+if [ "$deps" = "all" ]; then
+  threads=posix
+else
+  threads=win32
+fi
+
 # Copy libvips and dependencies with pe-util
 /usr/local/bin/peldd \
   $installdir/bin/libvips-cpp-42.dll \
   --clear-path \
   --path $installdir/bin \
-  --path /usr/lib/gcc/x86_64-w64-mingw32/*-win32 \
+  --path /usr/lib/gcc/x86_64-w64-mingw32/*-$threads \
   --path /usr/x86_64-w64-mingw32/lib/ \
   -a \
   -w USERENV.dll \
@@ -37,12 +47,8 @@ echo "Copying libvips and dependencies"
 
 echo "Copying install area $installdir"
 
-# Follow symlinks when copying /share and /etc
-cp -Lr $installdir/{share,etc} $repackagedir
-
-# Copy everything from /lib and /include, then delete the symlinks
-cp -r $installdir/{lib,include} $repackagedir
-find $repackagedir/{lib,include} -type l -exec rm -f {} \;
+# Follow symlinks when copying /share, /etc, /lib and /include
+cp -Lr $installdir/{share,etc,lib,include} $repackagedir
 
 echo "Generating import files"
 
@@ -58,8 +64,9 @@ rm -rf $repackagedir/include/cairo
 rm -rf $repackagedir/lib/{*cairo*,*gdk*,ldscripts}
 find $repackagedir/lib -name "*.la" -exec rm -f {} \;
 
-# We only support GB and de locales
-find $repackagedir/share/locale -mindepth 1 -maxdepth 1 -type d ! -name "en_GB" ! -name "de" -exec rm -rf {} \;
+# We intentionally disabled the i18n features of (GNU) gettext,
+# so the locales are not needed.
+rm -rf $repackagedir/share/locale
 
 echo "Copying vips executables"
 
@@ -70,8 +77,7 @@ cp $installdir/bin/vipsprofile $repackagedir/bin/
 echo "Strip unneeded symbols"
 
 # Remove all symbols that are not needed
-strip --strip-unneeded $repackagedir/bin/*.exe
-strip --strip-unneeded $repackagedir/bin/*.dll
+strip --strip-unneeded $repackagedir/bin/*.{exe,dll}
 
 echo "Copying packaging files"
 
