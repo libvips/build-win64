@@ -14,7 +14,9 @@ On Ubuntu, follow these steps as a regular user:
 
 You need the mingw cross-compiler to generate 64-bit Windows binaries.
 
-	sudo apt install mingw-w64 mingw-w64-tools
+```bash
+sudo apt install mingw-w64 mingw-w64-tools
+```
 
 The `tools` package provides `gendef`, which we use to generate .def files for
 our DLLs.
@@ -26,11 +28,22 @@ You need to install pe-util from source as well.
 
 Check Dockerfile.
 
+### Install Rust
+
+You need Rust to build librsvg.
+
+```bash
+curl https://sh.rustup.rs -sSf | sh -s -- -y
+~/.cargo/bin/rustup target add x86_64-pc-windows-gnu
+```
+
 ### Other packages 
 
 Various other packages required during the build:
 
-	sudo apt install cmake nasm gperf intltool
+```bash
+sudo apt install cmake nasm gperf intltool
+```
 
 ### Check the build variables
 
