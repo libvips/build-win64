@@ -33,7 +33,8 @@ docker build -t libvips-build-win64 container
 # - inheriting the current uid and gid
 # - versioned subdirectory mounted at /data
 # - set ~ to /data as well, since jhbuild likes to cache stuff there
-docker run --rm -t \
+# - run interactively, since it's often useful to be able to redo sections
+docker run --rm -it \
   -u $(id -u):$(id -g) \
   -v $PWD/$version:/data \
   -e "HOME=/data" \
