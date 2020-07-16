@@ -22,10 +22,10 @@ mkdir -p $repackagedir/bin
 echo "Copying libvips and dependencies"
 
 # We need a POSIX-compliant libstdc++-6.dll,
-# if we build the -all flavour. Poppler,
+# if we build anything but the -web flavour. Poppler,
 # OpenEXR and libde265 needs a libstdc++
 # with <thread> and <mutex> functionality.
-if [ "$deps" = "all" ]; then
+if [ "$deps" != "web" ]; then
   threads=posix
 else
   threads=win32

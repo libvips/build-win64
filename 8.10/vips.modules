@@ -148,7 +148,7 @@
   <repository
     type="tarball"
     name="sqlite3"
-    href="http://www.sqlite.org/"/>
+    href="https://www.sqlite.org/"/>
 
   <repository
     type="tarball"
@@ -346,7 +346,7 @@
     </dependencies>
   </autotools>
 
-  <!-- build with -posix because Poppler needs std::mutex, std::recursive_mutex, 
+  <!-- build with -posix because Poppler needs std::mutex, std::recursive_mutex,
        std::once_flag, etc.
 
     -->
@@ -423,8 +423,8 @@
     autogen-sh="configure">
     <branch
       repo="sqlite3"
-      module="2019/sqlite-autoconf-3280000.tar.gz"
-      version="3.28.0"/>
+      module="2020/sqlite-autoconf-3320300.tar.gz"
+      version="3.32.3"/>
     <dependencies>
     </dependencies>
   </autotools>
@@ -812,7 +812,7 @@
 
     <branch
       repo="vips"
-      module="v${version}-beta2/vips-${version}-beta2.tar.gz"
+      module="v${version}-rc1/vips-${version}-rc1.tar.gz"
       checkoutdir="vips-${version}"
       version="8.10.0"/>
 
@@ -864,7 +864,7 @@
 
     <branch
       repo="vips"
-      module="v${version}-beta2/vips-${version}-beta2.tar.gz"
+      module="v${version}-rc1/vips-${version}-rc1.tar.gz"
       checkoutdir="vips-${version}"
       version="8.10.0"/>
 
@@ -895,7 +895,7 @@
 
     <branch
       repo="vips"
-      module="v${version}-beta2/vips-${version}-beta2.tar.gz"
+      module="v${version}-rc1/vips-${version}-rc1.tar.gz"
       checkoutdir="vips-${version}"
       version="8.10.0">
       <patch file="patches/transform.patch" strip="1"/>
