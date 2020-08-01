@@ -29,7 +29,9 @@ RUN apt-get update \
     # needed by pe-util
     libboost-filesystem-dev \
     libboost-system-dev \
-  && curl https://sh.rustup.rs -sSf | sh -s -- --no-modify-path --profile minimal -y \
+  && curl https://sh.rustup.rs -sSf | sh -s -- -y \
+    --no-modify-path \
+    --profile minimal \
   && rustup target add x86_64-pc-windows-gnu \
   && pip3 install meson
 
