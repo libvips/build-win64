@@ -79,11 +79,10 @@
     name="proxy-libintl"
     href="https://github.com/frida/proxy-libintl/tarball/"/>
 
-  <!-- href="https://github.com/randy408/libspng/archive/" -->
   <repository
     type="tarball"
     name="libspng"
-    href="https://github.com/randy408/libspng/tarball/"/>
+    href="https://github.com/randy408/libspng/archive/"/>
 
   <repository
     type="tarball"
@@ -303,9 +302,11 @@
   <meson id="libspng">
     <branch
       repo="libspng"
-      module="${version}"
+      module="v${version}.tar.gz"
       checkoutdir="libspng-${version}"
-      version="9a08896"/>
+      version="0.6.0">
+      <patch file="patches/libspng-0.6-fixes.patch" strip="1"/>
+    </branch>
     <dependencies>
       <dep package="zlib"/>
     </dependencies>

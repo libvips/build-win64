@@ -91,7 +91,12 @@ os.environ['CXXFLAGS'] += ' -O3'
 #os.environ['CXXFLAGS'] += ' -g'
 
 # special flags for Rust
-os.environ['RUSTFLAGS'] = '-Copt-level=s -Clto=on -Ccodegen-units=1 -Cincremental=false -Cpanic=abort'
+os.environ['CARGO_PROFILE_RELEASE_DEBUG'] = 'false'
+os.environ['CARGO_PROFILE_RELEASE_CODEGEN_UNITS'] = '1'
+os.environ['CARGO_PROFILE_RELEASE_INCREMENTAL'] = 'false'
+os.environ['CARGO_PROFILE_RELEASE_LTO'] = 'true'
+os.environ['CARGO_PROFILE_RELEASE_OPT_LEVEL'] = 's'
+os.environ['CARGO_PROFILE_RELEASE_PANIC'] = 'abort'
 
 # do not interact with the user
 interact = False
