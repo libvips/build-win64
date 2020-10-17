@@ -554,7 +554,7 @@
     <branch
       repo="cfitsio"
       module="cfitsio-${version}.tar.gz"
-      version="3.48">
+      version="3.49">
       <patch file="patches/cfitsio-3-fixes.patch" strip="1"/>
     </branch>
     <dependencies>
