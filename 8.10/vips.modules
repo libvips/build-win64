@@ -316,6 +316,8 @@
 
   <!-- giflib does not automatically open binary when cross-compiling
 
+       5.1.4 is the final autotools version ... they moved to hand-written             makefiles after this, making cross-compiling very hard
+
     -->
 
   <autotools id="giflib"
@@ -324,7 +326,7 @@
     <branch
       repo="sourceforge"
       module="giflib/giflib-${version}.tar.gz"
-      version="5.2.1"/>
+      version="5.1.4"/>
     <dependencies>
     </dependencies>
   </autotools>
@@ -599,7 +601,6 @@
       repo="gnome"
       module="glib/2.67/glib-${version}.tar.xz"
       version="2.67.0">
-      <patch file="patches/glib-2-fixes.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="zlib"/>
@@ -644,7 +645,7 @@
   </autotools>
 
   <meson id="pango"
-    mesonargs="-Dintrospection=false">
+    mesonargs="-Dintrospection=disabled">
     <branch
       repo="gnome"
       module="pango/1.48/pango-${version}.tar.xz"
