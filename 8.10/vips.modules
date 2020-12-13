@@ -338,7 +338,7 @@
     makeinstallargs="install bin_PROGRAMS=">
     <branch
       repo="gnome"
-      module="librsvg/2.49/librsvg-${version}.tar.xz"
+      module="librsvg/2.50/librsvg-${version}.tar.xz"
       version="2.50.2">
       <patch file="patches/librsvg-2-fixes.patch" strip="1"/>
     </branch>
