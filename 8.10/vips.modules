@@ -297,17 +297,12 @@
     </dependencies>
   </autotools>
 
-  <!-- TODO: pin to 0.6 once released
-
-    -->
-
   <meson id="libspng">
     <branch
       repo="libspng"
       module="v${version}.tar.gz"
       checkoutdir="libspng-${version}"
       version="0.6.1">
-      <patch file="patches/libspng-0.6-fixes.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="zlib"/>
