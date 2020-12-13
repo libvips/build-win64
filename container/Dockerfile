@@ -5,7 +5,9 @@ ARG JHBUILD_REVISION=3.36.0
 
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
-    PATH=/usr/local/cargo/bin:$PATH
+    PATH=/usr/local/cargo/bin:$PATH \
+    # non-interactive install for debconf
+    DEBIAN_FRONTEND=noninteractive
 
 # basic stuff
 RUN apt-get update \

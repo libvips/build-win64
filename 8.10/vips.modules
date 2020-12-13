@@ -618,7 +618,7 @@
 
        node canvas needs a cairo with SVG support, so don't disable-svg
 
-       librsvg needs a Cairo with script support, see:
+       librsvg needs Cairo with script support, see:
        https://github.com/gtk-rs/cairo/issues/259
 
     -->
