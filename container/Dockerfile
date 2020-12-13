@@ -1,7 +1,7 @@
 FROM ubuntu:focal
 MAINTAINER Lovell Fuller <npm@lovell.info>
 
-ARG JHBUILD_REVISION=3.36.0
+ARG JHBUILD_REVISION=3.38.0
 
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
@@ -22,6 +22,8 @@ RUN apt-get update \
     mingw-w64-tools \
     nasm \
     zip \
+    # needed for libgsf autoreconf
+    autopoint \
     # needed when building libvips from git
     gobject-introspection \
     gtk-doc-tools \
@@ -37,7 +39,7 @@ RUN apt-get update \
   && rustup target add x86_64-pc-windows-gnu \
   && pip3 install meson
 
-# install JHBuild from source for Meson support
+# install JHBuild
 RUN git clone https://github.com/GNOME/jhbuild.git /usr/local/src/jhbuild
 
 WORKDIR /usr/local/src/jhbuild

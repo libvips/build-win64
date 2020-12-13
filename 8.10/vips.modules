@@ -234,7 +234,7 @@
     -->
 
   <meson id="harfbuzz"
-    mesonargs="-Dicu=disabled -Dtests=disabled -Dintrospection=disabled -Dgtk_doc=disabled -Dbenchmark=disabled">
+    mesonargs="-Dicu=disabled -Dtests=disabled -Dintrospection=disabled -Ddocs=disabled -Dbenchmark=disabled">
     <branch
       repo="harfbuzz"
       module="${version}/harfbuzz-${version}.tar.xz"
@@ -381,7 +381,7 @@
     <branch
       repo="fftw"
       module="fftw-${version}.tar.gz"
-      version="3.3.8"/>
+      version="3.3.9"/>
     <dependencies>
     </dependencies>
   </autotools>
@@ -522,7 +522,7 @@
       repo="magick"
       module="${version}.tar.gz"
       checkoutdir="imagemagick-${version}"
-      version="6.9.11-22"/>
+      version="6.9.11-48"/>
     <dependencies>
       <dep package="lcms"/>
       <dep package="fftw3"/>
@@ -591,11 +591,12 @@
     -->
 
   <meson id="glib"
-    mesonargs="-Dforce_posix_threads=false -Dinternal_pcre=true">
+    mesonargs="-Dforce_posix_threads=false -Dinternal_pcre=true -Dnls=disabled">
     <branch
       repo="gnome"
       module="glib/2.67/glib-${version}.tar.xz"
       version="2.67.0">
+      <patch file="patches/glib-2-fixes.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="zlib"/>
@@ -621,15 +622,20 @@
        librsvg needs Cairo with script support, see:
        https://github.com/gtk-rs/cairo/issues/259
 
+       switch `autogen-sh="autoreconf"` to `autogen-sh="configure"`
+       once patching is no longer necessary
+
     -->
 
   <autotools id="cairo"
-    autogen-sh="configure"
+    autogen-sh="autoreconf">
     autogenargs="--disable-gl --disable-xlib --disable-xcb --enable-win32 --without-x --disable-ps">
     <branch
       repo="cairo"
       module="cairo-${version}.tar.xz"
-      version="1.16.0"/>
+      version="1.16.0">
+      <patch file="patches/cairo-1-fixes.patch" strip="1"/>
+    </branch>
     <dependencies>
       <dep package="fontconfig"/>
       <dep package="freetype"/>
@@ -662,11 +668,11 @@
     -->
 
   <meson id="gdk-pixbuf"
-    mesonargs="-Dbuiltin_loaders='jpeg,png,tiff' -Dgir=false -Dx11=false -Dc_link_args='-L${libdir} -lintl'">
+    mesonargs="-Dbuiltin_loaders='jpeg,png,tiff' -Dintrospection=disabled -Dc_link_args='-L${libdir} -lintl'">
     <branch
       repo="gnome"
       module="gdk-pixbuf/2.42/gdk-pixbuf-${version}.tar.xz"
-      version="2.42.0">
+      version="2.42.2">
       <patch file="patches/gdk-pixbuf-libjpeg-turbo.patch" strip="1"/>
     </branch>
     <dependencies>
@@ -677,8 +683,13 @@
     </dependencies>
   </meson>
 
+  <!-- switch `autogen-sh="autoreconf"` to `autogen-sh="configure"`
+       once patching is no longer necessary
+
+    -->
+
   <autotools id="libgsf"
-    autogen-sh="configure"
+    autogen-sh="autoreconf"
     autogenargs="--disable-nls --without-gdk-pixbuf"
     makeargs="bin_PROGRAMS="
     makeinstallargs="install bin_PROGRAMS=">
@@ -693,6 +704,26 @@
       <dep package="libxml2"/>
     </dependencies>
   </autotools>
+
+  <!-- build with g++-posix because IlmBase needs std::mutex, std::thread, etc.
+
+    -->
+
+  <cmake id="ilmbase"
+    cmakeargs="-DCMAKE_CXX_COMPILER=/usr/bin/x86_64-w64-mingw32-g++-posix -DOPENEXR_CXX_STANDARD=14 -DILMBASE_INSTALL_PKG_CONFIG=ON -DBUILD_TESTING=OFF -DBUILD_SHARED_LIBS=OFF"
+    cmakedir="IlmBase"
+    use-ninja="False">
+    <branch
+      repo="openexr"
+      module="v${version}.tar.gz"
+      checkoutdir="ilmbase-${version}"
+      version="2.5.3">
+      <patch file="patches/ilmbase-2-fixes.patch" strip="1"/>
+    </branch>
+    <dependencies>
+      <dep package="zlib"/>
+    </dependencies>
+  </cmake>
 
   <!-- build with g++-posix because OpenEXR needs std::mutex
 
@@ -709,6 +740,9 @@
       version="2.5.3">
       <patch file="patches/openexr-2-fixes.patch" strip="1"/>
     </branch>
+    <dependencies>
+      <dep package="ilmbase"/>
+    </dependencies>
   </cmake>
 
   <!-- sadly hdf5 does not like cross-compiling
@@ -753,6 +787,7 @@
       repo="libde265"
       module="v${version}/libde265-${version}.tar.gz"
       version="1.0.8">
+      <patch file="patches/libde265-1-fixes.patch" strip="1"/>
     </branch>
     <dependencies>
     </dependencies>
@@ -770,6 +805,7 @@
       repo="libheif"
       module="v${version}/libheif-${version}.tar.gz"
       version="1.9.1">
+      <patch file="patches/libheif-1-fixes.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libde265"/>
