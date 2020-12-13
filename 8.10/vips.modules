@@ -753,7 +753,6 @@
       repo="libde265"
       module="v${version}/libde265-${version}.tar.gz"
       version="1.0.8">
-      <patch file="patches/libde265-1-fixes.patch" strip="1"/>
     </branch>
     <dependencies>
     </dependencies>
@@ -771,7 +770,6 @@
       repo="libheif"
       module="v${version}/libheif-${version}.tar.gz"
       version="1.9.1">
-      <patch file="patches/libheif-1-fixes.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libde265"/>

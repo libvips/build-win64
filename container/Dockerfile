@@ -1,4 +1,4 @@
-FROM ubuntu:bionic
+FROM ubuntu:focal
 MAINTAINER Lovell Fuller <npm@lovell.info>
 
 ARG JHBUILD_REVISION=3.36.0
