@@ -628,7 +628,7 @@
     -->
 
   <autotools id="cairo"
-    autogen-sh="autoreconf">
+    autogen-sh="autoreconf"
     autogenargs="--disable-gl --disable-xlib --disable-xcb --enable-win32 --without-x --disable-ps">
     <branch
       repo="cairo"
