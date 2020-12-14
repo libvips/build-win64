@@ -24,7 +24,7 @@ if ! [ -x "$(command -v docker)" ]; then
 fi
 
 # Ensure latest Ubuntu LTS base image
-docker pull ubuntu:bionic
+docker pull ubuntu:focal
 
 # Create a machine image with all the required build tools pre-installed
 docker build -t libvips-build-win64 container

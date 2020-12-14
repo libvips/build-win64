@@ -181,11 +181,12 @@
     </branch>
   </cmake>
 
-  <!-- use a statically built dummy implementation of libintl/gettext that disables
-       all i18n features.
+  <!-- use a statically built dummy implementation of libintl/gettext that 
+       disables all i18n features.
 
-       this avoids having to ship libintl.dll (and libiconv-2.dll) and speeds up the
-       startup of libvips, see:
+       this avoids having to ship libintl.dll (and libiconv-2.dll) and speeds 
+       up the startup of libvips, see:
+
        https://github.com/libvips/libvips/issues/1637
 
     -->
@@ -208,7 +209,7 @@
     <branch
       repo="sourceforge"
       module="expat/expat-${version}.tar.bz2"
-      version="2.2.9"/>
+      version="2.2.10"/>
     <dependencies>
     </dependencies>
   </autotools>
@@ -219,7 +220,7 @@
     <branch
       repo="nongnu"
       module="freetype/freetype-${version}.tar.gz"
-      version="2.10.2"/>
+      version="2.10.4"/>
     <dependencies>
       <dep package="expat"/>
     </dependencies>
@@ -227,16 +228,17 @@
 
   <!-- icu will pull in standard linux headers, which we don't want
 
-       build with Meson as HarfBuzz tries to migrate all the other build systems to it
+       build with Meson as HarfBuzz tries to migrate all the other build 
+       systems to it
 
     -->
 
   <meson id="harfbuzz"
-    mesonargs="-Dicu=disabled -Dtests=disabled -Dintrospection=disabled -Dgtk_doc=disabled -Dbenchmark=disabled">
+    mesonargs="-Dicu=disabled -Dtests=disabled -Dintrospection=disabled -Ddocs=disabled -Dbenchmark=disabled">
     <branch
       repo="harfbuzz"
       module="${version}/harfbuzz-${version}.tar.xz"
-      version="2.6.8"/>
+      version="2.7.2"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="expat"/>
@@ -251,7 +253,7 @@
     <branch
       repo="fribidi"
       module="v${version}/fribidi-${version}.tar.xz"
-      version="1.0.9"/>
+      version="1.0.10"/>
   </meson>
 
   <autotools id="fontconfig"
@@ -260,7 +262,7 @@
     <branch
       repo="freedesktop.org"
       module="fontconfig/release/fontconfig-${version}.tar.gz"
-      version="2.13.92">
+      version="2.13.93">
     </branch>
     <dependencies>
       <dep package="expat"/>
@@ -295,17 +297,12 @@
     </dependencies>
   </autotools>
 
-  <!-- TODO: pin to 0.6 once released
-
-    -->
-
   <meson id="libspng">
     <branch
       repo="libspng"
       module="v${version}.tar.gz"
       checkoutdir="libspng-${version}"
-      version="0.6.0">
-      <patch file="patches/libspng-0.6-fixes.patch" strip="1"/>
+      version="0.6.1">
     </branch>
     <dependencies>
       <dep package="zlib"/>
@@ -313,6 +310,8 @@
   </meson>
 
   <!-- giflib does not automatically open binary when cross-compiling
+
+       5.1.4 is the final autotools version ... they moved to hand-written             makefiles after this, making cross-compiling very hard
 
     -->
 
@@ -334,8 +333,8 @@
     makeinstallargs="install bin_PROGRAMS=">
     <branch
       repo="gnome"
-      module="librsvg/2.49/librsvg-${version}.tar.xz"
-      version="2.49.3">
+      module="librsvg/2.50/librsvg-${version}.tar.xz"
+      version="2.50.2">
       <patch file="patches/librsvg-2-fixes.patch" strip="1"/>
     </branch>
     <dependencies>
@@ -359,7 +358,7 @@
     <branch
       repo="poppler.freedesktop.org"
       module="poppler-${version}.tar.xz"
-      version="0.89.0"/>
+      version="20.12.1"/>
     <dependencies>
       <dep package="zlib"/>
       <dep package="cairo"/>
@@ -382,7 +381,7 @@
     <branch
       repo="fftw"
       module="fftw-${version}.tar.gz"
-      version="3.3.8"/>
+      version="3.3.9"/>
     <dependencies>
     </dependencies>
   </autotools>
@@ -425,14 +424,13 @@
     <branch
       repo="sqlite3"
       module="2020/sqlite-autoconf-3320300.tar.gz"
-      version="3.32.3"/>
+      version="3.34.0"/>
     <dependencies>
     </dependencies>
   </autotools>
 
-  <!-- the openslide-3-fixes.patch handles UTF-8
-       filenames correctly and fixes compile errors
-       with labeled statements named `OUT`.
+  <!-- the openslide-3-fixes.patch handles UTF-8 filenames correctly and fixes 
+       compile errors with labeled statements named `OUT`.
 
        switch `autogen-sh="autoreconf"` to `autogen-sh="configure"`
        once the patch is accepted by upstream.
@@ -471,7 +469,7 @@
     <branch
       repo="sourceforge"
       module="libjpeg-turbo/${version}/libjpeg-turbo-${version}.tar.gz"
-      version="2.0.5">
+      version="2.0.6">
       <patch file="patches/libjpeg-turbo-compatibility.patch" strip="1"/>
     </branch>
     <dependencies>
@@ -524,7 +522,7 @@
       repo="magick"
       module="${version}.tar.gz"
       checkoutdir="imagemagick-${version}"
-      version="6.9.11-22"/>
+      version="6.9.11-48"/>
     <dependencies>
       <dep package="lcms"/>
       <dep package="fftw3"/>
@@ -538,18 +536,19 @@
     <branch
       repo="orc"
       module="orc-${version}.tar.xz"
-      version="0.4.31">
+      version="0.4.32">
       <patch file="patches/orc-0.4-fixes.patch" strip="1"/>
     </branch>
     <dependencies>
     </dependencies>
   </meson>
 
-  <!-- the patch removes the vendored version of zlib and makes cURL optional
+  <!-- the patch removes the vendored version of zlib
 
     -->
 
   <cmake id="cfitsio"
+    cmakeargs="-DUseCurl=OFF"
     use-ninja="False">
     <branch
       repo="cfitsio"
@@ -592,11 +591,11 @@
     -->
 
   <meson id="glib"
-    mesonargs="-Dforce_posix_threads=false -Dinternal_pcre=true">
+    mesonargs="-Dforce_posix_threads=false -Dinternal_pcre=true -Dnls=disabled">
     <branch
       repo="gnome"
-      module="glib/2.65/glib-${version}.tar.xz"
-      version="2.65.0">
+      module="glib/2.67/glib-${version}.tar.xz"
+      version="2.67.0">
       <patch file="patches/glib-2-fixes.patch" strip="1"/>
     </branch>
     <dependencies>
@@ -620,18 +619,23 @@
 
        node canvas needs a cairo with SVG support, so don't disable-svg
 
-       librsvg needs a Cairo with script support, see:
+       librsvg needs Cairo with script support, see:
        https://github.com/gtk-rs/cairo/issues/259
+
+       switch `autogen-sh="autoreconf"` to `autogen-sh="configure"`
+       once patching is no longer necessary
 
     -->
 
   <autotools id="cairo"
-    autogen-sh="configure"
+    autogen-sh="autoreconf"
     autogenargs="--disable-gl --disable-xlib --disable-xcb --enable-win32 --without-x --disable-ps">
     <branch
       repo="cairo"
       module="cairo-${version}.tar.xz"
-      version="1.16.0"/>
+      version="1.16.0">
+      <patch file="patches/cairo-1-fixes.patch" strip="1"/>
+    </branch>
     <dependencies>
       <dep package="fontconfig"/>
       <dep package="freetype"/>
@@ -642,11 +646,11 @@
   </autotools>
 
   <meson id="pango"
-    mesonargs="-Dintrospection=false">
+    mesonargs="-Dintrospection=disabled">
     <branch
       repo="gnome"
-      module="pango/1.45/pango-${version}.tar.xz"
-      version="1.45.3"/>
+      module="pango/1.48/pango-${version}.tar.xz"
+      version="1.48.0"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
@@ -664,11 +668,11 @@
     -->
 
   <meson id="gdk-pixbuf"
-    mesonargs="-Dbuiltin_loaders='jpeg,png,tiff' -Dgir=false -Dx11=false -Dc_link_args='-L${libdir} -lintl'">
+    mesonargs="-Dbuiltin_loaders='jpeg,png,tiff' -Dintrospection=disabled -Dc_link_args='-L${libdir} -lintl'">
     <branch
       repo="gnome"
-      module="gdk-pixbuf/2.40/gdk-pixbuf-${version}.tar.xz"
-      version="2.40.0">
+      module="gdk-pixbuf/2.42/gdk-pixbuf-${version}.tar.xz"
+      version="2.42.2">
       <patch file="patches/gdk-pixbuf-libjpeg-turbo.patch" strip="1"/>
     </branch>
     <dependencies>
@@ -679,8 +683,13 @@
     </dependencies>
   </meson>
 
+  <!-- switch `autogen-sh="autoreconf"` to `autogen-sh="configure"`
+       once patching is no longer necessary
+
+    -->
+
   <autotools id="libgsf"
-    autogen-sh="configure"
+    autogen-sh="autoreconf"
     autogenargs="--disable-nls --without-gdk-pixbuf"
     makeargs="bin_PROGRAMS="
     makeinstallargs="install bin_PROGRAMS=">
@@ -708,7 +717,7 @@
       repo="openexr"
       module="v${version}.tar.gz"
       checkoutdir="ilmbase-${version}"
-      version="2.5.2">
+      version="2.5.3">
       <patch file="patches/ilmbase-2-fixes.patch" strip="1"/>
     </branch>
     <dependencies>
@@ -728,7 +737,7 @@
       repo="openexr"
       module="v${version}.tar.gz"
       checkoutdir="openexr-${version}"
-      version="2.5.2">
+      version="2.5.3">
       <patch file="patches/openexr-2-fixes.patch" strip="1"/>
     </branch>
     <dependencies>
@@ -761,7 +770,7 @@
     <branch
       repo="sourceforge"
       module="matio/matio-${version}.tar.gz"
-      version="1.5.17"/>
+      version="1.5.19"/>
     <dependencies>
       <dep package="zlib"/>
     </dependencies>
@@ -777,7 +786,7 @@
     <branch
       repo="libde265"
       module="v${version}/libde265-${version}.tar.gz"
-      version="1.0.5">
+      version="1.0.8">
       <patch file="patches/libde265-1-fixes.patch" strip="1"/>
     </branch>
     <dependencies>
@@ -795,7 +804,7 @@
     <branch
       repo="libheif"
       module="v${version}/libheif-${version}.tar.gz"
-      version="1.7.0">
+      version="1.9.1">
       <patch file="patches/libheif-1-fixes.patch" strip="1"/>
     </branch>
     <dependencies>
@@ -815,7 +824,7 @@
       repo="vips"
       module="v${version}/vips-${version}.tar.gz"
       checkoutdir="vips-${version}"
-      version="8.10.2"/>
+      version="8.10.3"/>
 
     <dependencies>
       <dep package="cfitsio"/>
@@ -853,8 +862,11 @@
 
        don't include imagemagick to try to keep the surface down
 
-       don't include libheif/libde265 since HEVC implementations (of which H.265 is one) have legal problems, see for e.g.:
+       don't include libheif/libde265 since HEVC implementations (of which 
+       H.265 is one) have legal problems, see eg.:
+
        https://bugzilla.redhat.com/show_bug.cgi?id=1129691#c3
+
        https://lists.fedoraproject.org/archives/list/legal@lists.fedoraproject.org/thread/GDOFPFQKWJF5CRU7BNWNTJ756AIZOMYK/
 
     -->
@@ -867,7 +879,7 @@
       repo="vips"
       module="v${version}/vips-${version}.tar.gz"
       checkoutdir="vips-${version}"
-      version="8.10.2"/>
+      version="8.10.3"/>
 
     <dependencies>
       <dep package="webp"/>
@@ -898,7 +910,7 @@
       repo="vips"
       module="v${version}/vips-${version}.tar.gz"
       checkoutdir="vips-${version}"
-      version="8.10.2">
+      version="8.10.3">
       <patch file="patches/transform.patch" strip="1"/>
     </branch>
 
