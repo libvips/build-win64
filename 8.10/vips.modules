@@ -36,11 +36,6 @@
 
   <repository
     type="tarball"
-    name="vips-beta"
-    href="http://www.rollthepotato.net/~john/"/>
-
-  <repository
-    type="tarball"
     name="libheif"
     href="https://github.com/strukturag/libheif/releases/download/"/>
 
@@ -302,7 +297,7 @@
       repo="libspng"
       module="v${version}.tar.gz"
       checkoutdir="libspng-${version}"
-      version="0.6.1">
+      version="0.6.2">
     </branch>
     <dependencies>
       <dep package="zlib"/>
@@ -822,7 +817,7 @@
 
     <branch
       repo="vips"
-      module="v${version}-beta/vips-${version}.tar.gz"
+      module="v${version}-beta2/vips-${version}.tar.gz"
       checkoutdir="vips-${version}"
       version="8.10.6"/>
 
@@ -877,7 +872,7 @@
 
     <branch
       repo="vips"
-      module="v${version}-beta/vips-${version}.tar.gz"
+      module="v${version}-beta2/vips-${version}.tar.gz"
       checkoutdir="vips-${version}"
       version="8.10.6"/>
 
@@ -908,7 +903,7 @@
 
     <branch
       repo="vips"
-      module="v${version}-beta/vips-${version}.tar.gz"
+      module="v${version}-beta2/vips-${version}.tar.gz"
       checkoutdir="vips-${version}"
       version="8.10.6">
       <patch file="patches/transform.patch" strip="1"/>
