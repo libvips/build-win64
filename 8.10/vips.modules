@@ -817,7 +817,7 @@
 
     <branch
       repo="vips"
-      module="v${version}-beta2/vips-${version}.tar.gz"
+      module="v${version}/vips-${version}.tar.gz"
       checkoutdir="vips-${version}"
       version="8.10.6"/>
 
@@ -872,7 +872,7 @@
 
     <branch
       repo="vips"
-      module="v${version}-beta2/vips-${version}.tar.gz"
+      module="v${version}/vips-${version}.tar.gz"
       checkoutdir="vips-${version}"
       version="8.10.6"/>
 
@@ -903,7 +903,7 @@
 
     <branch
       repo="vips"
-      module="v${version}-beta2/vips-${version}.tar.gz"
+      module="v${version}/vips-${version}.tar.gz"
       checkoutdir="vips-${version}"
       version="8.10.6">
       <patch file="patches/transform.patch" strip="1"/>
