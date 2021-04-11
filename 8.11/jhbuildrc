@@ -1,0 +1,143 @@
+# -*- mode: python -*-
+# -*- coding: utf-8 -*-
+
+# get the directory this source is in ... we assume we are always run in this
+# directory
+basedir = os.getcwd()
+
+# checkoutroot:   path to download packages elsewhere
+# prefix:         target path to install the compiled binaries
+# extra_prefixes: a list of extra prefixes (may contain /usr/local on some systems)
+# jhbuild hates relative paths, sadly
+checkoutroot = os.path.join(basedir, 'checkout')
+prefix = os.path.join(basedir, 'inst')
+extra_prefixes = []
+
+# what module set should be used. The default can be found in
+# jhbuild/defaults.jhbuildrc, but can be any file in the modulesets directory
+# or a URL of a module set file on a web server.
+moduleset = 'vips.modules'
+
+# HOST ... the thing that will run the executable we generate
+# BUILD ... the thing doing the compiling
+# TARGET ... complicated, but same as host
+os.environ['BUILD'] = 'x86_64-pc-linux-gnu'
+os.environ['HOST'] = 'x86_64-w64-mingw32'
+os.environ['TARGET'] = 'x86_64-w64-mingw32'
+
+# A list of strings specifying the system library paths
+system_libdirs = [os.path.join(prefix, 'lib')]
+
+# try to stop our enclosing pkg path getting in
+# basedir/lib/pkgconfig is added for us later
+os.environ['PKG_CONFIG_PATH'] = os.path.join(prefix, 'lib', 'pkgconfig')
+
+# pkg-config will always look in PKG_CONFIG_LIBDIR (by default 
+# /usr/lib/pkgconfig) after searching PKG_CONFIG_PATH ... we need to stop this
+# or it'll see host .pc files
+os.environ['PKG_CONFIG_LIBDIR'] = os.path.join(prefix, 'lib', 'pkgconfig')
+
+# Prefix for all the tools
+# mingw-w64 on debian uses this:
+mingw_tool_prefix = 'x86_64-w64-mingw32-'
+
+# Don't export the CC and CXX environment variables, see:
+# https://github.com/mesonbuild/meson/issues/3782#issuecomment-399736252
+mingw_tools = {
+    'ADDR2LINE': 'addr2line',
+    'AS': 'as',
+    #'CC': 'gcc',
+    'CPP': 'cpp',
+    'CPPFILT': 'c++filt',
+    #'CXX': 'g++',
+    'DLLTOOL': 'dlltool',
+    'DLLWRAP': 'dllwrap',
+    'GCOV': 'gcov',
+    'LD': 'ld',
+    'NM': 'nm',
+    'OBJCOPY': 'objcopy',
+    'OBJDUMP': 'objdump',
+    'READELF': 'readelf',
+    'SIZE': 'size',
+    'STRINGS': 'strings',
+    'WINDRES': 'windres',
+    'AR': 'ar',
+    'RANLIB': 'ranlib',
+    'STRIP': 'strip',
+    'PKG_CONFIG': 'pkg-config'
+}
+
+# Exporting all as environment variables with its prefix
+mingw_tools_args = str()
+for tool in mingw_tools.keys():
+    fullpath_tool = mingw_tool_prefix + mingw_tools[tool]
+    os.environ[tool] = fullpath_tool
+
+# Added another common env var name for windres
+os.environ['RC'] = os.environ['WINDRES']
+
+# Exporting tool flags environment variables
+os.environ['CFLAGS'] = '-mms-bitfields -march=x86-64'
+os.environ['CXXFLAGS'] = '-mms-bitfields -march=x86-64'
+os.environ['ARFLAGS'] = '-ar rcs'
+
+# turn on the optimiser
+# -O3 to turns on the auto vectorizer, this gives a useful speedup
+os.environ['CFLAGS'] += ' -O3'
+os.environ['CXXFLAGS'] += ' -O3'
+
+# turn on debugging
+#os.environ['CFLAGS'] += ' -g'
+#os.environ['CXXFLAGS'] += ' -g'
+
+# special flags for Rust
+os.environ['CARGO_PROFILE_RELEASE_DEBUG'] = 'false'
+os.environ['CARGO_PROFILE_RELEASE_CODEGEN_UNITS'] = '1'
+os.environ['CARGO_PROFILE_RELEASE_INCREMENTAL'] = 'false'
+os.environ['CARGO_PROFILE_RELEASE_LTO'] = 'true'
+os.environ['CARGO_PROFILE_RELEASE_OPT_LEVEL'] = 's'
+os.environ['CARGO_PROFILE_RELEASE_PANIC'] = 'abort'
+
+# do not interact with the user
+interact = False
+
+# exit immediately when a build fails
+exit_on_error = True
+
+# fetch modules from this dir ... in fact, we just use the 'vips.modules'
+# file
+modulesets_dir = basedir
+
+# we just want the local ones
+use_local_modulesets = True
+
+# only rebuild on a change
+build_policy = "updated-deps"
+
+# Show a tray icon using zenity
+notrayicon = True
+
+# whether not to emit notifications through the notification daemon
+nonotify = True
+
+# trim jhbuild's default parallelisation down ... it uses 2x#cores jobs, which
+# can actually melt some hardware
+jobs = 1
+
+# we want to force out of tree builds ... some packages (like harfbuzz)
+# break with in-tree builds
+buildroot = os.path.join(basedir, 'build')
+
+# override command line arguments
+autogenargs = ' --build=' + os.environ['BUILD']
+autogenargs += ' --host=' + os.environ['HOST']
+autogenargs += ' --target=' + os.environ['TARGET']
+autogenargs += ' --disable-debug'
+autogenargs += ' --enable-all-warnings --enable-maintainer-mode'
+
+for tool in ('AR', 'RANLIB', 'STRIP', 'AS',
+             'DLLTOOL', 'OBJDUMP', 'NM', 'WINDRES'):
+    autogenargs += ' ' + tool + '="' + os.environ[tool] + '"'
+
+cmakeargs = '-DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=' + basedir + '/Toolchain-x86_64-w64-mingw32.cmake'
+mesonargs = '--buildtype=release --strip --cross-file ' + basedir + '/x86_64-w64-mingw32-crossfile.meson'
