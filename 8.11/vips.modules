@@ -408,7 +408,7 @@
       repo="openjpeg"
       module="v${version}.tar.gz"
       checkoutdir="openjpeg-${version}"
-      version="2.3.1"/>
+      version="2.4.0"/>
     <dependencies>
       <dep package="lcms"/>
       <dep package="tiff"/>
@@ -687,8 +687,7 @@
 
     -->
 
-  <meson id="libimagequant"
-    >
+  <meson id="libimagequant">
     <branch
       repo="github"
       module="lovell/libimagequant"
