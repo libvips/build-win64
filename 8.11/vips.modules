@@ -36,6 +36,11 @@
 
   <repository
     type="tarball"
+    name="expat"
+    href="https://github.com/libexpat/libexpat/releases/download/"/>
+
+  <repository
+    type="tarball"
     name="libheif"
     href="https://github.com/strukturag/libheif/releases/download/"/>
 
@@ -43,6 +48,16 @@
     type="tarball"
     name="libde265"
     href="https://github.com/strukturag/libde265/releases/download/"/>
+
+  <repository
+    type="tarball"
+    name="brotli"
+    href="https://github.com/google/brotli/archive/refs/tags/"/>
+
+  <repository
+    type="tarball"
+    name="jpeg-xl"
+    href="https://gitlab.com/wg1/jpeg-xl/-/archive/"/>
 
   <repository
     type="tarball"
@@ -207,9 +222,9 @@
   <autotools id="expat"
     autogen-sh="configure">
     <branch
-      repo="sourceforge"
-      module="expat/expat-${version}.tar.bz2"
-      version="2.2.10"/>
+      repo="expat"
+      module="R_2_4_1/expat-${version}.tar.bz2"
+      version="2.4.1"/>
     <dependencies>
     </dependencies>
   </autotools>
@@ -373,6 +388,37 @@
     <after>
       <dep package="gdk-pixbuf"/>
     </after>
+  </cmake>
+
+  <cmake id="brotli"
+    use-ninja="False">
+    <branch
+      repo="brotli"
+      module="v${version}.tar.gz"
+      checkoutdir="brotli-${version}"
+      version="1.0.9"/>
+    <dependencies>
+      <dep package="lcms"/>
+      <dep package="brotli"/>
+    </dependencies>
+  </cmake>
+
+  <!-- jpeg-xl need clang, sadly
+
+    -->
+
+  <cmake id="jpeg-xl"
+    cmakeargs="-DBUILD_TESTING=OFF"
+    use-ninja="False">
+    <branch
+      repo="jpeg-xl"
+      module="v${version}/jpeg-xl-v${version}.tar.gz"
+      version="0.3.7"/>
+    <dependencies>
+      <dep package="libjpeg-turbo"/>
+      <dep package="lcms"/>
+      <dep package="brotli"/>
+    </dependencies>
   </cmake>
 
   <autotools id="fftw3"
@@ -837,7 +883,7 @@
       repo="vips"
       module="v${version}/vips-${version}.tar.gz"
       checkoutdir="vips-${version}"
-      version="8.11.0"/>
+      version="8.11.2"/>
 
     <dependencies>
       <dep package="cfitsio"/>
@@ -895,7 +941,7 @@
       repo="vips"
       module="v${version}/vips-${version}.tar.gz"
       checkoutdir="vips-${version}"
-      version="8.11.0"/>
+      version="8.11.2"/>
 
     <dependencies>
       <dep package="giflib"/>
@@ -928,7 +974,7 @@
       repo="vips"
       module="v${version}/vips-${version}.tar.gz"
       checkoutdir="vips-${version}"
-      version="8.11.0">
+      version="8.11.2">
       <patch file="patches/transform.patch" strip="1"/>
     </branch>
 

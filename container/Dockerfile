@@ -58,6 +58,9 @@ RUN cmake .. -DCMAKE_BUILD_TYPE=Release \
   && make \
   && make install
 
+# jpeg-xl needs clang
+RUN apt-get install -y clang
+
 # the versioned build dir is mounted at /data, so this runs the build script
 # in that
 ENTRYPOINT ["/bin/bash", "/data/build.sh"]
